@@ -1,7 +1,11 @@
+import Header from "./components/header";
+import "./index.css"
+import {a} from "react-router-dom"
 function App() {
   return (
     <div className="App">
-      photography
+
+      <Header/>
     </div>
   );
 }
