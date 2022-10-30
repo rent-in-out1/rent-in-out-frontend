@@ -1,12 +1,11 @@
-import Header from "./components/header";
 import "./index.css"
-import {a} from "react-router-dom"
+import React from "react";
+import AppRoutes from "./appRoutes";
 function App() {
   return (
-    <div className="App">
-
-      <Header/>
-    </div>
+    <React.Fragment>
+      <AppRoutes />
+    </React.Fragment>
   );
 }
 
