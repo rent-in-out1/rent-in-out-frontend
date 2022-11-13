@@ -7,7 +7,7 @@ export const Button = styled.div`
     button{
       display: flex;
       justify-content: center;
-      padding: 12px 24px;
+      padding: 8px 16px;
       border-radius: 4px;
       font-size: 1em;
       background-color: #2d80c9;

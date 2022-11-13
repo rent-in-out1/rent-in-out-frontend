@@ -3,7 +3,7 @@ import React from 'react'
 const HomeAdmin = () => {
   return (
     <div>
-        home admin
+        Welcome back Shay Ido Shimon
     </div>
   )
 }
