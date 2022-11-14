@@ -2,7 +2,6 @@ import React from 'react'
 import {BrowserRouter as Router, Routes,Route} from "react-router-dom"
 import Layout from './layout/layout'
 import LayoutAdmin from './layoutAdmin/layoutAdmin'
-import Login from './components/auth/login'
 import Register from './components/auth/register/register'
 import HomeAdmin from './components/admin/homeAdmin'
 import Users from './components/admin/users'
@@ -18,8 +17,7 @@ const AppRoutes = () => {
             {/* outLet */}
             <Route index element={<Dashboard/>}/>
             <Route path='/about' element={<About/>}/>
-            <Route path='/register'  element={<Register />}/>
-            <Route path='/login'  element={<Login />}/>
+            <Route path='/register' element={<Register />}/>
         </Route>
         <Route path='/admin' element={<LayoutAdmin/>}>
             {/* OutLet */}

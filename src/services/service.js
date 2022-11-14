@@ -1,7 +1,7 @@
 import axios from "axios"
 export const API_URL = 'https://rentinout.onrender.com'
 
-export const doGetApiMethod = async(_url, _method, _body = {}) => {
+export const doGetApiMethod = async(_url) => {
     try {
         let resp = await axios({
             method: "GET",

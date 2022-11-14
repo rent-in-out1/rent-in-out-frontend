@@ -1,43 +1,28 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    padding: 0;
     position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-     min-height: 100vh;
-    background: rgba(0, 0, 0, 0.705);
-    /* z-index: 999; */
+    z-index: 999;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: block;
     box-sizing: border-box;
-    @media(max-width:768px){
-        background: var(--white);
-    }
+    background: rgba(51, 51, 51, 0.742);
     .inside_box{
-    position:fixed;
-    top:10vh;
-    left:calc( 20%);
-    display: flex;
-    background: var(--white);
-    padding:8px;
-    margin: auto;
-    max-width: 900px;
-    flex-wrap: wrap;
-    width:100%;
-    overflow-y: scroll;
-    max-height: 80vh;
-    box-sizing: border-box;
-    @media(max-width:768px){
-            max-height: 100vh;
-            top: 0;
-            left: 0;
-            width: 100%;
-    }
+      background: var(--white);;
+      display: flex;
+      flex-wrap: wrap;
+      padding:8px;
+      max-width: 900px;
+      width:100%;
+      box-sizing: border-box;
+      border-radius: 8px;
+      overflow-y: hidden;
     }   
-   
     .right{
         padding: 12px 36px 0px 0px;
         input{
@@ -56,7 +41,7 @@ export const Wrapper = styled.div`
             }
         }
         label{
-            /* block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 */
+
             display: block;
             color: var(--grey-700);
             font-size: x-small;
@@ -65,7 +50,6 @@ export const Wrapper = styled.div`
             text-transform: uppercase;
         }
         small{
-            /* text-red-500 text-xs italic */
             color: var(--red);
             margin: 0;
             padding: 0;
@@ -73,7 +57,6 @@ export const Wrapper = styled.div`
             font-style: italic;
         }
         .input{
-            //  dark:text-gray-400  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
             display: block;
             width: 100%;
             background: var(--grey-100);
@@ -89,8 +72,6 @@ export const Wrapper = styled.div`
                 background: var(--white);
                 border: 1px solid var(--grey-500);
             }
-            
-           
         }
     }
 .left{
