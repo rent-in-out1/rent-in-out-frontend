@@ -6,14 +6,20 @@ export const Wrapper = styled.div`
     top:0;
     left:0;
     width:100%;
-    height: 100%;
+     min-height: 100vh;
     background: rgba(0, 0, 0, 0.705);
-    z-index: 999;
+    /* z-index: 999; */
     justify-content: center;
     align-items: center;
     display: block;
     box-sizing: border-box;
+    @media(max-width:768px){
+        background: var(--white);
+    }
     .inside_box{
+    position:fixed;
+    top:10vh;
+    left:calc( 20%);
     display: flex;
     background: var(--white);
     padding:8px;
@@ -24,7 +30,14 @@ export const Wrapper = styled.div`
     overflow-y: scroll;
     max-height: 80vh;
     box-sizing: border-box;
+    @media(max-width:768px){
+            max-height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100%;
+    }
     }   
+   
     .right{
         padding: 12px 36px 0px 0px;
         input{
@@ -59,8 +72,71 @@ export const Wrapper = styled.div`
             font-size: x-small;
             font-style: italic;
         }
+        .input{
+            //  dark:text-gray-400  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+            display: block;
+            width: 100%;
+            background: var(--grey-100);
+            color: var(--grey-700);
+            border: 1px solid var(--grey-200);
+            border-radius: 8px;
+            padding: 8px 32px;
+            margin-bottom: 2px;
+            cursor:pointer;
+            
+            &:focus{
+                outline: none;
+                background: var(--white);
+                border: 1px solid var(--grey-500);
+            }
+            
+           
+        }
     }
+.left{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    .loginButton{
+  width: 150px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.google{
+  background-color: #df4930;
+}
+.facebook{
+  background-color: #507cc0;
+}
+.github{
+  background-color: black;
+}
 
+.icon{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}.google{
+  background-color: #df4930;
+}
+.facebook{
+  background-color: #507cc0;
+}
+
+
+.icon{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+}
 `
 
 export const Button = styled.div`
