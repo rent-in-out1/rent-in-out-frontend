@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,6 +10,13 @@ import {
 } from "../../../services/service";
 import { Wrapper, Button } from "../../style/wrappers/registerPage";
 import Model from "./../../UI/Model";
+=======
+import React, { useEffect, useState} from 'react'
+import { useForm } from "react-hook-form"
+import { useNavigate } from 'react-router-dom';
+import { API_URL, doApiMethod ,doGetApiMethod } from '../../../services/service';
+import { Wrapper, Button } from '../../style/wrappers/registerPage';
+>>>>>>> Shaybush/issue1
 
 const Register = () => {
   const nav = useNavigate();
