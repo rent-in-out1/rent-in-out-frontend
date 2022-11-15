@@ -17,14 +17,14 @@ const Footer = () => {
               <p>rentInOut</p>
             </Logo>
           </Link>
-              <p><i class="fa fa-phone" aria-hidden="true"></i> +9725641124</p>
-              <p><i class="fa fa-envelope-o" aria-hidden="true"></i> RentMe@gmail.com</p>
-              <p><i class="fa fa-map-marker" aria-hidden="true"></i> KING GEORGE STREET, TEL AVIV</p>
+              <p><i className="fa fa-phone" aria-hidden="true"></i> +9725641124</p>
+              <p><i className="fa fa-envelope-o" aria-hidden="true"></i> RentMe@gmail.com</p>
+              <p><i className="fa fa-map-marker" aria-hidden="true"></i> KING GEORGE STREET, TEL AVIV</p>
               <ul className='social'>
-                <li><i class="fa fa-linkedin-square" aria-hidden="true"></i></li>
-                <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
-                <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
-                <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
+                <li><i className="fa fa-linkedin-square" aria-hidden="true"></i></li>
+                <li><i className="fa fa-twitter" aria-hidden="true"></i></li>
+                <li><i className="fa fa-facebook" aria-hidden="true"></i></li>
+                <li><i className="fa fa-instagram" aria-hidden="true"></i></li>
               </ul>
               <div>© All rights reserved</div>
             </div>
