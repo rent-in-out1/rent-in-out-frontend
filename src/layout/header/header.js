@@ -8,7 +8,6 @@ import { Logo, Wrapper } from '../../components/style/wrappers/navbarUser';
 const Header = () => {
   const [isLogin, setIsLogin] = useState(true);
   return (
-
     <Wrapper>
       <div className="container">
         <div className='left flex flex-wrap'>
@@ -68,6 +67,4 @@ const Header = () => {
     </Wrapper>
   )
 }
-
 export default Header
-

@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { API_URL, doApiMethod ,doGetApiMethod } from '../../../services/service';
 import { Wrapper, Button } from '../../style/wrappers/registerPage';
-import Model from './../../UI/Model';
 
+import Model from '../../UI/Model';
 
 const Register = () => {
   const nav = useNavigate();
