@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { API_URL, doApiMethod ,doGetApiMethod } from '../../../services/service';
 import { Wrapper, Button } from '../../style/wrappers/registerPage';
+import axios from "axios";
 
 const Register = () => {
     const nav = useNavigate();
     let { register, getValues, handleSubmit, formState: { errors } } = useForm();
     const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const [isRegister, setIsRegister] = useState(true)
-
     const onSub = (_dataBody) => {
         console.log(_dataBody)
         delete _dataBody.password2
@@ -92,14 +92,14 @@ const Register = () => {
                                 <label>
                                     First Name
                                 </label>
-                                <input {...register('firstName', { required: true, minLength: 2, maxLength: 25 })} type="text" placeholder="Shimon" />
+                                <input {...register('firstName', { required: true, minLength: 2, maxLength: 25 })} type="text" placeholder="FIrst name" />
                                 {errors.firstName && <small>Enter valid name.</small>}
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label >
                                     Last Name
                                 </label>
-                                <input {...register('lastName', { required: true, minLength: 2, maxLength: 25 })} type="text" placeholder="Doe" />
+                                <input {...register('lastName', { required: true, minLength: 2, maxLength: 25 })} type="text" placeholder="Last name" />
                                 {errors.lastName && <small>Enter valid last name.</small>}
                             </div>
                         </div>
@@ -149,7 +149,6 @@ const Register = () => {
                                     Birthdate
                                 </label>
                                 <div className="flex relative bottom-3 items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" className=" absolute top-6 w-5 h-4 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path></svg>
                                 </div>
                                 <input {...register('birthdate', { required: false })} type="date" className="datepicker-input" placeholder="Select date" />
                             </div>
@@ -157,7 +156,7 @@ const Register = () => {
                                 <label>
                                     Phone
                                 </label>
-                                <input {...register('phone', { required: true, minLength: 6, maxLength: 12 })} type="text" placeholder="0543567634" />
+                                <input {...register('phone', { required: true, minLength: 6, maxLength: 12 })} type="text" placeholder="0555555555" />
                                 {errors.phone && <small>Enter valid phone.</small>}
                             </div>
                             <div className="w-1/2 md:w-1/3 px-2 mb-2 md:mb-0">

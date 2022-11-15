@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    min-height: 100vh;
+    position: sticky;
+    z-index: 10;
+    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -13,18 +11,24 @@ export const Wrapper = styled.div`
     box-sizing: border-box;
     background: rgba(51, 51, 51, 0.742);
     .inside_box{
+      min-height: max-content;
       background: var(--white);;
       display: flex;
       flex-wrap: wrap;
       padding:8px;
       max-width: 900px;
       width:100%;
-      box-sizing: border-box;
+      /* box-sizing: border-box; */
       border-radius: 8px;
-      overflow-y: hidden;
-    }   
+      @media(max-width:768px){
+          border-radius:0;
+        } 
+    } 
+    @media(max-width:768px){
+          align-items: baseline;
+        } 
+ 
     .right{
-        padding: 12px 36px 0px 0px;
         input{
             display: block;
             width: 100%;
@@ -32,7 +36,7 @@ export const Wrapper = styled.div`
             color: var(--grey-700);
             border: 1px solid var(--grey-200);
             border-radius: 8px;
-            padding: 8px 32px;
+            padding: 8px;
             margin-bottom: 2px;
             &:focus{
                 outline: none;
@@ -40,8 +44,13 @@ export const Wrapper = styled.div`
                 border: 1px solid var(--grey-500);
             }
         }
-        label{
+        padding: 12px 12px 0px 0px;
+        @media(max-width:768px){
+          padding: 24px;
+        } 
+        }
 
+        label{
             display: block;
             color: var(--grey-700);
             font-size: x-small;
@@ -79,6 +88,10 @@ export const Wrapper = styled.div`
     flex-direction:column;
     align-items: center;
     justify-content: center;
+    @media(max-width:768px){
+          flex-direction:row;
+          justify-content: space-around;
+        } 
     .loginButton{
   width: 150px;
   padding: 15px 25px;
