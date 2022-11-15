@@ -1,32 +1,43 @@
-import { Fragment } from 'react';
-import ReactDOM  from 'react-dom';
-
-import classes from "./Model.module.css"
+import React from "react";
+import classes from "./Model.module.css";
+import {useNavigate} from "react-router-dom";
 
 function Backdrop(props) {
+  const nav = useNavigate();
   return (
-    <div onClick={props.cartShowHandler} className={classes.backdrop}/>
-  )
+    <div
+      onClick={() => {
+        nav("/");
+      }}
+      className={classes.backdrop}
+    >
+    </div>
+  );
 }
 
 function ModelOverlay(props) {
-   
+  const nav = useNavigate();
   return (
     <div className={classes.model}>
-        <div className={classes.content}>{props.children}</div>
+      <h2
+        onClick={() => {
+          nav("/");
+        }}
+      >
+        X
+      </h2>
+      <div className={classes.content}>{props.children}</div>
     </div>
-  )
+  );
 }
-
-const portal = document.querySelector("#overlays")
 
 function Model(props) {
   return (
-    <Fragment>
-        {ReactDOM.createPortal(<Backdrop cartShowHandler={props.cartShowHandler}/>, portal)}
-        {ReactDOM.createPortal(<ModelOverlay>{props.children}</ModelOverlay>, portal)}
-    </Fragment>
-  )
-};
+    <React.Fragment>
+      <Backdrop registerShowHandler={props.registerShowHandler} />
+      <ModelOverlay>{props.children}</ModelOverlay>
+    </React.Fragment>
+  );
+}
 
-export default Model
+export default Model;

@@ -1,8 +1,11 @@
 import React from 'react'
+import Register from './../../auth/register/register';
 
 const Dashboard = () => {
   return (
-    <div>Dashboard client</div>
+    <div>
+      <Register/>
+    </div>
   )
 }
 

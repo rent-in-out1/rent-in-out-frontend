@@ -1,16 +1,16 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Footer from './footer'
-import Header from './header'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Footer from "./footer";
+import Header from "./header";
 
 const LayoutAdmin = () => {
-    return (
-        <div>
-            <Header />
-                <Outlet />
-            <Footer />
-        </div>
-    )
-}
+  return (
+    <div>
+      <Header />
+      <Outlet />
+      <Footer />
+    </div>
+  );
+};
 
-export default LayoutAdmin
+export default LayoutAdmin;
