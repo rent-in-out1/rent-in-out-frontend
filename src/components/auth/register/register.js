@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
+import React, { useEffect, useState} from 'react'
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { API_URL, doApiMethod ,doGetApiMethod } from '../../../services/service';
 import { Wrapper, Button } from '../../style/wrappers/registerPage';
-import axios from "axios";
 
 const Register = () => {
     const nav = useNavigate();
