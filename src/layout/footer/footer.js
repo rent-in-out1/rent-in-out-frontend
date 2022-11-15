@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Wrapper } from "../../components/style/wrappers/footer";
+import { Logo } from '../../components/style/wrappers/navbarUser';
 
 
 const Footer = () => {
@@ -10,10 +11,12 @@ const Footer = () => {
         <div>
           <main>
             <div>
-              <Link to="/" className="flex items-center">
-                <img src={"https://flowbite.com/docs/images/logo.svg"} className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">User</span>
-              </Link>
+            <Link to={"/"}>
+            <Logo>
+              <img src="./img/LOGO.png" alt="logo" />
+              <p>rentInOut</p>
+            </Logo>
+          </Link>
               <p><i class="fa fa-phone" aria-hidden="true"></i> +9725641124</p>
               <p><i class="fa fa-envelope-o" aria-hidden="true"></i> RentMe@gmail.com</p>
               <p><i class="fa fa-map-marker" aria-hidden="true"></i> KING GEORGE STREET, TEL AVIV</p>
