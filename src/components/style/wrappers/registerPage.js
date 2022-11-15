@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    position: sticky;
-    z-index: 10;
-    height: 100vh;
+    height: 90vh;
     width: 100%;
     display: flex;
     justify-content: center;
+
     align-items: center;
     box-sizing: border-box;
-    background: rgba(51, 51, 51, 0.742);
     .inside_box{
       min-height: max-content;
       background: var(--white);;
