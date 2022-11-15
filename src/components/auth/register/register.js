@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -38,11 +38,13 @@ const Register = () => {
       registerRequest(register);
       return;
     }
-    let login = {
-      email: _dataBody.email,
-      password: _dataBody.password,
-    };
-      loginRequest(login);
+    else {
+      let login = {
+        email: _dataBody.email,
+        password: _dataBody.password,
+      };
+        loginRequest(login);
+    }
   };
   const registerRequest = async (_dataBody) => {
     try {
@@ -57,7 +59,7 @@ const Register = () => {
       const url = "users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
       localStorage.setItem("token", data.token);
-      console.log(data);
+      console.log(data.role)
       if (data.role === "admin") {
         nav("/admin");
       } else {

@@ -15,7 +15,6 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* outLet */}
-        <Route path="/register" element={<Register />} />
           <Route index element={<Dashboard />} />
           <Route path="/about" element={<About />} />
         </Route>
