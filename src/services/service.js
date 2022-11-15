@@ -1,13 +1,15 @@
 import axios from "axios"
 export const API_URL = 'https://rentinout.onrender.com/'
 
+
+
 export const doGetApiMethod = async(_url) => {
     try {
         let resp = await axios({
             method: "GET",
             url: API_URL + _url,
             headers: {
-                'x-api-key' : localStorage["token"] 
+                'x-api-key' : JSON.parse(localStorage["userData"]).token
             }
         })
         return resp;
@@ -22,7 +24,7 @@ export const doApiMethod = async(_url, _method, _body = {}) => {
             url: API_URL + _url,
             data: _body,
             headers: {
-                'x-api-key' : localStorage["token"] 
+                'x-api-key' : JSON.parse(localStorage["userData"]).token
             }
         })
         return resp;
