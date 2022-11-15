@@ -46,7 +46,7 @@ const Register = () => {
   };
   const registerRequest = async (_dataBody) => {
     try {
-      const url = API_URL + "/users";
+      const url = API_URL + "users";
       const { data } = await doApiMethod(url, "POST", _dataBody);
     } catch (err) {
       console.log(err.response);
@@ -68,7 +68,7 @@ const Register = () => {
     }
   };
   const loginGmailRequest = async () => {
-    const url = API_URL + "/users/auth/google";
+    const url = API_URL + "users/auth/google";
     const data = await doGetApiMethod(url);
     console.log(data);
   };

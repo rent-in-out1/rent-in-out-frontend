@@ -1,19 +1,35 @@
 import React from "react";
-
 import classes from "./Model.module.css";
+import {useNavigate} from "react-router-dom";
 
 function Backdrop(props) {
-  return <div onClick={props.registerShowHandler} className={classes.backdrop} />;
-}
-
-function ModelOverlay(props) {
+  const nav = useNavigate();
   return (
-    <div className={classes.model}>
-      <div className={classes.content}>{props.children}</div>
+    <div
+      onClick={() => {
+        nav("/");
+      }}
+      className={classes.backdrop}
+    >
     </div>
   );
 }
 
+function ModelOverlay(props) {
+  const nav = useNavigate();
+  return (
+    <div className={classes.model}>
+      <h2
+        onClick={() => {
+          nav("/");
+        }}
+      >
+        X
+      </h2>
+      <div className={classes.content}>{props.children}</div>
+    </div>
+  );
+}
 
 function Model(props) {
   return (
