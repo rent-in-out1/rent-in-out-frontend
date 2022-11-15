@@ -55,7 +55,7 @@ const Register = () => {
     try {
       const url = "users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("userData", JSON.stringify(data));
       console.log(data.role)
       if (data.role === "admin") {
         nav("/admin");

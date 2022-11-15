@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaHome, FaBell, FaInbox, FaUser, FaStickyNote } from "react-icons/fa"
 import { Logo, Wrapper } from '../../components/style/wrappers/navbarUser';
+import {useSelector} from "react-redux"
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const isLogin = useSelector(state => state.userSlice.isLoggedIn)
+  console.log(isLogin )
   return (
     <Wrapper>
       <div className="container">
