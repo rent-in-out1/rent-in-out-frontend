@@ -1,5 +1,5 @@
 import "./index.css"
-import React ,{useState} from "react";
+import React  from "react";
 import AppRoutes from "./appRoutes";
 import { Provider } from 'react-redux';
 import store from "./redux/store";

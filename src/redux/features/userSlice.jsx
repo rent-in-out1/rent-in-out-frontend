@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const user_key = "userData"
+const key = "userData"
+
 const initialState =
-localStorage[user_key] ? {
+localStorage[key] ? {
     isLoggedIn: true ,
-    role: JSON.parse(localStorage[user_key]).role
+    role: JSON.parse(localStorage[key]).role,
 }: {
     isLoggedIn: false,
     role: ""

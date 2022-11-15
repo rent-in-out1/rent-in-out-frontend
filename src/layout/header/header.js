@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaHome, FaBell, FaInbox, FaUser, FaStickyNote } from "react-icons/fa"
 import { Logo, Wrapper } from '../../components/style/wrappers/navbarUser';
