@@ -37,16 +37,16 @@
     --pink-800: #e001dc;
     --pink-900: #c602c3;
     /* sky blue */
-    --pink-50: #cfd9fa;
-    --pink-100: #b9c8f9;
-    --pink-200: #a5b7f3;
-    --pink-300: #97aef8;
-    --pink-400: #8ca5f8;
-    --pink-500: #7f9bfb;
-    --pink-600: #6c8bf0;
-    --pink-700: #6184f6;
-    --pink-800: #466def;
-    --pink-900: #2f5df3;
+    --skyblue-50: #cfd9fa;
+    --skyblue-100: #b9c8f9;
+    --skyblue-200: #a5b7f3;
+    --skyblue-300: #97aef8;
+    --skyblue-400: #8ca5f8;
+    --skyblue-500: #7f9bfb;
+    --skyblue-600: #6c8bf0;
+    --skyblue-700: #6184f6;
+    --skyblue-800: #466def;
+    --skyblue-900: #2f5df3;
     /* rest of the colors */
     --black: #141613;
     --white: #fff;
