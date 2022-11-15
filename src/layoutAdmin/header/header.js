@@ -10,8 +10,10 @@ import {
   FaHome,
 } from "react-icons/fa";
 import { Logo, Wrapper } from "../../components/style/wrappers/navbarAdmin";
+import { useSelector } from "react-redux";
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const isLogin = useSelector(state => state.userSlice.isLoggedIn)
+  console.log(isLogin )
   return (
     <Wrapper>
       <div className="container">
@@ -39,7 +41,7 @@ const Header = () => {
               <li>
                 <Link
                   to={"/admin"}
-                  class="inline-flex items-center p-3 text-sm text-center"
+                  className="inline-flex items-center p-3 text-sm text-center"
                 >
                   <FaHome className="text-large" />
                 </Link>
@@ -47,7 +49,7 @@ const Header = () => {
               <li>
                 <Link
                   to={"/admin/users"}
-                  class="inline-flex items-center p-3 text-sm text-center"
+                  className="inline-flex items-center p-3 text-sm text-center"
                 >
                   <FaUsers className="text-large" />
                 </Link>
@@ -55,7 +57,7 @@ const Header = () => {
               <li>
                 <Link
                   to={"/admin/categories"}
-                  class="inline-flex items-center p-3 text-sm text-center"
+                  className="inline-flex items-center p-3 text-sm text-center"
                 >
                   <FaListAlt className="text-large" />
                 </Link>
@@ -63,7 +65,7 @@ const Header = () => {
               <li>
                 <Link
                   to={"/admin/posts"}
-                  class="inline-flex items-center p-3 text-sm text-center"
+                  className="inline-flex items-center p-3 text-sm text-center"
                 >
                   <FaUpload className="text-large" />
                 </Link>
@@ -71,11 +73,11 @@ const Header = () => {
               <li>
                 <button
                   type="button"
-                  class="inline-flex relative items-center p-3 text-sm  text-center"
+                  className="inline-flex relative items-center p-3 text-sm  text-center"
                 >
                   <FaBell />
-                  <span class="sr-only">Notifications</span>
-                  <div class="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
+                  <span className="sr-only">Notifications</span>
+                  <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
                     2
                   </div>
                 </button>

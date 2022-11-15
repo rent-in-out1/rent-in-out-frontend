@@ -30,32 +30,32 @@ const Header = () => {
           <nav>
             <ul>
             <li>
-                <Link to={"/"} class="inline-flex items-center p-3 text-sm text-center">
+                <Link to={"/"} className="inline-flex items-center p-3 text-sm text-center">
                   <FaHome className='text-large' />
                 </Link>
               </li>
             <li>
-                <Link to={"/mypsots"} class="inline-flex items-center p-3 text-sm text-center">
+                <Link to={"/mypsots"} className="inline-flex items-center p-3 text-sm text-center">
                   <FaStickyNote className='text-large' />
                 </Link>
               </li>
               <li>
-                <Link to={"/profile"} class="inline-flex items-center p-3 text-sm text-center">
+                <Link to={"/profile"} className="inline-flex items-center p-3 text-sm text-center">
                   <FaUser className='text-large' />
                 </Link>
               </li>
               <li>
-                <button type="button" class="inline-flex relative items-center p-3 text-sm  text-center">
+                <button type="button" className="inline-flex relative items-center p-3 text-sm  text-center">
                   <FaInbox />
-                  <span class="sr-only">Notifications</span>
-                  <div class="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">1</div>
+                  <span className="sr-only">Notifications</span>
+                  <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">1</div>
                 </button>
               </li>
               <li>
-                <button type="button" class="inline-flex relative items-center p-3 text-sm  text-center">
+                <button type="button" className="inline-flex relative items-center p-3 text-sm  text-center">
                   <FaBell />
-                  <span class="sr-only">Notifications</span>
-                  <div class="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">2</div>
+                  <span className="sr-only">Notifications</span>
+                  <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">2</div>
                 </button>
               </li>
             </ul>
