@@ -80,7 +80,6 @@ export const Wrapper = styled.div`
                 border: 1px solid var(--grey-500);
             }
         }
-    
 .left{
     display:flex;
     flex-direction:column;
