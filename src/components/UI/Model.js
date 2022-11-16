@@ -1,13 +1,15 @@
 import React from "react";
 import classes from "./Model.module.css";
 import {useNavigate} from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { isLoggedIn } from "../../redux/features/userSlice";
 
 function Backdrop(props) {
-  const nav = useNavigate();
+  const dispatch = useDispatch();
   return (
     <div
       onClick={() => {
-        nav("/");
+        dispatch(isLoggedIn());
       }}
       className={classes.backdrop}
     >
@@ -16,12 +18,12 @@ function Backdrop(props) {
 }
 
 function ModelOverlay(props) {
-  const nav = useNavigate();
+  const dispatch = useDispatch();
   return (
     <div className={classes.model}>
       <h2
         onClick={() => {
-          nav("/");
+          dispatch(isLoggedIn());
         }}
       >
         X

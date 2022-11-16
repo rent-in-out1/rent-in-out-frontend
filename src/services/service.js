@@ -24,9 +24,10 @@ export const doApiMethod = async(_url, _method, _body = {}) => {
             url: API_URL + _url,
             data: _body,
             headers: {
-                'x-api-key' : JSON.parse(localStorage["userData"]).token
+                'x-api-key' : localStorage["userData"]
             }
         })
+        console.log(resp)
         return resp;
     } catch (err) {
         throw err;
