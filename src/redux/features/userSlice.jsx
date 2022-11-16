@@ -6,7 +6,7 @@ const initialState = localStorage[key] ?{
     active: JSON.parse( localStorage[key]).active,
 }
 :{
-    isLoggedIn: false,
+    isLoggedIn: true,
     role: "",
     active: false,
 }
