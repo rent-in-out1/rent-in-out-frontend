@@ -19,7 +19,9 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* outLet */}
+          {/* Guest Routes */}
           <Route index element={<Dashboard />} />
+          {/* User Routes */}
           {userState.role === "user" && (
             <React.Fragment>
               <Route path="/profile" element={<About />} />
