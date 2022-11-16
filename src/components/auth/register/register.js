@@ -2,12 +2,15 @@
 import React, { useState} from 'react'
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
+import {useDispatch} from 'react-redux'
 import { API_URL, doApiMethod ,doGetApiMethod } from '../../../services/service';
 import { Wrapper, Button } from '../../style/wrappers/registerPage';
 
 import Model from '../../UI/Model';
+import { isLoggedIn } from '../../../redux/features/userSlice';
 
 const Register = () => {
+  const dispatch = useDispatch()
   const nav = useNavigate();
   let {
     register,
@@ -57,6 +60,12 @@ const Register = () => {
       const { data } = await doApiMethod(url, "POST", _dataBody);
       console.log(data)
       localStorage.setItem("userData", JSON.stringify(data));
+      if(data) {
+        dispatch(isLoggedIn())
+      }
+      else {
+        
+      }
       if (data.role === "admin") {
         nav("/admin");
       } else {

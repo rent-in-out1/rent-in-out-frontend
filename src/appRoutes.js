@@ -9,30 +9,33 @@ import Posts from "./components/admin/posts";
 import About from "./components/client/about";
 import Dashboard from "./components/client/dashboard";
 
-import {useSelector} from "react-redux"
-import Register from './components/auth/register/register';
+import { useSelector } from "react-redux";
+import Register from "./components/auth/register/register";
 const AppRoutes = () => {
-  const isLoggedIn = useSelector(state => state.userSlice.isLoggedIn)
+  let userState = useSelector((state) => state.userSlice);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          {/* outLet */}
-          <Route index element={<Dashboard />} />
-          <Route path="/about" element={<About />} />
-        </Route>
-        <Route path="/admin" element={<LayoutAdmin />}>
-          {/* OutLet */}
-          <Route path="/admin" element={<HomeAdmin />} />
-          <Route path="/admin/users" element={<Users />} />
-          <Route path="/admin/categories" element={<Categories />} />
-          <Route path="/admin/posts" element={<Posts />} />
-        </Route>
+        {userState.role === "user" && (
+          <Route path="/" element={<Layout />}>
+            {/* outLet */}
+            <Route index element={<Dashboard />} />
+            <Route path="/about" element={<About />} />
+          </Route>
+        )}
+        {userState.role === "admin" && (
+          <Route path="/admin" element={<LayoutAdmin />}>
+            {/* OutLet */}
+            <Route path="/admin" element={<HomeAdmin />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/categories" element={<Categories />} />
+            <Route path="/admin/posts" element={<Posts />} />
+          </Route>
+        )}
 
         <Route path="*" element={<div className="bg-red-500">Not found</div>} />
-
       </Routes>
-      {!isLoggedIn ? <Register/> : null}
+      {!userState.isLoggedIn && <Register />}
     </Router>
   );
 };

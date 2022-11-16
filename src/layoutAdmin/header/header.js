@@ -13,7 +13,6 @@ import { Logo, Wrapper } from "../../components/style/wrappers/navbarAdmin";
 import { useSelector } from "react-redux";
 const Header = () => {
   const isLogin = useSelector(state => state.userSlice.isLoggedIn)
-  console.log(isLogin )
   return (
     <Wrapper>
       <div className="container">
