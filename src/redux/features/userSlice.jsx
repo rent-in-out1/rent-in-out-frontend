@@ -4,11 +4,13 @@ const initialState = localStorage[key] ?{
     isLoggedIn: true,
     role: JSON.parse( localStorage[key]).role,
     active: JSON.parse( localStorage[key]).active,
+    alert: false
 }
 :{
     isLoggedIn: true,
     role: "",
-    active: false
+    active: false,
+    alert: false
 }
 
 const userSlice = createSlice({
@@ -24,6 +26,9 @@ const userSlice = createSlice({
             else{
                 state.isLoggedIn = !state.isLoggedIn
             }
+        },
+        isAlert: (state, action) =>{
+            
         }
         
     }

@@ -8,17 +8,19 @@ import Categories from "./components/admin/categories";
 import Posts from "./components/admin/posts";
 import About from "./components/client/about";
 import Dashboard from "./components/client/dashboard";
-
 import { useSelector } from "react-redux";
 import Register from "./components/auth/register/register";
+import Model from "./components/UI/Model";
 const AppRoutes = () => {
   let userState = useSelector((state) => state.userSlice);
   return (
     <Router>
+      {!userState.alert&& <Model/>}
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* outLet */}
           <Route index element={<Dashboard />} />
+          
           {userState.role === "user" && (
             <React.Fragment>
               <Route path="/profile" element={<About />} />
