@@ -47,7 +47,7 @@ export const Wrapper = styled.div`
      }
 
     .right{
-        width: 25%;
+        width: auto;
         display: flex;
         justify-content: end;
         align-items: center;
@@ -97,8 +97,8 @@ export const Wrapper = styled.div`
         }
         .right{
             .avatar{
-                width: 30px;
-                height: 30px;
+                /* width: 30px; */
+                /* height: 30px; */
              }   
             width: auto;
             nav{

@@ -22,7 +22,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  const [isRegister, setIsRegister] = useState(true);
+  const [isRegister, setIsRegister] = useState(false);
   const onSub = (_dataBody) => {
     console.log(isRegister);
     delete _dataBody.password2;
