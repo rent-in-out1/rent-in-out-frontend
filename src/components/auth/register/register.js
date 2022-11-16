@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { API_URL, doApiMethod ,doGetApiMethod } from '../../../services/service';
@@ -18,7 +18,7 @@ const Register = () => {
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   const [isRegister, setIsRegister] = useState(true);
   const onSub = (_dataBody) => {
-    console.log(_dataBody);
+    console.log(isRegister)
     delete _dataBody.password2;
     delete _dataBody.email2;
     if (isRegister) {
@@ -48,22 +48,22 @@ const Register = () => {
       const url = API_URL + "users";
       const { data } = await doApiMethod(url, "POST", _dataBody);
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
     }
   };
   const loginRequest = async (_dataBody) => {
     try {
       const url = "users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
+      console.log(data)
       localStorage.setItem("userData", JSON.stringify(data));
-      console.log(data.role)
       if (data.role === "admin") {
         nav("/admin");
       } else {
         nav("/");
       }
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
     }
   };
   const loginGmailRequest = async () => {
