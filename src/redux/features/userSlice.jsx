@@ -4,10 +4,9 @@ const initialState = localStorage[key] ?{
     isLoggedIn: true,
     role: JSON.parse( localStorage[key]).role,
     active: JSON.parse( localStorage[key]).active,
-    showModel: false
 }
 :{
-    isLoggedIn: true,
+    isLoggedIn: false,
     role: "",
     active: false,
 }
