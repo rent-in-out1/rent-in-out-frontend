@@ -11,6 +11,7 @@ import Dashboard from "./components/client/dashboard";
 
 import { useSelector } from "react-redux";
 import Register from "./components/auth/register/register";
+import Page404 from "./components/error/page404/page404";
 const AppRoutes = () => {
   let userState = useSelector((state) => state.userSlice);
   return (
@@ -37,7 +38,7 @@ const AppRoutes = () => {
           </Route>
         )}
 
-        <Route path="*" element={<div className="bg-red-500">Not found</div>} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
       {!userState.isLoggedIn && <Register />}
     </Router>
