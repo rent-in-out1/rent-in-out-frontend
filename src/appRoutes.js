@@ -11,7 +11,7 @@ import Dashboard from "./components/client/dashboard";
 import { useSelector } from "react-redux";
 import Register from "./components/auth/register/register";
 import Model from './components/UI/Model';
-import Page404 from "./components/error/page404/page404";
+import Page404 from './components/error/page404/page404';
 const AppRoutes = () => {
   let userState = useSelector((state) => state.userSlice);
   let isError = useSelector((state) => state.errorsSlice.isError);
