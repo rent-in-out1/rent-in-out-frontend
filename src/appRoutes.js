@@ -14,10 +14,8 @@ import Model from './components/UI/Model';
 const AppRoutes = () => {
   let userState = useSelector((state) => state.userSlice);
   let isError = useSelector((state) => state.errorsSlice.isError);
-  console.log(isError)
   return (
     <Router>
-      {isError && <Model/>}
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* outLet */}

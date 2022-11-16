@@ -1,16 +1,19 @@
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  API_URL,
+  doApiMethod,
+  doGetApiMethod,
+} from "../../../services/service";
+import { Wrapper, Button } from "../../style/wrappers/registerPage";
 
-import React, { useState} from 'react'
-import { useForm } from "react-hook-form"
-import { useNavigate } from 'react-router-dom';
-import {useDispatch} from 'react-redux'
-import { API_URL, doApiMethod ,doGetApiMethod } from '../../../services/service';
-import { Wrapper, Button } from '../../style/wrappers/registerPage';
-
-import Model from '../../UI/Model';
-import { isLoggedIn } from '../../../redux/features/userSlice';
+import Model from "../../UI/Model";
+import { isLoggedIn } from "../../../redux/features/userSlice";
 
 const Register = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const nav = useNavigate();
   let {
     register,
@@ -21,7 +24,7 @@ const Register = () => {
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   const [isRegister, setIsRegister] = useState(true);
   const onSub = (_dataBody) => {
-    console.log(isRegister)
+    console.log(isRegister);
     delete _dataBody.password2;
     delete _dataBody.email2;
     if (isRegister) {
@@ -37,13 +40,12 @@ const Register = () => {
       };
       registerRequest(register);
       return;
-    }
-    else {
+    } else {
       let login = {
         email: _dataBody.email,
         password: _dataBody.password,
       };
-        loginRequest(login);
+      loginRequest(login);
     }
   };
   const registerRequest = async (_dataBody) => {
@@ -58,13 +60,11 @@ const Register = () => {
     try {
       const url = "users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
-      console.log(data)
+      console.log(data);
       localStorage.setItem("userData", JSON.stringify(data));
-      if(data) {
-        dispatch(isLoggedIn())
-      }
-      else {
-        
+      if (data) {
+        dispatch(isLoggedIn());
+      } else {
       }
       if (data.role === "admin") {
         nav("/admin");
@@ -85,6 +85,9 @@ const Register = () => {
   };
   return (
     <Model>
+      <h1 className="text-center text-5xl my-10">
+        {isRegister ? "Register" : "Login"}
+      </h1>
       <Wrapper>
         <div className="inside_box">
           <div className="left w-full md:w-1/3">
@@ -98,9 +101,7 @@ const Register = () => {
             </div>
           </div>
           <div className="right w-full md:w-2/3">
-            <h1 className="text-center text-2xl mb-3">
-              {isRegister ? "Register" : "Login"}
-            </h1>
+            <div></div>
             <form onSubmit={handleSubmit(onSub)}>
               {isRegister && (
                 <div className="flex flex-wrap -mx-3 mb-2">

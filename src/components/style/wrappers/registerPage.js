@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
     min-height: max-content;
     background: var(--white);
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     padding: 8px;
     max-width: 900px;
@@ -20,6 +21,7 @@ export const Wrapper = styled.div`
     border-radius: 8px;
     @media (max-width: 768px) {
       border-radius: 0;
+      text-align: center;
     }
   }
   @media (max-width: 768px) {
