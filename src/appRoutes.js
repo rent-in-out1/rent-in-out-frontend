@@ -10,12 +10,14 @@ import About from "./components/client/about";
 import Dashboard from "./components/client/dashboard";
 import { useSelector } from "react-redux";
 import Register from "./components/auth/register/register";
-import Model from "./components/UI/Model";
+import Model from './components/UI/Model';
 const AppRoutes = () => {
   let userState = useSelector((state) => state.userSlice);
+  let isError = useSelector((state) => state.errorsSlice.isError);
+  console.log(isError)
   return (
     <Router>
-      {!userState.alert&& <Model/>}
+      {isError && <Model/>}
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* outLet */}
