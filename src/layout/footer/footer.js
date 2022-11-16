@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <Wrapper>
       <footer>
-        <div>
+        
           <main>
             <div>
             <Link to={"/"}>
@@ -29,21 +29,24 @@ const Footer = () => {
               <div>© All rights reserved</div>
             </div>
             <div>
-              about
+              <h3>about</h3>
+              <h3> Privacy Policy</h3>
 
             </div>
             <div>
               <h2> Get in Touch</h2>
               <form>
+
                 <input type="text" placeholder="Enter First Name" />
                 <input type="text" placeholder="Enter Last Name" />
                 <input type="text" placeholder="Enter your mail" />
                 <input type="number" placeholder="Enter your phone" />
                 <button>submit</button>
+                
               </form>
             </div>
           </main>
-        </div>
+       
       </footer>
     </Wrapper>
 
