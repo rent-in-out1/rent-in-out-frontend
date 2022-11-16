@@ -16,13 +16,17 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {userState.role === "user" && (
-          <Route path="/" element={<Layout />}>
-            {/* outLet */}
-            <Route index element={<Dashboard />} />
-            <Route path="/about" element={<About />} />
-          </Route>
-        )}
+        <Route path="/" element={<Layout />}>
+          {/* outLet */}
+          <Route index element={<Dashboard />} />
+          {userState.role === "user" && (
+            <React.Fragment>
+              <Route path="/profile" element={<About />} />
+              <Route path="/profile1" element={"<Dashboard />"} />
+              <Route path="/profile2" element={"<Users />"} />
+            </React.Fragment>
+          )}
+        </Route>
         {userState.role === "admin" && (
           <Route path="/admin" element={<LayoutAdmin />}>
             {/* OutLet */}
