@@ -26,5 +26,5 @@ const toggleSlice = createSlice({
     }
 })
 
-export const {onToggle} = registerSlice.actions
-export default registerSlice.reducer
+export const {onToggle} = toggleSlice.actions
+export default toggleSlice.reducer
