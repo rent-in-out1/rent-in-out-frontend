@@ -9,13 +9,13 @@ import {
 } from "../../../services/service";
 import { Wrapper, Button } from "../../style/wrappers/registerPage";
 import Model from "../../UI/Model";
-import { isLoggedIn } from "../../../redux/features/userSlice";
+import  { onLogin, onRegister} from "../../../redux/features/userSlice";
 import getLocations from "../../../services/countries-api/getLocations";
 
 const Register = () => {
-  useEffect(()=>{
-    getLocations()
-  })
+  // useEffect(()=>{
+  //   getLocations()
+  // })
   const dispatch = useDispatch();
   const nav = useNavigate();
   let {
@@ -29,7 +29,6 @@ const Register = () => {
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
   const [isRegister, setIsRegister] = useState(true);
   const onSub = (_dataBody) => {
-    console.log(isRegister);
     delete _dataBody.password2;
     delete _dataBody.email2;
     if (isRegister) {
@@ -44,7 +43,7 @@ const Register = () => {
         password: _dataBody.password,
       };
       registerRequest(register);
-      return;
+      // dispatch(onRegister(register))
     } else {
       let login = {
         email: _dataBody.email,
@@ -55,23 +54,25 @@ const Register = () => {
   };
   const registerRequest = async (_dataBody) => {
     try {
-      const url = API_URL + "users";
+      const url ="/users";
       const { data } = await doApiMethod(url, "POST", _dataBody);
+      if(data) {
+        dispatch(onRegister(data))
+      }
     } catch (err) {
       console.log(err);
     }
   };
   const loginRequest = async (_dataBody) => {
     try {
-      const url = "users/login";
+      const url = "/users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
-      console.log(data);
-      localStorage.setItem("userData", JSON.stringify(data));
-      if (data) {
-        dispatch(isLoggedIn());
+      localStorage.setItem("token", JSON.stringify(data.token));
+      if (data.user) {
+        dispatch(onLogin(data.user, data.token));
       } else {
       }
-      if (data.role === "admin") {
+      if (data.user.role === "admin") {
         nav("/admin");
       } else {
         nav("/");
@@ -184,7 +185,7 @@ const Register = () => {
                       required: true,
                       minLength: 6,
                       maxLength: 25,
-                      pattern: regPassword
+                      // pattern: regPassword
                     })}
                     type="password"
                     placeholder="******************"

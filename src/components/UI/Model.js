@@ -9,7 +9,7 @@ function Backdrop(props) {
   return (
     <div
       onClick={() => {
-        dispatch(isLoggedIn());
+
       }}
       className={classes.backdrop}
     >
@@ -23,7 +23,7 @@ function ModelOverlay(props) {
     <div className={classes.model}>
       <h2
         onClick={() => {
-          dispatch(isLoggedIn());
+  
         }}
       >
         X

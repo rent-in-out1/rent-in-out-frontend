@@ -1,32 +1,59 @@
 import { createSlice } from "@reduxjs/toolkit";
-const key = "userData"
-const initialState = localStorage[key] ?{
-    isLoggedIn: true,
-    role: JSON.parse( localStorage[key]).role,
-    active: JSON.parse( localStorage[key]).active,
-}
-:{
-    isLoggedIn: false,
-    role: "",
-    active: false,
-}
+const initialState = {
+        token : "",
+        userId: "",
+        fullName : {
+            firstname: "",
+            lastname: "",
+        },
+        email: "",
+        phone : "",
+        profile_img: "",
+        cover_img: "",
+        role: "",
+        birthdate: "",
+        location: "",
+        rank: [],
+        productList : [],
+        createdAt : "",
+        active: false
+      
+    };
 
 const userSlice = createSlice({
     name: "user",
     initialState: initialState,
     reducers :{
-        isLoggedIn: (state) =>{
-            state.active = localStorage[key] ? JSON.parse( localStorage[key]).active : state.active
-            if(state.active){
-                state.isLoggedIn = !state.isLoggedIn
-                state.role = JSON.parse( localStorage[key]).role
+        onRegister: (state , action) =>{
+            state.phone = action.payload.phone
+            state.birthdate = action.payload.birthdate
+            state.email = action.payload.email
+            state.fullName= {
+                firstname : action.payload.fullName.firstName,
+                lastname : action.payload.fullName.lastName
             }
-            else{
-                state.isLoggedIn = !state.isLoggedIn
-            }
+            state.profile_img = action.payload.profile_img
+            state.role = action.payload.role
+            state.createdAt = action.payload.craetedAt
         },
+        onLogin: (state , action) => {
+            state.phone = action.payload.phone
+            state.birthdate = action.payload.birthdate
+            state.email = action.payload.email
+            state.fullName= {
+                firstname : action.payload.fullName.firstName,
+                lastname : action.payload.fullName.lastName
+            }
+            state.profile_img = action.payload.profile_img
+            state.role = action.payload.role
+            state.userId = action.payload._id
+            state.createdAt = action.payload.craetedAt
+            state.active = action.payload.active 
+            state.token = JSON.parse(localStorage["token"])
+        },
+
     }
 })
 
-export const {isLoggedIn} = userSlice.actions
+export const {onRegister , onLogin } = userSlice.actions
 export default userSlice.reducer

@@ -1,0 +1,30 @@
+
+    const initialstate = {
+        register: false,
+        error : {
+            status: false,
+            massege :""
+        },
+        bar: false
+    }
+
+const toggleSlice = createSlice({
+    name: "toggle",
+    initialState: initialstate,
+    reducers :{
+        onRegisterToggle: (state) =>{
+            state.register = !state.register;
+        },
+        onErrorToggle: (state, action) =>{
+            state.error.status = !state.error.status
+            state.error.massege = action.payload.error.massege
+        },
+        onBarToggle : (state) => {
+            state.bar = !state.bar
+        }
+
+    }
+})
+
+export const {onToggle} = registerSlice.actions
+export default registerSlice.reducer
