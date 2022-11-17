@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -10,8 +10,6 @@ import {
 import { Wrapper, Button } from "../../style/wrappers/registerPage";
 import Model from "../../UI/Model";
 import  { onLogin, onRegister} from "../../../redux/features/userSlice";
-import getLocations from "../../../services/countries-api/getLocations";
-
 const Register = () => {
   // useEffect(()=>{
   //   getLocations()
@@ -25,8 +23,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  const regPassword =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
+  // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
   const [isRegister, setIsRegister] = useState(false);
   const onSub = (_dataBody) => {
     delete _dataBody.password2;
