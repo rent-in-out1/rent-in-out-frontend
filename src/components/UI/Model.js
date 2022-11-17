@@ -1,15 +1,15 @@
 import React from "react";
 import classes from "./Model.module.css";
 import { useDispatch } from 'react-redux';
-import { isLoggedIn } from "../../redux/features/userSlice";
 import  ReactDOM  from 'react-dom';
+import { onRegisterToggle } from "../../redux/features/toggleSlice";
 
 function Backdrop(props) {
   const dispatch = useDispatch();
   return (
     <div
       onClick={() => {
-
+        dispatch(onRegisterToggle())
       }}
       className={classes.backdrop}
     >
@@ -23,7 +23,7 @@ function ModelOverlay(props) {
     <div className={classes.model}>
       <h2
         onClick={() => {
-  
+          dispatch(onRegisterToggle())
         }}
       >
         X

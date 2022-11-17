@@ -22,9 +22,8 @@ const toggleSlice = createSlice({
         onBarToggle : (state) => {
             state.bar = !state.bar
         }
-
     }
 })
 
-export const {onToggle} = toggleSlice.actions
+export const {onToggle , onRegisterToggle} = toggleSlice.actions
 export default toggleSlice.reducer
