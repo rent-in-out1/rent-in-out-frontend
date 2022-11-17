@@ -58,7 +58,7 @@ button{
       width: 100px;
       padding: 10px 22px;
       border-radius: 5px;
-      color: var(--grey-400);
+      color: var(--white);
       background: var(--primary-300);
       display: flex;
       align-items: center;
