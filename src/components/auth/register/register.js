@@ -190,7 +190,7 @@ const Register = () => {
                     placeholder="******************"
                   />
                   {errors.password && (
-                    <small>Please fill out an valid password (Example: A123bf!@#).</small>
+                    <small>Please fill out valid password (Upper/Lowercase , Number , Special characters).</small>
                   )}
                 </div>
                 {isRegister && (
