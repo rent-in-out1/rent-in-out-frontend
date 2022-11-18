@@ -2,10 +2,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaHome, FaBell, FaInbox, FaUser, FaStickyNote, FaSignInAlt, FaSignOutAlt } from "react-icons/fa"
-import { Logo, Wrapper } from '../../components/style/wrappers/navbarUser';
+import { Logo, Wrapper } from '../../../components/style/wrappers/navbarUser';
 import { useSelector,useDispatch } from "react-redux"
 import { useState } from 'react';
-import { onRegisterToggle } from '../../redux/features/toggleSlice';
+import { onRegisterToggle } from '../../../redux/features/toggleSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const Header = () => {
             {
               isOpen &&
               <ul className='absolute bg-white w-32 rounded right-2 -bottom-11'>
-                <li onClick={()=>{
+                <li onMouseUpCapture={()=>{
                   dispatch(onRegisterToggle())
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 ${isLogin ? "hover:bg-red-300" : "hover:bg-blue-200"}`}>
                   {isLogin ? <div className='flex justify-between items-center'> <p>Signout</p> <FaSignOutAlt /></div> : <div className='flex justify-between items-center'><p>Signin</p> <FaSignInAlt /></div>}</li>

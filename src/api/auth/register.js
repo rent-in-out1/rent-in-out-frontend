@@ -6,11 +6,12 @@ import {
   API_URL,
   doApiMethod,
   doGetApiMethod,
-} from "../../../services/service";
-import { Wrapper, Button } from "../../style/wrappers/registerPage";
-import Model from "../../UI/Model";
-import  { onLogin, onRegister} from "../../../redux/features/userSlice";
-import getLocations from "../../../services/countries-api/getLocations";
+} from "../../services/service";
+import { Wrapper, Button } from "../../components/style/wrappers/registerPage";
+import Model from "../../components/UI/Model";
+import  { onLogin, onRegister} from "../../redux/features/userSlice";
+import getLocations from "../../services/countries-api/getLocations";
+import { onRegisterToggle } from "../../redux/features/toggleSlice";
 
 const Register = () => {
   // useEffect(()=>{
@@ -73,8 +74,10 @@ const Register = () => {
       } else {
       }
       if (data.user.role === "admin") {
+        dispatch(onRegisterToggle())
         nav("/admin");
       } else {
+        dispatch(onRegisterToggle())
         nav("/");
       }
     } catch (err) {

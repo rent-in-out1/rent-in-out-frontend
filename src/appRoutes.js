@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./layout/layout";
-import LayoutAdmin from "./layoutAdmin/layoutAdmin";
-import HomeAdmin from "./components/admin/homeAdmin";
-import Users from "./components/admin/users";
-import Categories from "./components/admin/categories";
-import Posts from "./components/admin/posts";
-import About from "./components/client/about";
-import Dashboard from "./components/client/dashboard";
 import { useSelector } from "react-redux";
-import Register from "./components/auth/register/register";
-import Page404 from './components/error/page404/page404';
+import LayoutAdmin from './layout/layoutAdmin/layoutAdmin';
+import HomeAdmin from './pages/admin/homeAdmin';
+import Users from './pages/admin/users';
+import Categories from './pages/admin/categories';
+import Layout from './layout/layout'
+import Dashboard from './pages/client/dashboard';
+import About from './pages/client/about';
+import Page404 from './pages/error/page404';
+import Register from './api/auth/register';
+import Posts from './pages/admin/posts';
 const AppRoutes = () => {
   let userState = useSelector((state) => state.userSlice);
   let isRegister = useSelector((state) => state.toggleSlice.register);

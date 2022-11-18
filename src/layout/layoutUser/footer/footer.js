@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Wrapper } from "../../components/style/wrappers/footer";
-import { Logo } from '../../components/style/wrappers/navbarUser';
+import { Wrapper } from "../../../components/style/wrappers/footer";
+import { Logo } from '../../../components/style/wrappers/navbarUser';
 
 
 const Footer = () => {

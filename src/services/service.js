@@ -1,15 +1,13 @@
 import axios from "axios"
 export const API_URL = 'https://rentinout.onrender.com'
 
-
-
 export const doGetApiMethod = async(_url) => {
     try {
         let resp = await axios({
             method: "GET",
             url: API_URL + _url,
             headers: {
-                'x-api-key' : JSON.parse(localStorage["userData"]).token
+                'x-api-key' : JSON.parse(localStorage["token"])
             }
         })
         return resp;
