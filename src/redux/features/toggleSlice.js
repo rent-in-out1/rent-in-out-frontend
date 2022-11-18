@@ -19,9 +19,7 @@ const toggleSlice = createSlice({
             state.error.status = !state.error.status
             state.error.massege = action.payload.error.massege
         },
-        onBarToggle : (state) => {
-            state.bar = !state.bar
-        }
+
     }
 })
 
