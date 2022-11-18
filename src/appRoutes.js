@@ -12,7 +12,7 @@ import Page404 from './pages/error/page404';
 import Register from './api/auth/register';
 import Posts from './pages/admin/posts';
 const AppRoutes = () => {
-  let userState = useSelector((state) => state.userSlice);
+  let {role} = useSelector((state) => state.userSlice);
   let isRegister = useSelector((state) => state.toggleSlice.register);
   return (
     <Router>
@@ -21,7 +21,7 @@ const AppRoutes = () => {
           {/* outLet */}
           <Route index element={<Dashboard />} />
           
-          {userState.role === "user" && (
+          {role === "user" && (
             <React.Fragment>
               <Route path="/profile" element={<About />} />
               <Route path="/profile1" element={"<Dashboard />"} />
@@ -29,7 +29,7 @@ const AppRoutes = () => {
             </React.Fragment>
           )}
         </Route>
-        {userState.role === "admin" && (
+        {role === "admin" && (
           <Route path="/admin" element={<LayoutAdmin />}>
             {/* OutLet */}
             <Route path="/admin" element={<HomeAdmin />} />
@@ -38,7 +38,6 @@ const AppRoutes = () => {
             <Route path="/admin/posts" element={<Posts />} />
           </Route>
         )}
-
         <Route path="*" element={<Page404 />} />
       </Routes>
       {isRegister && <Register />}
