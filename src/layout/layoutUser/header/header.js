@@ -70,15 +70,34 @@ const Header = () => {
             {
               isOpen &&
               <ul className='absolute bg-white w-32 rounded right-2 -bottom-11'>
-                <li onMouseUpCapture={()=>{
+                <li onClick={()=>{
                   dispatch(onRegisterToggle())
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 ${isLogin ? "hover:bg-red-300" : "hover:bg-blue-200"}`}>
                   {isLogin ? <div className='flex justify-between items-center'> <p>Signout</p> <FaSignOutAlt /></div> : <div className='flex justify-between items-center'><p>Signin</p> <FaSignInAlt /></div>}</li>
               </ul>
             }
+
           </div>
         </div>
       </div>
+      {
+        isOpen &&
+        <ul className='absolute bg-white w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
+          <li className={`w-full p-2 rounded transition ease-in-out delay-150 ${isLogin ? "hover:bg-red-300" : "hover:bg-blue-200"}`}>
+            Home</li>
+          <li className={`w-full p-2 rounded transition ease-in-out delay-150 ${isLogin ? "hover:bg-red-300" : "hover:bg-blue-200"}`}>
+            About</li>
+          <li className={`w-full p-2 rounded transition ease-in-out delay-150 ${isLogin ? "hover:bg-red-300" : "hover:bg-blue-200"}`}>
+            Profile</li>
+          <li className={`w-full p-2 rounded transition ease-in-out delay-150 ${isLogin ? "hover:bg-red-300" : "hover:bg-blue-200"}`}>
+            Settings</li>
+            <li onClick={() => {
+            dispatch(onRegisterToggle())
+          }} className={`w-full p-2 rounded transition ease-in-out delay-150 ${isLogin ? "hover:bg-red-300" : "hover:bg-blue-200"}`}>
+            {isLogin ? <div className='flex justify-between items-center'> <p>Signout</p> <FaSignOutAlt /></div> :
+             <div className='flex justify-between items-center'><p>Signin</p> <FaSignInAlt /></div>}</li>
+        </ul>
+      }
     </Wrapper>
   )
 }
