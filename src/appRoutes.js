@@ -5,7 +5,7 @@ import LayoutAdmin from './layout/layoutAdmin/layoutAdmin';
 import HomeAdmin from './pages/admin/homeAdmin';
 import Users from './pages/admin/users';
 import Categories from './pages/admin/categories';
-import Layout from './layout/layout'
+import Layout from './layout/layoutUser/layout'
 import Dashboard from './pages/client/dashboard';
 import About from './pages/client/about';
 import Page404 from './pages/error/page404';
