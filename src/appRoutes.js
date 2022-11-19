@@ -21,13 +21,9 @@ const AppRoutes = () => {
           {/* outLet */}
           {/* Guest Routes */}
           <Route index element={<Dashboard />} />
-<<<<<<< HEAD
-          {/* User Routes */}
-          {userState.role === "user" && (
-=======
-          
+
+
           {role === "user" && (
->>>>>>> rentApp
             <React.Fragment>
               <Route path="/profile" element={<About />} />
               <Route path="/profile1" element={"<Dashboard />"} />

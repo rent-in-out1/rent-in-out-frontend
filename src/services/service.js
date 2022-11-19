@@ -16,12 +16,15 @@ export const doGetApiMethod = async(_url) => {
     }
 }
 export const doApiMethod = async(_url, _method, _body = {}, _headers = {}) => {
+    console.log(_body)
     try {
         let resp = await axios({
             method: _method,
             url: API_URL+_url,
+            headers: {
+                'x-api-key' : JSON.parse(localStorage["token"])
+            },
             data: _body,
-            headers: _headers 
         })
         return resp;
     } catch (err) {

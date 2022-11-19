@@ -10,13 +10,9 @@ import {
 import { Wrapper, Button } from "../../components/style/wrappers/registerPage";
 import Model from "../../components/UI/Model";
 import  { onLogin, onRegister} from "../../redux/features/userSlice";
-import getLocations from "../../services/countries-api/getLocations";
 import { onRegisterToggle } from "../../redux/features/toggleSlice";
 
 const Register = () => {
-  // useEffect(()=>{
-  //   getLocations()
-  // })
   const dispatch = useDispatch();
   const nav = useNavigate();
   let {
@@ -43,7 +39,6 @@ const Register = () => {
         password: _dataBody.password,
       };
       registerRequest(register);
-      // dispatch(onRegister(register))
     } else {
       let login = {
         email: _dataBody.email,
