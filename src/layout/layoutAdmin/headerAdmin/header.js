@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { onRegisterToggle } from '../../../redux/features/toggleSlice';
 import {
   FaSearch,
   FaUsers,
@@ -9,7 +9,7 @@ import {
   FaBell,
   FaHome,
 } from "react-icons/fa";
-import { Logo, Wrapper } from "../../components/style/wrappers/navbarAdmin";
+import { Logo, Wrapper } from "../../../components/style/wrappers/navbarAdmin";
 import { useSelector } from "react-redux";
 const Header = () => {
   const isLogin = useSelector(state => state.userSlice.isLoggedIn)
