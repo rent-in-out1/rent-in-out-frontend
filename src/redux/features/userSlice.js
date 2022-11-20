@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-        token : "",
         userId: "",
         fullName : {
             firstname: "",
@@ -16,8 +15,8 @@ const initialState = {
         rank: [],
         productList : [],
         createdAt : "",
-        active: false
-      
+        active: false,
+        accessToken: ""
     };
 
 const userSlice = createSlice({
@@ -49,9 +48,23 @@ const userSlice = createSlice({
             state.userId = action.payload._id
             state.createdAt = action.payload.craetedAt
             state.active = action.payload.active 
-            state.token = JSON.parse(localStorage["token"])
+            state.accessToken = action.payload.token
         },
-
+        onLogout : (state) =>{
+            state.phone = ""
+            state.birthdate = ""
+            state.email = ""
+            state.fullName= {
+                firstname : "",
+                lastname : ""
+            }
+            state.profile_img = ""
+            state.role = ""
+            state.userId = ""
+            state.createdAt = ""
+            state.active = "" 
+            state.accessToken =""
+        },
     }
 })
 
