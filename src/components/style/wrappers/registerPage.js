@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   padding-top: 0;
   align-items: center;
   box-sizing: border-box;
+
   .inside_box {
     min-height: max-content;
     background: var(--white);
