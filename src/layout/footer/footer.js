@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import {useDispatch} from 'react-redux'
 import { Wrapper } from "../../components/style/wrappers/footer";
 import { Logo } from '../../components/style/wrappers/navbarUser';
+// import { API_URL, doApiMethod } from '../../../services/service';
 
 
 const Footer = () => {
@@ -19,7 +20,23 @@ const Footer = () => {
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   const onSub =(_dataBody) => {
     console.log(_dataBody)
+    // sendEmail(_dataBody);
+    return;
   }
+
+//   const sendEmail = async (_dataBody) => {
+//     try {
+//       const url = "users/clientMail";
+//       const { data } = await doApiMethod(url, "POST", _dataBody);
+//       console.log(data)
+//       // localStorage.setItem("userDataForm", JSON.stringify(data));
+//     }
+//    catch (err) {
+//     console.log(err);
+//   }
+// }
+     
+
   return (
     <Wrapper>
       <footer>

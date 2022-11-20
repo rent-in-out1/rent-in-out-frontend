@@ -53,6 +53,10 @@ input{
       margin-bottom: 6px;
 }
 
+small{
+    color: var(--red);
+}
+
 button{
     margin-top: 12px;
       width: 100px;
