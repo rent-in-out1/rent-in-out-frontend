@@ -1,10 +1,7 @@
 import React from 'react'
 import { BsTrash } from 'react-icons/bs'
-import { useDispatch } from 'react-redux';
-import { changeRole } from "../../../redux/features/userSlice"
 import { API_URL, doApiMethod } from '../../../services/service';
 const SingleUser = (props) => {
-  const dispatch = useDispatch();
   const user = props.item;
 
   const unixToAge = (birthday) => {
@@ -52,13 +49,6 @@ const SingleUser = (props) => {
           {user?.craetedAt.split("T")[0]}
         </p>
       </td>
-      <td onClick={() => changeRole(user?._id)}>
-        <span className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
-          <span aria-hidden
-            className={user?.role === "admin" ? "absolute inset-0 bg-black opacity-50 rounded-full" : "absolute inset-0 bg-gray-200 opacity-50 rounded-full"}></span>
-          <span className="relative">{String(user?.role)}</span>
-        </span>
-      </td>
       <td>
         <span className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
           <span aria-hidden
@@ -66,6 +56,14 @@ const SingleUser = (props) => {
           <span className="relative">{String(user?.active)}</span>
         </span>
       </td>
+      <td onClick={() => changeRole(user?._id)}>
+        <span className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
+          <span aria-hidden
+            className={user?.role === "admin" ? "absolute inset-0 bg-black opacity-50 rounded-full" : "absolute inset-0 bg-gray-200 opacity-50 rounded-full"}></span>
+          <span className="relative">{String(user?.role)}</span>
+        </span>
+      </td>
+
       <td>
         <span className="relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900">
           <span aria-hidden
