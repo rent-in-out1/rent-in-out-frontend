@@ -1,25 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { API_URL, doApiMethod } from "../../services/service";
 const initialState = {
-    token: "",
-    userId: "",
-    fullName: {
-        firstname: "",
-        lastname: "",
-    },
-    email: "",
-    phone: "",
-    profile_img: "",
-    cover_img: "",
-    role: "",
-    birthdate: "",
-    location: "",
-    rank: [],
-    productList: [],
-    createdAt: "",
-    active: false
-
-};
+        userId: "",
+        fullName : {
+            firstname: "",
+            lastname: "",
+        },
+        email: "",
+        phone : "",
+        profile_img: "",
+        cover_img: "",
+        role: "",
+        birthdate: "",
+        location: "",
+        rank: [],
+        productList : [],
+        createdAt : "",
+        active: false,
+        accessToken: ""
+    };
 
 const userSlice = createSlice({
     name: "user",
@@ -49,9 +48,24 @@ const userSlice = createSlice({
             state.role = action.payload.role
             state.userId = action.payload._id
             state.createdAt = action.payload.craetedAt
-            state.active = action.payload.active
-            state.token = JSON.parse(localStorage["token"])
-        }
+            state.active = action.payload.active 
+            state.accessToken = action.payload.token
+        },
+        onLogout : (state) =>{
+            state.phone = ""
+            state.birthdate = ""
+            state.email = ""
+            state.fullName= {
+                firstname : "",
+                lastname : ""
+            }
+            state.profile_img = ""
+            state.role = ""
+            state.userId = ""
+            state.createdAt = ""
+            state.active = "" 
+            state.accessToken =""
+        },
     }
 })
 
