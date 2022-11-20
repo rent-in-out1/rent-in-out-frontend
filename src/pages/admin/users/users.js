@@ -6,7 +6,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     getAllUsers();
-  }, []);
+  }, [users]);
   const getAllUsers = async () => {
     let url = "/users/userList";
     const { data } = await doGetApiMethod(url);
@@ -41,17 +41,3 @@ const Users = () => {
 };
 
 export default Users;
-
-
-{/* <tbody>
-{users.map((user, index) => {
-  return (
-    <tr key={index}>
-      <td>{user.fullName.firstName}</td>
-      <td>{user.fullName.lastName}</td>
-      <td>{user.role}</td>
-      <td>{[user.active]}</td>
-    </tr>
-  );
-})}
-</tbody> */}

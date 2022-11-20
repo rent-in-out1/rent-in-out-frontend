@@ -6,15 +6,24 @@ const SingleUser = (props) => {
 
   const unixToAge = (birthday) => {
     let age = (Date.now() - birthday) / (1000 * 60 * 60 * 24 * 365)
-    console.log(Date.now() - birthday)
     return Math.floor(age);
   }
   const changeRole = async (_id) => {
-    console.log(_id)
-    const url = API_URL + "/users/changeRole/" + _id;
-    let obj = {role:"admin"}
-    let { data } = await doApiMethod(url, "PATCH",obj);
+    const url = "/users/changeRole/" + _id;
+    let { data } = await doApiMethod(url, "PATCH");
     console.log(data)
+  }
+  const changeActive = async (_id) => {
+    const url = "/users/changeActive/" + _id;
+    let { data } = await doApiMethod(url, "PATCH");
+    console.log(data)
+  }
+  const deleteUser = async (_id, name) => {
+    if (window.confirm(`Are you sure you want to delete ${name}`)) {
+      const url = "/users/" + _id;
+      let { data } = await doApiMethod(url, "DELETE")
+      console.log(data)
+    }
   }
   return (
     <tr>
@@ -39,7 +48,7 @@ const SingleUser = (props) => {
         <p className="text-gray-900 whitespace-no-wrap">{user?.location}</p>
       </td>
       <td>
-        <p className="text-gray-900 whitespace-no-wrap">{unixToAge(Math.floor(new Date(user?.birthdate).getTime() / 1000))}</p>
+        <p className="text-gray-900 whitespace-no-wrap">{() => unixToAge(Math.floor(new Date(user?.birthdate).getTime() / 1000))}</p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">{user?.phone}</p>
@@ -50,7 +59,7 @@ const SingleUser = (props) => {
         </p>
       </td>
       <td>
-        <span className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
+        <span onClick={() => changeActive(user?._id)} className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
           <span aria-hidden
             className={user?.active ? "absolute inset-0 bg-green-200 opacity-50 rounded-full" : "absolute inset-0 bg-red-400 opacity-50 rounded-full"}></span>
           <span className="relative">{String(user?.active)}</span>
@@ -65,9 +74,9 @@ const SingleUser = (props) => {
       </td>
 
       <td>
-        <span className="relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900">
+        <span onClick={() => deleteUser(user._id, user.fullName.firstName)} className="relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900">
           <span aria-hidden
-            className={"absolute inset-0 bg-red-200 opacity-50 rounded-full hover:bg-red-400"}></span>
+            className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}></span>
           <span className="relative"><BsTrash /></span>
         </span>
       </td>

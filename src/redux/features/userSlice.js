@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { API_URL, doApiMethod } from "../../services/service";
 const initialState = {
         userId: "",
         fullName : {
