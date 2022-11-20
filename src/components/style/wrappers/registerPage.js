@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  height: 90vh;
+  max-height: 90vh;
   width: 100%;
   display: flex;
   justify-content: center;
-
+  padding-top: 0;
   align-items: center;
   box-sizing: border-box;
+
   .inside_box {
     min-height: max-content;
     background: var(--white);
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     padding: 8px;
     max-width: 900px;
@@ -20,6 +22,7 @@ export const Wrapper = styled.div`
     border-radius: 8px;
     @media (max-width: 768px) {
       border-radius: 0;
+      text-align: center;
     }
   }
   @media (max-width: 768px) {
@@ -85,15 +88,17 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 35px;
     @media (max-width: 768px) {
-      margin: 8px -8px;
+      margin-bottom: 0;
+      margin: 8px;
       flex-direction: row;
       justify-content: space-around;
     }
     .loginButton {
-      margin-top: 12px;
+      margin-top:0;
       width: 150px;
-      padding: 15px 25px;
+      padding: 10px 25px;
       border-radius: 5px;
       color: white;
       display: flex;
@@ -125,6 +130,12 @@ export const Wrapper = styled.div`
       width: 20px;
       height: 20px;
       margin-right: 10px;
+    }
+    @media (max-width: 768px) {
+      .loginButton{
+        padding: 10px 10px;
+        width: 120px;
+      }
     }
   }
 `;

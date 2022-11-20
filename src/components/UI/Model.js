@@ -1,15 +1,15 @@
 import React from "react";
 import classes from "./Model.module.css";
-import {useNavigate} from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { isLoggedIn } from "../../redux/features/userSlice";
+import  ReactDOM  from 'react-dom';
+import { onRegisterToggle } from "../../redux/features/toggleSlice";
 
 function Backdrop(props) {
   const dispatch = useDispatch();
   return (
     <div
       onClick={() => {
-        dispatch(isLoggedIn());
+        dispatch(onRegisterToggle())
       }}
       className={classes.backdrop}
     >
@@ -23,7 +23,7 @@ function ModelOverlay(props) {
     <div className={classes.model}>
       <h2
         onClick={() => {
-          dispatch(isLoggedIn());
+          dispatch(onRegisterToggle())
         }}
       >
         X
@@ -32,12 +32,18 @@ function ModelOverlay(props) {
     </div>
   );
 }
-
-function Model(props) {
+const portalElement = document.getElementById("overlays");
+const Model = (props) => {
   return (
     <React.Fragment>
-      <Backdrop registerShowHandler={props.registerShowHandler} />
-      <ModelOverlay>{props.children}</ModelOverlay>
+      {ReactDOM.createPortal(
+        <Backdrop onClose={props.onClose} />,
+        portalElement
+      )}
+      {ReactDOM.createPortal(
+        <ModelOverlay>{props.children}</ModelOverlay>,
+        portalElement
+      )}
     </React.Fragment>
   );
 }

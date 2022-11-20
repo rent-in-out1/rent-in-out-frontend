@@ -1,16 +1,23 @@
-
-import React, { useState} from 'react'
-import { useForm } from "react-hook-form"
-import { useNavigate } from 'react-router-dom';
-import {useDispatch} from 'react-redux'
-import { API_URL, doApiMethod ,doGetApiMethod } from '../../../services/service';
-import { Wrapper, Button } from '../../style/wrappers/registerPage';
-
-import Model from '../../UI/Model';
-import { isLoggedIn } from '../../../redux/features/userSlice';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  API_URL,
+  doApiMethod,
+  doGetApiMethod,
+} from "../../services/service";
+import { Wrapper, Button } from "../../components/style/wrappers/registerPage";
+import Model from "../../components/UI/Model";
+import  { onLogin, onRegister} from "../../redux/features/userSlice";
+import getLocations from "../../services/countries-api/getLocations";
+import { onRegisterToggle } from "../../redux/features/toggleSlice";
 
 const Register = () => {
-  const dispatch = useDispatch()
+  // useEffect(()=>{
+  //   getLocations()
+  // })
+  const dispatch = useDispatch();
   const nav = useNavigate();
   let {
     register,
@@ -19,9 +26,9 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  const [isRegister, setIsRegister] = useState(true);
+  // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
+  const [isRegister, setIsRegister] = useState(false);
   const onSub = (_dataBody) => {
-    console.log(isRegister)
     delete _dataBody.password2;
     delete _dataBody.email2;
     if (isRegister) {
@@ -36,39 +43,40 @@ const Register = () => {
         password: _dataBody.password,
       };
       registerRequest(register);
-      return;
-    }
-    else {
+      // dispatch(onRegister(register))
+    } else {
       let login = {
         email: _dataBody.email,
         password: _dataBody.password,
       };
-        loginRequest(login);
+      loginRequest(login);
     }
   };
   const registerRequest = async (_dataBody) => {
     try {
-      const url = API_URL + "users";
+      const url ="/users";
       const { data } = await doApiMethod(url, "POST", _dataBody);
+      if(data) {
+        dispatch(onRegister(data))
+      }
     } catch (err) {
       console.log(err);
     }
   };
   const loginRequest = async (_dataBody) => {
     try {
-      const url = "users/login";
+      const url = "/users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
-      console.log(data)
-      localStorage.setItem("userData", JSON.stringify(data));
-      if(data) {
-        dispatch(isLoggedIn())
+      localStorage.setItem("token", JSON.stringify(data.token));
+      if (data.user) {
+        dispatch(onLogin(data.user, data.token));
+      } else {
       }
-      else {
-        
-      }
-      if (data.role === "admin") {
+      if (data.user.role === "admin") {
+        dispatch(onRegisterToggle())
         nav("/admin");
       } else {
+        dispatch(onRegisterToggle())
         nav("/");
       }
     } catch (err) {
@@ -85,6 +93,9 @@ const Register = () => {
   };
   return (
     <Model>
+      <h1 className="text-center text-5xl my-6 m-0">
+        {isRegister ? "Register" : "Login"}
+      </h1>
       <Wrapper>
         <div className="inside_box">
           <div className="left w-full md:w-1/3">
@@ -98,9 +109,7 @@ const Register = () => {
             </div>
           </div>
           <div className="right w-full md:w-2/3">
-            <h1 className="text-center text-2xl mb-3">
-              {isRegister ? "Register" : "Login"}
-            </h1>
+            <div></div>
             <form onSubmit={handleSubmit(onSub)}>
               {isRegister && (
                 <div className="flex flex-wrap -mx-3 mb-2">
@@ -178,12 +187,13 @@ const Register = () => {
                       required: true,
                       minLength: 6,
                       maxLength: 25,
+                      // pattern: regPassword
                     })}
                     type="password"
                     placeholder="******************"
                   />
                   {errors.password && (
-                    <small>Please fill out this field.</small>
+                    <small>Please fill out valid password (Upper/Lowercase , Number , Special characters).</small>
                   )}
                 </div>
                 {isRegister && (

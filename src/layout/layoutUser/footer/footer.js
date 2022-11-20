@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import {useDispatch} from 'react-redux'
-import { Wrapper } from "../../components/style/wrappers/footer";
-import { Logo } from '../../components/style/wrappers/navbarUser';
+import { Wrapper } from "../../../components/style/wrappers/footer";
+import { Logo } from '../../../components/style/wrappers/navbarUser';
 // import { API_URL, doApiMethod } from '../../../services/service';
 
 

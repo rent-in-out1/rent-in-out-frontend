@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { doGetApiMethod } from "../../../services/service";
-import { Wrapper } from "../../style/wrappers/userAdminPage";
+import { Wrapper } from "../../../components/style/wrappers/userAdminPage";
 const Users = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     getAllUsers();
   }, []);
   const getAllUsers = async () => {
-    let url = "users/userList";
+    let url = "/users/userList";
     const { data } = await doGetApiMethod(url);
     setUsers(data);
   };

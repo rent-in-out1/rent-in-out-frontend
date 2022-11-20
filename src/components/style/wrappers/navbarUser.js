@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     background: var(--skyblue-50);
+    position: relative;
     .container{
         display: flex;
         justify-content: space-between;
@@ -47,7 +48,7 @@ export const Wrapper = styled.div`
      }
 
     .right{
-        width: 25%;
+        width: auto;
         display: flex;
         justify-content: end;
         align-items: center;
@@ -97,8 +98,8 @@ export const Wrapper = styled.div`
         }
         .right{
             .avatar{
-                width: 30px;
-                height: 30px;
+                /* width: 30px; */
+                /* height: 30px; */
              }   
             width: auto;
             nav{
