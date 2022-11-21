@@ -47,7 +47,7 @@ useEffect(()=>{
       </div>
     </td>
     <td>
-      <p className="text-gray-900 whitespace-no-wrap">{creator.data?.userInfo.fullName.firstName} {creator.data?.userInfo.fullName.lastName}</p>
+      <p onClick={()=> console.log(creator.data?.userInfo)} className="text-gray-900 whitespace-no-wrap">{creator.data?.userInfo.fullName.firstName} {creator.data?.userInfo.fullName.lastName}</p>
     </td>
     <td>
       <p className="text-gray-900 whitespace-no-wrap">{post?.location}</p>

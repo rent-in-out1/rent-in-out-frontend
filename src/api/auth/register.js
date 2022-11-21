@@ -62,7 +62,6 @@ const Register = () => {
     try {
       const url = "/users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
-      console.log(data)
       localStorage.setItem("token", JSON.stringify(data.token));
       if (data.user) {
         dispatch(onLogin(data.user, data.token));
