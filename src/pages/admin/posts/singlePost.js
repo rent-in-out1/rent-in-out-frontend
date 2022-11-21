@@ -1,8 +1,90 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { BsTrash } from 'react-icons/bs'
+import { doApiMethod, doGetApiMethod } from './../../../services/service';
+import { useState } from 'react';
 
-const SinglePost = () => {
+const SinglePost = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [creator , setCreator ] = useState({});
+  const post = props.item;
+useEffect(()=>{
+  getCreator()
+},[])
+  const getCreator = async () => {
+    let url = "/posts/info/"+ post?.creator_id;
+    let {data} = await doGetApiMethod(url)
+    setCreator(data?.creator_id)
+    console.log(data)
+  }
+
+  const changeActive = async (_id) => {
+    const url = "/posts/changeActive/" + _id;
+    let { data } = await doApiMethod(url, "PATCH");
+    console.log(data)
+  }
+  const deletePost = async (_id, postName) => {
+    if (window.confirm(`Are you sure you want to delete ${postName}`)) {
+      const url = "/posts/" + _id;
+      let { data } = await doApiMethod(url, "DELETE")
+      console.log(data)
+    }
+  }
+
   return (
-    <div>SinglePost</div>
+    <tr>
+    <td>
+      <div className="flex items-center">
+        <div className="flex-shrink-0 w-8 h-8">
+          <img className="w-full h-full rounded-full"
+            src={post?.img}
+            alt={post?.img} />
+        </div>
+        <div className="ml-3">
+          <p className="text-gray-900 whitespace-no-wrap">
+            {post?.title}
+          </p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <p className="text-gray-900 whitespace-no-wrap">{creator?.firstName}</p>
+    </td>
+    <td>
+      <p className="text-gray-900 whitespace-no-wrap">{post?.location}</p>
+    </td>
+    <td>
+      <p className="text-gray-900 whitespace-no-wrap"></p>
+    </td>
+    <td>
+      <p className="text-gray-900 whitespace-no-wrap">{post?.phone}</p>
+    </td>
+    <td>
+      <p className="text-gray-900 whitespace-no-wrap">
+        
+      </p>
+    </td>
+    <td>
+      <span onClick={() => changeActive(post?._id)} className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
+        <span aria-hidden
+          className={post?.active ? "absolute inset-0 bg-green-200 opacity-50 rounded-full" : "absolute inset-0 bg-red-400 opacity-50 rounded-full"}></span>
+        <span className="relative">{String(post?.active)}</span>
+      </span>
+    </td>
+    <td>
+      <span className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
+        <span aria-hidden
+          className={post?.role === "admin" ? "absolute inset-0 bg-black opacity-50 rounded-full" : "absolute inset-0 bg-gray-200 opacity-50 rounded-full"}></span>
+        <span className="relative">{String(post?.role)}</span>
+      </span>
+    </td>
+    <td>
+      <span onClick={() => deletePost(post._id, post.title)} className="relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900">
+        <span aria-hidden
+          className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}></span>
+        <span className="relative"><BsTrash /></span>
+      </span>
+    </td>
+  </tr>
   )
 }
 
