@@ -34,6 +34,9 @@ export const Wrapper = styled.div`
                     background: var(--white);
                     font-size: 0.8em;
                     text-align: center;
+                    p{
+                        text-transform: capitalize;
+                    }
                 }
             }
         }

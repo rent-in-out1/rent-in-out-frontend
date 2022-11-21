@@ -9,22 +9,22 @@ const SinglePost = (props) => {
   const post = props.item;
 useEffect(()=>{
   getCreator()
+  console.log()
 },[])
   const getCreator = async () => {
-    let url = "/posts/info/"+ post?.creator_id;
-    let {data} = await doGetApiMethod(url)
-    setCreator(data?.creator_id)
-    console.log(data)
+    let url = "/users/info/"+ post?.creator_id;
+    let data = await doGetApiMethod(url)
+    setCreator(data)
   }
 
   const changeActive = async (_id) => {
-    const url = "/posts/changeActive/" + _id;
+    const url = "/posts/changeActive/" +_id;
     let { data } = await doApiMethod(url, "PATCH");
     console.log(data)
   }
   const deletePost = async (_id, postName) => {
     if (window.confirm(`Are you sure you want to delete ${postName}`)) {
-      const url = "/posts/" + _id;
+      const url = "/posts/" +_id;
       let { data } = await doApiMethod(url, "DELETE")
       console.log(data)
     }
@@ -47,34 +47,28 @@ useEffect(()=>{
       </div>
     </td>
     <td>
-      <p className="text-gray-900 whitespace-no-wrap">{creator?.firstName}</p>
+      <p className="text-gray-900 whitespace-no-wrap">{creator.data?.userInfo.fullName.firstName} {creator.data?.userInfo.fullName.lastName}</p>
     </td>
     <td>
       <p className="text-gray-900 whitespace-no-wrap">{post?.location}</p>
     </td>
     <td>
-      <p className="text-gray-900 whitespace-no-wrap"></p>
+      <p className="text-gray-900 whitespace-no-wrap">{post?.category_url}</p>
     </td>
     <td>
-      <p className="text-gray-900 whitespace-no-wrap">{post?.phone}</p>
+      <p className="text-gray-900 whitespace-no-wrap">{post?.createdAt.split("T")[0]}</p>
     </td>
     <td>
-      <p className="text-gray-900 whitespace-no-wrap">
-        
-      </p>
+      <p className="text-gray-900 whitespace-no-wrap">{post?.updatedAt.split("T")[0]}</p>
+    </td>
+    <td>
+      <p className="text-gray-900 whitespace-no-wrap">{post?.available_from.split("T")[0]}</p>
     </td>
     <td>
       <span onClick={() => changeActive(post?._id)} className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
         <span aria-hidden
           className={post?.active ? "absolute inset-0 bg-green-200 opacity-50 rounded-full" : "absolute inset-0 bg-red-400 opacity-50 rounded-full"}></span>
         <span className="relative">{String(post?.active)}</span>
-      </span>
-    </td>
-    <td>
-      <span className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
-        <span aria-hidden
-          className={post?.role === "admin" ? "absolute inset-0 bg-black opacity-50 rounded-full" : "absolute inset-0 bg-gray-200 opacity-50 rounded-full"}></span>
-        <span className="relative">{String(post?.role)}</span>
       </span>
     </td>
     <td>

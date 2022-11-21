@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SinglePost from "./singlePost";
-import Loader from './../../../components/UI/Loader/Loader';
-import SmallLoader from "../../../components/UI/Loader/SmallLoader";
 
 const Posts = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,10 +11,11 @@ const Posts = () => {
     let url = "/posts";
     const { data } = await doGetApiMethod(url);
     setPosts(data);
+    console.log(posts)
   };
   useEffect(() => {
     getAllposts()
-    console.log(posts)
+    
   }, []);
 
   return (
@@ -29,12 +28,12 @@ const Posts = () => {
               <thead>
                 <tr>
                   <th>Title</th>
+                  <th>Created by</th>
                   <th>location</th>
-                  <th>location</th>
-                  <th>hi</th>
-                  <th>hi</th>
-                  <th>hi</th>
-                  <th>active</th>
+                  <th>category</th>
+                  <th>created at</th>
+                  <th>updated at</th>
+                  <th>availability</th>
                   <th>active</th>
                   <th>delete</th>
                 </tr>

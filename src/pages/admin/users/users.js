@@ -6,7 +6,8 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     getAllUsers();
-  }, [users]);
+  }, []);
+  
   const getAllUsers = async () => {
     let url = "/users/userList";
     const { data } = await doGetApiMethod(url);
