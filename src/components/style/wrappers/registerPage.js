@@ -73,7 +73,7 @@ export const Wrapper = styled.div`
     color: var(--grey-700);
     border: 1px solid var(--grey-200);
     border-radius: 8px;
-    padding: 8px 32px;
+    padding: 8px 8px;
     margin-bottom: 2px;
     cursor: pointer;
 
