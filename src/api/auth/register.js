@@ -1,18 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
+import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  API_URL,
-  doApiMethod,
-  doGetApiMethod,
-} from "../../services/service";
+import { API_URL, doApiMethod, doGetApiMethod } from "../../services/service";
 import { Wrapper, Button } from "../../components/style/wrappers/registerPage";
 import Model from "../../components/UI/Model";
-import  { onLogin, onRegister} from "../../redux/features/userSlice";
+import { onLogin, onRegister } from "../../redux/features/userSlice";
 import { onRegisterToggle } from "../../redux/features/toggleSlice";
+import getLocations from "../../services/countries-api/getLocations";
 
 const Register = () => {
+  const [isRegister, setIsRegister] = useState(false);
+  const [allCountries, setAllCountries] = useState([]);
+  const [country, setCountry] = useState({});
+  const [cities, setCities] = useState();
+  const [city, setCity] = useState("");
+
+  const onCountrySelect = (e) => {
+    const citiesArr = e.cities.map((city) => {
+      return {
+        value: city,
+        label: city,
+      };
+    });
+    setCities(citiesArr);
+  };
+
+  useEffect(() => {
+    const getCountry = async () => {
+      const countries = await getLocations();
+      const contriesArr = countries.map((country) => {
+        return {
+          value: country.country,
+          label: country.country,
+          cities: country.cities,
+        };
+      });
+      setAllCountries(contriesArr);
+    };
+    getCountry();
+  }, []);
+
   const dispatch = useDispatch();
   const nav = useNavigate();
   let {
@@ -23,7 +52,6 @@ const Register = () => {
   } = useForm();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
-  const [isRegister, setIsRegister] = useState(false);
   const onSub = (_dataBody) => {
     delete _dataBody.password2;
     delete _dataBody.email2;
@@ -37,6 +65,7 @@ const Register = () => {
         birthdate: _dataBody.birthdate,
         email: _dataBody.email,
         password: _dataBody.password,
+        location: country + ", " + city,
       };
       registerRequest(register);
     } else {
@@ -49,10 +78,10 @@ const Register = () => {
   };
   const registerRequest = async (_dataBody) => {
     try {
-      const url ="/users";
+      const url = "/users";
       const { data } = await doApiMethod(url, "POST", _dataBody);
-      if(data) {
-        dispatch(onRegister(data))
+      if (data) {
+        dispatch(onRegister(data));
       }
     } catch (err) {
       console.log(err);
@@ -68,10 +97,10 @@ const Register = () => {
       } else {
       }
       if (data.user.role === "admin") {
-        dispatch(onRegisterToggle())
+        dispatch(onRegisterToggle());
         nav("/admin");
       } else {
-        dispatch(onRegisterToggle())
+        dispatch(onRegisterToggle());
         nav("/");
       }
     } catch (err) {
@@ -93,6 +122,7 @@ const Register = () => {
       </h1>
       <Wrapper>
         <div className="inside_box">
+          <h2>{country.country}</h2>
           <div className="left w-full md:w-1/3">
             <div className="loginButton google" onClick={loginGmailRequest}>
               <img src={"./img/google.png"} alt="" className="icon" />
@@ -188,7 +218,10 @@ const Register = () => {
                     placeholder="******************"
                   />
                   {errors.password && (
-                    <small>Please fill out valid password (Upper/Lowercase , Number , Special characters).</small>
+                    <small>
+                      Please fill out valid password (Upper/Lowercase , Number ,
+                      Special characters).
+                    </small>
                   )}
                 </div>
                 {isRegister && (
@@ -216,7 +249,7 @@ const Register = () => {
                   className="flex flex-wrap mb-2 -mx-3"
                   style={{ display: isRegister ? "flex" : "none" }}
                 >
-                  <div className=" w-1/3 px-2">
+                  <div className=" w-1/2 px-2">
                     <label>Birthdate</label>
                     <div className="flex relative bottom-3 items-center pl-3 pointer-events-none"></div>
                     <input
@@ -226,7 +259,7 @@ const Register = () => {
                       placeholder="Select date"
                     />
                   </div>
-                  <div className="w-1/2 md:w-1/3 px-2 mb-2 md:mb-0">
+                  <div className="w-1/2 md:w-1/2 px-2 mb-2 md:mb-0 ">
                     <label>Phone</label>
                     <input
                       {...register("phone", {
@@ -239,15 +272,28 @@ const Register = () => {
                     />
                     {errors.phone && <small>Enter valid phone.</small>}
                   </div>
-                  <div className="w-1/2 md:w-1/3 px-2 mb-2 md:mb-0">
+                  <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0 ">
                     <label>Select country</label>
-                    <select className="input">
-                      <option defaultValue>Country</option>
-                      <option value="US">United States</option>
-                      <option value="CA">Canada</option>
-                      <option value="FR">France</option>
-                      <option value="DE">Germany</option>
-                    </select>
+                    <Select
+                      className="input"
+                      options={allCountries}
+                      isSearchable
+                      clearable
+                      onChange={(e) => onCountrySelect(e)}
+                    />
+                  </div>
+                  <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0">
+                    <label>Select city</label>
+                    {cities?.length > 0 && (
+                      <Select
+                        className="input"
+                        classNamePrefix="select"
+                        isSearchable
+                        clearable
+                        options={cities}
+                        onchange={(e) => setCity(e)}
+                      />
+                    )}
                   </div>
                 </div>
               )}

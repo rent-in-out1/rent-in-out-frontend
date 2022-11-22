@@ -32,7 +32,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => <SingleUser item={user}/>)}
+          {users.map((user) => <SingleUser key={user._id} item={user}/>)}
         </tbody>
       </table>
     </div>
