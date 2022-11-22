@@ -22,8 +22,6 @@ const AppRoutes = () => {
           {/* outLet */}
           {/* Guest Routes */}
           <Route index element={<Dashboard />} />
-
-
           {role === "user" && (
             <React.Fragment>
               <Route path="/profile" element={<MyProfile />} />

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+overflow-x: auto;
     h1{
         text-align: center;
         margin: 8px 0;
@@ -8,8 +9,8 @@ export const Wrapper = styled.div`
         font-family: sans-serif;
     }
     table{
-        width: 75%;
-        table-layout: fixed;
+        width: 85%;
+        table-layout: auto;
         thead{
             tr{
                 background: var(--grey-50);
@@ -39,6 +40,15 @@ export const Wrapper = styled.div`
                     }
                 }
             }
+        }
+    }
+    @media(max-width:768px){
+        table{
+            width: 15000px;
+            background: red;
+        }
+        thead{
+            background: red;
         }
     }
 `

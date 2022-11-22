@@ -8,7 +8,6 @@ const LayoutAdmin = () => {
     <div>
       <Header />
       <Outlet />
-      <Footer />
     </div>
   );
 };
