@@ -20,7 +20,6 @@ export const doGetApiMethod = async(_url) => {
     }
 }
 export const doApiMethod = async(_url, _method, _body = {}, _headers = {}) => {
-    console.log(_body)
     let token;
     if(localStorage["token"]){
         token = JSON.parse(localStorage["token"])

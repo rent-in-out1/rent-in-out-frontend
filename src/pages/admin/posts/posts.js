@@ -6,17 +6,17 @@ import SinglePost from "./singlePost";
 const Posts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([]);
-
+  const [isChange , setIsChange] = useState(false);
+  
   const getAllposts = async () => {
     let url = "/posts";
     const { data } = await doGetApiMethod(url);
     setPosts(data);
-    console.log(posts)
+    setIsChange(false)
   };
   useEffect(() => {
     getAllposts()
-    
-  }, []);
+  }, [isChange]);
 
   return (
     <>
@@ -40,7 +40,7 @@ const Posts = () => {
               </thead>
               <tbody>
                 {posts.map((post) => (
-                  <SinglePost key={post._id} item={post} />
+                  <SinglePost key={post._id} item={post} setIsChange={setIsChange} />
                 ))}
               </tbody>
             </table>
