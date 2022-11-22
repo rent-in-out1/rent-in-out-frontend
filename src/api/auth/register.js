@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -11,8 +11,19 @@ import { Wrapper, Button } from "../../components/style/wrappers/registerPage";
 import Model from "../../components/UI/Model";
 import  { onLogin, onRegister} from "../../redux/features/userSlice";
 import { onRegisterToggle } from "../../redux/features/toggleSlice";
+import getLocations from "../../services/countries-api/getLocations";
 
 const Register = () => {
+  const [isRegister, setIsRegister] = useState(false);
+  const [country , setCountry] = useState({});
+  useEffect(() =>{
+    const getCountry = async()=>{
+      const country = await getLocations();
+      console.log(country)
+    } 
+    getCountry();
+
+  })
   const dispatch = useDispatch();
   const nav = useNavigate();
   let {
@@ -23,7 +34,6 @@ const Register = () => {
   } = useForm();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
-  const [isRegister, setIsRegister] = useState(false);
   const onSub = (_dataBody) => {
     delete _dataBody.password2;
     delete _dataBody.email2;
@@ -243,10 +253,7 @@ const Register = () => {
                     <label>Select country</label>
                     <select className="input">
                       <option defaultValue>Country</option>
-                      <option value="US">United States</option>
-                      <option value="CA">Canada</option>
-                      <option value="FR">France</option>
-                      <option value="DE">Germany</option>
+                      {}
                     </select>
                   </div>
                 </div>
