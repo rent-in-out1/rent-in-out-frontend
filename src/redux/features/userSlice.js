@@ -68,5 +68,5 @@ const userSlice = createSlice({
     }
 })
 
-export const { onRegister, onLogin, changeRole } = userSlice.actions
+export const { onRegister, onLogin, changeRole, onLogout } = userSlice.actions
 export default userSlice.reducer

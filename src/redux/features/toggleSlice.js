@@ -17,7 +17,7 @@ const toggleSlice = createSlice({
         },
         onErrorToggle: (state, action) =>{
             state.error.status = !state.error.status
-            state.error.massege = action.payload.error.massege
+            state.error.message = action.payload.error.message
         },
 
     }
