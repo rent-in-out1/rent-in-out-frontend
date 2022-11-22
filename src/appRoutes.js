@@ -11,6 +11,7 @@ import About from './pages/client/about';
 import Page404 from './pages/error/page404';
 import Register from './api/auth/register';
 import Posts from './pages/admin/posts';
+import MyProfile from "./pages/client/myProfile/myProfile";
 const AppRoutes = () => {
   let {role} = useSelector((state) => state.userSlice);
   let isRegister = useSelector((state) => state.toggleSlice.register);
@@ -25,7 +26,7 @@ const AppRoutes = () => {
 
           {role === "user" && (
             <React.Fragment>
-              <Route path="/profile" element={<About />} />
+              <Route path="/profile" element={<MyProfile />} />
               <Route path="/profile1" element={"<Dashboard />"} />
               <Route path="/profile2" element={"<Users />"} />
             </React.Fragment>
