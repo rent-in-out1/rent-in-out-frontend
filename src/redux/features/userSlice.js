@@ -69,16 +69,16 @@ const userSlice = createSlice({
             state.accessToken =""
         },
 
-        bannerimage : (state,action) =>{
-            state.banner_image = action.payload.resp.data.url
+        bannerImage : (state,action) =>{
+            state.banner_image = action.payload
         },
 
         profileImage : (state,action) =>{
-            state.profile_img = action.payload.resp.data.url
+            state.profile_img = action.payload
         },
        
     }
 })
 
-export const { onRegister, onLogin, changeRole, onLogout } = userSlice.actions
+export const { onRegister, onLogin, changeRole, onLogout,bannerImage,  profileImage} = userSlice.actions
 export default userSlice.reducer

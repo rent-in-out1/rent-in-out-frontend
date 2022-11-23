@@ -1,7 +1,15 @@
 import React,{useRef} from 'react'
 import { FaCamera } from "react-icons/fa"
+import { useDispatch } from 'react-redux'
+import { bannerImage,profileImage } from '../../redux/features/userSlice'
+import { useNavigate } from 'react-router-dom'
+
+
+
 
 const BannerProfile = () => {
+  const nav= useNavigate()
+  const dispatch= useDispatch()
   const profileRef = useRef()
   const bannerRef = useRef()
   return (
@@ -12,7 +20,8 @@ const BannerProfile = () => {
         </span>
         <span className='absolute -bottom-6 left-20 z-5 text-gray-800 cursor-pointer hover:text-gray-500 md:-bottom-9 md:left-48'><label className="custom-file-upload">
           <input ref={profileRef} type="file" onChange={(e)=>{
-            console.log(profileRef.current.files[0])
+            dispatch(bannerImage(profileRef.current.files[0]) )
+            nav("/")
           }} multiple style={{ display: 'none' }} />
           <FaCamera />
         </label>

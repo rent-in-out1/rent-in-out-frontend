@@ -11,7 +11,6 @@ div{
     margin-top: 12px;
     
 }
-
 p{
     margin-bottom: 12px;
 }
@@ -20,9 +19,6 @@ p{
     justify-content: space-evenly;
     margin-bottom: 18px;
     font-size: 1.4em;
-   
-    
-
 }
 li{
     margin-right: 20px;
@@ -35,14 +31,12 @@ h2{
     margin-bottom: 12px;
     font-size: 1.2em;
 }
-
 form{
     display: flex; 
     flex-direction: column;
 }
 
 input{
-   
     display: block;
       width: 100%;
       background: var(--white);
