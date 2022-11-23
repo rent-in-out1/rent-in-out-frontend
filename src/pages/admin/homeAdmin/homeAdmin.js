@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 const HomeAdmin = () => {
-  const user = useSelector(state => state.userSlice)
+  const user = useSelector(state => state.userSlice.user)
   useState(() => {
     console.log(user)
   }, [])

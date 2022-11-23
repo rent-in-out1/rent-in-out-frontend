@@ -131,7 +131,7 @@ const Register = () => {
           <h2>{country.country}</h2>
           <div className="left w-full md:w-1/3">
             <div className="loginButton google" onClick={loginGmailRequest}>
-              <img src={"./img/google.png"} alt="" className="icon" />
+              <img src={"./google.png"} alt="" className="icon" />
               Google
             </div>
             <div className="loginButton facebook">

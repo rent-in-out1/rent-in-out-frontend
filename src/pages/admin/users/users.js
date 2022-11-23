@@ -4,14 +4,16 @@ import { Wrapper } from "../../../components/style/wrappers/table";
 import SingleUser from "./singleUser";
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [isChange , setIsChange] = useState(false);
   useEffect(() => {
     getAllUsers();
-  }, []);
+  }, [isChange]);
   
   const getAllUsers = async () => {
     let url = "/users/userList";
     const { data } = await doGetApiMethod(url);
     setUsers(data);
+    setIsChange(false)
   };
   return (
     <Wrapper>
@@ -32,7 +34,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => <SingleUser key={user._id} item={user}/>)}
+          {users.map((user) => <SingleUser key={user._id} item={user} setIsChange={setIsChange}/>)}
         </tbody>
       </table>
     </div>

@@ -11,12 +11,11 @@ const userSlice = createSlice({
             state.user = action.payload.user
         },
         onLogin: (state, action) => {
-            console.log(action.payload)
             state.user = action.payload
-            console.log(state.user)
         },
         onLogout : (state) =>{
             state.user = {}
+            window.location.replace('http://localhost:3000/');
         },
     }
 })

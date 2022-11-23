@@ -1,6 +1,6 @@
-import React , {useState , useEffect} from "react";
+import React , { useEffect } from "react";
 import jwt_decode from "jwt-decode";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector , useDispatch } from "react-redux";
 import LayoutAdmin from './layout/layoutAdmin/layoutAdmin';
 import HomeAdmin from './pages/admin/homeAdmin';
@@ -14,10 +14,11 @@ import Register from './api/auth/register';
 import Posts from './pages/admin/posts';
 import {doApiMethod } from './services/service';
 import { onLogin } from "./redux/features/userSlice";
-import { onRegisterToggle } from "./redux/features/toggleSlice";
+// import { onRegisterToggle } from "./redux/features/toggleSlice";
 
 const AppRoutes = () => {
   const dispatch = useDispatch() 
+  // const nav = useNavigate()
   let {user} = useSelector((state) => state.userSlice);
   let isRegister = useSelector((state) => state.toggleSlice.register);
 
@@ -26,12 +27,10 @@ const AppRoutes = () => {
     let token;
     if(localStorage['token']){
       token = localStorage['token'];
-    }
-    const decoded = jwt_decode(token)
-    console.log(decoded)
-    console.log(token)
-    if(decoded.exp < Date.now()){
-      getUserInfo(decoded._id, token)
+      const decoded = jwt_decode(token)
+      if(decoded.exp < Date.now()){
+        getUserInfo(decoded._id, token)
+      }
     }
   },[])
 
