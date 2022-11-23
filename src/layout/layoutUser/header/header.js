@@ -85,7 +85,7 @@ const Header = () => {
       </section>
       {
         isOpen &&
-        <ul className='absolute shadow bg-white w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
+        <ul className='absolute shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
           <li className={`w-full p-2 rounded transition ease-in-out delay-150 hover:bg-blue-200 cursor-pointer`}>
             Home</li>
           <li className={`w-full p-2 rounded transition ease-in-out delay-150 hover:bg-blue-200 cursor-pointer`}>
