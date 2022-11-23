@@ -5,10 +5,10 @@ import Header from "./headerAdmin";
 
 const LayoutAdmin = () => {
   return (
-    <div>
+    <React.Fragment>
       <Header />
       <Outlet />
-    </div>
+    </React.Fragment>
   );
 };
 
