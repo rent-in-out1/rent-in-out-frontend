@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 const initialState = {
-
-
-    user: {}
-    };
+    user: null
+};
 
 const userSlice = createSlice({
     name: "user",
@@ -15,21 +14,20 @@ const userSlice = createSlice({
         onLogin: (state, action) => {
             state.user = action.payload
         },
-        onLogout : (state) =>{
-            state.user = {}
-            window.location.replace('http://localhost:3000/');
+        onLogout: (state) => {
+            state.user = { active: false }
         },
 
-        bannerImage : (state,action) =>{
+        bannerImage: (state, action) => {
             state.banner_image = action.payload
         },
 
-        profileImage : (state,action) =>{
+        profileImage: (state, action) => {
             state.profile_img = action.payload
         },
-       
+
     }
 })
 
-export const { onRegister, onLogin, changeRole, onLogout,bannerImage,  profileImage} = userSlice.actions
+export const { onRegister, onLogin, changeRole, onLogout, bannerImage, profileImage } = userSlice.actions
 export default userSlice.reducer

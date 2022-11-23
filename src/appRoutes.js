@@ -9,6 +9,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { doApiMethod } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
+import MyProfile from "./pages/client/myProfile/myProfile";
 
 // Lazy loading of routes
 
@@ -61,17 +62,17 @@ const AppRoutes = () => {
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
-            {user.role === "user" && user.active && (
+            {user?.role === "user" && user?.active && (
               <React.Fragment>
-                <Route path="/profile" element={<About />} />
+                <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profile1" element={"<Dashboard />"} />
                 <Route path="/profile2" element={"<Users />"} />
                 <Route path="*" element={<Page404 />} />
-              </React.Fragment>
+              </React.Fragment> 
             )}
 
           </Route>
-          {user.role === "admin" && user.active && (
+          {user?.role === "admin" && user?.active && (
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
               <Route path="/admin" element={<HomeAdmin />} />

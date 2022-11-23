@@ -5,8 +5,7 @@ export const Wrapper = styled.div`
     section{
         display: flex;
         justify-content: space-between;
-        padding: 8px 12px;
-        max-width: 1600px;
+        padding: 8px 24px;
         margin: 0 auto;
         .left{
         width: 50%;

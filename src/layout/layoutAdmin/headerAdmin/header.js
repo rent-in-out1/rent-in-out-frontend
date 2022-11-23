@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 import { onRegisterToggle } from '../../../redux/features/toggleSlice';
 import {
   FaSearch,
@@ -16,8 +16,9 @@ import { useSelector,useDispatch } from "react-redux";
 import { onLogout } from "../../../redux/features/userSlice";
 import { useEffect } from "react";
 const Header = () => {
+  const nav = useNavigate();
   const dispatch = useDispatch();
-  const isLogin = useSelector(state => state.userSlice.user.userId !== "" )
+  const isLogin = useSelector(state => state.userSlice?.user !== null)
   const user = useSelector(state=> state.userSlice.user)
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -121,9 +122,10 @@ const Header = () => {
             Settings</li>
             <li onClick={() => {
             if(isLogin){
-              alert("logout")
               localStorage.removeItem('token')
               dispatch(onLogout)
+              // window.open("http://localhost:3000","_self")
+              nav("/")
             }
             dispatch(onRegisterToggle())
             setIsOpen(false)

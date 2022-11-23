@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { FaSearch, FaHome, FaBell, FaInbox, FaUser, FaStickyNote, FaSignInAlt, FaSignOutAlt } from "react-icons/fa"
 import { Logo, Wrapper } from '../../../components/style/wrappers/navbarUser';
 import { useSelector,useDispatch } from "react-redux"
@@ -10,9 +10,10 @@ import { onLogin, onLogout } from '../../../redux/features/userSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector(state => state.userSlice.user.userId !== "" )
-  const user = useSelector(state=> state.userSlice.user)
+  const nav = useNavigate();
+  const isLogin = useSelector(state => state.userSlice?.user !== null)
   console.log(isLogin)
+  const user = useSelector(state=> state.userSlice.user)
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -95,9 +96,9 @@ const Header = () => {
             Settings</li>
             <li onClick={() => {
             if(isLogin){
-              alert("logout")
               localStorage.removeItem('token')
               dispatch(onLogout)
+              nav("/")
             }
             dispatch(onRegisterToggle())
             setIsOpen(false)
