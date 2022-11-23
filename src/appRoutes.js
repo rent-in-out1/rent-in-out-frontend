@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { doApiMethod } from "./services/service";
@@ -22,6 +21,7 @@ const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
+
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const AppRoutes = () => {
   };
 
   return (
-    <Suspense fallback={<h1 className="centered">Loading</h1>}>
+    <Suspense fallback={<h1 className="content-center ">Loading....</h1>}>
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>

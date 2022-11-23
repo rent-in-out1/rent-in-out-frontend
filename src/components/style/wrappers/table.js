@@ -38,6 +38,12 @@ overflow-x: auto;
                     p{
                         text-transform: capitalize;
                     }
+                    .btn{
+                        transition: 0.5s;
+                    }
+                    .btn:hover{
+                        transform: scale(1.2);
+                    }
                 }
             }
         }

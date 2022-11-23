@@ -62,7 +62,7 @@ const SingleUser = (props) => {
         <span onClick={() => {
           changeActive(user?._id)
           props.setIsChange(true)
-          }} className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
+          }} className="btn relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
           <span aria-hidden
             className={user?.active ? "absolute inset-0 bg-green-200 opacity-50 rounded-full" : "absolute inset-0 bg-red-400 opacity-50 rounded-full"}></span>
           <span className="relative">{String(user?.active)}</span>
@@ -72,7 +72,7 @@ const SingleUser = (props) => {
         {changeRole(user?._id)
           props.setIsChange(true)
         }}>
-        <span className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
+        <span className="btn relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
           <span aria-hidden
             className={user?.role === "admin" ? "absolute inset-0 bg-black opacity-50 rounded-full" : "absolute inset-0 bg-gray-200 opacity-50 rounded-full"}></span>
           <span className="relative">{String(user?.role)}</span>
@@ -84,7 +84,7 @@ const SingleUser = (props) => {
           {deleteUser(user._id, user.fullName.firstName)
             props.setIsChange(true)
           }} 
-          className="relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900">
+          className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900">
           <span aria-hidden
             className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}></span>
           <span className="relative"><BsTrash /></span>
