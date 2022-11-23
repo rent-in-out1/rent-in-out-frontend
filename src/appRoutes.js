@@ -38,6 +38,10 @@ const AppRoutes = () => {
   const getUserInfo = async (_id, token) => {
     let url = "/users/info/"+_id;
     const {data} = await doApiMethod(url, 'GET', token);
+    if (!data.userInfo){
+      alert("invalid user")
+      return
+    }
     dispatch(onLogin(data.userInfo))
   }
 
@@ -48,7 +52,7 @@ const AppRoutes = () => {
           {/* outLet */}
           {/* Guest Routes */}
           <Route index element={<Dashboard />} />
-          {user.role === "user" && (
+          {user.role === "user" && user.active && (
             <React.Fragment>
               <Route path="/profile" element={<About />} />
               <Route path="/profile1" element={"<Dashboard />"} />
@@ -57,7 +61,7 @@ const AppRoutes = () => {
             </React.Fragment>
           )}
         </Route>
-        {user.role === "admin" && (
+        {user.role === "admin" && user.active && (
           <Route path="/admin" element={<LayoutAdmin />}>
             {/* OutLet */}
             <Route path="/admin" element={<HomeAdmin />} />
@@ -67,7 +71,6 @@ const AppRoutes = () => {
             <Route path="/admin/*" element={<Page404 />} />
           </Route>
         )}
-        
       </Routes>
       {isRegister && <Register />}
     </Router>
