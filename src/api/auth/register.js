@@ -68,6 +68,7 @@ const Register = () => {
         location: country + ", " + city,
       };
       registerRequest(register);
+
     } else {
       let login = {
         email: _dataBody.email,
@@ -91,6 +92,7 @@ const Register = () => {
     try {
       const url = "/users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
+      
       localStorage.setItem("token", JSON.stringify(data.token));
       if (data.user) {
         dispatch(onLogin(data.user, data.token));
@@ -107,6 +109,10 @@ const Register = () => {
       console.log(err);
     }
   };
+  const signOut =() =>{
+    localStorage.removeItem("token");
+    nav("/");
+  }
   const loginGmailRequest = async () => {
     const url = API_URL + "users/auth/google";
     const data = await doGetApiMethod(url);

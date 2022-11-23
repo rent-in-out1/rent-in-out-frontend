@@ -1,6 +1,7 @@
-import React from "react";
+import React , {useState , useEffect} from "react";
+import jwt_decode from "jwt-decode";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import LayoutAdmin from './layout/layoutAdmin/layoutAdmin';
 import HomeAdmin from './pages/admin/homeAdmin';
 import Users from './pages/admin/users';
@@ -11,9 +12,36 @@ import About from './pages/client/about';
 import Page404 from './pages/error/page404';
 import Register from './api/auth/register';
 import Posts from './pages/admin/posts';
+import {doApiMethod } from './services/service';
+import { onLogin } from "./redux/features/userSlice";
+import { onRegisterToggle } from "./redux/features/toggleSlice";
+
 const AppRoutes = () => {
-  let {role} = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch() 
+  let {user} = useSelector((state) => state.userSlice);
   let isRegister = useSelector((state) => state.toggleSlice.register);
+
+
+  useEffect(()=>{
+    let token;
+    if(localStorage['token']){
+      token = localStorage['token'];
+    }
+    const decoded = jwt_decode(token)
+    console.log(decoded)
+    console.log(token)
+    if(decoded.exp < Date.now()){
+      getUserInfo(decoded._id, token)
+    }
+  },[])
+
+  
+  const getUserInfo = async (_id, token) => {
+    let url = "/users/info/"+_id;
+    const {data} = await doApiMethod(url, 'GET', token);
+    dispatch(onLogin(data.userInfo))
+  }
+
   return (
     <Router>
       <Routes>
@@ -21,7 +49,7 @@ const AppRoutes = () => {
           {/* outLet */}
           {/* Guest Routes */}
           <Route index element={<Dashboard />} />
-          {role === "user" && (
+          {user.role === "user" && (
             <React.Fragment>
               <Route path="/profile" element={<About />} />
               <Route path="/profile1" element={"<Dashboard />"} />
@@ -29,7 +57,7 @@ const AppRoutes = () => {
             </React.Fragment>
           )}
         </Route>
-        {role === "admin" && (
+        {user.role === "admin" && (
           <Route path="/admin" element={<LayoutAdmin />}>
             {/* OutLet */}
             <Route path="/admin" element={<HomeAdmin />} />
