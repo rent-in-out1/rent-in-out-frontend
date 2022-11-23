@@ -34,7 +34,7 @@ export const Wrapper = styled.div`
       display: block;
       width: 100%;
       background: var(--grey-100);
-      color: var(--grey-700);
+      color: var(--black);
       border: 1px solid var(--grey-200);
       border-radius: 8px;
       padding: 8px;
@@ -70,7 +70,7 @@ export const Wrapper = styled.div`
     display: block;
     width: 100%;
     background: var(--grey-100);
-    color: var(--grey-700);
+    color: var(--black);
     border: 1px solid var(--grey-200);
     border-radius: 8px;
     padding: 8px 8px;

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 const initialState = {
-    user: {}
+    user: null
     };
 
 const userSlice = createSlice({
@@ -14,8 +15,7 @@ const userSlice = createSlice({
             state.user = action.payload
         },
         onLogout : (state) =>{
-            state.user = {}
-            window.location.replace('http://localhost:3000/');
+            state.user = {active:false}
         },
     }
 })
