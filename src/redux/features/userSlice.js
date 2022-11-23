@@ -16,7 +16,10 @@ const initialState = {
         productList : [],
         createdAt : "",
         active: false,
-        accessToken: ""
+        accessToken: "",
+        bannerFile: "",
+        profileFile: "",
+
     };
 
 const userSlice = createSlice({
@@ -65,6 +68,15 @@ const userSlice = createSlice({
             state.active = "" 
             state.accessToken =""
         },
+
+        bannerimage : (state,action) =>{
+            state.banner_image = action.payload.resp.data.url
+        },
+
+        profileImage : (state,action) =>{
+            state.profile_img = action.payload.resp.data.url
+        },
+       
     }
 })
 

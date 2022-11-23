@@ -11,6 +11,7 @@
     "framer-motion": "^7.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-file-input-custom": "^1.0.7",
     "react-google-button": "^0.7.2",
     "react-hook-form": "^7.38.0",
     "react-icons": "^4.6.0",
