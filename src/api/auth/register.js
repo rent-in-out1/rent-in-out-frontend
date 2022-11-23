@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
@@ -68,6 +68,7 @@ const Register = () => {
         location: country + ", " + city,
       };
       registerRequest(register);
+
     } else {
       let login = {
         email: _dataBody.email,
@@ -91,6 +92,7 @@ const Register = () => {
     try {
       const url = "/users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
+      
       localStorage.setItem("token", JSON.stringify(data.token));
       if (data.user) {
         dispatch(onLogin(data.user, data.token));
@@ -107,6 +109,10 @@ const Register = () => {
       console.log(err);
     }
   };
+  const signOut =() =>{
+    localStorage.removeItem("token");
+    nav("/");
+  }
   const loginGmailRequest = async () => {
     const url = API_URL + "users/auth/google";
     const data = await doGetApiMethod(url);
@@ -125,7 +131,7 @@ const Register = () => {
           <h2>{country.country}</h2>
           <div className="left w-full md:w-1/3">
             <div className="loginButton google" onClick={loginGmailRequest}>
-              <img src={"./img/google.png"} alt="" className="icon" />
+              <img src={"./google.png"} alt="" className="icon" />
               Google
             </div>
             <div className="loginButton facebook">

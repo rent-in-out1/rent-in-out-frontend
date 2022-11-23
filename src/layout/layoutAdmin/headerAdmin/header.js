@@ -17,13 +17,9 @@ import { onLogout } from "../../../redux/features/userSlice";
 import { useEffect } from "react";
 const Header = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector(state => state.userSlice.userId !== "" )
-  const user = useSelector(state=> state.userSlice)
+  const isLogin = useSelector(state => state.userSlice.user.userId !== "" )
+  const user = useSelector(state=> state.userSlice.user)
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(()=>{
-    console.log(isLogin)
-    console.log(user)
-  },[])
   return (
     <Wrapper>
       <section>
@@ -126,6 +122,7 @@ const Header = () => {
             <li onClick={() => {
             if(isLogin){
               alert("logout")
+              localStorage.removeItem('token')
               dispatch(onLogout)
             }
             dispatch(onRegisterToggle())

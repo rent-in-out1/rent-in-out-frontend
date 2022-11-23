@@ -44,7 +44,7 @@ const SinglePost = (props) => {
         </div>
       </td>
       <td>
-        <p className="text-gray-900 whitespace-no-wrap">
+        <p className="btn relative inline-block px-2 py-1 font-semibold  leading-tight cursor-pointer text-gray-900 whitespace-no-wrap hover:border rounded-full color-red">
           {creator.data?.userInfo.fullName.firstName}{" "}
           {creator.data?.userInfo.fullName.lastName}
         </p>
@@ -77,7 +77,7 @@ const SinglePost = (props) => {
             props.setIsChange(true);
 
           }}
-          className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer"
+          className="btn relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer"
         >
           <span
             aria-hidden
@@ -96,7 +96,7 @@ const SinglePost = (props) => {
             deletePost(post._id, post.title);
             props.setIsChange(true);
           }}
-          className="relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
+          className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
         >
           <span
             aria-hidden

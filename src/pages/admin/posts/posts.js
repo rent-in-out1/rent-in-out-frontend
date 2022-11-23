@@ -3,6 +3,7 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SinglePost from "./singlePost";
 
+
 const Posts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -15,12 +16,14 @@ const Posts = () => {
     setIsChange(false)
   };
   useEffect(() => {
+    setIsLoading(true)
     getAllposts()
+    setIsLoading(false)
   }, [isChange]);
 
   return (
     <>
-      {!isLoading ? (
+      {isLoading ? <h1 className="content-center">Loading ...</h1> :(
         <Wrapper>
           <h1>Posts List</h1>
           <div className="flex justify-center">
@@ -46,7 +49,7 @@ const Posts = () => {
             </table>
           </div>
         </Wrapper>
-      ) : <h2>Loading.....</h2>}
+      )}
     </>
   );
 };

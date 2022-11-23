@@ -59,14 +59,20 @@ const SingleUser = (props) => {
         </p>
       </td>
       <td>
-        <span onClick={() => changeActive(user?._id)} className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
+        <span onClick={() => {
+          changeActive(user?._id)
+          props.setIsChange(true)
+          }} className="btn relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
           <span aria-hidden
             className={user?.active ? "absolute inset-0 bg-green-200 opacity-50 rounded-full" : "absolute inset-0 bg-red-400 opacity-50 rounded-full"}></span>
           <span className="relative">{String(user?.active)}</span>
         </span>
       </td>
-      <td onClick={() => changeRole(user?._id)}>
-        <span className="relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
+      <td onClick={() => 
+        {changeRole(user?._id)
+          props.setIsChange(true)
+        }}>
+        <span className="btn relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer">
           <span aria-hidden
             className={user?.role === "admin" ? "absolute inset-0 bg-black opacity-50 rounded-full" : "absolute inset-0 bg-gray-200 opacity-50 rounded-full"}></span>
           <span className="relative">{String(user?.role)}</span>
@@ -74,7 +80,11 @@ const SingleUser = (props) => {
       </td>
 
       <td>
-        <span onClick={() => deleteUser(user._id, user.fullName.firstName)} className="relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900">
+        <span onClick={() => 
+          {deleteUser(user._id, user.fullName.firstName)
+            props.setIsChange(true)
+          }} 
+          className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900">
           <span aria-hidden
             className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}></span>
           <span className="relative"><BsTrash /></span>
