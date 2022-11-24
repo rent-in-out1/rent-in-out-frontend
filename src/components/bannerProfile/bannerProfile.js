@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { FaCamera } from "react-icons/fa"
 import { uploadImage } from '../../helpers/functions'
+import {toast} from "react-toastify"
 const BannerProfile = () => {
   const [banner, setBanner] = useState("")
   const [profile, setProfile] = useState("")
@@ -12,6 +13,7 @@ const BannerProfile = () => {
       return alert("file too big")
     }
     const url = await uploadImage(file)
+   
     setBanner(url)
   }
   const changeProfile = async(file) => {
@@ -19,6 +21,7 @@ const BannerProfile = () => {
       return alert("file too big")
     }
     const url = await uploadImage(file)
+    toast.info("Uploading",)
     setProfile(url)
   }
   return (

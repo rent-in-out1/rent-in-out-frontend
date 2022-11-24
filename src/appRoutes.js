@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { doApiMethod } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
 import MyProfile from "./pages/client/myProfile/myProfile";
+import { Details } from "./components/profileEdit/details";
 
 // Lazy loading of routes
 
@@ -69,6 +70,8 @@ const AppRoutes = () => {
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profile1" element={"<Dashboard />"} />
                 <Route path="/profile2" element={"<Users />"} />
+                <Route path="/details" element={<Details/>} />
+
                 <Route path="*" element={<Page404 />} />
               </React.Fragment> 
             )}
