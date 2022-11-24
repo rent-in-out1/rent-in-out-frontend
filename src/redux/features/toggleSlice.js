@@ -13,7 +13,10 @@ const toggleSlice = createSlice({
     initialState: initialstate,
     reducers :{
         onRegisterToggle: (state) =>{
-            state.register = !state.register;
+            state.register = true;
+        },
+        onLogout: (state) =>{
+            state.register = false;
         },
         onErrorToggle: (state, action) =>{
             state.error.status = !state.error.status
@@ -23,5 +26,5 @@ const toggleSlice = createSlice({
     }
 })
 
-export const {onToggle , onRegisterToggle} = toggleSlice.actions
+export const {onToggle , onRegisterToggle, onLogout} = toggleSlice.actions
 export default toggleSlice.reducer

@@ -7,7 +7,7 @@ import { API_URL, doApiMethod, doGetApiMethod, errorHandler } from "../../servic
 import { Wrapper, Button } from "../../components/style/wrappers/registerPage";
 import Model from "../../components/UI/Model";
 import { onLogin, onRegister } from "../../redux/features/userSlice";
-import { onRegisterToggle } from "../../redux/features/toggleSlice";
+import { onLogout, onRegisterToggle } from "../../redux/features/toggleSlice";
 import getLocations from "../../services/countries-api/getLocations";
 import {toast} from "react-toastify"
 
@@ -100,10 +100,10 @@ const Register = () => {
       } else {
       }
       if (data.user.role === "admin") {
-        dispatch(onRegisterToggle());
+        dispatch(onLogout());
         nav("/admin");
       } else {
-        dispatch(onRegisterToggle());
+        dispatch(onLogout());
         nav("/");
       }
     } catch (err) {
