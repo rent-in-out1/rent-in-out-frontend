@@ -55,7 +55,7 @@ const SingleUser = (props) => {
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {user?.craetedAt.split("T")[0]}
+          {user?.craetedAt?.split("T")[0]}
         </p>
       </td>
       <td>

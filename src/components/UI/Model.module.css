@@ -47,9 +47,14 @@
     z-index: 30;
     right: 20px;
     width: 20px;
-    color: var(--light-blue-600);
+    color: var(--skyblue-600);
     font-size: 2em;
     cursor: pointer;
+    transition: 0.5s linear;
+  }
+  .model h2:hover{
+    color: var(--skyblue-900);
+    transform:scale(1.1);
   }
 }
 

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  max-height: 90vh;
-  width: 100%;
+  max-height: inherit;;
+  width: inherit;
   display: flex;
   justify-content: center;
   padding-top: 0;
@@ -10,13 +10,13 @@ export const Wrapper = styled.div`
   box-sizing: border-box;
 
   .inside_box {
-    min-height: max-content;
+    min-height: inherit;;
     background: var(--white);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 8px;
-    max-width: 900px;
+    max-width: inherit;
     width: 100%;
     /* box-sizing: border-box; */
     border-radius: 8px;
