@@ -52,7 +52,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
+  // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
   const onSub = (_dataBody) => {
     delete _dataBody.password2;
     delete _dataBody.email2;
@@ -219,7 +219,7 @@ const Register = () => {
                       required: true,
                       minLength: 6,
                       maxLength: 25,
-                      pattern: regPassword
+                      // pattern: regPassword
                     })}
                     type="password"
                     placeholder="******************"
