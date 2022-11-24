@@ -1,4 +1,5 @@
 import axios from "axios"
+import {toast} from "react-toastify"
 export const API_URL = 'https://rentinout.onrender.com'
 
 export const doGetApiMethod = async(_url) => {
@@ -37,4 +38,15 @@ export const doApiMethod = async(_url, _method, _body = {}, _headers = {}) => {
     } catch (err) {
         throw err;
     }
+}
+
+export const errorHandler = (err) => {
+    toast.info(err , {
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light"})
 }

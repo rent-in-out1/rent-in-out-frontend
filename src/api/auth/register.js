@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { API_URL, doApiMethod, doGetApiMethod } from "../../services/service";
+import { API_URL, doApiMethod, doGetApiMethod, errorHandler } from "../../services/service";
 import { Wrapper, Button } from "../../components/style/wrappers/registerPage";
 import Model from "../../components/UI/Model";
 import { onLogin, onRegister } from "../../redux/features/userSlice";
 import { onRegisterToggle } from "../../redux/features/toggleSlice";
 import getLocations from "../../services/countries-api/getLocations";
+import {toast} from "react-toastify"
 
 const Register = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -51,7 +52,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
+  const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
   const onSub = (_dataBody) => {
     delete _dataBody.password2;
     delete _dataBody.email2;
@@ -155,7 +156,7 @@ const Register = () => {
                       type="text"
                       placeholder="FIrst name"
                     />
-                    {errors.firstName && <small>Enter valid name.</small>}
+                    {errors.firstName && errorHandler("Enter valid first name.")}
                   </div>
                   <div className="w-full md:w-1/2 px-3">
                     <label>Last Name</label>
@@ -168,7 +169,7 @@ const Register = () => {
                       type="text"
                       placeholder="Last name"
                     />
-                    {errors.lastName && <small>Enter valid last name.</small>}
+                    {errors.lastName && errorHandler("Enter valid last name.")}
                   </div>
                 </div>
               )}
@@ -185,7 +186,7 @@ const Register = () => {
                     type="email"
                     placeholder="example@email.com"
                   />
-                  {errors.email && <small>Please fill valid email.</small>}
+                  {errors.email && errorHandler("Please fill valid email.")}
                 </div>
               </div>
               {isRegister && (
@@ -202,7 +203,7 @@ const Register = () => {
                       type="email"
                       placeholder="example@email.com"
                     />
-                    {errors.email2 && <small>Email not match.</small>}
+                    {errors.email2 && errorHandler("Email not match.")}
                   </div>
                 </div>
               )}
@@ -218,17 +219,12 @@ const Register = () => {
                       required: true,
                       minLength: 6,
                       maxLength: 25,
-                      // pattern: regPassword
+                      pattern: regPassword
                     })}
                     type="password"
                     placeholder="******************"
                   />
-                  {errors.password && (
-                    <small>
-                      Please fill out valid password (Upper/Lowercase , Number ,
-                      Special characters).
-                    </small>
-                  )}
+                  {errors.password && errorHandler("Please fill out valid password (Upper/Lowercase , Number ,Special characters")}
                 </div>
                 {isRegister && (
                   <div
@@ -246,7 +242,7 @@ const Register = () => {
                       type="password"
                       placeholder="******************"
                     />
-                    {errors.password2 && <small>Password dont match.</small>}
+                    {errors.password2 && errorHandler("Password dont match.")}
                   </div>
                 )}
               </div>
@@ -276,7 +272,7 @@ const Register = () => {
                       type="text"
                       placeholder="0555555555"
                     />
-                    {errors.phone && <small>Enter valid phone.</small>}
+                    {errors.phone && errorHandler("Enter valid phone.")}
                   </div>
                   <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0 ">
                     <label>Select country</label>

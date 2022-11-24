@@ -6,6 +6,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from "react-redux";
 import { doApiMethod } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
@@ -84,6 +86,7 @@ const AppRoutes = () => {
           )}
         </Routes>
         {isRegister && <Register />}
+        <ToastContainer position="top-right" />
       </Router>
     </Suspense>
   );
