@@ -15,7 +15,7 @@ const userSlice = createSlice({
             state.user = action.payload
         },
         onLogout: (state) => {
-            state.user = { active: false }
+            state.user = null
         },
 
         bannerImage: (state, action) => {

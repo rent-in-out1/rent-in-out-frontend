@@ -123,12 +123,14 @@ const Header = () => {
             <li onClick={() => {
             if(isLogin){
               localStorage.removeItem('token')
-              dispatch(onLogout)
               // window.open("http://localhost:3000","_self")
               nav("/")
+              dispatch(onLogout())
             }
-            dispatch(onRegisterToggle())
-            setIsOpen(false)
+            else{
+              dispatch(onRegisterToggle())
+              setIsOpen(false)
+            }
           }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer ${isLogin ? "hover:bg-red-300" : "hover:bg-blue-200"}`}>
             {isLogin ? <div className='flex justify-between items-center'> <p>Signout</p> <FaSignOutAlt /></div> :
              <div className='flex justify-between items-center'><p>Signin</p> <FaSignInAlt /></div>}</li>
