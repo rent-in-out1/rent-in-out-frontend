@@ -123,7 +123,6 @@ const Header = () => {
             <li onClick={() => {
             if(isLogin){
               localStorage.removeItem('token')
-              // window.open("http://localhost:3000","_self")
               nav("/")
               dispatch(onLogout())
             }
