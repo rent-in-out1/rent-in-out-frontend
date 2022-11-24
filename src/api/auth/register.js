@@ -7,9 +7,8 @@ import { API_URL, doApiMethod, doGetApiMethod, errorHandler } from "../../servic
 import { Wrapper, Button } from "../../components/style/wrappers/registerPage";
 import Model from "../../components/UI/Model";
 import { onLogin, onRegister } from "../../redux/features/userSlice";
-import { onLogout, onRegisterToggle } from "../../redux/features/toggleSlice";
+import { onLogout } from "../../redux/features/toggleSlice";
 import getLocations from "../../services/countries-api/getLocations";
-import {toast} from "react-toastify"
 
 const Register = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -86,14 +85,13 @@ const Register = () => {
         dispatch(onRegister(data));
       }
     } catch (err) {
-      console.log(err);
+      errorHandler(err.response.data.msg);
     }
   };
   const loginRequest = async (_dataBody) => {
     try {
       const url = "/users/login";
       const { data } = await doApiMethod(url, "POST", _dataBody);
-      
       localStorage.setItem("token", JSON.stringify(data.token));
       if (data.user) {
         dispatch(onLogin(data.user, data.token));
@@ -107,17 +105,18 @@ const Register = () => {
         nav("/");
       }
     } catch (err) {
-      console.log(err);
+      errorHandler(err.response.data.msg);
     }
   };
-  const signOut =() =>{
-    localStorage.removeItem("token");
-    nav("/");
-  }
   const loginGmailRequest = async () => {
     const url = API_URL + "users/auth/google";
-    const data = await doGetApiMethod(url);
-    console.log(data);
+    try{
+      const data = await doGetApiMethod(url);
+      console.log(data);
+    }
+    catch (err) {
+      errorHandler(err.response.data.msg);
+    }
   };
   const handleClick = () => {
     setIsRegister(!isRegister);
@@ -156,7 +155,7 @@ const Register = () => {
                       type="text"
                       placeholder="FIrst name"
                     />
-                    {errors.firstName && errorHandler("Enter valid first name.")}
+                    {errors.firstName && <small>Enter valid first name.</small>}
                   </div>
                   <div className="w-full md:w-1/2 px-3">
                     <label>Last Name</label>
@@ -169,7 +168,7 @@ const Register = () => {
                       type="text"
                       placeholder="Last name"
                     />
-                    {errors.lastName && errorHandler("Enter valid last name.")}
+                    {errors.lastName && <small>Enter valid last name.</small>}
                   </div>
                 </div>
               )}
@@ -186,7 +185,7 @@ const Register = () => {
                     type="email"
                     placeholder="example@email.com"
                   />
-                  {errors.email && errorHandler("Please fill valid email.")}
+                  {errors.email && <small>Please fill valid email.</small>}
                 </div>
               </div>
               {isRegister && (
@@ -203,7 +202,7 @@ const Register = () => {
                       type="email"
                       placeholder="example@email.com"
                     />
-                    {errors.email2 && errorHandler("Email not match.")}
+                    {errors.email2 && <small>Email not match.</small>}
                   </div>
                 </div>
               )}
@@ -224,7 +223,7 @@ const Register = () => {
                     type="password"
                     placeholder="******************"
                   />
-                  {errors.password && errorHandler("Please fill out valid password (Upper/Lowercase , Number ,Special characters")}
+                  {errors.password && <small>Please fill out valid password (Upper/Lowercase , Number ,Special characters)</small>}
                 </div>
                 {isRegister && (
                   <div
@@ -242,7 +241,7 @@ const Register = () => {
                       type="password"
                       placeholder="******************"
                     />
-                    {errors.password2 && errorHandler("Password dont match.")}
+                    {errors.password2 && <small>Password dont match.</small>}
                   </div>
                 )}
               </div>
@@ -255,11 +254,12 @@ const Register = () => {
                     <label>Birthdate</label>
                     <div className="flex relative bottom-3 items-center pl-3 pointer-events-none"></div>
                     <input
-                      {...register("birthdate", { required: false })}
+                      {...register("birthdate", { required: true })}
                       type="date"
                       className="datepicker-input"
                       placeholder="Select date"
                     />
+                    {errors.birthdate && <small>Enter valid birthdate.</small>}
                   </div>
                   <div className="w-1/2 md:w-1/2 px-2 mb-2 md:mb-0 ">
                     <label>Phone</label>
@@ -272,7 +272,7 @@ const Register = () => {
                       type="text"
                       placeholder="0555555555"
                     />
-                    {errors.phone && errorHandler("Enter valid phone.")}
+                    {errors.phone && <small>Enter valid phone.</small>}
                   </div>
                   <div className="w-full md:w-1/2 px-2 mb-2 md:mb-0 ">
                     <label>Select country</label>
