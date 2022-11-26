@@ -1,13 +1,8 @@
-
 import React, { useEffect, Suspense } from "react";
 import jwt_decode from "jwt-decode";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { doApiMethod } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
@@ -15,7 +10,9 @@ import MyProfile from "./pages/client/myProfile/myProfile";
 
 // Lazy loading of routes
 
-const LayoutAdmin = React.lazy(() => import("./layout/layoutAdmin/layoutAdmin"));
+const LayoutAdmin = React.lazy(() =>
+  import("./layout/layoutAdmin/layoutAdmin")
+);
 const Users = React.lazy(() => import("./pages/admin/users"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
@@ -25,8 +22,6 @@ const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
-
-
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -55,8 +50,6 @@ const AppRoutes = () => {
   };
 
   return (
-
-
     <Suspense fallback={<h1 className="content-center ">Loading....</h1>}>
       <Router>
         <Routes>
@@ -69,21 +62,20 @@ const AppRoutes = () => {
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profile1" element={"<Dashboard />"} />
                 <Route path="/profile2" element={"<Users />"} />
-              </React.Fragment> 
+                <Route path="*" element={<Page404 />} />
+              </React.Fragment>
             )}
-
           </Route>
           {user?.role === "admin" && user?.active && (
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
-              <Route path="/admin" element={<HomeAdmin />} />
+              <Route index element={<HomeAdmin />} />
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/*" element={<Page404 />} />
             </Route>
           )}
-          <Route path="*" element={<Page404/>} />
-          <Route path="/admin/*" element={<Page404/>} />
         </Routes>
         {isRegister && <Register />}
         <ToastContainer position="top-right" />
