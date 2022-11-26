@@ -14,7 +14,6 @@ const SignIn = (props) => {
     // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
     let {
         register,
-        getValues,
         handleSubmit,
         formState: { errors },
       } = useForm();

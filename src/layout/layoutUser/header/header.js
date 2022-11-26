@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FaSearch, FaHome, FaBell, FaInbox, FaUser, FaStickyNote, FaSignInAlt, FaSignOutAlt } from "react-icons/fa"
 import { Logo, Wrapper } from '../../../components/style/wrappers/navbarUser';
 import { useSelector, useDispatch } from "react-redux"
@@ -11,7 +11,6 @@ import { API_URL_CLIENT } from '../../../services/service';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const nav = useNavigate();
   const isLogin = useSelector(state => state.userSlice?.user !== null)
   const {user} = useSelector(state => state.userSlice)
   const [isOpen, setIsOpen] = useState(false);

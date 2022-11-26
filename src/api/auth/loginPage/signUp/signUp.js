@@ -1,14 +1,9 @@
-import React, { useState, useEffect }  from "react";
-import { useDispatch } from "react-redux";
-import getLocations from "./../../../../services/countries-api/getLocations";
+import React  from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../../../../src/components/style/wrappers/registerPage";
 import { doApiMethod, errorHandler, successHandler } from "./../../../../services/service";
-import { onRegister } from "../../../../redux/features/userSlice";
-import  Select  from 'react-select';
 
 const SignUp = (props) => {
-    const dispatch = useDispatch()
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
   let {
@@ -37,7 +32,7 @@ const SignUp = (props) => {
   const registerRequest = async (_dataBody) => {
     try {
       const url = "/users";
-      const { data } = await doApiMethod(url, "POST", _dataBody);
+      await doApiMethod(url, "POST", _dataBody);
       props.setState("signIn")
       successHandler("Sign Up Success, please verify your email")
     } catch (err) {
