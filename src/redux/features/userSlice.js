@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 const initialState = {
-    user: null
+    user: null,
 };
 
 const userSlice = createSlice({
