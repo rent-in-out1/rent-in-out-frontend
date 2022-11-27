@@ -10,6 +10,7 @@ const Categories = () => {
   const getAllcategories = async () => {
     let url = "/categories";
     const { data } = await doGetApiMethod(url);
+    console.log(data)
     setCategories(data);
     setIsChange(false)
   };
@@ -19,19 +20,18 @@ const Categories = () => {
   return (
     <>
     <Wrapper>
-      <h1>Posts List</h1>
+      <h1>Categories</h1>
       <div className="flex justify-center">
         <table>
           <thead>
             <tr>
               <th>Title</th>
               <th>Created by</th>
-              <th>location</th>
-              <th>category</th>
+              <th>info</th>
               <th>created at</th>
               <th>updated at</th>
-              <th>availability</th>
-              <th>active</th>
+              <th>edit</th>
+              <th>last edit by</th>
               <th>delete</th>
             </tr>
           </thead>

@@ -8,7 +8,7 @@ const SinglePost = (props) => {
   const post = props.item;
   useEffect(() => {
     getCreator();
-    console.log();
+
   }, []);
   const getCreator = async () => {
     let url = "/users/info/" + post?.creator_id;
@@ -16,14 +16,15 @@ const SinglePost = (props) => {
     setCreator(data);
   };
 
+
   const changeActive = async (_id) => {
     const url = "/posts/changeActive/" + _id;
-    let { data } = await doApiMethod(url, "PATCH");
+      await doApiMethod(url, "PATCH");
   };
   const deletePost = async (_id, postName) => {
     if (window.confirm(`Are you sure you want to delete ${postName}`)) {
       const url = "/posts/" + _id;
-      let { data } = await doApiMethod(url, "DELETE");
+      await doApiMethod(url, "DELETE");
     }
   };
 

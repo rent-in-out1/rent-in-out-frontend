@@ -23,9 +23,8 @@ const Posts = () => {
 
   return (
     <>
-      {isLoading ? <h1 className="content-center">Loading ...</h1> :(
         <Wrapper>
-          <h1>Posts List</h1>
+          <h1>Posts</h1>
           <div className="flex justify-center">
             <table>
               <thead>
@@ -49,7 +48,6 @@ const Posts = () => {
             </table>
           </div>
         </Wrapper>
-      )}
     </>
   );
 };
