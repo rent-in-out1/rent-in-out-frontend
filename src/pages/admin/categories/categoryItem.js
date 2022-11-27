@@ -1,15 +1,28 @@
-import React ,{ useState, useEffect } from 'react'
-import { BsTrash , BsHammer } from 'react-icons/bs';
-import { doApiMethod } from '../../../services/service';
-import { doGetApiMethod } from './../../../services/service';
+import React, { useState, useEffect, useRef } from "react";
+import { BsTrash, BsHammer, BsEnvelopeOpenFill } from "react-icons/bs";
+import { useForm } from "react-hook-form";
+import { FaRegEdit, FaServer } from "react-icons/fa";
+import { uploadImage } from "../../../helpers/functions";
+import { doApiMethod } from "../../../services/service";
+import { doGetApiMethod } from "./../../../services/service";
 
 const CategoryItem = (props) => {
+  let {
+    register,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const profileRef = useRef();
   const [creator, setCreator] = useState({});
   const [editor, setEditor] = useState({});
-  const category = props.item
+  const [image, setImage] = useState("");
+  const [onEdit, setOnEdit] = useState(false);
+
+  const category = props.item;
   useEffect(() => {
     getCreator();
-    getEditor()
+    getEditor();
   }, []);
   const getCreator = async () => {
     let url = "/users/info/" + category?.creator_id;
@@ -27,87 +40,158 @@ const CategoryItem = (props) => {
       await doApiMethod(url, "DELETE");
     }
   };
+  const changeProfile = async (file) => {
+    if (file.size > 2 * 1024 * 1024) {
+      return alert("file too big");
+    }
+    const url = await uploadImage(file);
+    setImage(url);
+  };
   const editCategory = async (_id, categoryName) => {
     const url = "/categories/" + _id;
     if (window.confirm(`Are you sure you want to edit ${categoryName}`)) {
+      setOnEdit(true);
       await doApiMethod(url, "PUT");
     }
   };
   return (
     <tr>
-    <td>
-      <div className="flex items-center">
-        <div className="flex-shrink-0 w-8 h-8">
-          <img
-            className="w-full h-full rounded-full"
-            src={category?.img_url}
-            alt={category?.img_url}
-          />
-        </div>
-        <div className="ml-3">
-          <p className="text-gray-900 whitespace-no-wrap text-center">{category?.name}</p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <p className="text-gray-900 whitespace-no-wrap">          
-      {creator.data?.userInfo.fullName.firstName}{" "}
-      {creator.data?.userInfo.fullName.lastName}</p>
-    </td>
-    <td>
-      <p className="text-gray-900 whitespace-no-wrap">{category?.category_url}</p>
-    </td>
-    <td>
-      <p className="text-gray-900 whitespace-no-wrap">
-        {category?.craetedAt.split("T")[0]}
-      </p>
-    </td>
-    <td>
-      <p className="text-gray-900 whitespace-no-wrap">
-        {category?.updatedAt.split("T")[0]}
-      </p>
-    </td>
-    <td>
-      <span
-        onClick={() => {
-          editCategory(category._id, category.title);
-          props.setIsChange(true);
-        }}
-        className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
-      >
+      <td>
+        {!onEdit ? (
+          <p className="text-gray-900 whitespace-no-wrap">{category?.name}</p>
+        ) : (
+          <div className="w-full mb-2 md:mb-0 flex justify-center">
+            <input
+              defaultValue={category?.name}
+              {...register("name", {
+                required: true,
+                minLength: 2,
+                maxLength: 25,
+              })}
+              type="text"
+            />
+            {errors.name && <small>Enter valid category name.</small>}
+          </div>
+        )}
+      </td>
+      <td>
+        {!onEdit ? (
+          <p className="text-gray-900 whitespace-no-wrap">
+            {category?.url_name}
+          </p>
+        ) : (
+          <div className="w-full mb-2 md:mb-0 flex justify-center">
+            <input
+              disabled
+              defaultValue={category?.name}
+              {...register("name", {
+                required: true,
+                minLength: 2,
+                maxLength: 25,
+              })}
+              type="text"
+              placeholder=""
+            />
+            {errors.name && <small>Enter valid category name.</small>}
+          </div>
+        )}
+      </td>
+      <td>
+        <p className="text-gray-900 whitespace-no-wrap">
+          {creator.data?.userInfo.fullName.firstName}{" "}
+          {creator.data?.userInfo.fullName.lastName}
+        </p>
+      </td>
+      <td>
+        {!onEdit ? (
+          <p className="text-gray-900 whitespace-no-wrap">{category?.info}</p>
+        ) : (
+          <div className="w-full mb-2 md:mb-0 flex justify-center">
+            <input
+              defaultValue={category?.info}
+              {...register("name", {
+                required: true,
+                minLength: 2,
+                maxLength: 50,
+              })}
+              type="text"
+            />
+            {errors.name && <small>Enter valid category info.</small>}
+          </div>
+        )}
+      </td>
+      <td>
+        <p className="text-gray-900 whitespace-no-wrap">
+          {category?.craetedAt.split("T")[0]}
+        </p>
+      </td>
+      <td>
+        <p className="text-gray-900 whitespace-no-wrap">
+          {category?.updatedAt.split("T")[0]}
+        </p>
+      </td>
+      <td>
         <span
-          aria-hidden
-          className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}
-        ></span>
-        <span className="relative">
-          <BsHammer />
+          onClick={() => {
+            editCategory(category._id, category.title);
+            props.setIsChange(true);
+          }}
+          className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
+        >
+          <span
+            aria-hidden
+            className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}
+          ></span>
+          {!onEdit ? (
+            <span className="relative">
+              <BsHammer
+                onClick={() => {
+                  setOnEdit(true);
+                }}
+              />
+            </span>
+          ) : (
+            <div className="flex">
+              <div>
+                <FaRegEdit
+                  className="mx-2"
+                  onClick={() => {
+                    editCategory(category?._id, category?.name);
+                  }}
+                />
+              </div>
+              <div>
+                <FaServer />
+              </div>
+            </div>
+          )}
         </span>
-      </span>
-    </td>
-    <td>
-      <p className="text-gray-900 whitespace-no-wrap">          
-      {editor.data?.userInfo.fullName.firstName}{" "}
-      {editor.data?.userInfo.fullName.lastName}</p>
-    </td>
-    <td>
-      <span
-        onClick={() => {
-          deleteCategory(category._id, category.title);
-          props.setIsChange(true);
-        }}
-        className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
-      >
+      </td>
+      <td>
+        <p className="text-gray-900 whitespace-no-wrap">
+          {editor.data?.userInfo.fullName.firstName}{" "}
+          {editor.data?.userInfo.fullName.lastName}
+        </p>
+      </td>
+      <td>
         <span
-          aria-hidden
-          className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}
-        ></span>
-        <span className="relative">
-          <BsTrash />
+          onClick={() => {
+            deleteCategory(category._id, category.name);
+            props.setIsChange(true);
+          }}
+          className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
+        >
+          <span
+            aria-hidden
+            className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}
+          ></span>
+          <span className="relative">
+            <BsTrash />
+          </span>
         </span>
-      </span>
-    </td>
-  </tr>
-  )
-}
+      </td>
+    </tr>
+  );
+};
 
-export default CategoryItem
+export default CategoryItem;
