@@ -101,7 +101,14 @@ export const Wrapper = styled.div`
         }
     }
     }
-
+    .dropdown{
+        li{
+            transition: 1s ease;
+        }
+        li:hover{
+            background: var(--grey-300);
+        }
+    }
 
 `
 export const Logo = styled.div`
