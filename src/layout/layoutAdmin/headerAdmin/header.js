@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link,useNavigate  } from "react-router-dom";
 import { onRegisterToggle } from '../../../redux/features/toggleSlice';
 import {
-  FaSearch,
   FaUsers,
   FaListAlt,
   FaUpload,
@@ -14,7 +13,6 @@ import {
 import { Logo, Wrapper } from "../../../components/style/wrappers/navbarAdmin";
 import { useSelector,useDispatch } from "react-redux";
 import { onLogout } from "../../../redux/features/userSlice";
-import { useEffect } from "react";
 const Header = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -31,16 +29,6 @@ const Header = () => {
               <p>rentInOut</p>
             </Logo>
           </Link>
-          <div className="search">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="border-transparent focus:border-transparent focus:ring-0"
-            />
-            <div className="icon">
-              <FaSearch />
-            </div>
-          </div>
         </div>
         <div className="right">
           <nav>
