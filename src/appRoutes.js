@@ -69,6 +69,7 @@ const AppRoutes = () => {
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profile1" element={"<Dashboard />"} />
                 <Route path="/profile2" element={"<Users />"} />
+                <Route path="/*" element={<Page404/>} />
               </React.Fragment> 
             )}
 
@@ -80,10 +81,9 @@ const AppRoutes = () => {
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/*" element={<Page404/>} />
             </Route>
           )}
-          <Route path="*" element={<Page404/>} />
-          <Route path="/admin/*" element={<Page404/>} />
         </Routes>
         {isRegister && <Register />}
         <ToastContainer position="top-right" />
