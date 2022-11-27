@@ -1,11 +1,11 @@
 import React, { useEffect, Suspense } from "react";
 import jwt_decode from "jwt-decode";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route , useNavigate} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { doApiMethod } from "./services/service";
-import { onLogin } from "./redux/features/userSlice";
+import { onLogin, onLogout } from "./redux/features/userSlice";
 import MyProfile from "./pages/client/myProfile/myProfile";
 
 // Lazy loading of routes
@@ -24,6 +24,7 @@ const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 
 const AppRoutes = () => {
+  // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
   let isRegister = useSelector((state) => state.toggleSlice.register);
@@ -37,6 +38,7 @@ const AppRoutes = () => {
         getUserInfo(decoded._id, token);
       }
     }
+
   }, []);
 
   const getUserInfo = async (_id, token) => {
@@ -44,6 +46,7 @@ const AppRoutes = () => {
     const { data } = await doApiMethod(url, "GET", token);
     if (!data.userInfo) {
       alert("invalid user");
+      window.open("http://localhost:3000/", "_self");
       return;
     }
     dispatch(onLogin(data.userInfo));

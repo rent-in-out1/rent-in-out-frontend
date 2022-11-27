@@ -45,7 +45,7 @@ const CategoryItem = (props) => {
           />
         </div>
         <div className="ml-3">
-          <p className="text-gray-900 whitespace-no-wrap">{category?.name}</p>
+          <p className="text-gray-900 whitespace-no-wrap text-center">{category?.name}</p>
         </div>
       </div>
     </td>
