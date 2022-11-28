@@ -1,54 +1,33 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-
-
+margin-top: 48px;
+padding: 24px;
 main{
-    
- height: 900px;
 max-width : 600px;
 margin: 0 auto;
-
-div{
-    margin-top: 6px; 
-    margin: 0 auto;
-}
-
-
-h2{
-    background-color: var(--skyblue-50);
-    margin-bottom: 28px;
-    font-size: 1.1em;
-    text-align: center;
-    padding: 24px;
-    color: purple;
-    margin-top:6px;
-}
 form{
+    position: relative;
     background-color: var(--skyblue-50);
-    text-align: center;
     display: flex; 
+    padding:48px 24px 12px 24px;
     flex-direction: column;
     justify-content: center;
-    height: 520px;
-    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
-
-    
-}
-
-input{
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);  
+    div{ 
+        width: 100%;
+    input{
     display: block;
       width: 100%;
       background: var(--white);
-      color: var(--grey-700);
+      color: var(--black);
       border: 1px solid var(--grey-200);
       border-radius: 8px;
       padding: 8px;
       margin-bottom: 6px;
 }
-
-
-button{
+}
+button,a{
     margin-top: 12px;
       width: 100px;
       padding: 10px 22px;
@@ -64,8 +43,23 @@ button{
       justify-content: center;
       
 }
-
-
+}
+.avatar{
+    position: absolute;
+    top: -40px;
+    left: 20%;
+    background: white;
+    border-radius: 50%;
+    border: 1px solid black;
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+    padding: 4px;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
 }
 
 `
