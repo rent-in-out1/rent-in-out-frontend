@@ -105,7 +105,7 @@ const SignIn = (props) => {
           Forgot your password ?
           <button
             type="button"
-            onClick={()=>{props.setState("passReset")}}
+            onClick={()=>{props.setState("mailPass")}}
             className="underline text-blue-400 hover:text-blue-700"
           >
             click here

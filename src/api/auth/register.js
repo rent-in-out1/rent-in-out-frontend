@@ -5,6 +5,7 @@ import {Wrapper} from "../../components/style/wrappers/registerPage"
 import SignUp from "./loginPage/signUp";
 import SignIn from './loginPage/signIn/signIn';
 import ResetPass from './loginPage/resetPass/resetPass';
+import SentMailResetPass from './loginPage/sentMailResetPass/sentMailResetPass';
 
 const Register = () => {
   const [isState, setState] = useState("signIn");
@@ -24,6 +25,11 @@ const Register = () => {
       }
     if (isState === "passReset"){
         setLayout(<ResetPass
+          setState={setState}
+        />)
+      }
+    if (isState === "mailPass"){
+        setLayout(<SentMailResetPass
           setState={setState}
         />)
       }

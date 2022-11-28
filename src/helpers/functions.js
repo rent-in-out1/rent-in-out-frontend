@@ -1,9 +1,7 @@
 import axios from 'axios';
     export const uploadImage = async (file) => {
-        console.log(file)
         const formData = new FormData();
         formData.append("file", file);
-        // formData.append("api_key",'723814448645719');
         formData.append("upload_preset", "rentinoutprofile");
         formData.append("cloud_name", "dpmpi8dwb");
         try{

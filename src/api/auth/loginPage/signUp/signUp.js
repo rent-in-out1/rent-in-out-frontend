@@ -5,7 +5,7 @@ import { doApiMethod, errorHandler, successHandler } from "./../../../../service
 
 const SignUp = (props) => {
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  // const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
+  const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
   let {
     register,
     getValues,
@@ -76,8 +76,8 @@ const SignUp = (props) => {
             <input
               {...register("email", {
                 required: true,
-                minLength: 2,
-                maxLength: 25,
+                minLength: 5,
+                maxLength: 100,
                 pattern: regEmail,
               })}
               type="email"
@@ -110,7 +110,7 @@ const SignUp = (props) => {
                 required: true,
                 minLength: 6,
                 maxLength: 25,
-                // pattern: regPassword
+                pattern: regPassword
               })}
               type="password"
               placeholder="******************"
