@@ -21,7 +21,7 @@ const AddCategoryForm = (props) => {
         errorHandler("Please fill in all fields");
         return;
       }
-      const {data} = await doApiMethod(url, "POST", addData);
+      await doApiMethod(url, "POST", addData);
       props.setIsChange(true);
       props.setOnAdd(false);
       successHandler("Added new category successfully");

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { onRegisterToggle } from '../../../redux/features/toggleSlice';
 import {
   FaUsers,
+  FaUser,
   FaListAlt,
   FaUpload,
   FaBell,
@@ -84,6 +85,18 @@ const Header = () => {
                 nav("/admin/posts")
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
                   <div className='flex justify-between items-center'> <p>Posts</p> <FaUpload /></div>
+            </li>
+          <li onClick={()=>{
+                setIsOpen(false)
+                nav("/admin/categories")
+                }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
+                  <div className='flex justify-between items-center'> <p>Categories</p> <FaListAlt /></div>
+            </li>
+          <li onClick={()=>{
+                setIsOpen(false)
+                nav("/admin/profile")
+                }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
+                  <div className='flex justify-between items-center'> <p>Profile</p> <FaUser /></div>
             </li>
           <li onClick={() => {
             if (isLogin) {

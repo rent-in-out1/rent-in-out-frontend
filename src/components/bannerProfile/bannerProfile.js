@@ -4,7 +4,7 @@ import { uploadImage } from '../../helpers/functions'
 import LoaderImg from '../loaderImg/loaderImg'
 import { useSelector, useDispatch} from 'react-redux'
 import { doApiMethod, errorHandler, successHandler } from '../../services/service'
-import { uploadBanner } from '../../redux/features/userSlice'
+import { uploadBanner, uploadProfileImage } from '../../redux/features/userSlice'
 const BannerProfile = () => {
   const dispatch = useDispatch();
   const [banner, setBanner] = useState(useSelector(state=>state.userSlice.user?.cover_img))
@@ -41,6 +41,15 @@ const BannerProfile = () => {
     const url = await uploadImage(file)
     setLoadImg(false)
     setProfile(url)
+    try{
+      const urlR = "/users/uploadProfile";
+      let res = await doApiMethod(urlR,"PATCH",{img:url})
+      dispatch(uploadProfileImage(url));
+      successHandler(res)
+    }
+    catch(err){
+      return errorHandler(err.response.data.msg)
+    }
   }
   return (
     <React.Fragment>

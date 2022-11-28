@@ -1,11 +1,11 @@
 import React, { useEffect, Suspense } from "react";
 import jwt_decode from "jwt-decode";
-import { BrowserRouter as Router, Routes, Route , useNavigate} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { doApiMethod } from "./services/service";
-import { onLogin, onLogout } from "./redux/features/userSlice";
+import { onLogin} from "./redux/features/userSlice";
 import MyProfile from "./pages/client/myProfile/myProfile";
 import Loader from "./components/loaderImg/loaderImg";
 
@@ -39,7 +39,6 @@ const AppRoutes = () => {
         getUserInfo(decoded._id, token);
       }
     }
-
   }, []);
 
   const getUserInfo = async (_id, token) => {
@@ -79,10 +78,11 @@ const AppRoutes = () => {
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
               <Route index element={<HomeAdmin />} />
-              <Route path="/admin/profile" element={<MyProfile />} />
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/profile" element={<MyProfile />} />
+              <Route path="/admin/profileEdit" element={<ProfileEdit />} />
               <Route path="/admin/*" element={<Page404 />} />
             </Route>
           )}

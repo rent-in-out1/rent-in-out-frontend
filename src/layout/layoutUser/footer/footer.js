@@ -17,7 +17,7 @@ const Footer = () => {
             <div>
             <Link to={"/"}>
             <Logo>
-              <img src="./img/LOGO.png" alt="logo" />
+              <img src="../img/LOGO.png" alt="logo" />
               <p>rentInOut</p>
             </Logo>
           </Link>
