@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BsTrash, BsHammer } from "react-icons/bs";
 import { FaBan, FaCheckCircle } from "react-icons/fa";
-
+import { errorHandler } from "./../../../services/service";
 import { doApiMethod } from "../../../services/service";
 import { doGetApiMethod } from "./../../../services/service";
 
@@ -38,6 +38,15 @@ const CategoryItem = (props) => {
 
   const editCategory = async (_id, categoryName) => {
     const url = "/categories/" + _id;
+    if (
+      !editData ||
+      editData.name === "" ||
+      editData.url_name === "" ||
+      editData.info === ""
+    ) {
+      errorHandler("Please fill in all fields");
+      return;
+    }
     if (window.confirm(`Are you sure you want to edit ${categoryName}`)) {
       setOnEdit(true);
       await doApiMethod(url, "PUT", editData);
