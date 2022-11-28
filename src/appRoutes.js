@@ -68,12 +68,12 @@ const AppRoutes = () => {
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
-                <Route path="/profile1" element={"<Dashboard />"} />
+                <Route path="/posts" element={"posts..."} />
                 <Route path="/profile2" element={"<Users />"} />
                 <Route path="/details" element={<Details/>} />
               </React.Fragment> 
             )}
-
+  
           </Route>
           {user?.role === "admin" && user?.active && (
             <Route path="/admin" element={<LayoutAdmin />}>

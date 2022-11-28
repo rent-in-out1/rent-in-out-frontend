@@ -24,7 +24,6 @@
 }
 @media (max-width: 1024px) {
   .model {
-    border-radius: 0;
     width: 60%;
     left: 20%;
   }

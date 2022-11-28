@@ -4,9 +4,6 @@ import { Link } from "react-router-dom"
 
 const HomeAdmin = () => {
   const user = useSelector(state => state.userSlice.user)
-  useState(() => {
-    console.log(user)
-  }, [])
   return (
     <div className="text-center mt-4">
       <h1 className="text-3xl font-sans">Welcome back {user?.fullName.firstName} {user?.fullName.lastName} !</h1>
