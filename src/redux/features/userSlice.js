@@ -26,8 +26,13 @@ const userSlice = createSlice({
             state.profile_img = action.payload
         },
 
+        upload: (state, action) => {
+            state.user = action.payload
+           
+        }, 
+
     }
 })
 
-export const { onRegister, onLogin, changeRole, onLogout, bannerImage, profileImage } = userSlice.actions
+export const { onRegister, onLogin, changeRole, onLogout, bannerImage, profileImage,upload } = userSlice.actions
 export default userSlice.reducer

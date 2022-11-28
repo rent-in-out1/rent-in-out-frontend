@@ -12,7 +12,7 @@ const ProfileEdit = () => {
   return (
     <Wrapper>
       <main>
-      <h3>{user.fullName.firstName} {user.fullName.lastName}</h3>
+      <Link to={"/details"} className={"px-2"}>{user.fullName.firstName} {user.fullName.lastName}</Link>
       <Link to={"/details"} > <i className="fa fa-pencil" aria-hidden="true"></i></Link>
       
     </main>
