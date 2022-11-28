@@ -1,79 +1,14 @@
 import React from 'react'
+import Card from '../card'
 
 const Main = () => {
     return (
-        <main className='md:w-10/12 ml-auto p-3 text-center'>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, fugit.</p>
+        <main className='w-full md:w-10/12 ml-auto p-3 text-center flex flex-col justify-center'>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
         </main>
     )
 }

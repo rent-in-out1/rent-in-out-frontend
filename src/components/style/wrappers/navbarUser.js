@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
     background: var(--skyblue-50);
     position: relative;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 9999999px;
     section{
         display: flex;
         justify-content: space-between;
