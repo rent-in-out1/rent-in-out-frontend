@@ -1,7 +1,7 @@
 import React ,{useState} from "react";
 import { Button } from "../../../../components/style/wrappers/registerPage";
 import { useForm } from "react-hook-form";
-import { errorHandler, API_URL_CLIENT, doApiMethod } from './../../../../services/service';
+import { errorHandler, API_URL_CLIENT, doApiMethod, successHandler } from './../../../../services/service';
 
 const SentMailResetPass = () => {
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -20,7 +20,14 @@ const SentMailResetPass = () => {
     };
     try {
       const url = "/users/requestPasswordReset";
-      await doApiMethod(url , "POST", requestData);
+      const {data}= await doApiMethod(url , "POST", requestData);
+      console.log(data)
+      if (data.status === "Pending") {
+        successHandler("Reset request sent successfully please check your email")
+      }
+      else if (data.status === "failed") {
+        errorHandler(data.message);
+      }
     } catch (err) {
       errorHandler(err.response.data.msg);
     }
