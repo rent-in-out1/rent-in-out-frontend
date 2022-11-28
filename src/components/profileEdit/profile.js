@@ -12,7 +12,7 @@ const Profile = () => {
   },[])
   return (
     <Wrapper>
-      <main className='cursor-pointer' onClick={()=>nav("/details")}>
+      <main className='cursor-pointer' onClick={()=>nav("/profileEdit")}>
       <div className={"px-2"}>{user.fullName.firstName} {user.fullName.lastName}</div>
       <div > <i className="fa fa-pencil" aria-hidden="true"></i></div>
       

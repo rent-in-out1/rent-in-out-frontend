@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { FaCamera } from "react-icons/fa"
 import { uploadImage } from '../../helpers/functions'
-import { toast } from "react-toastify"
-import { Rings } from 'react-loader-spinner'
 import LoaderImg from '../loaderImg/loaderImg'
+import { useSelector, useDispatch} from 'react-redux'
+import { doApiMethod, errorHandler, successHandler } from '../../services/service'
+import { uploadBanner } from '../../redux/features/userSlice'
 const BannerProfile = () => {
-  const [banner, setBanner] = useState("")
-  const [profile, setProfile] = useState("")
+  const dispatch = useDispatch();
+  const [banner, setBanner] = useState(useSelector(state=>state.userSlice.user?.cover_img))
+  const [profile, setProfile] = useState(useSelector(state=>state.userSlice.user?.profile_img))
   const [loadBanner, setLoadBanner] = useState(false)
   const [loadImg, setLoadImg] = useState(false)
   const profileRef = useRef()
@@ -14,16 +16,26 @@ const BannerProfile = () => {
 
   const changeBanner = async (file) => {
     if (file.size > 2 * 1024 * 1024) {
-      return alert("file too big")
+      return errorHandler("file too big")
     }
     setLoadBanner(true)
     const url = await uploadImage(file)
     setLoadBanner(false)
     setBanner(url)
+    try{
+      const urlR = "/users/uploadBanner";
+      let res = await doApiMethod(urlR,"PATCH",{banner:url})
+      dispatch(uploadBanner(url));
+      successHandler(res)
+    }
+    catch(err){
+      return errorHandler(err.response.data.msg)
+    }
   }
+
   const changeProfile = async (file) => {
     if (file.size > 2 * 1024 * 1024) {
-      return alert("file too big")
+      return errorHandler("file too big")
     }
     setLoadImg(true)
     const url = await uploadImage(file)
