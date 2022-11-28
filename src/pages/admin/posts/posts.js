@@ -24,7 +24,6 @@ const Posts = () => {
   };
   useEffect(() => {
     getAllposts()
-    console.log(option)
   }, [isChange, search, option]);
 
   return (

@@ -1,22 +1,19 @@
-
 import React, { useEffect, Suspense } from "react";
 import jwt_decode from "jwt-decode";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route , useNavigate} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { doApiMethod } from "./services/service";
-import { onLogin } from "./redux/features/userSlice";
+import { onLogin, onLogout } from "./redux/features/userSlice";
 import MyProfile from "./pages/client/myProfile/myProfile";
 import  ProfileEdit  from "./components/profileEdit/profileEdit";
 
 // Lazy loading of routes
 
-const LayoutAdmin = React.lazy(() => import("./layout/layoutAdmin/layoutAdmin"));
+const LayoutAdmin = React.lazy(() =>
+  import("./layout/layoutAdmin/layoutAdmin")
+);
 const Users = React.lazy(() => import("./pages/admin/users"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
@@ -27,9 +24,8 @@ const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 
-
-
 const AppRoutes = () => {
+  // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
   let isRegister = useSelector((state) => state.toggleSlice.register);
@@ -43,6 +39,7 @@ const AppRoutes = () => {
         getUserInfo(decoded._id, token);
       }
     }
+
   }, []);
 
   const getUserInfo = async (_id, token) => {
@@ -50,14 +47,13 @@ const AppRoutes = () => {
     const { data } = await doApiMethod(url, "GET", token);
     if (!data.userInfo) {
       alert("invalid user");
+      window.open("http://localhost:3000/", "_self");
       return;
     }
     dispatch(onLogin(data.userInfo));
   };
 
   return (
-
-
     <Suspense fallback={<h1 className="content-center ">Loading....</h1>}>
       <Router>
         <Routes>
@@ -70,22 +66,22 @@ const AppRoutes = () => {
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/posts" element={"posts..."} />
                 <Route path="/profile2" element={"<Users />"} />
-                <Route path="/details" element={<ProfileEdit/>} />
-              </React.Fragment> 
+                <Route path="*" element={<Page404 />} />
+              </React.Fragment>
+
             )}
-  
           </Route>
           {user?.role === "admin" && user?.active && (
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
-              <Route path="/admin" element={<HomeAdmin />} />
+              <Route index element={<HomeAdmin />} />
+              <Route path="/admin/profile" element={<MyProfile />} />
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/*" element={<Page404 />} />
             </Route>
           )}
-          <Route path="*" element={<Page404/>} />
-          <Route path="/admin/*" element={<Page404/>} />
         </Routes>
         {isRegister && <Register />}
         <ToastContainer position="top-right" />
