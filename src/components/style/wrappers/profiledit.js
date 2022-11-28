@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-background-color:var(--skyblue-50);
-    max-width: 1600px;
     margin: 0 auto;
+    width: 50%;
+    /* background: black; */
     main{
         display: flex;
         align-items: center;

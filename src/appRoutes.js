@@ -13,6 +13,7 @@ import { doApiMethod } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
 import MyProfile from "./pages/client/myProfile/myProfile";
 import  ProfileEdit  from "./components/profileEdit/profileEdit";
+import Loader from "./components/loaderImg/loaderImg";
 
 // Lazy loading of routes
 
@@ -58,7 +59,10 @@ const AppRoutes = () => {
   return (
 
 
-    <Suspense fallback={<h1 className="content-center ">Loading....</h1>}>
+    <Suspense fallback=
+    {<div className="w-100 h-screen flex items-center justify-center">
+      <Loader load={true} height="400" width="400"/>
+    </div>}>
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
