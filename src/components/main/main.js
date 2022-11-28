@@ -3,7 +3,7 @@ import Card from '../card'
 
 const Main = () => {
     return (
-        <main className='w-full md:w-10/12 ml-auto p-3 text-center flex flex-col justify-center'>
+        <main className='w-full md:w-9/12 ml-auto p-3 text-center flex flex-col justify-center'>
             <Card/>
             <Card/>
             <Card/>
