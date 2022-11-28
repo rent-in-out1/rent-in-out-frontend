@@ -51,6 +51,7 @@ const Categories = () => {
             
             {!onAdd ? (
               <button type="button" onClick={() => setOnAdd(true)}>
+                
                 Add New Category
               </button>
             ): null}

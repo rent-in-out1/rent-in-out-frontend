@@ -1,23 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BsTrash, BsHammer, BsEnvelopeOpenFill } from "react-icons/bs";
-import { useForm } from "react-hook-form";
-import { FaRegEdit, FaServer } from "react-icons/fa";
-import { uploadImage } from "../../../helpers/functions";
+import { BsTrash, BsHammer } from "react-icons/bs";
+import { FaBan, FaCheckCircle } from "react-icons/fa";
+
 import { doApiMethod } from "../../../services/service";
 import { doGetApiMethod } from "./../../../services/service";
 
 const CategoryItem = (props) => {
-  let {
-    register,
-    getValues,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const profileRef = useRef();
+  const infoRef = useRef();
+  const nameRef = useRef();
+  const urlRef = useRef();
   const [creator, setCreator] = useState({});
   const [editor, setEditor] = useState({});
-  const [image, setImage] = useState("");
   const [onEdit, setOnEdit] = useState(false);
+  const [editData, setEditData] = useState({});
 
   const category = props.item;
   useEffect(() => {
@@ -45,7 +40,7 @@ const CategoryItem = (props) => {
     const url = "/categories/" + _id;
     if (window.confirm(`Are you sure you want to edit ${categoryName}`)) {
       setOnEdit(true);
-      await doApiMethod(url, "PUT");
+      await doApiMethod(url, "PUT", editData);
     }
   };
   return (
@@ -56,15 +51,19 @@ const CategoryItem = (props) => {
         ) : (
           <div className="w-full mb-2 md:mb-0 flex justify-center">
             <input
+              onChange={() => {
+                setEditData({
+                  name: nameRef.current.value,
+                  url_name: urlRef.current.value,
+                  info: infoRef.current.value,
+                });
+              }}
+              ref={nameRef}
               defaultValue={category?.name}
-              {...register("name", {
-                required: true,
-                minLength: 2,
-                maxLength: 25,
-              })}
               type="text"
+              max="25"
+              min="2"
             />
-            {errors.name && <small>Enter valid category name.</small>}
           </div>
         )}
       </td>
@@ -76,17 +75,20 @@ const CategoryItem = (props) => {
         ) : (
           <div className="w-full mb-2 md:mb-0 flex justify-center">
             <input
+              onChange={() => {
+                setEditData({
+                  name: nameRef.current.value,
+                  url_name: urlRef.current.value,
+                  info: infoRef.current.value,
+                });
+              }}
+              ref={urlRef}
               disabled
-              defaultValue={category?.name}
-              {...register("name", {
-                required: true,
-                minLength: 2,
-                maxLength: 25,
-              })}
+              defaultValue={category?.url_name}
               type="text"
-              placeholder=""
+              max="25"
+              min="2"
             />
-            {errors.name && <small>Enter valid category name.</small>}
           </div>
         )}
       </td>
@@ -102,15 +104,19 @@ const CategoryItem = (props) => {
         ) : (
           <div className="w-full mb-2 md:mb-0 flex justify-center">
             <input
+              onChange={() => {
+                setEditData({
+                  name: nameRef.current.value,
+                  url_name: urlRef.current.value,
+                  info: infoRef.current.value,
+                });
+              }}
+              ref={infoRef}
               defaultValue={category?.info}
-              {...register("name", {
-                required: true,
-                minLength: 2,
-                maxLength: 50,
-              })}
               type="text"
+              max="99"
+              min="2"
             />
-            {errors.name && <small>Enter valid category info.</small>}
           </div>
         )}
       </td>
@@ -124,19 +130,18 @@ const CategoryItem = (props) => {
           {category?.updatedAt.split("T")[0]}
         </p>
       </td>
-      <td>
-        <span
-          onClick={() => {
-            editCategory(category._id, category.title);
-            props.setIsChange(true);
-          }}
-          className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
-        >
+      {!onEdit ? (
+        <td>
           <span
-            aria-hidden
-            className={"absolute inset-0 bg-red-200 opacity-50 rounded-full"}
-          ></span>
-          {!onEdit ? (
+            onClick={() => {
+              setOnEdit(true);
+            }}
+            className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
+          >
+            <span
+              aria-hidden
+              className={"absolute inset-0 bg-blue-200 opacity-50 rounded-full"}
+            ></span>
             <span className="relative">
               <BsHammer
                 onClick={() => {
@@ -144,23 +149,44 @@ const CategoryItem = (props) => {
                 }}
               />
             </span>
-          ) : (
-            <div className="flex">
-              <div>
-                <FaRegEdit
-                  className="mx-2"
-                  onClick={() => {
-                    editCategory(category?._id, category?.name);
+          </span>
+        </td>
+      ) : (
+        <td>
+          <span className="relative">
+            <span className="absolute -bottom-4 -left-3 ">
+              <span className="btn text-xl text-blue-300 relative cursor-pointer inline-block p-2 font-semibold leading-tight hover:text-green-900 ">
+                <FaCheckCircle
+                  className="mx-2 absolute left-3 bottom-0 inset-0 opacity-50 rounded-full"
+                  onClick={async () => {
+                    await editCategory(category?._id, category?.name);
+                    setOnEdit(false);
+                    props.setIsChange(true);
                   }}
                 />
-              </div>
-              <div>
-                <FaServer />
-              </div>
-            </div>
-          )}
-        </span>
-      </td>
+              </span>
+            </span>
+            <span className="absolute -bottom-4 -left-3">
+              <span>
+                <span className="btn text-xl text-blue-300 relative cursor-pointer inline-block p-2 font-semibold leading-tight hover:text-red-900">
+                  <FaBan
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          "Are you sure you want to discard changes?"
+                        )
+                      )
+                        setOnEdit(false);
+                      props.setIsChange(true);
+                    }}
+                    className="absolute -left-4 -bottom-0 inset-0  opacity-50 rounded-full"
+                  />
+                </span>
+              </span>
+            </span>
+          </span>
+        </td>
+      )}
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
           {editor.data?.userInfo.fullName.firstName}{" "}
