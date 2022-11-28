@@ -1,11 +1,13 @@
 import React, { useEffect, Suspense } from "react";
 import jwt_decode from "jwt-decode";
-import { BrowserRouter as Router, Routes, Route , useNavigate} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
-import { doApiMethod } from "./services/service";
+import { API_URL_CLIENT, doApiMethod } from "./services/service";
 import { onLogin} from "./redux/features/userSlice";
+import Loader from "./components/loaderImg/loaderImg";
+
 
 // Lazy loading of routes
 
@@ -17,7 +19,7 @@ const MyProfile = React.lazy(() => import("./pages/client/myProfile/myProfile"))
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
-const About = React.lazy(() => import("./pages/client/about"));
+const ProfileEdit = React.lazy(() => import("./components/profileEdit/profileEdit"));
 const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
@@ -38,7 +40,6 @@ const AppRoutes = () => {
         getUserInfo(decoded._id, token);
       }
     }
-
   }, []);
 
   const getUserInfo = async (_id, token) => {
@@ -46,14 +47,17 @@ const AppRoutes = () => {
     const { data } = await doApiMethod(url, "GET", token);
     if (!data.userInfo) {
       alert("invalid user");
-      window.open("http://localhost:3000/", "_self");
+      window.open(API_URL_CLIENT, "_self");
       return;
     }
     dispatch(onLogin(data.userInfo));
   };
 
   return (
-    <Suspense fallback={<h1 className="content-center ">Loading....</h1>}>
+    <Suspense fallback=
+    {<div className="w-100 h-screen flex items-center justify-center">
+      <Loader load={true} height="400" width="400"/>
+    </div>}>
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -63,6 +67,7 @@ const AppRoutes = () => {
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
+                <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/posts" element={"posts..."} />
                 <Route path="/profile2" element={"<Users />"} />
                 <Route path="*" element={<Page404 />} />
@@ -74,16 +79,17 @@ const AppRoutes = () => {
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
               <Route index element={<HomeAdmin />} />
-              <Route path="/admin/profile" element={<MyProfile />} />
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/profile" element={<MyProfile />} />
+              <Route path="/admin/profileEdit" element={<ProfileEdit />} />
               <Route path="/admin/*" element={<Page404 />} />
             </Route>
           )}
         </Routes>
         {isRegister && <Register />}
-        <ToastContainer position="top-right" />
+        <ToastContainer position="bottom-right" />
       </Router>
     </Suspense>
   );

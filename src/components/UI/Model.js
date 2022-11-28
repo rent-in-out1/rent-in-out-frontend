@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Model.module.css";
 import { useDispatch } from 'react-redux';
 import  ReactDOM  from 'react-dom';
-import { onRegisterToggle, onLogout } from "../../redux/features/toggleSlice";
+import { onLogout } from "../../redux/features/toggleSlice";
 
 function Backdrop(props) {
   const dispatch = useDispatch();

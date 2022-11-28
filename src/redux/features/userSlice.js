@@ -17,12 +17,12 @@ const userSlice = createSlice({
             state.user = null
         },
 
-        bannerImage: (state, action) => {
-            state.banner_image = action.payload
+        uploadBanner: (state, action) => {
+            state.user.cover_img = action.payload
         },
 
-        profileImage: (state, action) => {
-            state.profile_img = action.payload
+        uploadProfileImage: (state, action) => {
+            state.user.profile_img = action.payload
         },
 
         upload: (state, action) => {
@@ -32,5 +32,5 @@ const userSlice = createSlice({
     }
 })
 
-export const { onRegister, onLogin, changeRole, onLogout, bannerImage, profileImage,upload } = userSlice.actions
+export const { onRegister, onLogin, changeRole, onLogout, uploadBanner, uploadProfileImage,upload } = userSlice.actions
 export default userSlice.reducer

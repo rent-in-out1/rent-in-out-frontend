@@ -11,7 +11,6 @@ const Categories = () => {
   const [isChange, setIsChange] = useState(false);
   const [onAdd, setOnAdd] = useState(false);
   const [search, setSearch] = useState("");
-  const [reverse, setReverse] = useState("");
   const [option, setOption] = useState();
   const options =
   [{ name: "Title", value: "name" },
@@ -19,7 +18,7 @@ const Categories = () => {
   { name: "Date updated", value: "updatedAt" }]
 
   const getAllcategories = async () => {
-    let url = `/categories/?s=${search}&sort=${option}&reverse=${reverse}`;
+    let url = `/categories/search/?s=${search}&sort=${option}`;
     const { data } = await doGetApiMethod(url);
     setCategories(data);
     setIsChange(false);

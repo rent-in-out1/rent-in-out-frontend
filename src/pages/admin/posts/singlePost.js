@@ -8,8 +8,8 @@ const SinglePost = (props) => {
   const post = props.item;
   useEffect(() => {
     getCreator();
+  }, [creator]);
 
-  }, [getCreator]);
   const getCreator = async () => {
     let url = "/users/info/" + post?.creator_id;
     let data = await doGetApiMethod(url);
@@ -45,7 +45,7 @@ const SinglePost = (props) => {
         </div>
       </td>
       <td>
-        <p className="btn relative inline-block px-2 py-1 font-semibold  leading-tight cursor-pointer text-gray-900 whitespace-no-wrap hover:border rounded-full color-red">
+        <p className="btn relative inline-block px-2 py-1 leading-tight cursor-pointer text-gray-900 whitespace-no-wrap hover:border rounded-full color-red">
           {creator.data?.userInfo.fullName.firstName}{" "}
           {creator.data?.userInfo.fullName.lastName}
         </p>
