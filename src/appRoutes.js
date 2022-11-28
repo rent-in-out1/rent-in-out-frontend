@@ -88,7 +88,7 @@ const AppRoutes = () => {
           )}
         </Routes>
         {isRegister && <Register />}
-        <ToastContainer position="top-right" />
+        <ToastContainer position="bottom-right" />
       </Router>
     </Suspense>
   );
