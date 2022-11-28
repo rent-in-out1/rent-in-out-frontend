@@ -40,13 +40,7 @@ const CategoryItem = (props) => {
       await doApiMethod(url, "DELETE");
     }
   };
-  const changeProfile = async (file) => {
-    if (file.size > 2 * 1024 * 1024) {
-      return alert("file too big");
-    }
-    const url = await uploadImage(file);
-    setImage(url);
-  };
+
   const editCategory = async (_id, categoryName) => {
     const url = "/categories/" + _id;
     if (window.confirm(`Are you sure you want to edit ${categoryName}`)) {

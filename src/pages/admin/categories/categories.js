@@ -3,34 +3,28 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import CategoryItem from "./categoryItem";
 import { Input } from "./../../../components/style/wrappers/category";
-import { useForm } from "react-hook-form";
+
+import AddCategoryForm from "../../../components/general/addCategoryForm/addCategoryForm";
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [isChange, setIsChange] = useState(false);
-  const [onAdd, setOnAdd] = useState(true);
-  let {
-    register,
-    getValues,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [onAdd, setOnAdd] = useState(false);
+
   const getAllcategories = async () => {
     let url = "/categories";
     const { data } = await doGetApiMethod(url);
-    console.log(data);
     setCategories(data);
     setIsChange(false);
   };
   useEffect(() => {
     getAllcategories();
-  }, [isChange]);
+  }, [isChange, onAdd]);
   return (
-    <>
-      <Wrapper>
+      <Wrapper className="mb-4">
         <Input>
           <h1>Categories</h1>
-          <div className="flex justify-center">
-            <table>
+          <main className="container-fluid">
+            <table className="m-auto">
               <thead>
                 <tr>
                   <th>Title</th>
@@ -52,126 +46,18 @@ const Categories = () => {
                     setIsChange={setIsChange}
                   />
                 ))}
-{ onAdd && <tr>
-                  <td>
-                    <div className="w-full mb-2 md:mb-0 flex justify-center">
-                      <input
-                        {...register("name", {
-                          required: true,
-                          minLength: 2,
-                          maxLength: 25,
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
-                      {errors.name && <small>Enter valid category name.</small>}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="w-full mb-2 md:mb-0 flex justify-center">
-                      <input
-                        {...register("name", {
-                          required: true,
-                          minLength: 2,
-                          maxLength: 25,
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
-                      {errors.name && <small>Enter valid category name.</small>}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="w-full mb-2 md:mb-0 flex justify-center">
-                      <input
-                        {...register("name", {
-                          required: true,
-                          minLength: 2,
-                          maxLength: 25,
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
-                      {errors.name && <small>Enter valid category name.</small>}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="w-full mb-2 md:mb-0 flex justify-center">
-                      <input
-                        {...register("name", {
-                          required: true,
-                          minLength: 2,
-                          maxLength: 25,
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
-                      {errors.name && <small>Enter valid category name.</small>}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="w-full mb-2 md:mb-0 flex justify-center">
-                      <input
-                        {...register("name", {
-                          required: true,
-                          minLength: 2,
-                          maxLength: 25,
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
-                      {errors.name && <small>Enter valid category name.</small>}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="w-full mb-2 md:mb-0 flex justify-center">
-                      <input
-                        {...register("name", {
-                          required: true,
-                          minLength: 2,
-                          maxLength: 25,
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
-                      {errors.name && <small>Enter valid category name.</small>}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="w-full mb-2 md:mb-0 flex justify-center">
-                      <input
-                        {...register("name", {
-                          required: true,
-                          minLength: 2,
-                          maxLength: 25,
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
-                      {errors.name && <small>Enter valid category name.</small>}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="w-full mb-2 md:mb-0 flex justify-center">
-                      <input
-                        {...register("name", {
-                          required: true,
-                          minLength: 2,
-                          maxLength: 25,
-                        })}
-                        type="text"
-                        placeholder=""
-                      />
-                      {errors.name && <small>Enter valid category name.</small>}
-                    </div>
-                  </td>
-                </tr>}
               </tbody>
             </table>
-          </div>
+            
+            {!onAdd ? (
+              <button type="button" onClick={() => setOnAdd(true)}>
+                Add New Category
+              </button>
+            ): null}
+          {onAdd && <AddCategoryForm setOnAdd={setOnAdd} setIsChange={setIsChange}/>}
+          </main>
         </Input>
       </Wrapper>
-    </>
   );
 };
 
