@@ -18,7 +18,7 @@ const CategoryItem = (props) => {
   useEffect(() => {
     getCreator();
     getEditor();
-  }, [props.isChange]);
+  }, []);
   const getCreator = async () => {
     let url = "/users/info/" + category?.creator_id;
     let data = await doGetApiMethod(url);
