@@ -14,6 +14,7 @@ import Loader from "./components/loaderImg/loaderImg";
 const LayoutAdmin = React.lazy(() =>
   import("./layout/layoutAdmin/layoutAdmin")
 );
+// add UserSearch
 const Users = React.lazy(() => import("./pages/admin/users"));
 const MyProfile = React.lazy(() => import("./pages/client/myProfile/myProfile"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
@@ -64,6 +65,8 @@ const AppRoutes = () => {
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
+            {/* replace dashboard to UserSearch */}
+            <Route path="search" element={<Dashboard/>} />
             <Route path ="passwordReset/*" element={<Dashboard />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
