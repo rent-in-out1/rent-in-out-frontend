@@ -1,8 +1,6 @@
 import React from "react";
 import classes from "./Model.module.css";
-import { useDispatch } from 'react-redux';
 import  ReactDOM  from 'react-dom';
-import { onLogout } from "../../redux/features/toggleSlice";
 import { useNavigate } from 'react-router-dom';
 
 function Backdrop(props) {

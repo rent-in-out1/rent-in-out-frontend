@@ -29,7 +29,6 @@ const AppRoutes = () => {
   // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
-  let isRegister = useSelector((state) => state.toggleSlice.register);
 
   useEffect(() => {
     let token;

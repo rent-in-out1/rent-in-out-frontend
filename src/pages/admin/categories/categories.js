@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import CategoryItem from "./categoryItem";
-import { Input } from "./../../../components/style/wrappers/category";
-
 import AddCategoryForm from "../../../components/general/addCategoryForm/addCategoryForm";
 import Controllers from './../../../components/controllers/controllers';
 const Categories = () => {

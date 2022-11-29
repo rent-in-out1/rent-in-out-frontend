@@ -1,11 +1,11 @@
 
 import React from 'react'
 import { Link,useNavigate } from 'react-router-dom'
-import { FaSearch, FaHome, FaBell, FaInbox, FaUser, FaStickyNote, FaSignInAlt, FaSignOutAlt, FaCog, FaCogs } from "react-icons/fa"
+import { FaSearch, FaHome, FaBell, FaInbox, FaUser, FaStickyNote, FaSignInAlt, FaSignOutAlt, FaCogs } from "react-icons/fa"
 import { Logo, Wrapper } from '../../../components/style/wrappers/navbarUser';
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react';
-import { onRegisterToggle, onLogout } from '../../../redux/features/toggleSlice';
+import {  onLogout } from '../../../redux/features/toggleSlice';
 import { API_URL_CLIENT } from '../../../services/service';
 
 
