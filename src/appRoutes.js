@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod } from "./services/service";
 import { onLogin} from "./redux/features/userSlice";
 import Loader from "./components/loaderImg/loaderImg";
+import UserSearch from "./pages/client/userSearch/userSearch";
 
 
 // Lazy loading of routes
@@ -71,6 +72,8 @@ const AppRoutes = () => {
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/posts" element={"posts..."} />
                 <Route path="/profile2" element={"<Users />"} />
+              
+
                 <Route path="*" element={<Page404 />} />
               </React.Fragment>
 

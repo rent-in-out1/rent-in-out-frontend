@@ -5,6 +5,7 @@ const UserSearch = () => {
   return (
 
     <div>
+        
         <input/>
         <UserCard/>
     </div>
