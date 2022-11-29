@@ -10,7 +10,8 @@
 .model {
   position: absolute;
   max-height: 90vh;
-  top: 7vh;
+  margin-bottom: 20px;
+  top: 2vh;
   left: 25%;
   width: 50%;
   background-color: white;
