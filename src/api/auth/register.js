@@ -3,9 +3,8 @@ import {doGetApiMethod ,errorHandler} from "../../services/service";
 import Model from "../../components/UI/Model";
 import {Wrapper} from "../../components/style/wrappers/registerPage"
 import SignUp from "./loginPage/signUp";
-import SignIn from './loginPage/signIn/signIn';
-import ResetPass from './loginPage/resetPass/resetPass';
-import SentMailResetPass from './loginPage/sentMailResetPass/sentMailResetPass';
+import SignIn from './loginPage/signIn';
+import SentMailResetPass from './loginPage/sentMailResetPass';
 
 const Register = () => {
   const [isState, setState] = useState("signIn");
@@ -22,11 +21,6 @@ const Register = () => {
         setLayout(<SignIn
           setState={setState}
     />)
-      }
-    if (isState === "passReset"){
-        setLayout(<ResetPass
-          setState={setState}
-        />)
       }
     if (isState === "mailPass"){
         setLayout(<SentMailResetPass
@@ -53,7 +47,7 @@ const Register = () => {
         : isState==="signUp"? "SignUp"
         : "Pass Reset"}
       </h1>
-      <Wrapper>
+      <Wrapper className="mb-3">
         <div className="inside_box">
           <div className="left w-full md:w-1/3">
             <div className="loginButton google" onClick={loginGmailRequest}>

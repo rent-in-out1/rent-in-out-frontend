@@ -1,11 +1,13 @@
 
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "../../../../components/style/wrappers/registerPage";
 import { useForm } from "react-hook-form";
 import { errorHandler, API_URL_CLIENT, doApiMethod, successHandler } from './../../../../services/service';
 import { onLogout } from "../../../../redux/features/toggleSlice";
 
 const SentMailResetPass = () => {
+  const nav =useNavigate()
   const dispatch = useDispatch()
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   let {
@@ -18,7 +20,7 @@ const SentMailResetPass = () => {
   const onSub = async (_dataBody) => {
     const requestData = {
       email: _dataBody.email,
-      redirectUrl: API_URL_CLIENT+"passwordReset",
+      redirectUrl: API_URL_CLIENT+"/resetPassword",
     };
     try {
       const url = "/users/requestPasswordReset";
@@ -27,6 +29,7 @@ const SentMailResetPass = () => {
       if (data.status === "Pending") {
         successHandler("Reset request sent successfully please check your email")
         dispatch(onLogout());
+        nav("/")
       }
       else if (data.status === "failed") {
         errorHandler(data.message);
