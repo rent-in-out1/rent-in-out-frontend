@@ -117,7 +117,7 @@ const Header = () => {
               setIsOpen(false)
             }
             else {
-              dispatch(onRegisterToggle())
+              nav("/register")
               setIsOpen(false)
             }
           }} className={`w-full p-2 rounded cursor-pointer`}>

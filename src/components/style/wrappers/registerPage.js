@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  max-height: inherit;;
+
+  max-height: inherit;
   width: inherit;
   display: flex;
   justify-content: center;
@@ -10,7 +11,7 @@ export const Wrapper = styled.div`
   box-sizing: border-box;
 
   .inside_box {
-    min-height: inherit;;
+    min-height: inherit;
     background: var(--white);
     display: flex;
     flex-direction: row;

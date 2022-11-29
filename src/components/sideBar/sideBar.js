@@ -1,11 +1,13 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { onLogout, onRegisterToggle } from '../../redux/features/toggleSlice';
+import { onLogout} from '../../redux/features/toggleSlice';
 import { API_URL_CLIENT } from '../../services/service';
+import { useNavigate } from 'react-router-dom';
 
 const SideBar = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
   const isLogin = useSelector(state => state.userSlice?.user !== null)
   return (
 
@@ -57,7 +59,7 @@ const SideBar = () => {
               dispatch(onLogout())
             }
             else {
-              dispatch(onRegisterToggle())
+              nav("/register")
             }
           }} className={`w-full p-2 rounded cursor-pointer`}>
             <span className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'>

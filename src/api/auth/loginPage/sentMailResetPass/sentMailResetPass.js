@@ -1,11 +1,13 @@
-import React ,{useState} from "react";
+
+import { useDispatch } from 'react-redux';
 import { Button } from "../../../../components/style/wrappers/registerPage";
 import { useForm } from "react-hook-form";
 import { errorHandler, API_URL_CLIENT, doApiMethod, successHandler } from './../../../../services/service';
+import { onLogout } from "../../../../redux/features/toggleSlice";
 
 const SentMailResetPass = () => {
+  const dispatch = useDispatch()
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  const [massege , setShowmassege] = useState(false)
   let {
     register,
     getValues,
@@ -16,7 +18,7 @@ const SentMailResetPass = () => {
   const onSub = async (_dataBody) => {
     const requestData = {
       email: _dataBody.email,
-      redirectUrl: API_URL_CLIENT,
+      redirectUrl: API_URL_CLIENT+"passwordReset",
     };
     try {
       const url = "/users/requestPasswordReset";
@@ -24,6 +26,7 @@ const SentMailResetPass = () => {
       console.log(data)
       if (data.status === "Pending") {
         successHandler("Reset request sent successfully please check your email")
+        dispatch(onLogout());
       }
       else if (data.status === "failed") {
         errorHandler(data.message);

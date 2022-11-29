@@ -34,9 +34,8 @@ const Categories = () => {
         setSearch={setSearch}
         setOption={setOption}
       />
-      <Input>
-        <main className="container-fluid">
-          <table className="m-auto">
+      <div className="justify-center">
+          <table className="m-auto table-fixed">
             <thead>
               <tr>
                 <th>Title</th>
@@ -79,8 +78,7 @@ const Categories = () => {
               </button>
             </div>
           ) : null}
-        </main>
-      </Input>
+          </div>
     </Wrapper>
   );
 };

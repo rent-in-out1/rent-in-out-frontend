@@ -43,7 +43,7 @@ export const doApiMethod = async(_url, _method, _body = {}, _headers = {}) => {
 
 export const errorHandler = (err) => {
     toast.info(err , {
-    autoClose: 2000,
+    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -53,7 +53,7 @@ export const errorHandler = (err) => {
 }
 export const successHandler = (data) => {
     toast.success(data , {
-    autoClose: 2000,
+    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

@@ -61,9 +61,11 @@ const AppRoutes = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
+          <Route path="/register" element={<Register />}/>
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
+            <Route path ="passwordReset/*" element={<Dashboard />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
@@ -88,7 +90,7 @@ const AppRoutes = () => {
             </Route>
           )}
         </Routes>
-        {isRegister && <Register />}
+        
         <ToastContainer position="bottom-right" />
       </Router>
     </Suspense>

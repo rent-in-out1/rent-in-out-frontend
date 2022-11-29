@@ -3,13 +3,14 @@ import classes from "./Model.module.css";
 import { useDispatch } from 'react-redux';
 import  ReactDOM  from 'react-dom';
 import { onLogout } from "../../redux/features/toggleSlice";
+import { useNavigate } from 'react-router-dom';
 
 function Backdrop(props) {
-  const dispatch = useDispatch();
+  const nav = useNavigate();
   return (
     <div
       onClick={() => {
-        dispatch(onLogout())
+        nav("/",{replace: true})
       }}
       className={classes.backdrop}
     >
@@ -18,12 +19,12 @@ function Backdrop(props) {
 }
 
 function ModelOverlay(props) {
-  const dispatch = useDispatch();
+  const nav = useNavigate();
   return (
     <div className={classes.model}>
       <h2
         onClick={() => {
-          dispatch(onLogout())
+          nav("/",{replace: true})
         }}
       >
         X
