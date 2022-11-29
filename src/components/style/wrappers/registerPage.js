@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
 
-  max-height: inherit;
+  max-height: 90vh;
   width: inherit;
   display: flex;
   justify-content: center;
   padding-top: 0;
   align-items: center;
   box-sizing: border-box;
+  margin-bottom: 20px;
 
   .inside_box {
     min-height: inherit;
