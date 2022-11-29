@@ -14,6 +14,7 @@ import ResetPass from "./api/auth/loginPage/resetPass";
 const LayoutAdmin = React.lazy(() =>
   import("./layout/layoutAdmin/layoutAdmin")
 );
+// add UserSearch
 const Users = React.lazy(() => import("./pages/admin/users"));
 const MyProfile = React.lazy(() =>
   import("./pages/client/myProfile/myProfile")
@@ -73,7 +74,9 @@ const AppRoutes = () => {
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
-            {/* User Routes */}
+            {/* replace dashboard to UserSearch */}
+            <Route path="search" element={<Dashboard/>} />
+            <Route path ="passwordReset/*" element={<Dashboard />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
