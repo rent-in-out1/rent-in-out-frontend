@@ -9,9 +9,6 @@ const Users = () => {
   const [search, setSearch] = useState("");
   const [option, setOption] = useState();
   //lazy loading users
-  const [firstLoad, setFirstLoad] = useState(true);
-  const [endScreen, endScreenEnd] = useScroll(900);
-  const [page, setPage] = useState(1);
   
   const [isChange, setIsChange] = useState(false);
   const options = [
@@ -23,27 +20,13 @@ const Users = () => {
   ];
   useEffect(() => {
     getAllUsers();
-  }, [isChange, option, search, page]);
-
-  useEffect(() => {
-    const count =async ()=>{
-      if (!firstLoad && endScreen) {
-        let {data} = await doGetApiMethod("/users/countUsers");
-        if(page > (data/10)) setPage(data)
-        else setPage(page + 1);
-      }
-      setFirstLoad(false);
-    }
-    count()
-  }, [endScreen]);
+  }, [isChange, option, search]);
 
   const getAllUsers = async () => {
-    if(isChange) setUsers([])
-    let url = `/users/search/?s=${search}&sort=${option}&page=${page}`;
+    let url = `/users/search/?s=${search}&sort=${option}`;
     let {data} = await doGetApiMethod(url);
-    setUsers([...users ,...data]);
+    setUsers(data);
     setIsChange(false);
-    endScreenEnd();
   };
   return (
     <Wrapper>
