@@ -17,7 +17,11 @@ const UserSearch = () => {
 
   const serachUser = async () => {
     let searchQ = query.get("s") || query.get("ido");
+<<<<<<< HEAD
     const url = "/users/search?s=" +searchQ;
+=======
+    const url = "/users/search/?s=" +searchQ;
+>>>>>>> cardandsearch
     try {
       const {data}  = await doGetApiMethod(url);
       console.log(data);
@@ -33,12 +37,20 @@ const UserSearch = () => {
         <div>
         <input  onChange={serachUser} ref= {inpRef} onKeyDown={(e)=>{
                if(e.key == "Enter"){
+<<<<<<< HEAD
                 serachUser()
+=======
+                nav("/users/search/?s="+inpRef.current.value);
+>>>>>>> cardandsearch
               }
         }} type="text" placeholder= "search users"/>
         </div>
         <div>
+<<<<<<< HEAD
         {ar?.map(item =>{
+=======
+        {ar.map(item =>{
+>>>>>>> cardandsearch
           return(
             <UserCard key={item._id} item={item}/>
           )

@@ -5,26 +5,36 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod } from "./services/service";
-import { onLogin} from "./redux/features/userSlice";
+import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loaderImg/loaderImg";
+<<<<<<< HEAD
 import UserSearch from "./pages/client/userSearch/userSearch";
 
+=======
+import ResetPass from "./api/auth/loginPage/resetPass";
+>>>>>>> cardandsearch
 
 // Lazy loading of routes
 
 const LayoutAdmin = React.lazy(() =>
   import("./layout/layoutAdmin/layoutAdmin")
 );
+
 const Users = React.lazy(() => import("./pages/admin/users"));
-const MyProfile = React.lazy(() => import("./pages/client/myProfile/myProfile"));
+const MyProfile = React.lazy(() =>
+  import("./pages/client/myProfile/myProfile")
+);
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
-const ProfileEdit = React.lazy(() => import("./components/profileEdit/profileEdit"));
+const ProfileEdit = React.lazy(() =>
+  import("./components/profileEdit/profileEdit")
+);
 const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
+const UserSearch = React.lazy(() => import("./pages/client/userSearch"));
 
 const AppRoutes = () => {
   // const nav = useNavigate()
@@ -54,17 +64,24 @@ const AppRoutes = () => {
   };
 
   return (
-    <Suspense fallback=
-    {<div className="w-100 h-screen flex items-center justify-center">
-      <Loader load={true} height="400" width="400"/>
-    </div>}>
+    <Suspense
+      fallback={
+        <div className="w-100 h-screen flex items-center justify-center">
+          <Loader load={true} height="400" width="400" />
+        </div>
+      }
+    >
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
-          <Route path="/register" element={<Register />}/>
+            <Route path="/register" element={<Register />} />
+            <Route path="/resetPassword/:id/:resetString" element={<ResetPass />}/>
+
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
+            
+            <Route path="search" element={<UserSearch/>} />
             <Route path ="passwordReset/*" element={<Dashboard />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
@@ -76,7 +93,6 @@ const AppRoutes = () => {
 
                 <Route path="*" element={<Page404 />} />
               </React.Fragment>
-
             )}
           </Route>
           {user?.role === "admin" && user?.active && (
@@ -92,7 +108,7 @@ const AppRoutes = () => {
             </Route>
           )}
         </Routes>
-        
+
         <ToastContainer position="bottom-right" />
       </Router>
     </Suspense>

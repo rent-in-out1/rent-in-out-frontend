@@ -6,7 +6,6 @@ import { upload } from "../../redux/features/userSlice";
 import { doApiMethod, errorHandler, doGetApiMethod } from "../../services/service";
 import { toast } from "react-toastify"
 import { Wrapper } from "../style/wrappers/editUser";
-import { FaCamera } from "react-icons/fa"
 
 
 const ProfileEdit = () => {
