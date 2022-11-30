@@ -7,12 +7,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loaderImg/loaderImg";
-<<<<<<< HEAD
-import UserSearch from "./pages/client/userSearch/userSearch";
 
-=======
+
+
+
 import ResetPass from "./api/auth/loginPage/resetPass";
->>>>>>> cardandsearch
+
 
 // Lazy loading of routes
 
