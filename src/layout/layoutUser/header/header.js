@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react';
 import {  onLogout } from '../../../redux/features/toggleSlice';
 import { API_URL_CLIENT } from '../../../services/service';
+import Search from '../../../components/icons/search';
 
 
 const Header = () => {
@@ -29,7 +30,7 @@ const Header = () => {
           <div className="search">
             <input type="text" placeholder='Search...' className='border-transparent focus:border-transparent focus:ring-0' />
             <div className="icon">
-              <FaSearch />
+              <Search color='#333' width='16' height='16'/>
             </div>
           </div>
         </div>
@@ -37,21 +38,6 @@ const Header = () => {
           <nav>
             {isLogin &&
               <ul>
-                <li>
-                  <Link to={"/"} className="inline-flex items-center p-3 text-sm text-center md:hidden">
-                    <FaHome className='text-large' />
-                  </Link>
-                </li>
-                <li>
-                  <Link to={"/mypsots"} className="inline-flex items-center p-3 text-sm text-center md:hidden">
-                    <FaStickyNote className='text-large' />
-                  </Link>
-                </li>
-                <li>
-                  <Link to={"/profile"} className="inline-flex items-center p-3 text-sm text-center md:hidden">
-                    <FaUser className='text-large' />
-                  </Link>
-                </li>
                 <li>
                   <button type="button" className="inline-flex relative items-center p-3 text-sm  text-center">
                     <FaInbox />
@@ -86,7 +72,7 @@ const Header = () => {
       </section>
       {
         isOpen &&
-        <ul className='absolute dropdown shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
+        <ul className='absolute dropdown transition shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
           {isLogin &&
             <React.Fragment>
               <li onClick={()=>{
