@@ -7,16 +7,13 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
-  useEffect(() => {
-    console.log(user);
-  }, []);
   return (
     <Wrapper>
       <main
         className="cursor-pointer"
         onClick={() => {
           if (user.role === "admin") nav("/admin/profileEdit");
-          else nav("/admin/profileEdit");
+          else nav("/profileEdit");
         }}
       >
         <div className={"px-2"}>
