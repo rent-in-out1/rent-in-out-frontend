@@ -20,7 +20,7 @@ const SideBar = () => {
   const nav = useNavigate();
   const isLogin = useSelector(state => state.userSlice?.user !== null)
   return (
-    <Wrapper className="w-3/12 z-10 top-16 left-0 fixed hidden lg:flex" aria-label="Sidebar">
+    <Wrapper className="w-2/12 z-10 top-16 left-0 fixed hidden lg:flex" aria-label="Sidebar">
       <div className="overflow-y-auto py-4 px-3 w-full bg-white rounded">
         <ul className="space-y-2">
           <li>
