@@ -17,7 +17,6 @@ export function useScroll(offsetY = 0){
     let scrollTop = document.documentElement.scrollTop;
     // all the files inside the window height
     let docHeight = document.documentElement.offsetHeight;
-    console.log("Scroll",windowHeight,scrollTop,docHeight)
     if(Math.ceil(windowHeight + scrollTop) >= docHeight - offsetY){
       setEndScreen(true)
     }

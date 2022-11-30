@@ -1,6 +1,6 @@
 import React from 'react'
 import { BsTrash } from 'react-icons/bs'
-import { API_URL, doApiMethod } from '../../../services/service';
+import { doApiMethod } from '../../../services/service';
 const SingleUser = (props) => {
   const user = props.item;
 
@@ -36,7 +36,7 @@ const SingleUser = (props) => {
           </div>
           <div className="ml-3">
             <p className="text-gray-900 whitespace-no-wrap">
-              {user?.fullName.firstName} {user?.fullName.lastName}
+              {user?.fullName?.firstName} {user?.fullName?.lastName}
             </p>
           </div>
         </div>
@@ -45,10 +45,13 @@ const SingleUser = (props) => {
         <p className="text-gray-900 whitespace-no-wrap">{user?.email}</p>
       </td>
       <td>
-        <p className="text-gray-900 whitespace-no-wrap">{user?.location}</p>
+        <p className="text-gray-900 whitespace-no-wrap">{user?.country}</p>
       </td>
       <td>
-        <p className="text-gray-900 whitespace-no-wrap">{() => unixToAge(Math.floor(new Date(user?.birthdate).getTime() / 1000))}</p>
+        <p className="text-gray-900 whitespace-no-wrap">{user?.city}</p>
+      </td>
+      <td>
+        <p className="text-gray-900 whitespace-no-wrap">{() => unixToAge(Math.floor(new Date(user?.birthdate).getTime()))}</p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">{user?.phone}</p>
