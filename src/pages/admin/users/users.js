@@ -3,7 +3,6 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SingleUser from "./singleUser";
 import Controllers from "../../../components/controllers/controllers";
-import { useScroll } from "./../../../hooks/useScroll";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
