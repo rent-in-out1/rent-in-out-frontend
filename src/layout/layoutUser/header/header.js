@@ -1,12 +1,20 @@
 
 import React from 'react'
 import { Link,useNavigate } from 'react-router-dom'
-import { FaSearch, FaHome, FaBell, FaInbox, FaUser, FaStickyNote, FaSignInAlt, FaSignOutAlt, FaCogs } from "react-icons/fa"
+import {  FaSignInAlt, FaSignOutAlt } from "react-icons/fa"
 import { Logo, Wrapper } from '../../../components/style/wrappers/navbarUser';
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react';
 import {  onLogout } from '../../../redux/features/toggleSlice';
 import { API_URL_CLIENT } from '../../../services/service';
+import Search from '../../../components/icons/search';
+import Dashboard from '../../../components/icons/dashboard';
+import Profile from '../../../components/icons/profile';
+import Bell from '../../../components/icons/bell';
+import Settings from '../../../components/icons/settings';
+import Inbox from '../../../components/icons/inbox';
+import SignIn from '../../../components/icons/signIn';
+import SignOut from '../../../components/icons/signOut';
 
 
 const Header = () => {
@@ -29,7 +37,7 @@ const Header = () => {
           <div className="search">
             <input type="text" placeholder='Search...' className='border-transparent focus:border-transparent focus:ring-0' />
             <div className="icon">
-              <FaSearch />
+              <Search color='#333' width='16' height='16'/>
             </div>
           </div>
         </div>
@@ -38,30 +46,15 @@ const Header = () => {
             {isLogin &&
               <ul>
                 <li>
-                  <Link to={"/"} className="inline-flex items-center p-3 text-sm text-center md:hidden">
-                    <FaHome className='text-large' />
-                  </Link>
-                </li>
-                <li>
-                  <Link to={"/mypsots"} className="inline-flex items-center p-3 text-sm text-center md:hidden">
-                    <FaStickyNote className='text-large' />
-                  </Link>
-                </li>
-                <li>
-                  <Link to={"/profile"} className="inline-flex items-center p-3 text-sm text-center md:hidden">
-                    <FaUser className='text-large' />
-                  </Link>
-                </li>
-                <li>
                   <button type="button" className="inline-flex relative items-center p-3 text-sm  text-center">
-                    <FaInbox />
+                    <Inbox color='black' width='20' height='20' />
                     <span className="sr-only">Notifications</span>
                     <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">1</div>
                   </button>
                 </li>
                 <li>
                   <button type="button" className="inline-flex relative items-center p-3 text-sm  text-center">
-                    <FaBell />
+                    <Bell/>
                     <span className="sr-only">Notifications</span>
                     <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">2</div>
                   </button>
@@ -86,26 +79,26 @@ const Header = () => {
       </section>
       {
         isOpen &&
-        <ul className='absolute dropdown shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
+        <ul className='absolute dropdown transition shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
           {isLogin &&
             <React.Fragment>
               <li onClick={()=>{
                 setIsOpen(false)
                 nav("/")
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}>
-                <div className='flex justify-between items-center'><p>Home</p> <FaHome /></div>
+                <div className='flex justify-between items-center'><p>Home</p> <Dashboard color='black'/></div>
               </li>
               <li onClick={()=>{
                 setIsOpen(false)
                 nav("/profile")
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}>
-                <div className='flex justify-between items-center'> <p>Profile</p> <FaUser /></div>
+                <div className='flex justify-between items-center'> <p>Profile</p> <Profile color='black' /></div>
               </li>
               <li onClick={()=>{
                 setIsOpen(false)
                 nav("/profile1")
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}>
-                <div className='flex justify-between items-center'> <p>Settings</p> <FaCogs /></div>
+                <div className='flex justify-between items-center'> <p>Settings</p> <Settings /></div>
               </li>
             </React.Fragment>
           }
@@ -121,8 +114,8 @@ const Header = () => {
               setIsOpen(false)
             }
           }} className={`w-full p-2 rounded cursor-pointer`}>
-            {isLogin ? <div className='flex justify-between items-center'> <p>Signout</p> <FaSignOutAlt /></div> :
-              <div className='flex justify-between items-center'><p>Signin</p> <FaSignInAlt /></div>}</li>
+            {isLogin ? <div className='flex justify-between items-center'> <p>Signout</p> <SignOut color='black' /></div> :
+              <div className='flex justify-between items-center'><p>Signin</p> <SignIn /></div>}</li>
         </ul>
       }
     </Wrapper>

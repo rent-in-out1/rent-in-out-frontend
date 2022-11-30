@@ -3,12 +3,12 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SingleUser from "./singleUser";
 import Controllers from "../../../components/controllers/controllers";
+import Loader from './../../../components/loaderImg/loaderImg';
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [option, setOption] = useState();
-  //lazy loading users
-  
+  const [isLoading, setIsLoading] = useState(false);
   const [isChange, setIsChange] = useState(false);
   const options = [
     { name: "Role", value: "role" },
@@ -22,11 +22,14 @@ const Users = () => {
   }, [isChange, option, search]);
 
   const getAllUsers = async () => {
-    let url = `/users/search/?s=${search}&sort=${option}`;
-    let {data} = await doGetApiMethod(url);
-    setUsers(data);
-    setIsChange(false);
-  };
+      setIsLoading(true)
+      let url = `/users/search/?s=${search}&sort=${option}`;
+      let { data } = await doGetApiMethod(url);
+      setIsLoading(false)
+      setUsers(data);
+      setIsChange(false);
+    }
+
   return (
     <Wrapper>
       <Controllers
@@ -51,7 +54,7 @@ const Users = () => {
               <th>delete</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tbody">
             {users.length > 0 && users?.map((user) => {
               return (
                 <SingleUser
@@ -61,9 +64,9 @@ const Users = () => {
                 />
               );
             })}
+            {isLoading && <div className="flex justify-center w-full"><Loader/></div>}
           </tbody>
         </table>
-            {/* {endScreen && <h3>loading...</h3>} */}
       </div>
     </Wrapper>
   );
