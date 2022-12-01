@@ -31,7 +31,7 @@ const SingleUser = (props) => {
         <div className="flex items-center">
           <div className="flex-shrink-0 w-8 h-8">
             <img className="w-full h-full rounded-full"
-              src={user?.profile_img}
+              src={user?.profile_img.url}
               alt="profile" />
           </div>
           <div className="ml-3">

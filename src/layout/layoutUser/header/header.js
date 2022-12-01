@@ -67,7 +67,7 @@ const Header = () => {
               className="rounded-full"
               src={
                 user !== null && user?.active
-                  ? user.profile_img
+                  ? user.profile_img.url
                   : "https://freesvg.org/img/Male-Avatar.png"
               }
               alt=""
