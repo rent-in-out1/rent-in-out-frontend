@@ -63,6 +63,7 @@ export const Wrapper = styled.div`
             width: 40px;
             height: 40px;
             img{
+                object-fit: cover;
                 width: 100%;
                 height: 100%;
             }

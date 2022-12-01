@@ -1,5 +1,6 @@
 import React from "react";
 // should send title options and set search set option
+// controllers of all the tables 
 const Controllers = ({ title, options, setSearch, setOption }) => {
   return (
     <div className="flex flex-wrap controllers">

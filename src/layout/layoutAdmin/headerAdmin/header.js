@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { onRegisterToggle } from '../../../redux/features/toggleSlice';
 import {
-  FaUsers,
-  FaUser,
-  FaListAlt,
-  FaUpload,
   FaBell,
-  FaHome,
-  FaSignOutAlt,
-  FaSignInAlt,
 } from "react-icons/fa";
 import { Logo, Wrapper } from "../../../components/style/wrappers/navbarAdmin";
 import { useSelector, useDispatch } from "react-redux";
 import { onLogout } from "../../../redux/features/userSlice";
+import Profile from "../../../components/icons/profile";
+import Users from "../../../components/icons/users";
+import Posts from "../../../components/icons/posts";
+import Categories from "../../../components/icons/categories";
+import Home from "../../../components/icons/home";
+import SignIn from "../../../components/icons/signIn";
+import SignOut from "../../../components/icons/signOut";
+import Bell from "../../../components/icons/bell";
 const Header = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const Header = () => {
                   type="button"
                   className="inline-flex relative items-center p-3 text-sm  text-center"
                 >
-                  <FaBell />
+                  <Bell />
                   <span className="sr-only">Notifications</span>
                   <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
                     2
@@ -72,31 +73,31 @@ const Header = () => {
             setIsOpen(false)
             nav("/admin")
           }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
-            <div className='flex justify-between items-center'> <p>Home</p> <FaHome /></div>
+            <div className='flex justify-between items-center'> <p>Home</p> <Home /></div>
             </li>
           <li onClick={()=>{
                 setIsOpen(false)
                 nav("/admin/users")
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
-            <div className='flex justify-between items-center'> <p>Users</p> <FaUsers /></div>
+            <div className='flex justify-between items-center'> <p>Users</p> <Profile color="black"/></div>
             </li>
           <li onClick={()=>{
                 setIsOpen(false)
                 nav("/admin/posts")
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
-                  <div className='flex justify-between items-center'> <p>Posts</p> <FaUpload /></div>
+                  <div className='flex justify-between items-center'> <p>Posts</p> <Posts color="black" /></div>
             </li>
           <li onClick={()=>{
                 setIsOpen(false)
                 nav("/admin/categories")
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
-                  <div className='flex justify-between items-center'> <p>Categories</p> <FaListAlt /></div>
+                  <div className='flex justify-between items-center'> <p>Categories</p> <Categories /></div>
             </li>
           <li onClick={()=>{
                 setIsOpen(false)
                 nav("/admin/profile")
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
-                  <div className='flex justify-between items-center'> <p>Profile</p> <FaUser /></div>
+                  <div className='flex justify-between items-center'> <p>Profile</p> <Users /></div>
             </li>
           <li onClick={() => {
             if (isLogin) {
@@ -109,8 +110,8 @@ const Header = () => {
               setIsOpen(false)
             }
           }} className={`w-full p-2 rounded`}>
-            {isLogin ? <div className='flex justify-between items-center cursor-pointer'> <p>Signout</p> <FaSignOutAlt /></div> :
-              <div className='flex justify-between items-center'><p>Signin</p> <FaSignInAlt /></div>}</li>
+            {isLogin ? <div className='flex justify-between items-center cursor-pointer'> <p>Signout</p> <SignOut color="black" /></div> :
+              <div className='flex justify-between items-center'><p>Signin</p> <SignIn color="black"/></div>}</li>
         </ul>
       }
     </Wrapper>

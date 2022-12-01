@@ -1,11 +1,46 @@
-import React  from "react";
+import { filterProps } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../../../../src/components/style/wrappers/registerPage";
-import { doApiMethod, errorHandler, successHandler } from "./../../../../services/service";
+import {
+  getCountries,
+  getCities,
+} from "../../../../helpers/countries-api/getLocations";
+import {
+  doApiMethod,
+  errorHandler,
+  successHandler,
+} from "./../../../../services/service";
 
 const SignUp = (props) => {
+  const countryRef = useRef();
+  const cityRef = useRef();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  const regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
+  const regPassword =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
+  const [countries, setAllCountry] = useState();
+  const [cities, setAllCities] = useState();
+  const [selectedCountry, setSelectedCountry] = useState("Israel");
+  const [selectedCity, setSelectedCity] = useState("Israel");
+
+  useEffect(() => {
+    getAllCountries();
+  }, [cities]);
+
+  useEffect(() => {
+    getAllCities(selectedCountry);
+  }, [selectedCountry]);
+
+  const getAllCountries = async () => {
+    const countries = await getCountries();
+    const countriesName = await countries?.map((country) => country.country);
+    setAllCountry(countriesName);
+  };
+  const getAllCities = async (_country) => {
+    const cities = await getCities(_country);
+    await setAllCities(cities);
+  };
+
   let {
     register,
     getValues,
@@ -26,6 +61,8 @@ const SignUp = (props) => {
       birthdate: _dataBody.birthdate,
       email: _dataBody.email,
       password: _dataBody.password,
+      country: selectedCountry,
+      city: selectedCity,
     };
     registerRequest(register);
   };
@@ -33,8 +70,8 @@ const SignUp = (props) => {
     try {
       const url = "/users";
       await doApiMethod(url, "POST", _dataBody);
-      props.setState("signIn")
-      successHandler("Sign Up Success, please verify your email")
+      props.setState("signIn");
+      successHandler("Sign Up Success, please verify your email");
     } catch (err) {
       errorHandler(err.response.data.msg);
     }
@@ -110,7 +147,7 @@ const SignUp = (props) => {
                 required: true,
                 minLength: 6,
                 maxLength: 25,
-                pattern: regPassword
+                pattern: regPassword,
               })}
               type="password"
               placeholder="******************"
@@ -122,9 +159,7 @@ const SignUp = (props) => {
               </small>
             )}
           </div>
-          <div
-            className="w-full md:w-1/2 px-3"
-          >
+          <div className="w-full md:w-1/2 px-3">
             <label>Confirm Password</label>
             <input
               {...register("password2", {
@@ -139,9 +174,7 @@ const SignUp = (props) => {
             {errors.password2 && <small>Password dont match.</small>}
           </div>
         </div>
-        <div
-          className="flex flex-wrap mb-2 -mx-3"
-        >
+        <div className="flex flex-wrap mb-2 -mx-3">
           <div className=" w-1/2 px-2">
             <label>Birthdate</label>
             <div className="flex relative bottom-3 items-center pl-3 pointer-events-none"></div>
@@ -167,20 +200,60 @@ const SignUp = (props) => {
             {errors.phone && <small>Enter valid phone.</small>}
           </div>
         </div>
+        <div className="filters w-full flex mr-2">
+          <div className="w-4/5 mr-1">
+            <label>Country</label>
+            <select
+              ref={countryRef}
+              defaultValue={selectedCountry}
+              onChange={() => setSelectedCountry(countryRef.current.value)}
+              className="block py-2.5 px-2 w-full  text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+            >
+              <option value="Israel" key={0} className="capitalize">
+                Israel
+              </option>
+              {countries
+                ?.filter((country) => country !== "Israel")
+                .map((country, i) => (
+                  <option value={country} key={i + 1} className="capitalize">
+                    {country}
+                  </option>
+                ))}
+            </select>
+          </div>
+            <div className="w-4/5 mr-1">
+              <label>City</label>
+              <select
+                ref={cityRef}
+                defaultValue={selectedCountry}
+                onChange={() => setSelectedCity(cityRef.current.value)}
+                className="block py-2.5 px-2 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+              >
+                {cities?.map((city, i) => (
+                  <option value={city} key={i} className="capitalize">
+                    {city}
+                  </option>
+                ))}
+              </select>
+            </div>
+          
+        </div>
         <Button>
           <button>SignUp</button>
         </Button>
       </form>
       <span>
-          Already a member ?
-          <button
-            type="button"
-            onClick={()=>{props.setState("signIn")}}
-            className="underline text-blue-400 hover:text-blue-700"
-          >
-            click here
-          </button>
-        </span>
+        Already a member ?
+        <button
+          type="button"
+          onClick={() => {
+            props.setState("signIn");
+          }}
+          className="underline text-blue-400 hover:text-blue-700"
+        >
+          click here
+        </button>
+      </span>
     </div>
   );
 };
