@@ -30,7 +30,7 @@ const Posts = () => {
     <React.Fragment>
       <Wrapper>
         <Controllers title={"posts list"} options={options} setSearch={setSearch} setOption={setOption} />
-        <div className="flex justify-center">
+        <div className="wrapper">
           <table>
             <thead>
               <tr>

@@ -9,7 +9,7 @@ const MyProfile = () => {
     <div>
       <BannerProfile/>
       <ProfileEdit/>
-      <OwnPosts/>
+      <OwnPosts />
       <Footer/>
      
     </div>

@@ -3,12 +3,14 @@ import Card from '../card'
 
 const Main = () => {
     return (
-        <main className='w-full lg:w-10/12 ml-auto p-3 bg-gray-100 text-center justify-center'>
+        <main className='w-full  p-3 bg-gray-100 text-center justify-center'>
+            <div className='w-1/2'>
             <Card/>
             <Card/>
             <Card/>
             <Card/>
             <Card/>
+            </div>
         </main>
     )
 }

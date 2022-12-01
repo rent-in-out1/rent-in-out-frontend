@@ -1,6 +1,7 @@
 import React, { useEffect , useState } from 'react'
 import { doGetApiMethod } from './../../services/service';
 import Card from './../card/card';
+import { Wrapper } from './../style/wrappers/grid';
 
 const OwnPosts = () => {
   const [posts , setPosts] = useState([])
@@ -14,13 +15,15 @@ const OwnPosts = () => {
     setPosts(data)
   }
   return (
-    <div className='"grid grid-cols-3 gap-4"'>
+    <Wrapper col={2} rowGap ={5} colGap ={5} className="px-auto">
       {posts.map(post =>{
         return(
+          <div className=" flex justify-center items-center">
           <Card key= {post._id} post={post}/>
+          </div>
         )
       })}
-    </div>
+    </Wrapper>
   )
 }
 

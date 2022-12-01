@@ -7,7 +7,7 @@ import Loader from './../../../components/loaderImg/loaderImg';
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
-  const [option, setOption] = useState();
+  const [option, setOption] = useState("role");
   const [isLoading, setIsLoading] = useState(false);
   const [isChange, setIsChange] = useState(false);
   const options = [
@@ -31,14 +31,15 @@ const Users = () => {
     }
 
   return (
-    <Wrapper>
+    <Wrapper className="border">
       <Controllers
         title={"users list"}
         options={options}
         setSearch={setSearch}
         setOption={setOption}
       />
-      <div className="flex justify-center">
+
+        <div className="wrapper">
         <table>
           <thead>
             <tr>
@@ -67,7 +68,7 @@ const Users = () => {
             {isLoading && <div className="flex justify-center w-full"><Loader/></div>}
           </tbody>
         </table>
-      </div>
+        </div>
     </Wrapper>
   );
 };

@@ -53,7 +53,7 @@ const BannerProfile = () => {
   }
   return (
     <React.Fragment>
-      <div className='w-full h-48 relative' style={{ backgroundImage: `url(${banner})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+      <div className='w-full h-72 relative' style={{ backgroundImage: `url(${banner})`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className='z-10 w-full h-full flex justify-center items-center'>
           <LoaderImg load={loadBanner} height="160" width={"160"} />
         </div>

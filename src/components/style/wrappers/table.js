@@ -1,14 +1,22 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  .wrapper {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    overflow-x: scroll;
+    width: 100%;
+  }
+
   h1 {
-      text-align: center;
-      margin: 8px 0;
-      font-size: 2em;
-      font-family: sans-serif;
-    }
-    table {
-      overflow-x: hidden;
+    text-align: center;
+    margin: 8px 0;
+    font-size: 2em;
+    font-family: sans-serif;
+  }
+  table {
+    overflow-x: scroll;
     max-width: 85%;
     table-layout: auto;
     thead {
@@ -64,8 +72,14 @@ export const Wrapper = styled.div`
     }
   }
   @media (max-width: 768px) {
+    .wrapper {
+      margin: 0;
+      display: block;
+      overflow-x: scroll;
+      width: 100%;
+    }
     table {
-      width: 15000px;
+      max-width: 100%;
       background: red;
     }
     thead {
