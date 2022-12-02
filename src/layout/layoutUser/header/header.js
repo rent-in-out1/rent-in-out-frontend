@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { Link,useNavigate } from 'react-router-dom'
-import {  FaSignInAlt, FaSignOutAlt } from "react-icons/fa"
 import { Logo, Wrapper } from '../../../components/style/wrappers/navbarUser';
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react';
