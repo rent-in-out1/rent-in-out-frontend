@@ -9,7 +9,7 @@ import axios from 'axios';
                 "https://api.cloudinary.com/v1_1/dpmpi8dwb/image/upload",
                 formData
             );
-           return resp.data.url
+           return ({url:resp.data.url , img_id: resp.data.asset_id })
         }
         catch(err){
             console.log(err)
