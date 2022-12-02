@@ -32,7 +32,7 @@ const UserSearch = () => {
     <div className='mt-6'>
       <SideBar />
       <div className='w-10/12 ml-auto p-2'>
-      <div className="search w-full md:w-1/2">
+      <div className="search w-full md:w-1/3">
             <input onChange={serachUser} ref={inpRef} onKeyDown ={(e)=> {
               if (e.key=="Enter"){
                 serachUser()
