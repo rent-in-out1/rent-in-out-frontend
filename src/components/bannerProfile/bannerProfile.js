@@ -7,8 +7,8 @@ import { doApiMethod, errorHandler, successHandler } from '../../services/servic
 import { uploadBanner, uploadProfileImage } from '../../redux/features/userSlice'
 const BannerProfile = () => {
   const dispatch = useDispatch();
-  const [banner, setBanner] = useState(useSelector(state=>state.userSlice.user?.cover_img))
-  const [profile, setProfile] = useState(useSelector(state=>state.userSlice.user?.profile_img))
+  const [banner, setBanner] = useState(useSelector(state=>state.userSlice.user?.cover_img?.url))
+  const [profile, setProfile] = useState(useSelector(state=>state.userSlice.user?.profile_img?.url))
   const [loadBanner, setLoadBanner] = useState(false)
   const [loadImg, setLoadImg] = useState(false)
   const profileRef = useRef()
@@ -19,13 +19,13 @@ const BannerProfile = () => {
       return errorHandler("file too big")
     }
     setLoadBanner(true)
-    const url = await uploadImage(file)
+    const img_data = await uploadImage(file)
     setLoadBanner(false)
-    setBanner(url)
+    setBanner(img_data.url)
     try{
       const urlR = "/users/uploadBanner";
-      let res = await doApiMethod(urlR,"PATCH",{banner:url})
-      dispatch(uploadBanner(url));
+      let res = await doApiMethod(urlR,"PATCH",img_data)
+      dispatch(uploadBanner(img_data.url));
       successHandler(res)
     }
     catch(err){
@@ -38,13 +38,13 @@ const BannerProfile = () => {
       return errorHandler("file too big")
     }
     setLoadImg(true)
-    const url = await uploadImage(file)
+    const img_data = await uploadImage(file)
     setLoadImg(false)
-    setProfile(url)
+    setProfile(img_data.url)
     try{
       const urlR = "/users/uploadProfile";
-      let res = await doApiMethod(urlR,"PATCH",{img:url})
-      dispatch(uploadProfileImage(url));
+      let res = await doApiMethod(urlR,"PATCH",img_data)
+      dispatch(uploadProfileImage(img_data.url));
       successHandler(res)
     }
     catch(err){
@@ -53,7 +53,7 @@ const BannerProfile = () => {
   }
   return (
     <React.Fragment>
-      <div className='w-full h-48 relative' style={{ backgroundImage: `url(${banner})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+      <div className='w-full h-72 relative' style={{ backgroundImage: `url(${banner})`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className='z-10 w-full h-full flex justify-center items-center'>
           <LoaderImg load={loadBanner} height="160" width={"160"} />
         </div>

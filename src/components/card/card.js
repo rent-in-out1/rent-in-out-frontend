@@ -5,7 +5,7 @@ import Dots from '../icons/dots'
 import FillHeart from '../icons/fillHeart'
 import Heart from '../icons/heart'
 import { Wrapper } from '../style/wrappers/card'
-const Card = () => {
+const Card = ({post}) => {
     const [like, setLike] = useState(false)
     const heartClick = () => {
         setLike(!like)
@@ -18,7 +18,7 @@ const Card = () => {
                     <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
                         <img className='w-full h-full rounded-full object-cover' src="http://res.cloudinary.com/dpmpi8dwb/image/upload/v1669812257/profile/f1g9jbu5utwmesrkddeg.jpg" alt="" />
                     </div>
-                    <span className='pl-1'>Yoav Grinwald</span>
+                    <span className='pl-1'></span>
                     </div>
                     <Dots />
                 </div>

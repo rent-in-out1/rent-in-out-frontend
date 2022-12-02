@@ -11,10 +11,10 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [isChange, setIsChange] = useState(false);
   const options =
-    [{ name: "title", value: "title" },
-    { name: "rent duration", value: "range" },
-    { name: "location", value: "location" },
-    { name: "active", value: "active" }]
+    [{ name: "Title", value: "title" },
+    { name: "Rent duration", value: "range" },
+    { name: "Location", value: "location" },
+    { name: "Active", value: "active" }]
 
   const getAllposts = async () => {
     let url = `/posts/search/?s=${search}&sort=${option}`;
@@ -30,7 +30,7 @@ const Posts = () => {
     <React.Fragment>
       <Wrapper>
         <Controllers title={"posts list"} options={options} setSearch={setSearch} setOption={setOption} />
-        <div className="flex justify-center">
+        <div className="wrapper">
           <table>
             <thead>
               <tr>

@@ -32,7 +32,7 @@ const Categories = () => {
         setSearch={setSearch}
         setOption={setOption}
       />
-      <div className="justify-center">
+      <div>
           <table className="m-auto table-fixed">
             <thead>
               <tr>

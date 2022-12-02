@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
-import { API_URL_CLIENT, doApiMethod } from "./services/service";
+import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loaderImg/loaderImg";
 
@@ -49,6 +49,7 @@ const AppRoutes = () => {
       if (decoded.exp < Date.now()) {
         getUserInfo(decoded._id, token);
       }
+      else errorHandler("Your authorization is expired please login again")
     }
   }, []);
 
@@ -56,7 +57,7 @@ const AppRoutes = () => {
     let url = "/users/info/" + _id;
     const { data } = await doApiMethod(url, "GET", token);
     if (!data.userInfo) {
-      alert("invalid user");
+      errorHandler("invalid user");
       window.open(API_URL_CLIENT, "_self");
       return;
     }
@@ -98,8 +99,9 @@ const AppRoutes = () => {
           {user?.role === "admin" && user?.active && (
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
-              <Route index element={<HomeAdmin />} />
+              <Route index element={<Dashboard />} />
               <Route path="/admin/users" element={<Users />} />
+              <Route path="/admin/home" element={<HomeAdmin/>} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
               <Route path="/admin/profile" element={<MyProfile />} />

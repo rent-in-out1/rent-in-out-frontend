@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     background: var(--skyblue-50);
-    position: relative;
-    position: fixed;
+    position: sticky;
     width: 100%;
     top: 0;
     left: 0;

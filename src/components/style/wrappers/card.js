@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    width: 50%;
+    width: 100%;
     padding: 12px;
     .card{
     z-index: 0;
