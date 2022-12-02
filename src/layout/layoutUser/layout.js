@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <div>
       <Header />
-      <div className='pt-10'>
+      <div className='pt-10 select-none'>
       <Outlet />
       </div>
     </div>
