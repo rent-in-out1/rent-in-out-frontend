@@ -7,8 +7,8 @@ import { doApiMethod, errorHandler, successHandler } from '../../services/servic
 import { uploadBanner, uploadProfileImage } from '../../redux/features/userSlice'
 const BannerProfile = () => {
   const dispatch = useDispatch();
-  const [banner, setBanner] = useState(useSelector(state=>state.userSlice.user?.cover_img.url))
-  const [profile, setProfile] = useState(useSelector(state=>state.userSlice.user?.profile_img.url))
+  const [banner, setBanner] = useState(useSelector(state=>state.userSlice.user?.cover_img?.url))
+  const [profile, setProfile] = useState(useSelector(state=>state.userSlice.user?.profile_img?.url))
   const [loadBanner, setLoadBanner] = useState(false)
   const [loadImg, setLoadImg] = useState(false)
   const profileRef = useRef()
