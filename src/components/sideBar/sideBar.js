@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { Wrapper } from "../style/wrappers/sideBar";
 // icons import
 import Dashboard from "../icons/dashboard";
-import Posts from "../icons/posts";
 import Profile from "../icons/profile";
 import Inbox from "../icons/inbox";
 import Notifications from "../icons/notifications";

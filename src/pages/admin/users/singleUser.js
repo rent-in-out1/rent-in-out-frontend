@@ -10,19 +10,18 @@ const SingleUser = (props) => {
   }
   const changeRole = async (_id) => {
     const url = "/users/changeRole/" + _id;
-    let { data } = await doApiMethod(url, "PATCH");
-    console.log(data)
+    await doApiMethod(url, "PATCH");
+
   }
   const changeActive = async (_id) => {
     const url = "/users/changeActive/" + _id;
-    let { data } = await doApiMethod(url, "PATCH");
-    console.log(data)
+    await doApiMethod(url, "PATCH");
+
   }
   const deleteUser = async (_id, name) => {
     if (window.confirm(`Are you sure you want to delete ${name}`)) {
       const url = "/users/" + _id;
-      let { data } = await doApiMethod(url, "DELETE")
-      console.log(data)
+      await doApiMethod(url, "DELETE")
     }
   }
   return (

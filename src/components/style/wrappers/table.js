@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
     margin: 0;
     display: flex;
     justify-content: center;
-    overflow-x: scroll;
     width: 100%;
   }
 
@@ -45,7 +44,6 @@ export const Wrapper = styled.div`
           text-align: center;
           input {
             display: block;
-            /* max-width: 10%; */
             background: var(--grey-100);
             color: var(--black);
             border: 1px solid var(--grey-200);
