@@ -7,11 +7,12 @@ const OwnPosts = () => {
   const [posts , setPosts] = useState([])
   useEffect(()=>{
     getUserPosts()
-  })
+  },[])
 
   const getUserPosts = async() =>{
     let url = "/posts/userPosts"
     const {data} = await doGetApiMethod(url)
+    console.log(data)
     setPosts(data)
   }
   return (
@@ -19,7 +20,7 @@ const OwnPosts = () => {
       {posts.map(post =>{
         return(
           <div className=" flex justify-center items-center">
-          <Card key= {post._id} post={post}/>
+          <Card key={post._id} post={post}/>
           </div>
         )
       })}
