@@ -46,6 +46,7 @@ const SignIn = (props) => {
       setLoad(false)
       successHandler("Log In successfully!!!");
     } catch (err) {
+      setLoad(false)
       errorHandler(err.response.data.msg);
     }
   };
