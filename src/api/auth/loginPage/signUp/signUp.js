@@ -11,8 +11,11 @@ import {
   errorHandler,
   successHandler,
 } from "./../../../../services/service";
+import LoadingButton from './../../../../components/UI/spinnerButton';
+
 
 const SignUp = (props) => {
+  const [load, setLoad] = useState(false);
   const countryRef = useRef();
   const cityRef = useRef();
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -49,6 +52,7 @@ const SignUp = (props) => {
   } = useForm();
 
   const onSub = (_dataBody) => {
+    setLoad(true)
     delete _dataBody.password2;
     delete _dataBody.email2;
 
@@ -72,7 +76,9 @@ const SignUp = (props) => {
       await doApiMethod(url, "POST", _dataBody);
       props.setState("signIn");
       successHandler("Sign Up Success, please verify your email");
+      setLoad(false)
     } catch (err) {
+      setLoad(false)
       errorHandler(err.response.data.msg);
     }
   };
@@ -239,7 +245,7 @@ const SignUp = (props) => {
           
         </div>
         <Button>
-          <button>SignUp</button>
+        <LoadingButton isLoading={load}>Sign Up</LoadingButton>
         </Button>
       </form>
       <span>
