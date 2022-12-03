@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import { doApiMethod, doGetApiMethod } from "../../services/service";
 import Chat from "../icons/chat";
 import Dots from "../icons/dots";
+import Send from "../icons/send"
 import FillHeart from "../icons/fillHeart";
 import Heart from "../icons/heart";
 import { Wrapper } from "../style/wrappers/card";
 const Card = ({ post, setIsChange }) => {
 
   const [like, setLike] = useState(false);
-  const [displayOptions, setDisplayOptions] = useState(true);
+  const [displayOptions, setDisplayOptions] = useState(false)
   const [user, setUser] = useState({});
 
   const heartClick = async () => {
@@ -39,16 +40,24 @@ const Card = ({ post, setIsChange }) => {
                 alt=""
               />
             </div>
-            <span className="pl-1"></span>
+            <span className="pl-1">{user.fullName?.firstName} {user.fullName?.lastName}</span>
           </div>
-          <div>
+          <div className='z-10' onClick={() => setDisplayOptions(!displayOptions)}>
             <Dots />
           </div>
-          {
-            displayOptions &&
-            <ul className="bg-white absoulte top-0 right-0">
-              <li>
-                hello
+          {displayOptions &&
+            <ul className='w-1/3 absolute bg-white shadow-xl rounded-b-xl top-12 z-10 right-0'>
+              <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200'>
+                <p>Share</p>
+                <Send />
+              </li>
+              <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200'>
+                <p>Share</p>
+                <p>icon</p>
+              </li>
+              <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:bg-gray-200'>
+                <p>Share</p>
+                <p>icon</p>
               </li>
             </ul>
           }
@@ -69,7 +78,7 @@ const Card = ({ post, setIsChange }) => {
               heartClick();
             }}
           >
-            {like ? (
+            {!post.likes.some(el => el.user_id === user._id) ? (
               <Heart color="red" width="35px" height={"35px"} />
             ) : (
               <FillHeart color="red" width="35px" height={"35px"} />
