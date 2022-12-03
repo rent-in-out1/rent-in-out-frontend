@@ -7,11 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loaderImg/loaderImg";
+import UserSearch from "./pages/client/userSearch/userSearch";
 
-
-
-
-import ResetPass from "./api/auth/loginPage/resetPass";
 
 
 // Lazy loading of routes
@@ -34,7 +31,9 @@ const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
-const UserSearch = React.lazy(() => import("./pages/client/userSearch"));
+
+const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
+
 
 const AppRoutes = () => {
   // const nav = useNavigate()

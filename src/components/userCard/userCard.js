@@ -9,14 +9,14 @@ const UserCard = ({ item }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
-  const searcInfo= async (req) =>{
+
+  const searcInfo= async () =>{
     try{
-     
-      const url = "/users/info/" + user._id;
+      const url = "/users/info/" + item._id;
       const {data}= await doGetApiMethod(url,"GET")
       console.log(data)
-      dispatch(transfer(data.userInfo))
-      nav("/profile")
+     
+      nav("/profile/"+item._id)
     }
     catch(err){
       errorHandler(err.response.data.msg)

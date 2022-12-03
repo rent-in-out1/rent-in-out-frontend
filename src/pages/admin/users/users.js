@@ -3,7 +3,7 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SingleUser from "./singleUser";
 import Controllers from "../../../components/controllers/controllers";
-import Loader from './../../../components/loaderImg/loaderImg';
+import Loader from "./../../../components/loaderImg/loaderImg";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
@@ -22,13 +22,13 @@ const Users = () => {
   }, [isChange, option, search]);
 
   const getAllUsers = async () => {
-      setIsLoading(true)
-      let url = `/users/search/?s=${search}&sort=${option}`;
-      let { data } = await doGetApiMethod(url);
-      setIsLoading(false)
-      setUsers(data);
-      setIsChange(false);
-    }
+    setIsLoading(true);
+    let url = `/users/userSearch/?s=${search}&sort=${option}`;
+    let { data } = await doGetApiMethod(url);
+    setIsLoading(false);
+    setUsers(data);
+    setIsChange(false);
+  };
 
   return (
     <Wrapper className="border">
@@ -39,8 +39,9 @@ const Users = () => {
         setOption={setOption}
       />
 
-        <div className="wrapper">
-        <table>
+      <div className="wrapper">
+      {!isLoading ? 
+(        <table>
           <thead>
             <tr>
               <th>Name</th>
@@ -56,19 +57,24 @@ const Users = () => {
             </tr>
           </thead>
           <tbody id="tbody">
-            {users.length > 0 && users?.map((user) => {
-              return (
-                <SingleUser
-                  key={user._id}
-                  item={user}
-                  setIsChange={setIsChange}
-                />
-              );
-            })}
-            {isLoading && <div className="flex justify-center w-full"><Loader/></div>}
+            {users.length > 0 &&
+              users?.map((user) => {
+                return (
+                  <SingleUser
+                    key={user._id}
+                    item={user}
+                    setIsChange={setIsChange}
+                  />
+                );
+              })}
           </tbody>
-        </table>
-        </div>
+        </table>)
+        :(
+          <div className="flex justify-center w-full">
+            <Loader />
+          </div>
+        )}
+      </div>
     </Wrapper>
   );
 };

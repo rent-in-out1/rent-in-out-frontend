@@ -27,13 +27,11 @@ const userSlice = createSlice({
 
         upload: (state, action) => {
             state.user = action.payload 
-        }, 
-        transfer: (state, action) => {
-            state.user = action.payload.user._id 
         }
+       
 
     }
 })
 
-export const { onRegister, onLogin, changeRole, onLogout, uploadBanner, uploadProfileImage,upload,transfer } = userSlice.actions
+export const { onRegister, onLogin, changeRole, onLogout, uploadBanner, uploadProfileImage,upload } = userSlice.actions
 export default userSlice.reducer
