@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { onRegisterToggle } from '../../../redux/features/toggleSlice';
-import {
-  FaBell,
-} from "react-icons/fa";
 import { Logo, Wrapper } from "../../../components/style/wrappers/navbarAdmin";
 import { useSelector, useDispatch } from "react-redux";
 import { onLogout } from "../../../redux/features/userSlice";
@@ -54,7 +51,7 @@ const Header = () => {
               className="rounded-full"
               src={
                 isLogin
-                  ? user.profile_img
+                  ? user.profile_img.url
                   : "https://freesvg.org/img/Male-Avatar.png"
               }
               alt=""

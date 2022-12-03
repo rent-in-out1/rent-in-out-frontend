@@ -10,19 +10,18 @@ const SingleUser = (props) => {
   }
   const changeRole = async (_id) => {
     const url = "/users/changeRole/" + _id;
-    let { data } = await doApiMethod(url, "PATCH");
-    console.log(data)
+    await doApiMethod(url, "PATCH");
+
   }
   const changeActive = async (_id) => {
     const url = "/users/changeActive/" + _id;
-    let { data } = await doApiMethod(url, "PATCH");
-    console.log(data)
+    await doApiMethod(url, "PATCH");
+
   }
   const deleteUser = async (_id, name) => {
     if (window.confirm(`Are you sure you want to delete ${name}`)) {
       const url = "/users/" + _id;
-      let { data } = await doApiMethod(url, "DELETE")
-      console.log(data)
+      await doApiMethod(url, "DELETE")
     }
   }
   return (
@@ -31,7 +30,7 @@ const SingleUser = (props) => {
         <div className="flex items-center">
           <div className="flex-shrink-0 w-8 h-8">
             <img className="w-full h-full rounded-full"
-              src={user?.profile_img}
+              src={user?.profile_img.url}
               alt="profile" />
           </div>
           <div className="ml-3">

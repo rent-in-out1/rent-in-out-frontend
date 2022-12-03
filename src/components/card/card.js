@@ -5,7 +5,7 @@ import Dots from '../icons/dots'
 import FillHeart from '../icons/fillHeart'
 import Heart from '../icons/heart'
 import { Wrapper } from '../style/wrappers/card'
-const Card = () => {
+const Card = ({ post }) => {
     const [like, setLike] = useState(false)
     const [displayOptions, setDisplayOptions] = useState(false)
     const heartClick = () => {
@@ -25,7 +25,7 @@ const Card = () => {
                     <div className='z-10' onClick={() => setDisplayOptions(!displayOptions)}>
                         <Dots />
                     </div>
-                    { displayOptions &&
+                    {displayOptions &&
                         <ul className='w-1/2 absolute bg-white shadow-xl rounded-b-xl top-12 z-10 right-0'>
                             <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200'>
                                 <p>Share</p>
@@ -46,7 +46,7 @@ const Card = () => {
                 <div className='relative cursor-pointer' onDoubleClick={() => heartClick()}>
                     <img src="https://images.pexels.com/photos/819805/pexels-photo-819805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="post" />
                     <div className='absolute top-0 right-4 p-2' onClick={() => { heartClick() }}>
-                        {like ? <FillHeart color='#333' width="35px" height={"35px"} /> :   <Heart color='#333' width="35px" height={"35px"} />}
+                        {like ? <FillHeart color='#333' width="35px" height={"35px"} /> : <Heart color='#333' width="35px" height={"35px"} />}
                     </div>
                 </div>
                 {/* Title of post */}

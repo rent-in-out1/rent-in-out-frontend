@@ -35,7 +35,7 @@ const SinglePost = (props) => {
           <div className="flex-shrink-0 w-8 h-8">
             <img
               className="w-full h-full rounded-full"
-              src={post?.img}
+              src={post?.img[0]?.url}
               alt={post?.img}
             />
           </div>
@@ -46,12 +46,12 @@ const SinglePost = (props) => {
       </td>
       <td>
         <p className="btn relative inline-block px-2 py-1 leading-tight cursor-pointer text-gray-900 whitespace-no-wrap hover:border rounded-full color-red">
-          {creator.data?.userInfo.fullName.firstName}{" "}
-          {creator.data?.userInfo.fullName.lastName}
+          {creator.data?.userInfo?.fullName.firstName}{" "}
+          {creator.data?.userInfo?.fullName.lastName}
         </p>
       </td>
       <td>
-        <p className="text-gray-900 whitespace-no-wrap">{post?.location}</p>
+        <p className="text-gray-900 whitespace-no-wrap">{post?.country} - {post?.city}</p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">{post?.category_url}</p>

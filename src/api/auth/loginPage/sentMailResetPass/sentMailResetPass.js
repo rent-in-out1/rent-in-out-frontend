@@ -1,14 +1,16 @@
-
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "../../../../components/style/wrappers/registerPage";
 import { useForm } from "react-hook-form";
 import { errorHandler, API_URL_CLIENT, doApiMethod, successHandler } from './../../../../services/service';
 import { onLogout } from "../../../../redux/features/toggleSlice";
+import LoadingButton from './../../../../components/UI/spinnerButton';
 
-const SentMailResetPass = () => {
+const SentMailResetPass = (props) => {
   const nav =useNavigate()
   const dispatch = useDispatch()
+  const [load, setLoad] = useState(false);
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   let {
     register,
@@ -18,6 +20,7 @@ const SentMailResetPass = () => {
   } = useForm();
 
   const onSub = async (_dataBody) => {
+    setLoad(true)
     const requestData = {
       email: _dataBody.email,
       redirectUrl: API_URL_CLIENT+"/resetPassword",
@@ -34,7 +37,9 @@ const SentMailResetPass = () => {
       else if (data.status === "failed") {
         errorHandler(data.message);
       }
+      setLoad(false)
     } catch (err) {
+      setLoad(false)
       errorHandler(err.response.data.msg);
     }
   };
@@ -74,9 +79,34 @@ const SentMailResetPass = () => {
           </div>
         </div>
         <Button>
-          <button>Send Password Reset Request</button>
+          <LoadingButton isLoading={load}>Send Password Reset Request</LoadingButton>
         </Button>
       </form>
+      <span>
+        Not a member yet ?
+        <button
+          type="button"
+          onClick={() => {
+            props.setState("signUp");
+          }}
+          className="underline text-blue-400 hover:text-blue-700"
+        >
+          click here
+        </button>
+      </span>
+      <br />
+      <span>
+        Sign In ?
+        <button
+          type="button"
+          onClick={() => {
+            props.setState("signIn");
+          }}
+          className="underline text-blue-400 hover:text-blue-700"
+        >
+          click here
+        </button>
+      </span>
     </div>
   );
 };

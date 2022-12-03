@@ -3,19 +3,12 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SingleUser from "./singleUser";
 import Controllers from "../../../components/controllers/controllers";
-import { useScroll } from "./../../../hooks/useScroll";
-import Loader from "../../../components/loaderImg/loaderImg";
+import Loader from "./../../../components/loaderImg/loaderImg";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
-  const [option, setOption] = useState();
+  const [option, setOption] = useState("role");
   const [isLoading, setIsLoading] = useState(false);
-  //lazy loading users
-
-  const [firstLoad, setFirstLoad] = useState(true);
-  const [endScreen, endScreenEnd] = useScroll(900);
-  const [page, setPage] = useState(1);
-
   const [isChange, setIsChange] = useState(false);
   const options = [
     { name: "Role", value: "role" },
@@ -26,50 +19,29 @@ const Users = () => {
   ];
   useEffect(() => {
     getAllUsers();
-  }, [isChange, option, search, page]);
-
-  useEffect(() => {
-    const count = async () => {
-      if (!firstLoad && endScreen) {
-        let { data } = await doGetApiMethod("/users/countUsers");
-        if (page +1 > (data / 10)) setPage(data / 10)
-        else setPage(page + 1);
-      }
-      setFirstLoad(false);
-    }
-    count()
-  }, [endScreen]);
+  }, [isChange, option, search]);
 
   const getAllUsers = async () => {
-    if (search) {
-      setIsLoading(true)
-      setPage(1);
-      setUsers([])
-      let url = `/users/search/?s=${search}&sort=${option}&page=${page}`;
-      let { data } = await doGetApiMethod(url);
-      setIsLoading(false)
-      console.log(page)
-      setUsers(data);
-    }
-    else {
-      setIsLoading(true)
-      let url = `/users/search/?s=${search}&sort=${option}&page=${page}`;
-      let { data } = await doGetApiMethod(url);
-      setIsLoading(false)
-      setUsers([...users, ...data]);
-    }
+    setIsLoading(true);
+    let url = `/users/userSearch/?s=${search}&sort=${option}`;
+    let { data } = await doGetApiMethod(url);
+    setIsLoading(false);
+    setUsers(data);
     setIsChange(false);
   };
+
   return (
-    <Wrapper>
+    <Wrapper className="border">
       <Controllers
         title={"users list"}
         options={options}
         setSearch={setSearch}
         setOption={setOption}
       />
-      <div className="flex justify-center">
-        <table>
+
+      <div className="wrapper">
+      {!isLoading ? 
+(        <table>
           <thead>
             <tr>
               <th>Name</th>
@@ -85,18 +57,23 @@ const Users = () => {
             </tr>
           </thead>
           <tbody id="tbody">
-            {users.length > 0 && users?.map((user) => {
-              return (
-                <SingleUser
-                  key={user._id}
-                  item={user}
-                  setIsChange={setIsChange}
-                />
-              );
-            })}
-            {isLoading && <div className="flex justify-center w-full"><Loader/></div>}
+            {users.length > 0 &&
+              users?.map((user) => {
+                return (
+                  <SingleUser
+                    key={user._id}
+                    item={user}
+                    setIsChange={setIsChange}
+                  />
+                );
+              })}
           </tbody>
-        </table>
+        </table>)
+        :(
+          <div className="flex justify-center w-full">
+            <Loader />
+          </div>
+        )}
       </div>
     </Wrapper>
   );

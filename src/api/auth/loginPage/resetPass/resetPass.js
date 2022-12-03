@@ -9,8 +9,11 @@ import {
   successHandler,
 } from "./../../../../services/service";
 import { useParams } from "react-router-dom";
+import { useState } from 'react';
+import LoadingButton from './../../../../components/UI/spinnerButton';
 
-const ResetPass = () => {
+const ResetPass = (props) => {
+  const [load, setLoad] = useState(false);
   const { id, resetString } = useParams();
   const nav = useNavigate();
   const regPassword =
@@ -21,9 +24,9 @@ const ResetPass = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log(id, resetString);
 
   const onSub = async (_dataBody) => {
+    setLoad(true)
     delete _dataBody.password2;
     const requestData = {
       userId: id,
@@ -40,7 +43,9 @@ const ResetPass = () => {
         errorHandler(data.msg);
         nav("/register");
       }
+      setLoad(false)
     } catch (err) {
+      setLoad(false)
       errorHandler(err.response.data.msg);
     }
   };
@@ -86,9 +91,10 @@ const ResetPass = () => {
               </div>
             </div>
             <Button>
-              <button>Change Password</button>
+            <LoadingButton isLoading={load}>Change Password</LoadingButton>
             </Button>
           </form>
+
         </div>
       </Wrapper>
     </Model>
