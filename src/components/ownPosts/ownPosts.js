@@ -5,22 +5,23 @@ import { Wrapper } from './../style/wrappers/grid';
 
 const OwnPosts = () => {
   const [posts , setPosts] = useState([])
+  const [isChange, setIsChange] = useState(false);
   useEffect(()=>{
     getUserPosts()
-  },[])
+    setIsChange(false)
+  },[isChange])
 
   const getUserPosts = async() =>{
     let url = "/posts/userPosts"
     const {data} = await doGetApiMethod(url)
-    console.log(data)
     setPosts(data)
   }
   return (
     <Wrapper col={2} rowGap ={5} colGap ={5} className="px-auto">
-      {posts.map(post =>{
+      {posts.map((post, i) =>{
         return(
-          <div className=" flex justify-center items-center">
-          <Card key={post._id} post={post}/>
+          <div key={post._id} className=" flex justify-center items-center">
+          <Card setIsChange={setIsChange}  post={post}/>
           </div>
         )
       })}

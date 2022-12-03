@@ -1,26 +1,29 @@
 import React, { useState , useEffect} from "react";
 import { Link } from "react-router-dom";
-import { doGetApiMethod } from "../../services/service";
+import { doApiMethod, doGetApiMethod } from "../../services/service";
 import Chat from "../icons/chat";
 import Dots from "../icons/dots";
 import FillHeart from "../icons/fillHeart";
 import Heart from "../icons/heart";
 import { Wrapper } from "../style/wrappers/card";
-const Card = ({ post }) => {
+const Card = ({ post , setIsChange }) => {
 
   const [like, setLike] = useState(false);
   const [user, setUser] = useState({});
-  const heartClick = () => {
+
+  const heartClick = async () => {
     setLike(!like);
+    let url = "/posts/likePost/" + post._id
+    console.log(url)
+    await doApiMethod(url , "POST")
+    setIsChange(true);
   };
   useEffect(()=>{
-    console.log(post?.creator_id)
-    getPostCreatorInfo()
-  },[])
-  const getPostCreatorInfo=async ()=>{
-    const user = await doGetApiMethod("/info/"+ post?.creator_id)
-    console.log(user)
-    setUser(user)
+    getPostCreatorInfo(post?.creator_id)
+},[like])
+const getPostCreatorInfo=async (id)=>{
+    const {data} = await doGetApiMethod("/users/info/"+id)
+    setUser(data.userInfo)
   }
   return (
     <Wrapper>
@@ -42,10 +45,12 @@ const Card = ({ post }) => {
           className="relative cursor-pointer"
           onDoubleClick={() => heartClick()}
         >
-          <img
-            src="https://images.pexels.com/photos/819805/pexels-photo-819805.jpeg?auto=compress&cs=tinysrgb&w=600"
+            <div className="overflow-hidden">
+          <img className=""
+            src={post?.img[0].url}
             alt="post"
           />
+          </div>
           <div
             className="absolute top-0 right-4 p-2"
             onClick={() => {
@@ -66,7 +71,7 @@ const Card = ({ post }) => {
             </h5>
           </Link>
           <div className="flex items-center mt-2.5 mb-5 cursor-pointer">
-            <span className="text-xs font-semibold mr-1 rounded">12</span>
+            <span className="text-xs font-semibold mr-1 rounded">{post?.likes.length || "Likes: 0"}</span>
             <div className="flex items-center relative">
               {/* <div className="w-6 h-6 bg-red-200 rounded-full absolute -top-3 left-0 border-2 border-red-700">
                 <img
@@ -76,7 +81,6 @@ const Card = ({ post }) => {
                 />
               </div> */}
               {post?.likes.map((like, i) => {
-                {console.log(like.profile_img)}
                 return(
                 <div key={i} className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i*4}`}>
                   <img
