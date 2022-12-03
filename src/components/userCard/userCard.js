@@ -1,20 +1,38 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector,useDispatch } from "react-redux";
+import { doGetApiMethod,errorHandler,doApiMethod} from '../../services/service';
+import { transfer } from "../../redux/features/userSlice";
 
-import { useSelector } from "react-redux";
 
 const UserCard = ({ item }) => {
-
+  const nav = useNavigate();
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
+  const searcInfo= async (req) =>{
+    try{
+     
+      const url = "/users/info/" + user._id;
+      const {data}= await doGetApiMethod(url,"GET")
+      console.log(data)
+      dispatch(transfer(data.userInfo))
+      nav("/profile")
+    }
+    catch(err){
+      errorHandler(err.response.data.msg)
+    }
+    
+  };
   return (
 
-    <li className='p-3 sm:py-3  flex items-center justify-between w-full mt-3   w-full max-w-md  bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700'>
+    <li onClick={searcInfo} className='p-3 sm:py-3  flex items-center justify-between w-full mt-3   w-full max-w-md cursor-pointer bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700'>
       <div className='flex items-center space-x-1'>
         <div className=' rounded-full  w-8 h-8 overflow-hidden' >
           <img
             className=" object-cover  w-full h-full "
             src={
               user !== null && user?.active
-                ? item.profile_img
+                ? item.profile_img.url
                 : "https://freesvg.org/img/Male-Avatar.png"
             }
             alt=""
