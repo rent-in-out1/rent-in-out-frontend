@@ -29,7 +29,7 @@ const UserProfile = () => {
             {userDetails.cover_img ?
                 <React.Fragment>
                     <div className='w-full h-72 relative' style={{ backgroundImage: `url(${userDetails.cover_img.url})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                        <span className='w-24 h-24 border-4 rounded-lg drop-shadow-lg border-white absolute -bottom-7 left-2 z-4 overflow-hidden lg:-bottom-10 lg:left-32 lg:h-32 lg:w-32'>
+                        <span className='w-24 h-24 border-4 rounded-full drop-shadow-lg border-white absolute -bottom-7 left-2 z-4 overflow-hidden lg:-bottom-10 lg:left-32 lg:h-32 lg:w-32'>
                             <img className='w-full h-full object-cover' src={userDetails.profile_img ? userDetails.profile_img.url : "https://images.pexels.com/photos/1137511/pexels-photo-1137511.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} alt="" />
                         </span>
                     </div>
