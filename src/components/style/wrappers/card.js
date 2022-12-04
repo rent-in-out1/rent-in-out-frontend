@@ -3,9 +3,11 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
     width: 100%;
     padding: 12px;
+    user-select: none;
     .card{
-    z-index: 0;
+    position: relative;
     background: var(--white);
+    z-index: 0;
     border-radius: 8px;
     margin-bottom: 12px;
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));

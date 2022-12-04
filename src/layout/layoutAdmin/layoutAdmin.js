@@ -8,7 +8,7 @@ const LayoutAdmin = () => {
     <React.Fragment>
       <Header/>
       <Sidebar />
-      <div className='w-10/12 ml-auto'>
+      <div className='lg:w-10/12 ml-auto'>
       <Outlet />
       </div>
     </React.Fragment>
