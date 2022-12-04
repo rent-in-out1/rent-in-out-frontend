@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { FaCamera } from "react-icons/fa"
 import { uploadImage } from '../../helpers/functions'
-import LoaderImg from '../loaderImg/loaderImg'
+import Loader from '../loader/loader'
 import { useSelector, useDispatch} from 'react-redux'
 import { doApiMethod, errorHandler, successHandler } from '../../services/service'
 import { uploadBanner, uploadProfileImage } from '../../redux/features/userSlice'
@@ -55,11 +55,11 @@ const BannerProfile = () => {
     <React.Fragment>
       <div className='w-full h-72 relative' style={{ backgroundImage: `url(${banner})`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className='z-10 w-full h-full flex justify-center items-center'>
-          <LoaderImg load={loadBanner} height="160" width={"160"} />
+          <Loader load={loadBanner} height="160" width={"160"} />
         </div>
         <span className='w-24 h-24 rounded-full absolute -bottom-7 left-2 z-4 overflow-hidden md:-bottom-10 md:left-24 md:h-32 md:w-32'>
           <div className='z-10 absolute top-2 left-2 md:top-8 md:left-6'>
-            <LoaderImg load={loadImg} height="80" width={"80"} />
+            <Loader load={loadImg} height="80" width={"80"} />
           </div>
           <img className='w-full h-full object-cover' src={profile ? profile : "https://images.pexels.com/photos/1137511/pexels-photo-1137511.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} alt="" />
         </span>

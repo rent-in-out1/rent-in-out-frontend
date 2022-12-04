@@ -3,7 +3,7 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SingleUser from "./singleUser";
 import Controllers from "../../../components/controllers/controllers";
-import Loader from "./../../../components/loaderImg/loaderImg";
+import Loader from "../../../components/loader/loader";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");

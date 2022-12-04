@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
-import Loader from "./components/loaderImg/loaderImg";
+import Loader from "./components/loader/loader";
 
 // Lazy loading of routes
 
@@ -22,7 +22,7 @@ const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
 const ProfileEdit = React.lazy(() =>
-  import("./components/profileEdit/profileEdit")
+  import("./components/profile/profileEdit")
 );
 const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));

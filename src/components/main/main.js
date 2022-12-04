@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { doGetApiMethod } from '../../services/service'
 import Card from '../card'
-import Loader from '../loaderImg/loaderImg'
+import Loader from '../loader/loader'
 
 const Main = () => {
     const [postsArray, setPostArray] = useState([]);

@@ -1,14 +1,14 @@
 import React from 'react'
 import BannerProfile from '../../../components/bannerProfile'
 import OwnPosts from '../../../components/ownPosts'
-import ProfileEdit from '../../../components/profileEdit'
+import Profile from '../../../components/profile'
 import Footer from "../../../layout/layoutUser/footer"
 
 const MyProfile = () => {
   return (
     <div>
       <BannerProfile/>
-      <ProfileEdit/>
+      <Profile/>
       <OwnPosts />
       <Footer/>
      
