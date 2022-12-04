@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form"
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,14 +6,43 @@ import { upload } from "../../redux/features/userSlice";
 import { doApiMethod, errorHandler, doGetApiMethod } from "../../services/service";
 import { toast } from "react-toastify"
 import { Wrapper } from "../style/wrappers/editUser";
+import {
+    getCountries,
+    getCities,
+  } from "../../helpers/countries-api/getLocations";
 
 
 const ProfileEdit = () => {
     const nav = useNavigate();
     const { user } = useSelector(state => state.userSlice)
     const dispatch = useDispatch();
+    const countryRef = useRef();
+    const cityRef = useRef();
+    const [countries, setAllCountry] = useState();
+    const [cities, setAllCities] = useState();
+    const [selectedCountry, setSelectedCountry] = useState("Israel");
+    const [selectedCity, setSelectedCity] = useState("Israel");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+    useEffect(() => {
+        getAllCountries();
+      }, [cities]);
+    
+      useEffect(() => {
+        getAllCities(selectedCountry);
+      }, [selectedCountry]);
+    
+      const getAllCountries = async () => {
+        const countries = await getCountries();
+        const countriesName = await countries?.map((country) => country.country);
+        setAllCountry(countriesName);
+      };
+      const getAllCities = async (_country) => {
+        const cities = await getCities(_country);
+        await setAllCities(cities);
+      };
+    
     const onSubForm = (_dataBody) => {
         let allupload = {
             fullName: {
@@ -21,7 +50,9 @@ const ProfileEdit = () => {
                 lastName: _dataBody.lastName,
             },
             phone: _dataBody.phone,
-            location: _dataBody.location,
+           country: _dataBody.country.toLowerCase(),
+           city: _dataBody.city.toLowerCase()
+           
         };
         onUpload(allupload);
 
@@ -90,18 +121,36 @@ const ProfileEdit = () => {
                             />
                             {errors.phone && errorHandler("Enter valid phone.")}
                         </div>
-                        <div className="w-full md:w-1/2 px-2 mt-2 md:mb-0 ">
-                            <label>Location: </label>
-                            <input defaultValue={user.location}
-                                {...register("location", {
+                        <div className="filters w-full flex mr-2">
+          <div className="w-4/5 mr-1">
+           
+            <div className="w-full md:w-1/2 px-2 mt-2 md:mb-0 ">
+            <label>Country:</label>
+                            <input defaultValue={user.country}
+                                {...register("country", {
                                     required: true,
                                     minLength: 2,
-                                    maxLength: 20,
+                                    maxLength: 12,
                                 })}
                                 type="text"
                             />
-                            {errors.location && errorHandler("Enter valid location.")}
+                            {errors.country && errorHandler("Enter your country.")}
                         </div>
+          </div>
+          <div className="w-full md:w-1/2 px-2 mt-2 md:mb-0 ">
+            <label>city:</label>
+                            <input defaultValue={user.city}
+                                {...register("city", {
+                                    required: true,
+                                    minLength: 2,
+                                    maxLength: 12,
+                                })}
+                                type="text"
+                            />
+                            {errors.city && errorHandler("Enter your city.")}
+                        </div>
+          
+        </div>
                         <div className='mt-3 flex px-2 justify-center'>
                             <button className='mx-1'>Update</button>
                             <Link to={user.role=== "admin"? "/": "/profile"}>Back</Link>
