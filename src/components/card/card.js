@@ -9,6 +9,7 @@ import Heart from "../icons/heart";
 import { Wrapper } from "../style/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
 import { onRegisterShow } from "../../redux/features/toggleSlice";
+import Clock from "../icons/clock";
 const Card = ({ post, setIsChange }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -39,7 +40,7 @@ const Card = ({ post, setIsChange }) => {
     <Wrapper>
       <div className="card">
         <div className="flex justify-between items-center pr-2 p-1">
-          <div onClick={()=>nav(`/profile/${owner._id}`)} className="flex items-center cursor-pointer">
+          <div onClick={() => nav(`/profile/${owner._id}`)} className="flex items-center cursor-pointer">
             <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
               <img
                 className="w-full h-full rounded-full object-cover"
@@ -71,7 +72,6 @@ const Card = ({ post, setIsChange }) => {
                   </li>
                 </React.Fragment>
               }
-
             </ul>
           }
         </div>
@@ -98,41 +98,48 @@ const Card = ({ post, setIsChange }) => {
             )}
           </div>
         </div>
-        <div className="px-5 pb-5">
-          <Link to={"/"}>
-            <h5 className="text-sm sm:text-lg font-semibold sm:tracking-tight text-gray-900">
+        <div className="px-5 pb-5 pt-2 md:pt-4">
+          <div>
+            <h5 className="text-sm capitalize text-lg lg:text-3xl font-semibold sm:tracking-tight text-gray-900">
               {post?.title}
             </h5>
-          </Link>
-          <div className="flex items-center mt-2.5 mb-5 cursor-pointer">
-            <span className="text-xs font-semibold mr-1 rounded">{post?.likes.length || "Likes: 0"}</span>
-            <div className="flex items-center relative">
-              {post?.likes.slice(0, 3).map((like, i) => {
-                return (
-                  <div key={i} className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4}`}>
-                    <img
-                      title={like.fullName.firstName + " " + like.fullName.lastName}
-                      className="w-full h-full rounded-full object-cover"
-                      src={like.profile_img}
-                      alt="profile"
-                    />
-                  </div>
-                )
-              })}
-            </div>
           </div>
+          <div className="lg:flex lg:justify-between lg:items-center">
+            <div className="flex items-center mt-2.5 mb-5 cursor-pointer">
+              <span className="text-xs font-semibold mr-1 rounded">{post?.likes.length || "Likes: 0"}</span>
+              <div className="flex items-center justify-between relative">
+                {post?.likes.slice(0, 3).map((like, i) => {
+                  return (
+                    <div key={i} className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4}`}>
+                      <img
+                        title={like.fullName.firstName}
+                        className="w-full h-full rounded-full object-cover"
+                        src={like.profile_img}
+                        alt="profile"
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+            <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded lg:mr-2">
+              <Clock />
+              3 days ago
+            </span>
+          </div>
+
           <div className="md:flex items-center justify-between">
             <div className="flex items-center">
               <span className="text-xl md:text-3xl font-bold text-gray-900 mr-1">
                 {post?.price}$
               </span>
-              <span className="text-xs text-gray-400">per day</span>
+              <span className="text-xs capitalize text-gray-400">per day</span>
             </div>
             <Link
               to={"/"}
               className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 md:px-5 md:py-2.5"
             >
-              <p className="mr-2 text-xs lg:text-lg">Rent now</p>
+              <p className="mr-2 text-xs capitalize lg:text-lg">Rent now</p>
               <Chat color="white" />
             </Link>
           </div>

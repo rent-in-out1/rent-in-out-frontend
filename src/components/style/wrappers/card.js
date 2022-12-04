@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
         width: 100%;
     }
     .postImg{
-        height: 420px;
+        height: 600px;
     }
     /* smart phones */
     @media screen and (min-width: 320px) and (max-width:480px) {
