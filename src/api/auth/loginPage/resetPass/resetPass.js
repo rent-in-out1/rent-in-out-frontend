@@ -46,7 +46,7 @@ const ResetPass = (props) => {
         dispatch(onRegisterShow())
       } else {
         errorHandler(data.msg);
-        // nav("/register");
+        nav("/register");
         dispatch(onRegisterShow())
       }
       setLoad(false)
