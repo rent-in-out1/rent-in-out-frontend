@@ -40,11 +40,11 @@ const Main = () => {
         endScreenEnd()
     }
     return (
-        <main className='w-full min-h-screen p-3 bg-gray-100 text-center justify-center'>
+        <main className='w-full min-h-screen p-1 md:p-3 bg-gray-100 text-center justify-center'>
             <div className='flex flex-wrap'>
                 {postsArray &&
                     postsArray.map((post, i) => (
-                        <div className='w-1/2 p-3'>
+                        <div className='w-1/2 lg:p-3'>
                         <Card key={i} post={post} setIsChange={setIsChange} />
                         </div>
                     ))}
