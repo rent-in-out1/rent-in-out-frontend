@@ -51,7 +51,7 @@ const Card = ({ post, setIsChange }) => {
             <Dots />
           </div>
           {displayOptions &&
-            <ul className='w-1/3 absolute bg-white shadow-xl rounded-b-xl top-12 z-10 right-0'>
+            <ul className='w-1/3 absolute bg-white shadow-xl rounded-b-xl top-10 md:top-12 z-10 right-0'>
               <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200'>
                 <p>Share</p>
                 <Send />

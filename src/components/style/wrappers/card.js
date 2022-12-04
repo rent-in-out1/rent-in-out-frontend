@@ -5,7 +5,8 @@ export const Wrapper = styled.div`
     padding: 12px;
     user-select: none;
     .card{
-        background: var(--white);
+    position: relative;
+    background: var(--white);
     z-index: 0;
     border-radius: 8px;
     margin-bottom: 12px;
