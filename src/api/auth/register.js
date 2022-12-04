@@ -1,6 +1,5 @@
 import React, { useState , useEffect} from "react";
 import {doGetApiMethod ,errorHandler} from "../../services/service";
-import Model from "../../components/UI/Model";
 import {Wrapper} from "../../components/style/wrappers/registerPage"
 import SignUp from "./loginPage/signUp";
 import SignIn from './loginPage/signIn';

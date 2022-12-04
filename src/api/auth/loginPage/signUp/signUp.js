@@ -249,16 +249,16 @@ const SignUp = (props) => {
         <LoadingButton isLoading={load}>Sign Up</LoadingButton>
         </Button>
       </form>
-      <span>
+      <span className="flex items-center justify-center">
         Already a member ?
         <button
           type="button"
           onClick={() => {
             props.setState("signIn");
           }}
-          className="underline text-blue-400 hover:text-blue-700"
+          className="ml-2 text-blue-400 hover:text-blue-700"
         >
-          click here
+          Login now
         </button>
       </span>
     </div>
