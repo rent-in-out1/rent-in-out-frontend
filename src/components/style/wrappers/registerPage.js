@@ -24,7 +24,6 @@ export const Wrapper = styled.div`
     border-radius: 8px;
     @media (max-width: 768px) {
       border-radius: 0;
-      text-align: center;
     }
   }
   @media (max-width: 768px) {

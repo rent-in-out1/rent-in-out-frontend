@@ -58,12 +58,12 @@
 }
 * {
     scrollbar-width: auto;
-    scrollbar-color: var(--skyblue-900) var(--skyblue-900);
+    scrollbar-color: var(--skyblue-200) var(--skyblue-200);
   }
 
   /* Chrome, Edge, and Safari */
   *::-webkit-scrollbar {
-    width: 14px;
+    width: 12px;
   }
 
   *::-webkit-scrollbar-track {
@@ -71,7 +71,7 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color:var(--skyblue-900);
+    background-color:var(--skyblue-200);
     border-radius: 40px;
     border: 0px none #ffffff;
   }

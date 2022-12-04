@@ -24,7 +24,7 @@ const PopUpOverlay = ({action , children})=> {
   return (
     <div className={classes.model}>
       <h2
-        className=" exit w-full flex justify-end "
+        className=" exit w-full md:hidden flex justify-end "
         onMouseOver={() => setOver(true)}
         onMouseLeave={() => setOver(false)}
         onClick={() => {
@@ -32,9 +32,9 @@ const PopUpOverlay = ({action , children})=> {
         }}
       >
         {over ? (
-          <ExitFill className="icon display-none" width={32} height={32} />
+          <ExitFill className="icon" width={32} height={32} />
         ) : (
-          <ExitNoFill className="icon display-none" width={32} height={32} />
+          <ExitNoFill className="icon" width={32} height={32} />
         )}
       </h2>
       <div>{children}</div>
