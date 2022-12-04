@@ -37,7 +37,7 @@ const Card = ({ post, setIsChange }) => {
     <Wrapper>
       <div className="card">
         <div className="flex justify-between items-center pr-2 p-1">
-          <div className="flex items-center cursor-pointer">
+          <div onClick={()=>nav(`/profile/${owner._id}`)} className="flex items-center cursor-pointer">
             <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
               <img
                 className="w-full h-full rounded-full object-cover"
