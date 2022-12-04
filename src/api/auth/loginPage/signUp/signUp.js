@@ -186,9 +186,10 @@ const SignUp = (props) => {
             <div className="flex relative bottom-3 items-center pl-3 pointer-events-none"></div>
             <input
               {...register("birthdate", { required: true })}
+              defaultValue="01/01/2000"
               type="date"
               className="datepicker-input"
-              placeholder="Select date"
+              placeholder="01/01/2000"
             />
             {errors.birthdate && <small>Enter valid birthdate.</small>}
           </div>
