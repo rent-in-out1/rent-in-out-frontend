@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { doApiMethod, doGetApiMethod } from "../../services/service";
 import Chat from "../icons/chat";
 import Dots from "../icons/dots";
@@ -10,14 +10,14 @@ import { Wrapper } from "../style/wrappers/card";
 import { useSelector } from "react-redux";
 const Card = ({ post, setIsChange }) => {
   const nav = useNavigate();
-  const {user} = useSelector(state =>state.userSlice)
+  const { user } = useSelector(state => state.userSlice)
   const [like, setLike] = useState(false);
   const [displayOptions, setDisplayOptions] = useState(false)
   const [owner, setOwner] = useState({});
 
   const heartClick = async () => {
     // check if the user is logged in
-    if(!user){
+    if (!user) {
       nav("/register");
       return;
     }
@@ -56,14 +56,20 @@ const Card = ({ post, setIsChange }) => {
                 <p>Share</p>
                 <Send />
               </li>
-              <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200'>
-                <p>Share</p>
-                <p>icon</p>
-              </li>
-              <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:bg-gray-200'>
-                <p>Share</p>
-                <p>icon</p>
-              </li>
+              {
+                user._id === post.creator_id &&
+                <React.Fragment>
+                  <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:bg-gray-200'>
+                    <p>Edit</p>
+                    <p>icon</p>
+                  </li>
+                  <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:bg-gray-200'>
+                    <p>Delete</p>
+                    <p>icon</p>
+                  </li>
+                </React.Fragment>
+              }
+
             </ul>
           }
         </div>
@@ -99,10 +105,11 @@ const Card = ({ post, setIsChange }) => {
           <div className="flex items-center mt-2.5 mb-5 cursor-pointer">
             <span className="text-xs font-semibold mr-1 rounded">{post?.likes.length || "Likes: 0"}</span>
             <div className="flex items-center relative">
-              {post?.likes.slice(0,3).map((like, i) => {
+              {post?.likes.slice(0, 3).map((like, i) => {
                 return (
                   <div key={i} className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4}`}>
                     <img
+                      title={like.fullName.firstName + " " + like.fullName.lastName}
                       className="w-full h-full rounded-full object-cover"
                       src={like.profile_img}
                       alt="profile"

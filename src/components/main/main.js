@@ -40,11 +40,13 @@ const Main = () => {
         endScreenEnd()
     }
     return (
-        <main className='w-full  p-3 bg-gray-100 text-center justify-center'>
-            <div className='lg:w-1/2'>
+        <main className='w-full min-h-screen p-3 bg-gray-100 text-center justify-center'>
+            <div className='flex flex-wrap'>
                 {postsArray &&
                     postsArray.map((post, i) => (
+                        <div className='w-1/2 p-3'>
                         <Card key={i} post={post} setIsChange={setIsChange} />
+                        </div>
                     ))}
             </div>
             {endScreen  && Math.ceil(countPosts/10) >= page+1  && <div className='flex items-center justify-center min-h-40'><Loader width={"200px"} height={"200px"} /></div>}
