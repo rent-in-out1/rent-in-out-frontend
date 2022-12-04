@@ -7,8 +7,10 @@ import Send from "../icons/send"
 import FillHeart from "../icons/fillHeart";
 import Heart from "../icons/heart";
 import { Wrapper } from "../style/wrappers/card";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onRegisterShow } from "../../redux/features/toggleSlice";
 const Card = ({ post, setIsChange }) => {
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const { user } = useSelector(state => state.userSlice)
   const [like, setLike] = useState(false);
@@ -18,7 +20,7 @@ const Card = ({ post, setIsChange }) => {
   const heartClick = async () => {
     // check if the user is logged in
     if (!user) {
-      nav("/register");
+      dispatch(onRegisterShow())
       return;
     }
     setLike(!like);
@@ -45,13 +47,13 @@ const Card = ({ post, setIsChange }) => {
                 alt=""
               />
             </div>
-            <span className="pl-1">{owner.fullName?.firstName} {owner.fullName?.lastName}</span>
+            <span className="pl-1 flex">{owner.fullName?.firstName} <span className="ml-1 hidden md:flex"> {owner.fullName?.lastName}</span></span>
           </div>
           <div className='z-10' onClick={() => setDisplayOptions(!displayOptions)}>
             <Dots />
           </div>
           {displayOptions &&
-            <ul className='w-1/3 absolute bg-white shadow-xl rounded-b-xl top-10 md:top-12 z-10 right-0'>
+            <ul className='w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl top-10 md:top-12 z-10 right-0'>
               <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200'>
                 <p>Share</p>
                 <Send />
@@ -77,7 +79,7 @@ const Card = ({ post, setIsChange }) => {
           className="relative cursor-pointer"
           onDoubleClick={() => heartClick()}
         >
-          <div className="overflow-hidden w-full" style={{ height: "500px" }}>
+          <div className="overflow-hidden w-full postImg">
             <img className="w-full h-full object-cover"
               src={post.img[0]?.url}
               alt="post"
@@ -90,9 +92,9 @@ const Card = ({ post, setIsChange }) => {
             }}
           >
             {!post.likes.some(el => el.user_id === user?._id) ? (
-              <Heart color="red" width="35px" height={"35px"} />
+              <Heart color="red" width="20px" height={"20px"} />
             ) : (
-              <FillHeart color="red" width="35px" height={"35px"} />
+              <FillHeart color="red" width="20px" height={"20px"} />
             )}
           </div>
         </div>
@@ -119,7 +121,7 @@ const Card = ({ post, setIsChange }) => {
               })}
             </div>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="md:flex items-center justify-between">
             <div className="flex items-center">
               <span className="text-xl md:text-3xl font-bold text-gray-900 mr-1">
                 {post?.price}$
@@ -128,9 +130,9 @@ const Card = ({ post, setIsChange }) => {
             </div>
             <Link
               to={"/"}
-              className="text-white items-center flex bg-blue-400 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 md:px-5 md:py-2.5"
+              className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 md:px-5 md:py-2.5"
             >
-              <p className="mr-2 text-xs md:text-base">Send message</p>
+              <p className="mr-2 text-xs lg:text-lg">Rent now</p>
               <Chat color="white" />
             </Link>
           </div>
