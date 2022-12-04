@@ -7,13 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loader/loader";
+import UserSearch from "./pages/client/userSearch/userSearch";
 
 // Lazy loading of routes
 
 const LayoutAdmin = React.lazy(() =>
   import("./layout/layoutAdmin/layoutAdmin")
 );
-// add UserSearch
+
 const Users = React.lazy(() => import("./pages/admin/users"));
 const MyProfile = React.lazy(() => import("./pages/client/myProfile"));
 const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
@@ -26,6 +27,7 @@ const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
+
 
 const AppRoutes = () => {
   // const nav = useNavigate()
@@ -68,12 +70,10 @@ const AppRoutes = () => {
           <Route path="/" element={<Layout />}>
             <Route path="/register" element={<Register />} />
             <Route path="/resetPassword/:id/:resetString" element={<ResetPass />}/>
-
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
-            {/* replace dashboard to UserSearch */}
-            <Route path="search" element={<Dashboard/>} />
+            <Route path="search" element={<UserSearch/>} />
             <Route path ="passwordReset/*" element={<Dashboard />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>

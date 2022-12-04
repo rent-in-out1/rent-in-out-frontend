@@ -7,6 +7,7 @@ import Sidebar from '../../components/sideBar'
 const Layout = () => {
   return (
     <div>
+
       <Header />
       <Sidebar />
       <div className='w-full bg-gray-100 lg:w-10/12 ml-auto min-h-screen'>

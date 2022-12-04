@@ -57,7 +57,7 @@ const Card = ({ post, setIsChange }) => {
                 <Send />
               </li>
               {
-                user._id === post.creator_id &&
+                user?._id === post?.creator_id &&
                 <React.Fragment>
                   <li className='transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:bg-gray-200'>
                     <p>Edit</p>
