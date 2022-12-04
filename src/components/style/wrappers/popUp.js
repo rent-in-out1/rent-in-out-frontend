@@ -23,7 +23,7 @@ export const Wrapper = styled.div`
   z-index: 30;
   animation: slide-down 600ms ease-in-out forwards;
 }
-.model .exit .icon{
+.model .exit{
   display: none;
 }
 @media (max-width: 1024px) {
@@ -53,10 +53,10 @@ export const Wrapper = styled.div`
     cursor: pointer;
     transition: 0.5s linear;
   }
-  .model .exit:hover{
+  /* .model .exit:hover{
     color: var(--skyblue-900);
     transform:scale(1.1);
-  }
+  } */
 }
 
 @keyframes slide-down {
@@ -69,5 +69,6 @@ export const Wrapper = styled.div`
     transform: translateY(0);
   }
 }
+
 
 `

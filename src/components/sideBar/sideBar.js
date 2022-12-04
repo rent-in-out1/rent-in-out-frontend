@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { onLogout } from "../../redux/features/toggleSlice";
+import { onLogout, onSearchToggle } from "../../redux/features/toggleSlice";
 import { API_URL_CLIENT } from "../../services/service";
 import { useNavigate } from "react-router-dom";
 //style
@@ -41,8 +41,8 @@ const SideBar = () => {
               </Link>
             </li>
           ) : null}
-          <li>
-            <Link to={user?.role === "admin" ? "/admin/search" : "/search"}>
+          <li onClick={()=> dispatch(onSearchToggle())}>
+            <Link>
               <Search />
               <span className="ml-3">Search</span>
             </Link>

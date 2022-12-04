@@ -1,35 +1,34 @@
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import ExitFill from "./../icons/exitFill";
+import ExitNoFill from "./../icons/exitNoFill";
 import classes from "./Model.module.css";
-import  ReactDOM  from 'react-dom';
-import { useNavigate } from 'react-router-dom';
-import { Wrapper } from "../style/wrappers/popUp";
-import ExitFill from "../icons/exitFill";
-import ExitNoFill from "../icons/exitNoFill";
+import { Wrapper } from './../style/wrappers/popUp';
+import { useDispatch } from "react-redux";
 
-function Backdrop(props) {
-  const nav = useNavigate();
+const Backdrop =({action})=> {
+  const dispatch = useDispatch();
   return (
     <div
       onClick={() => {
-        nav("/",{replace: true})
+        dispatch(action());
       }}
-      className="backdrop"
-    >
-    </div>
+      className={classes.backdrop}
+    ></div>
   );
 }
 
-function PopUpModel(props) {
-  const nav = useNavigate();
+const PopUpOverlay = ({action , children})=> {
   const [over, setOver] = useState(false);
+  const dispatch = useDispatch();
   return (
-    <Wrapper>
-      <div
-        className="model exit w-full flex justify-end "
+    <div className={classes.model}>
+      <h2
+        className=" exit w-full flex justify-end "
         onMouseOver={() => setOver(true)}
         onMouseLeave={() => setOver(false)}
         onClick={() => {
-          nav("/", { replace: true });
+          dispatch(action());
         }}
       >
         {over ? (
@@ -37,25 +36,25 @@ function PopUpModel(props) {
         ) : (
           <ExitNoFill className="icon display-none" width={32} height={32} />
         )}
-      </div>
-      <div className={classes.content}>{props.children}</div>
-    </Wrapper>
+      </h2>
+      <div>{children}</div>
+    </div>
   );
 }
 const portalElement = document.getElementById("overlays");
-const PopUp = (props) => {
+const PopUPModel = ({action , children}) => {
   return (
-    <React.Fragment>
+    <Wrapper>
       {ReactDOM.createPortal(
-        <Backdrop onClose={props.onClose} />,
+        <Backdrop action={action} />,
         portalElement
       )}
       {ReactDOM.createPortal(
-        <PopUpModel>{props.children}</PopUpModel>,
+        <PopUpOverlay action={action}>{children}</PopUpOverlay>,
         portalElement
       )}
-    </React.Fragment>
+    </Wrapper>
   );
-}
+};
 
-export default PopUp;
+export default PopUPModel;

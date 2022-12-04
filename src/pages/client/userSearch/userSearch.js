@@ -4,9 +4,9 @@ import UserCard from "../../../components/userCard";
 import { doGetApiMethod, errorHandler } from "../../../services/service";
 import Search from "../../../components/icons/search";
 import { Wrapper } from "../../../components/style/wrappers/userSearch";
-// import PopUpModel from "../../../components/UI/popUpModel";
+import PopUPModel from "../../../components/UI/popUpModel";
 import { onSearchToggle } from "../../../redux/features/toggleSlice";
-import PopUp from "../../../components/UI/popUpModel";
+
 
 const UserSearch = () => {
   const inpRef = useRef();
@@ -27,10 +27,9 @@ const UserSearch = () => {
     }
   };
   return (
-    <PopUp action={onSearchToggle}>
+    <PopUPModel action={onSearchToggle}>
       <Wrapper>
         <div className="mt-6">
-          {/* <SideBar /> */}
           <div className="p-2 flex flex-col items-center ">
             <div className="search w-full lg:w-2/3 mx-auto">
               <input
@@ -57,7 +56,7 @@ const UserSearch = () => {
           </div>
         </div>
       </Wrapper>
-    </PopUp>
+    </PopUPModel>
   );
 };
 

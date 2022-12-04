@@ -20,7 +20,7 @@
   z-index: 30;
   animation: slide-down 600ms ease-in-out forwards;
 }
-.model .exit .icon{
+.model .h2{
   display: none;
 }
 @media (max-width: 1024px) {
@@ -38,7 +38,7 @@
     width: 100%;
     padding: 0;
   }
-  .model .exit {
+  .model .h2 {
     padding: 0;
     margin: 0;
     top: 0;

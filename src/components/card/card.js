@@ -7,8 +7,10 @@ import Send from "../icons/send"
 import FillHeart from "../icons/fillHeart";
 import Heart from "../icons/heart";
 import { Wrapper } from "../style/wrappers/card";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onRegisterShow } from "../../redux/features/toggleSlice";
 const Card = ({ post, setIsChange }) => {
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const { user } = useSelector(state => state.userSlice)
   const [like, setLike] = useState(false);
@@ -18,7 +20,7 @@ const Card = ({ post, setIsChange }) => {
   const heartClick = async () => {
     // check if the user is logged in
     if (!user) {
-      nav("/register");
+      dispatch(onRegisterShow())
       return;
     }
     setLike(!like);
