@@ -784,9 +784,9 @@ nagishli .nagishli-tab > div:not(#NagishLiOptions) kbd {
   max-height: 60px;
   display: inline-block;
   position: fixed;
-  bottom: 10px;
+  bottom: 30%;
   right: 10px;
-  left: calc(10px + (100vw - 100%));
+  left: 0;
 }
 .nagishli-trigger-icon {
   cursor: pointer;
@@ -799,7 +799,7 @@ nagishli .nagishli-tab > div:not(#NagishLiOptions) kbd {
   font-family: Helvetica, Arial #000, sans;
   display: inline-block;
   padding: 10px;
-  border-radius: 10%;
+  border-radius: 0 50% 50% 0;
   box-shadow: 0 0 0 2px #fff;
 }
 .nagishli-header-text {

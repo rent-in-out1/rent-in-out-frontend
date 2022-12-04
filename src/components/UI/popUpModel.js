@@ -1,27 +1,29 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
-import ExitFill from "./../icons/exitFill";
-import ExitNoFill from "./../icons/exitNoFill";
 import classes from "./Model.module.css";
+import  ReactDOM  from 'react-dom';
+import { useNavigate } from 'react-router-dom';
+import { Wrapper } from "../style/wrappers/popUp";
+import ExitFill from "../icons/exitFill";
+import ExitNoFill from "../icons/exitNoFill";
 
 function Backdrop(props) {
   const nav = useNavigate();
   return (
     <div
       onClick={() => {
-        nav("/", { replace: true });
+        nav("/",{replace: true})
       }}
       className={classes.backdrop}
-    ></div>
+    >
+    </div>
   );
 }
 
-function ModelOverlay(props) {
-  const [over, setOver] = useState(false);
+function PopUpModel(props) {
   const nav = useNavigate();
+  const [over, setOver] = useState(false);
   return (
-    <div className={classes.model}>
+    <Wrapper>
       <div
         className="exit w-full flex justify-end "
         onMouseOver={() => setOver(true)}
@@ -36,12 +38,12 @@ function ModelOverlay(props) {
           <ExitNoFill className="icon display-none" width={32} height={32} />
         )}
       </div>
-      <div>{props.children}</div>
-    </div>
+      <div className={classes.content}>{props.children}</div>
+    </Wrapper>
   );
 }
 const portalElement = document.getElementById("overlays");
-const Model = (props) => {
+const PopUp = (props) => {
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
@@ -49,11 +51,11 @@ const Model = (props) => {
         portalElement
       )}
       {ReactDOM.createPortal(
-        <ModelOverlay>{props.children}</ModelOverlay>,
+        <PopUpModel>{props.children}</PopUpModel>,
         portalElement
       )}
     </React.Fragment>
   );
-};
+}
 
-export default Model;
+export default PopUp;
