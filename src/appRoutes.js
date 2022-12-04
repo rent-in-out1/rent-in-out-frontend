@@ -15,15 +15,12 @@ const LayoutAdmin = React.lazy(() =>
 );
 // add UserSearch
 const Users = React.lazy(() => import("./pages/admin/users"));
-const MyProfile = React.lazy(() =>
-  import("./pages/client/myProfile/myProfile")
-);
+const MyProfile = React.lazy(() => import("./pages/client/myProfile"));
+const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
-const ProfileEdit = React.lazy(() =>
-  import("./components/profile/profileEdit")
-);
+const ProfileEdit = React.lazy(() => import("./components/profile/profileEdit"));
 const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
@@ -81,6 +78,7 @@ const AppRoutes = () => {
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
+                <Route path="/profile/:userId" element={<UserProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/posts" element={"posts..."} />
                 <Route path="/profile2" element={"<Users />"} />

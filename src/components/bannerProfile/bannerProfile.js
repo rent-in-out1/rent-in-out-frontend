@@ -79,8 +79,6 @@ const BannerProfile = () => {
       </div>
       <div className='flex justify-center'>
       </div>
-
-
     </React.Fragment>
   )
 }
