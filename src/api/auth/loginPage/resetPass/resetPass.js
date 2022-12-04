@@ -43,12 +43,11 @@ const ResetPass = (props) => {
       if (data.status === "Success") {
         successHandler(data.msg);
         nav("/");
-        dispatch(onRegisterShow())
       } else {
         errorHandler(data.msg);
         nav("/register");
-        dispatch(onRegisterShow())
       }
+      dispatch(onRegisterShow())
       setLoad(false)
     } catch (err) {
       setLoad(false)
