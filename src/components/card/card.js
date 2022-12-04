@@ -132,7 +132,7 @@ const Card = ({ post, setIsChange }) => {
               to={"/"}
               className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 md:px-5 md:py-2.5"
             >
-              <p className="mr-2 text-xs flex">Rent <span className="hidden ml-1 md:block">now</span></p>
+              <p className="mr-2 text-xs lg:text-lg">Rent now</p>
               <Chat color="white" />
             </Link>
           </div>
