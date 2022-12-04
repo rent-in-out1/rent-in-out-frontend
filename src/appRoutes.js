@@ -33,6 +33,7 @@ const AppRoutes = () => {
   // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
+  let {search , register} = useSelector((state) => state.toggleSlice)
 
   useEffect(() => {
     let token;
@@ -68,12 +69,11 @@ const AppRoutes = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/register" element={<Register />} />
+            {/* <Route path="/register" element={<Register />} /> */}
             <Route path="/resetPassword/:id/:resetString" element={<ResetPass />}/>
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
-            <Route path="search" element={<UserSearch/>} />
             <Route path ="passwordReset/*" element={<Dashboard />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
@@ -102,6 +102,8 @@ const AppRoutes = () => {
         </Routes>
 
         <ToastContainer position="bottom-right" />
+        {search? <UserSearch/> : null}
+        {register? <Register/> : null}
       </Router>
     </Suspense>
   );

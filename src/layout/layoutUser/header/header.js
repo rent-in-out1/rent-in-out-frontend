@@ -4,7 +4,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import { Logo, Wrapper } from '../../../components/style/wrappers/navbarUser';
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react';
-import {  onLogout } from '../../../redux/features/toggleSlice';
+import {  onLogout, onRegisterShow } from '../../../redux/features/toggleSlice';
 import { API_URL_CLIENT } from '../../../services/service';
 import Search from '../../../components/icons/search';
 import Dashboard from '../../../components/icons/dashboard';
@@ -109,7 +109,8 @@ const Header = () => {
               setIsOpen(false)
             }
             else {
-              nav("/register")
+              // nav("/register")
+              dispatch(onRegisterShow())
               setIsOpen(false)
             }
           }} className={`w-full p-2 rounded cursor-pointer`}>

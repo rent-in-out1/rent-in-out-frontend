@@ -1,3 +1,6 @@
+import styled from "styled-components";
+
+export const Wrapper = styled.div`
 .backdrop {
   position: fixed;
   top: 0;
@@ -20,7 +23,7 @@
   z-index: 30;
   animation: slide-down 600ms ease-in-out forwards;
 }
-.model .h2{
+.model .exit{
   display: none;
 }
 @media (max-width: 1024px) {
@@ -38,7 +41,7 @@
     width: 100%;
     padding: 0;
   }
-  .model .h2 {
+  .model .exit {
     padding: 0;
     margin: 0;
     top: 0;
@@ -50,10 +53,10 @@
     cursor: pointer;
     transition: 0.5s linear;
   }
-  .model .exit:hover{
+  /* .model .exit:hover{
     color: var(--skyblue-900);
     transform:scale(1.1);
-  }
+  } */
 }
 
 @keyframes slide-down {
@@ -66,3 +69,6 @@
     transform: translateY(0);
   }
 }
+
+
+`

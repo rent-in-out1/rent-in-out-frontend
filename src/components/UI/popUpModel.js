@@ -1,33 +1,34 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
 import ExitFill from "./../icons/exitFill";
 import ExitNoFill from "./../icons/exitNoFill";
 import classes from "./Model.module.css";
+import { Wrapper } from './../style/wrappers/popUp';
+import { useDispatch } from "react-redux";
 
-function Backdrop(props) {
-  const nav = useNavigate();
+const Backdrop =({action})=> {
+  const dispatch = useDispatch();
   return (
     <div
       onClick={() => {
-        nav("/", { replace: true });
+        dispatch(action());
       }}
       className={classes.backdrop}
     ></div>
   );
 }
 
-function ModelOverlay(props) {
+const PopUpOverlay = ({action , children})=> {
   const [over, setOver] = useState(false);
-  const nav = useNavigate();
+  const dispatch = useDispatch();
   return (
     <div className={classes.model}>
-      <div
-        className="exit w-full flex justify-end "
+      <h2
+        className=" exit w-full flex justify-end "
         onMouseOver={() => setOver(true)}
         onMouseLeave={() => setOver(false)}
         onClick={() => {
-          nav("/", { replace: true });
+          dispatch(action());
         }}
       >
         {over ? (
@@ -35,25 +36,25 @@ function ModelOverlay(props) {
         ) : (
           <ExitNoFill className="icon display-none" width={32} height={32} />
         )}
-      </div>
-      <div>{props.children}</div>
+      </h2>
+      <div>{children}</div>
     </div>
   );
 }
 const portalElement = document.getElementById("overlays");
-const Model = (props) => {
+const PopUPModel = ({action , children}) => {
   return (
-    <React.Fragment>
+    <Wrapper>
       {ReactDOM.createPortal(
-        <Backdrop onClose={props.onClose} />,
+        <Backdrop action={action} />,
         portalElement
       )}
       {ReactDOM.createPortal(
-        <ModelOverlay>{props.children}</ModelOverlay>,
+        <PopUpOverlay action={action}>{children}</PopUpOverlay>,
         portalElement
       )}
-    </React.Fragment>
+    </Wrapper>
   );
 };
 
-export default Model;
+export default PopUPModel;
