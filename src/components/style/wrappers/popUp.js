@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: -20;
+  z-index: 20;
   background-color: rgba(0, 0, 0, 0.75);
 }
 .model {
@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
   background-color: white;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  /* z-index: 30; */
+  z-index: 30;
   animation: slide-down 600ms ease-in-out forwards;
 }
 .model .exit .icon{

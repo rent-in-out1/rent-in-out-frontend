@@ -13,7 +13,7 @@ function Backdrop(props) {
       onClick={() => {
         nav("/",{replace: true})
       }}
-      className={classes.backdrop}
+      className="backdrop"
     >
     </div>
   );
@@ -25,7 +25,7 @@ function PopUpModel(props) {
   return (
     <Wrapper>
       <div
-        className="exit w-full flex justify-end "
+        className="model exit w-full flex justify-end "
         onMouseOver={() => setOver(true)}
         onMouseLeave={() => setOver(false)}
         onClick={() => {
