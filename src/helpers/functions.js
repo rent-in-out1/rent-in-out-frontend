@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { doApiMethod, errorHandler, successHandler } from './../services/service';
-    export const uploadBanner = async (file) => {
+    export const uploadBannerImg = async (file) => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", "rentinoutprofile");
@@ -10,13 +10,13 @@ import { doApiMethod, errorHandler, successHandler } from './../services/service
                 "https://api.cloudinary.com/v1_1/dpmpi8dwb/image/upload",
                 formData
             );
-           return ({url:resp.data.url , img_id: resp.data.asset_id })
+           return ({url:resp.data.url , img_id: resp.data.public_id })
         }
         catch(err){
-            console.log(err)
+            errorHandler(err)
         }
     }
-    export const uploadProfile = async (file) => {
+    export const uploadProfileImg = async (file) => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", "profilpreset");
@@ -29,24 +29,24 @@ import { doApiMethod, errorHandler, successHandler } from './../services/service
            return ({url:resp.data.url , img_id: resp.data.public_id })
         }
         catch(err){
-            console.log(err)
+            errorHandler(err)
         }
     }
     export const deleteProfileImage = async (img_id) => {
-        let url = "/cloudinary/profileDel/?id=" + img_id
+        let url = "/users/cloudinary/profileDel/?id=" + img_id
         try {
-            await doApiMethod(url , "POST")
-            return successHandler(resp.data.response)
-        } catch (error) {
-            errorHandler(err.response.data.msg)
+            const {data} = await doApiMethod(url , "POST")
+            return data.result
+        } catch (err) {
+            errorHandler(err)
         }
     }
     export const deleteBannerImage = async (img_id) => {
-        let url = "/cloudinary/bannerDel/?id=" + img_id
+        let url = "/users/cloudinary/bannerDel/?id=" + img_id
         try {
-            await doApiMethod(url , "POST")
-            return successHandler(resp.data.response)
-        } catch (error) {
-            errorHandler(err.response.data.msg)
+            const {data} = await doApiMethod(url , "POST")
+            return data.result
+        } catch (err) {
+            errorHandler(err)
         }
     }
