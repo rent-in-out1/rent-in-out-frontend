@@ -36,6 +36,7 @@ import { doApiMethod, errorHandler, successHandler } from './../services/service
         let url = "/users/cloudinary/profileDel/?id=" + img_id
         try {
             const {data} = await doApiMethod(url , "POST")
+            console.log(data.result)
             return data.result
         } catch (err) {
             errorHandler(err)

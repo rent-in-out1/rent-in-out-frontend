@@ -19,13 +19,13 @@ const BannerProfile = () => {
       return errorHandler("file too big")
     }
     setLoadBanner(true)
-    await deleteBannerImage(cover_img?.img_id)
     const img_data = await uploadBannerImg(file)
     setLoadBanner(false)
     setBanner(img_data.url)
     try{
       const urlR = "/users/uploadBanner";
       let res = await doApiMethod(urlR,"PATCH",img_data)
+      await deleteBannerImage(cover_img?.img_id)
       dispatch(uploadBanner(img_data));
       successHandler(res)
     }
