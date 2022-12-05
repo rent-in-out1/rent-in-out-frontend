@@ -3,7 +3,7 @@ import {toast} from "react-toastify"
 export const API_URL = 'https://rentinout.onrender.com'
 export const API_URL_CLIENT = 'http://localhost:3000'
 
-export const doGetApiMethod = async(_url) => {
+export const doGetApiMethod = async(_url ) => {
     
     let token;
     if(localStorage["token"]){

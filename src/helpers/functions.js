@@ -1,5 +1,6 @@
 import axios from 'axios';
-    export const uploadImage = async (file) => {
+import { doApiMethod, errorHandler, successHandler } from './../services/service';
+    export const uploadBanner = async (file) => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", "rentinoutprofile");
@@ -15,9 +16,37 @@ import axios from 'axios';
             console.log(err)
         }
     }
-    export const deleteImage = async (file) => {
-        // cloudinary.v2.uploader.destroy(imageData.public_id, function(error,result) {
-        // console.log(result, error) })
-        // .then(resp => console.log(resp))
-        // .catch(_err=> console.log("Something went wrong, please try again later."));
+    export const uploadProfile = async (file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "profilpreset");
+        formData.append("cloud_name", "dgxzsxpoe");
+        try{
+            const resp = await axios.post(
+                "https://api.cloudinary.com/v1_1/dgxzsxpoe/image/upload",
+                formData
+            );
+           return ({url:resp.data.url , img_id: resp.data.public_id })
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    export const deleteProfileImage = async (img_id) => {
+        let url = "/cloudinary/profileDel/?id=" + img_id
+        try {
+            await doApiMethod(url , "POST")
+            return successHandler(resp.data.response)
+        } catch (error) {
+            errorHandler(err.response.data.msg)
+        }
+    }
+    export const deleteBannerImage = async (img_id) => {
+        let url = "/cloudinary/bannerDel/?id=" + img_id
+        try {
+            await doApiMethod(url , "POST")
+            return successHandler(resp.data.response)
+        } catch (error) {
+            errorHandler(err.response.data.msg)
+        }
     }
