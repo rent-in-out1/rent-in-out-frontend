@@ -4,7 +4,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import { Logo, Wrapper } from '../../../components/style/wrappers/navbarUser';
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from 'react';
-import {  onLogout, onRegisterShow } from '../../../redux/features/toggleSlice';
+import {  onLogout, onRegisterShow, onSearchToggle } from '../../../redux/features/toggleSlice';
 import { API_URL_CLIENT } from '../../../services/service';
 import Search from '../../../components/icons/search';
 import Dashboard from '../../../components/icons/dashboard';
@@ -14,7 +14,6 @@ import Settings from '../../../components/icons/settings';
 import Inbox from '../../../components/icons/inbox';
 import SignIn from '../../../components/icons/signIn';
 import SignOut from '../../../components/icons/signOut';
-
 
 const Header = () => {
   const nav = useNavigate();
@@ -61,7 +60,7 @@ const Header = () => {
               </ul>
             }
           </nav>
-          <div className="relative avatar" onClick={() => setIsOpen(!isOpen)}>
+          <div className="relative avatar" onMouseOver={() => setIsOpen(true)} onClick={() => setIsOpen(true)}>
             <img
               className="rounded-full"
               src={
@@ -78,7 +77,7 @@ const Header = () => {
       </section>
       {
         isOpen &&
-        <ul className='absolute dropdown transition shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
+        <ul  onMouseLeave={() => setIsOpen(false)} className='absolute dropdown transition shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30'>
           {isLogin &&
             <React.Fragment>
               <li onClick={()=>{
@@ -99,6 +98,14 @@ const Header = () => {
                 }} className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}>
                 <div className='flex justify-between items-center'> <p>Settings</p> <Settings /></div>
               </li>
+              <li
+             onClick={()=> dispatch(onSearchToggle())}
+             className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}>
+            <Link className='flex justify-between items-center'>
+              <span>Search</span>
+              <Search />
+            </Link>
+          </li>
             </React.Fragment>
           }
           <li onClick={() => {

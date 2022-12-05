@@ -14,7 +14,7 @@ const SingleLike = ({item}) => {
           dispatch(onLikesToggle(""))
           nav("/profile/" + item.user_id);
         }}
-        className={`p-3 sm:py-3 mx-auto flex items-center justify-between w-full mt-3 w-10/12 cursor-pointer bg-white hover:bg-gray-300 border rounded-lg shadow-md sm:p-8 `}
+        className={`p-3 sm:py-3 mx-auto flex items-center justify-between w-full mt-3 w-10/12 cursor-pointer bg-white transition ease-in-out delay-150 hover:bg-gray-300 border rounded-lg shadow-md sm:p-8 `}
       >
         <div className="flex items-center space-x-1">
           <div className=" rounded-full w-8 h-8 overflow-hidden">

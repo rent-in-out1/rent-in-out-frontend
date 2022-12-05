@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../components/style/wrappers/registerPage";
-import Model from "../../../../components/UI/Model";
 import { Wrapper } from "./../../../../components/style/wrappers/registerPage";
 import { useForm } from "react-hook-form";
 import {
@@ -13,6 +12,7 @@ import { useState } from 'react';
 import LoadingButton from './../../../../components/UI/spinnerButton';
 import { onRegisterShow } from "../../../../redux/features/toggleSlice";
 import { useDispatch } from "react-redux";
+import PopUPModel from './../../../../components/UI/registerModel';
 
 const ResetPass = (props) => {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const ResetPass = (props) => {
     }
   };
   return (
-    <Model>
+    <PopUPModel>
       <h1 className="text-center text-5xl my-6 m-0">Password Reset</h1>
       <Wrapper className="mb-3">
         <div className="right w-full md:w-2/3">
@@ -101,7 +101,7 @@ const ResetPass = (props) => {
 
         </div>
       </Wrapper>
-    </Model>
+    </PopUPModel>
   );
 };
 

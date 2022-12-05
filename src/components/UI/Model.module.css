@@ -13,11 +13,10 @@
   position: fixed;
   max-height: 90vh;
   margin-bottom: 20px;
-  top: 2vh;
+  top: 5vh;
   left: 25%;
   width: 50%;
   background-color: white;
-  border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
   animation: slide-down 600ms ease-in-out forwards;

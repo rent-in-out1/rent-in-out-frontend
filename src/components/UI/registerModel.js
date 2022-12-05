@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import ExitFill from "./../icons/exitFill";
 import ExitNoFill from "./../icons/exitNoFill";
-import classes from "./PopUp.module.css";
+import classes from "./Model.module.css";
+import { Wrapper } from "./../style/wrappers/popUp";
 import { useDispatch } from "react-redux";
 
 const Backdrop = ({ action }) => {

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { onLikesToggle } from "../../../redux/features/toggleSlice";
 import PopUPModel from "./../../../components/UI/popUpModel";
 import SingleLike from "./singleLike";

@@ -5,7 +5,7 @@ import SignUp from "./loginPage/signUp";
 import SignIn from "./loginPage/signIn";
 import SentMailResetPass from "./loginPage/sentMailResetPass";
 import { onRegisterShow } from "../../redux/features/toggleSlice";
-import PopUPModel from "../../components/UI/popUpModel";
+import PopUPModel from './../../components/UI/registerModel';
 
 const Register = () => {
   const [isState, setState] = useState("signIn");
