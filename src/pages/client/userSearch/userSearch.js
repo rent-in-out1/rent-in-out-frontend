@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import UserCard from "../../../components/userCard";
 import { doGetApiMethod, errorHandler } from "../../../services/service";
 import Search from "../../../components/icons/search";
@@ -37,7 +37,7 @@ const UserSearch = () => {
                 onChange={serachUser}
                 ref={inpRef}
                 onKeyDown={(e) => {
-                  if (e.key == "Enter") {
+                  if (e.key === "Enter") {
                     serachUser();
                   }
                 }}

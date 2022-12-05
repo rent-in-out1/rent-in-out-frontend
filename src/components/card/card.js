@@ -8,7 +8,7 @@ import FillHeart from "../icons/fillHeart";
 import Heart from "../icons/heart";
 import { Wrapper } from "../style/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
-import { onRegisterShow } from "../../redux/features/toggleSlice";
+import { onLikesToggle, onRegisterShow } from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
 const Card = ({ post, setIsChange }) => {
   const dispatch = useDispatch();
@@ -123,7 +123,8 @@ const Card = ({ post, setIsChange }) => {
               </span>
               <div
                 onClick={() => {
-                  
+                  // console.log(post?._id)
+                  dispatch(onLikesToggle(post?.likes))
                 }}
                 className="flex items-center justify-between relative "
               >
@@ -168,6 +169,7 @@ const Card = ({ post, setIsChange }) => {
           </div>
         </div>
       </div>
+      
     </Wrapper>
   );
 };

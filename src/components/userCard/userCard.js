@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { doGetApiMethod, errorHandler } from "../../services/service";
@@ -21,9 +21,9 @@ const UserCard = ({ item }) => {
     <li
       onClick={() => {
         searchInfo();
-        dispatch(onSearchToggle())
+        dispatch(onSearchToggle());
       }}
-      className="p-3 sm:py-3 mx-auto flex items-center justify-between w-full mt-3 w-10/12 cursor-pointer bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+      className="p-3 sm:py-3 mx-auto flex items-center justify-between w-full mt-3 w-10/12 cursor-pointer bg-white hover:bg-gray-300 border rounded-lg shadow-md sm:p-8"
     >
       <div className="flex items-center space-x-1">
         <div className=" rounded-full w-8 h-8 overflow-hidden">

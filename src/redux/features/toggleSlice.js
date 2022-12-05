@@ -5,7 +5,11 @@ import { createSlice } from "@reduxjs/toolkit";
             status: false,
             massege :""
         },
-        search: false
+        search: false,
+        likes:{
+            active: false,
+            likesArr:[]
+        } 
     }
 
 const toggleSlice = createSlice({
@@ -24,8 +28,9 @@ const toggleSlice = createSlice({
         onSearchToggle: (state) =>{
             state.search = !state.search;
         },
-        onLikesToggle: (state) =>{
-            state.search = !state.search;
+        onLikesToggle: (state, action) =>{
+            state.likes.active = !state.likes.active
+            state.likes.likesArr = action.payload
         },
         onErrorToggle: (state, action) =>{
             state.error.status = !state.error.status
@@ -35,5 +40,5 @@ const toggleSlice = createSlice({
     }
 })
 
-export const {onToggle , onRegisterToggle,onSearchToggle, onLogout , onRegisterShow } = toggleSlice.actions
+export const {onToggle , onRegisterToggle,onSearchToggle, onLogout , onRegisterShow, onLikesToggle } = toggleSlice.actions
 export default toggleSlice.reducer

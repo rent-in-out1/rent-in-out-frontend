@@ -9,6 +9,7 @@
 }
 .model {
   overflow-y: scroll;
+  padding: 12px;
   position: fixed;
   max-height: 90vh;
   margin-bottom: 20px;
@@ -20,6 +21,9 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
   animation: slide-down 600ms ease-in-out forwards;
+}
+.model .data{
+  overflow-y: scroll;
 }
 .model .h2{
   display: none;

@@ -8,6 +8,7 @@ import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
+import Likes from "./pages/client/likes";
 
 // Lazy loading of routes
 
@@ -33,7 +34,8 @@ const AppRoutes = () => {
   // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
-  let {search , register} = useSelector((state) => state.toggleSlice)
+  let {search , register } = useSelector((state) => state.toggleSlice)
+  let {likes } = useSelector((state) => state.toggleSlice)
 
   useEffect(() => {
     let token;
@@ -104,6 +106,7 @@ const AppRoutes = () => {
         <ToastContainer position="bottom-right" />
         {search? <UserSearch/> : null}
         {register? <Register/> : null}
+        {likes.active ? <Likes likesArr={likes.likesArr}/>: null}
       </Router>
     </Suspense>
   );
