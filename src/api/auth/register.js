@@ -1,10 +1,11 @@
 import React, { useState , useEffect} from "react";
 import {doGetApiMethod ,errorHandler} from "../../services/service";
-import Model from "../../components/UI/Model";
 import {Wrapper} from "../../components/style/wrappers/registerPage"
 import SignUp from "./loginPage/signUp";
 import SignIn from './loginPage/signIn';
 import SentMailResetPass from './loginPage/sentMailResetPass';
+import { onRegisterShow } from "../../redux/features/toggleSlice";
+import PopUPModel from "../../components/UI/popUpModel";
 
 const Register = () => {
   const [isState, setState] = useState("signIn");
@@ -41,7 +42,7 @@ const Register = () => {
 
 
   return (
-    <Model>
+    <PopUPModel action={onRegisterShow}>
       <h1 className="text-center text-5xl my-6 m-0">
         {isState==="signIn" ? "Sign In" 
         : isState==="signUp"? "SignUp"
@@ -62,7 +63,7 @@ const Register = () => {
           {layout}
         </div>
       </Wrapper>
-    </Model>
+    </PopUPModel>
   )
 }
 export default Register

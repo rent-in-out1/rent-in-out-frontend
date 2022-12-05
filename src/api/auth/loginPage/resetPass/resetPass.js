@@ -11,8 +11,11 @@ import {
 import { useParams } from "react-router-dom";
 import { useState } from 'react';
 import LoadingButton from './../../../../components/UI/spinnerButton';
+import { onRegisterShow } from "../../../../redux/features/toggleSlice";
+import { useDispatch } from "react-redux";
 
 const ResetPass = (props) => {
+  const dispatch = useDispatch();
   const [load, setLoad] = useState(false);
   const { id, resetString } = useParams();
   const nav = useNavigate();
@@ -36,13 +39,14 @@ const ResetPass = (props) => {
     try {
       const url = "/users/resetPassword";
       const { data } = await doApiMethod(url, "POST", requestData);
+      console.log(data)
       if (data.status === "Success") {
         successHandler(data.msg);
-        nav("/register");
+        nav("/");
       } else {
         errorHandler(data.msg);
-        nav("/register");
       }
+      dispatch(onRegisterShow())
       setLoad(false)
     } catch (err) {
       setLoad(false)

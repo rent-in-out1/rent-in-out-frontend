@@ -1,13 +1,12 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
-import SideBar from "../../../components/sideBar/sideBar";
 import UserCard from "../../../components/userCard";
 import { doGetApiMethod, errorHandler } from "../../../services/service";
 import Search from "../../../components/icons/search";
-
 import { Wrapper } from "../../../components/style/wrappers/userSearch";
-import PopUpModel from "../../../components/UI/popUpModel";
-import Model from "../../../components/UI/Model";
+import PopUPModel from "../../../components/UI/popUpModel";
+import { onSearchToggle } from "../../../redux/features/toggleSlice";
+
 
 const UserSearch = () => {
   const inpRef = useRef();
@@ -28,10 +27,10 @@ const UserSearch = () => {
     }
   };
   return (
-    <Model>
+
+    <PopUPModel action={onSearchToggle}>
       <Wrapper>
         <div className="mt-6">
-          {/* <SideBar /> */}
           <div className="p-2 flex flex-col items-center ">
             <div className="search w-full lg:w-2/3 mx-auto">
               <input
@@ -58,7 +57,7 @@ const UserSearch = () => {
           </div>
         </div>
       </Wrapper>
-    </Model>
+    </PopUPModel>
   );
 };
 

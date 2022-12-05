@@ -16,20 +16,16 @@ const LayoutAdmin = React.lazy(() =>
 );
 
 const Users = React.lazy(() => import("./pages/admin/users"));
-const MyProfile = React.lazy(() =>
-  import("./pages/client/myProfile/myProfile")
-);
+const MyProfile = React.lazy(() => import("./pages/client/myProfile"));
+const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
-const ProfileEdit = React.lazy(() =>
-  import("./components/profile/profileEdit")
-);
+const ProfileEdit = React.lazy(() => import("./components/profile/profileEdit"));
 const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
-
 const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
 
 
@@ -37,6 +33,7 @@ const AppRoutes = () => {
   // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
+  let {search , register} = useSelector((state) => state.toggleSlice)
 
   useEffect(() => {
     let token;
@@ -72,23 +69,19 @@ const AppRoutes = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/register" element={<Register />} />
+            {/* <Route path="/register" element={<Register />} /> */}
             <Route path="/resetPassword/:id/:resetString" element={<ResetPass />}/>
-
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
-            
-            <Route path="search" element={<UserSearch/>} />
             <Route path ="passwordReset/*" element={<Dashboard />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
-                <Route path="/profile/*" element={<MyProfile />} />
+                <Route path="/profile" element={<MyProfile />} />
+                <Route path="/profile/:userId" element={<UserProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/posts" element={"posts..."} />
                 <Route path="/profile2" element={"<Users />"} />
-              
-
                 <Route path="*" element={<Page404 />} />
               </React.Fragment>
             )}
@@ -109,6 +102,8 @@ const AppRoutes = () => {
         </Routes>
 
         <ToastContainer position="bottom-right" />
+        {search? <UserSearch/> : null}
+        {register? <Register/> : null}
       </Router>
     </Suspense>
   );

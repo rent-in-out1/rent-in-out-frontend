@@ -71,7 +71,16 @@ const SignIn = (props) => {
         </div>
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full px-3">
-            <label>Password</label>
+            <label><span className="mr-2">Password</span>
+              <button
+                type="button"
+                onClick={() => {
+                  props.setState("mailPass");
+                }}
+                className="text-blue-400 hover:text-blue-700"
+              >
+                Forgot Password ? 
+              </button></label>
             <input
               {...register("password", {
                 required: true,
@@ -90,34 +99,22 @@ const SignIn = (props) => {
           </div>
         </div>
         <Button >
-            <LoadingButton isLoading={load}>Sign In</LoadingButton>
+          <LoadingButton isLoading={load}>Sign In</LoadingButton>
         </Button>
       </form>
-      <span>
-        Not a member yet ?
+      <span className="flex items-center justify-center">
+        Not a member ?
         <button
           type="button"
           onClick={() => {
             props.setState("signUp");
           }}
-          className="underline text-blue-400 hover:text-blue-700"
+          className="ml-2 text-blue-400 hover:text-blue-700"
         >
-          click here
+          Signup now
         </button>
       </span>
       <br />
-      <span>
-        Forgot your password ?
-        <button
-          type="button"
-          onClick={() => {
-            props.setState("mailPass");
-          }}
-          className="underline text-blue-400 hover:text-blue-700"
-        >
-          click here
-        </button>
-      </span>
     </div>
   );
 };

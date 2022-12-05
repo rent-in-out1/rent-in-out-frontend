@@ -11,7 +11,6 @@ const MyProfile = () => {
       <Profile/>
       <OwnPosts />
       <Footer/>
-     
     </div>
   )
 }
