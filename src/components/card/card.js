@@ -122,7 +122,7 @@ const Card = ({ post, setIsChange }) => {
                 })}
               </div>
             </div>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded lg:mr-2">
+            <span className="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded lg:mr-2">
               <Clock />
               3 days ago
             </span>

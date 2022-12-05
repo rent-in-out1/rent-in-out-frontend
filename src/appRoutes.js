@@ -33,7 +33,7 @@ const AppRoutes = () => {
   // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
-  let {search , register} = useSelector((state) => state.toggleSlice)
+  let { search, register } = useSelector((state) => state.toggleSlice)
 
   useEffect(() => {
     let token;
@@ -70,19 +70,19 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             {/* <Route path="/register" element={<Register />} /> */}
-            <Route path="/resetPassword/:id/:resetString" element={<ResetPass />}/>
+            <Route path="/resetPassword/:id/:resetString" element={<ResetPass />} />
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
-            <Route path ="passwordReset/*" element={<Dashboard />} />
+            <Route path="passwordReset/*" element={<Dashboard />} />
+            <Route path="/profile/:userId" element={<UserProfile />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
-                <Route path="/profile/:userId" element={<UserProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/posts" element={"posts..."} />
                 <Route path="/profile2" element={"<Users />"} />
-                <Route path="*" element={<Page404 />} />
+                <Route path="/*" element={<Page404 />} />
               </React.Fragment>
             )}
           </Route>
@@ -91,7 +91,7 @@ const AppRoutes = () => {
               {/* OutLet */}
               <Route index element={<Dashboard />} />
               <Route path="/admin/users" element={<Users />} />
-              <Route path="/admin/home" element={<HomeAdmin/>} />
+              <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
               <Route path="/admin/profile" element={<MyProfile />} />
@@ -102,8 +102,8 @@ const AppRoutes = () => {
         </Routes>
 
         <ToastContainer position="bottom-right" />
-        {search? <UserSearch/> : null}
-        {register? <Register/> : null}
+        {search ? <UserSearch /> : null}
+        {register ? <Register /> : null}
       </Router>
     </Suspense>
   );

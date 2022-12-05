@@ -9,7 +9,7 @@ const Loader = ({ load = true, height, width, color = "#97aef8" }) => {
             color={color}
             radius="6"
             wrapperStyle={{}}
-            wrapperClass=""
+            wrapperclassName=""
             visible={load}
             ariaLabel="rings-loading"
         />

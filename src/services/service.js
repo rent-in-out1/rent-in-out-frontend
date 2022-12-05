@@ -1,7 +1,7 @@
 import axios from "axios"
 import {toast} from "react-toastify"
 export const API_URL = 'https://rentinout.onrender.com'
-export const API_URL_CLIENT = 'http://localhost:3000'
+export const API_URL_CLIENT = 'https://rentinout.netlify.app'
 
 export const doGetApiMethod = async(_url) => {
     let token;

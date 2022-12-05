@@ -38,19 +38,53 @@ export const Wrapper = styled.div`
     }
     }
     main{
+        margin-top: 12px;
         min-height: 300px;
         display: flex;
+        padding: 12px;
         aside section{
             min-height: inherit;
         }
         aside{
-            display: flex;
+            width: 22%;
+            text-align: center;
             justify-content: center;
             h3{
-                font-size: 1.5em;
+                font-size: 1.2em;
+                font-weight: 600;
             }
         }
         section{
+            width: 56%;
         }
+            /* smart phones */
+    @media screen and (min-width: 320px) and (max-width:480px) {
+        display: block;
+        #details{
+            width: 100%;
+        }
+        #main{
+            width: 100%;
+        }
+    }
+    /* For tablets and ipads */
+    @media screen and (min-width: 481px) and (max-width:768px) {
+        display: block;
+        #details{
+            width: 100%;
+        }
+        #main{
+            width: 100%;
+        }
+    }
+    /* For laptops */
+    @media screen and (min-width: 769px) and (max-width:1280px) {
+        #details{
+            width: 30%;
+        }
+        #main{
+            width: 70%;
+        }
+    }
     }
 `
