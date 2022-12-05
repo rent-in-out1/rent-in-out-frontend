@@ -24,6 +24,9 @@ const toggleSlice = createSlice({
         onSearchToggle: (state) =>{
             state.search = !state.search;
         },
+        onLikesToggle: (state) =>{
+            state.search = !state.search;
+        },
         onErrorToggle: (state, action) =>{
             state.error.status = !state.error.status
             state.error.message = action.payload.error.message
