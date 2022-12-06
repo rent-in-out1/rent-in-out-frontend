@@ -13,6 +13,7 @@ const CategoryItem = (props) => {
   const [editor, setEditor] = useState({});
   const [onEdit, setOnEdit] = useState(false);
   const [editData, setEditData] = useState({});
+  const [confirm , setConfirm] = useState(false)
 
   const category = props.item;
   useEffect(() => {

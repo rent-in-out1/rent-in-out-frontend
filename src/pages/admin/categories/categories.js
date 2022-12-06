@@ -32,8 +32,8 @@ const Categories = () => {
         setSearch={setSearch}
         setOption={setOption}
       />
-      <div>
-          <table className="m-auto table-fixed">
+      <div className="wrapper">
+          <table >
             <thead>
               <tr>
                 <th>Title</th>
@@ -65,8 +65,9 @@ const Categories = () => {
             </tbody>
           </table>
 
+          </div>
           {!onAdd ? (
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-2 mb-8">
               <button
                 className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-full md:w-1/6 inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
                 type="button"
@@ -76,7 +77,6 @@ const Categories = () => {
               </button>
             </div>
           ) : null}
-          </div>
     </Wrapper>
   );
 };
