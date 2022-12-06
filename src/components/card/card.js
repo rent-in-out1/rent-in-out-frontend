@@ -11,7 +11,6 @@ import { Wrapper } from "../style/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
 import { onLikesToggle, onRegisterShow } from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
-import { onLogin } from "../../redux/features/userSlice";
 
 const Card = ({ post, setIsChange }) => {
   const dispatch = useDispatch();
@@ -20,7 +19,16 @@ const Card = ({ post, setIsChange }) => {
   const [like, setLike] = useState(false);
   const [displayOptions, setDisplayOptions] = useState(false);
   const [owner, setOwner] = useState({});
-
+  let timeOut;
+  const openNav = () => {
+    clearTimeout(timeOut);
+    setDisplayOptions(true)
+  }
+  const closeNav = () => {
+    timeOut = setTimeout(() => {
+      setDisplayOptions(false)
+    }, 100)
+  }
   const heartClick = async () => {
     // check if the user is logged in
     if (!user) {
@@ -31,9 +39,10 @@ const Card = ({ post, setIsChange }) => {
     let url = "/posts/likePost/" + post._id;
     await doApiMethod(url, "POST");
     setIsChange(true);
-    
+
   };
   useEffect(() => {
+    window.addEventListener("scroll", ()=> closeNav())
     getPostCreatorInfo(post?.creator_id);
   }, [like]);
   const getPostCreatorInfo = async (id) => {
@@ -46,9 +55,9 @@ const Card = ({ post, setIsChange }) => {
         <div className="flex justify-between items-center pr-2 p-1">
           <div
             onClick={() => {
-              user.role=== "admin" ?
-              nav(`admin/profile/${owner._id}`)
-              :nav(`/profile/${owner._id}`)
+              user.role === "admin" ?
+                nav(`admin/profile/${owner._id}`)
+                : nav(`/profile/${owner._id}`)
             }}
             className="flex items-center cursor-pointer"
           >
@@ -69,13 +78,13 @@ const Card = ({ post, setIsChange }) => {
           </div>
           <div
             className="z-10"
-            onMouseOver={() => setDisplayOptions(true)}
-            onClick={() => setDisplayOptions(true)}
+            onMouseLeave={() => closeNav()}
+            onClick={() => { displayOptions ? closeNav() : openNav() }}
           >
             <Dots />
           </div>
           {displayOptions && (
-            <ul onMouseLeave={() => setDisplayOptions(false)} className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl top-10 md:top-12 z-10 right-0">
+            <ul onTouchCancel={() => closeNav()} onMouseOver={() => openNav()} onMouseLeave={() => closeNav()} className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl top-10 md:top-12 z-10 right-0">
               <li className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200">
                 <p>Share</p>
                 <Send />
@@ -141,9 +150,8 @@ const Card = ({ post, setIsChange }) => {
                   return (
                     <div
                       key={uuidv4()}
-                      className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${
-                        i * 4
-                      }`}
+                      className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4
+                        }`}
                     >
                       <img
                         title={like.fullName.firstName}
@@ -180,7 +188,7 @@ const Card = ({ post, setIsChange }) => {
           </div>
         </div>
       </div>
-      
+
     </Wrapper>
   );
 };
