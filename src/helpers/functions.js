@@ -32,6 +32,22 @@ import { doApiMethod, errorHandler, successHandler } from './../services/service
             errorHandler(err)
         }
     }
+    export const uploadPostImages = async (files) => {
+        const formData = new FormData();
+        formData.append("file", files);
+        formData.append("upload_preset", "rentinoutprofile");
+        formData.append("cloud_name", "dpmpi8dwb");
+        try{
+            const resp = await axios.post(
+                "https://api.cloudinary.com/v1_1/dpmpi8dwb/image/upload",
+                formData
+            );
+           console.log(resp)
+        }
+        catch(err){
+            errorHandler(err)
+        }
+    }
     export const deleteProfileImage = async (img_id) => {
         let url = "/users/cloudinary/profileDel/?id=" + img_id
         try {
