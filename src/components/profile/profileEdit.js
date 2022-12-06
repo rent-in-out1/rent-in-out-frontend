@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form"
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -15,33 +15,15 @@ import {
 const ProfileEdit = () => {
     const nav = useNavigate();
     const { user } = useSelector(state => state.userSlice)
-    const dispatch = useDispatch();
-    const countryRef = useRef();
-    const cityRef = useRef();
-    const [countries, setAllCountry] = useState();
-    const [cities, setAllCities] = useState();
+    const dispatch = useDispatch()
     const [selectedCountry, setSelectedCountry] = useState("Israel");
     const [selectedCity, setSelectedCity] = useState("Israel");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-    useEffect(() => {
-        getAllCountries();
-      }, [cities]);
+ 
     
-      useEffect(() => {
-        getAllCities(selectedCountry);
-      }, [selectedCountry]);
-    
-      const getAllCountries = async () => {
-        const countries = await getCountries();
-        const countriesName = await countries?.map((country) => country.country);
-        setAllCountry(countriesName);
-      };
-      const getAllCities = async (_country) => {
-        const cities = await getCities(_country);
-        await setAllCities(cities);
-      };
+   
     
     const onSubForm = (_dataBody) => {
         let allupload = {
