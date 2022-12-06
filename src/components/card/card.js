@@ -6,10 +6,12 @@ import Dots from "../icons/dots";
 import Send from "../icons/send";
 import FillHeart from "../icons/fillHeart";
 import Heart from "../icons/heart";
+import { v4 as uuidv4 } from 'uuid';
 import { Wrapper } from "../style/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
 import { onLikesToggle, onRegisterShow } from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
+
 const Card = ({ post, setIsChange }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -26,7 +28,7 @@ const Card = ({ post, setIsChange }) => {
     }
     setLike(!like);
     let url = "/posts/likePost/" + post._id;
-    const data = await doApiMethod(url, "POST");
+    await doApiMethod(url, "POST");
     setIsChange(true);
   };
   useEffect(() => {
@@ -132,7 +134,7 @@ const Card = ({ post, setIsChange }) => {
                 {post?.likes.slice(0, 3).map((like, i) => {
                   return (
                     <div
-                      key={i}
+                      key={uuidv4()}
                       className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${
                         i * 4
                       }`}
