@@ -29,11 +29,9 @@ const Main = () => {
 
     const countP = async() => { 
         let {data} = await doGetApiMethod("/posts/count")
-        console.log(data.count)
         setCountPosts(data.count)
     }
     const doApi = async () => {
-        console.log(page)
         let url_posts = `/posts?page=${page}`
         let { data } = await doGetApiMethod(url_posts);
         setPostArray([...postsArray,...data]);
@@ -45,7 +43,7 @@ const Main = () => {
                 {postsArray &&
                     postsArray.map((post, i) => (
                         <div className='w-1/2 lg:p-3'>
-                        <Card key={i} post={post} setIsChange={setIsChange} />
+                        <Card key={post._id+i} post={post} setIsChange={setIsChange} />
                         </div>
                     ))}
             </div>

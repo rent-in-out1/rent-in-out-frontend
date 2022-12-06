@@ -17,6 +17,7 @@ import Settings from "../../../components/icons/settings";
 import Inbox from "../../../components/icons/inbox";
 import SignIn from "../../../components/icons/signIn";
 import SignOut from "../../../components/icons/signOut";
+import WishList from "../../../components/icons/wishlist";
 
 const Header = () => {
   const nav = useNavigate();
@@ -125,7 +126,6 @@ const Header = () => {
                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
               >
                 <div className="flex justify-between items-center">
-                  {" "}
                   <p>Profile</p> <Profile color="black" />
                 </div>
               </li>
@@ -137,12 +137,23 @@ const Header = () => {
                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
               >
                 <div className="flex justify-between items-center">
-                  {" "}
                   <p>Settings</p> <Settings />
                 </div>
               </li>
+              <li
+                className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
+              >
+                <Link
+                  className="flex justify-between items-center"
+                  to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
+                >
+                  <span>Wish List</span>
+                  <WishList />
+                </Link>
+              </li>
             </React.Fragment>
           )}
+
           <li
             onClick={() => dispatch(onSearchToggle())}
             className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
