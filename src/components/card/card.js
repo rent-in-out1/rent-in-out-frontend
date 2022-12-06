@@ -43,7 +43,11 @@ const Card = ({ post, setIsChange }) => {
       <div className="card">
         <div className="flex justify-between items-center pr-2 p-1">
           <div
-            onClick={() => nav(`/profile/${owner._id}`)}
+            onClick={() => {
+              user.role=== "admin" ?
+              nav(`admin/profile/${owner._id}`)
+              :nav(`/profile/${owner._id}`)
+            }}
             className="flex items-center cursor-pointer"
           >
             <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">

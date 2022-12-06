@@ -9,6 +9,7 @@ import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
 import Likes from "./pages/client/likes";
+import WishList from "./pages/client/wishList";
 
 // Lazy loading of routes
 
@@ -81,6 +82,7 @@ const AppRoutes = () => {
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
+                <Route path="/wishList" element={<WishList />} />
                 <Route path="*" element={<Page404 />} />
               </React.Fragment>
             )}
@@ -93,6 +95,7 @@ const AppRoutes = () => {
               <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/profile/:userId" element={<UserProfile />} />
               <Route path="/admin/profile" element={<MyProfile />} />
               <Route path="/admin/profileEdit" element={<ProfileEdit />} />
               <Route path="/admin/*" element={<Page404 />} />

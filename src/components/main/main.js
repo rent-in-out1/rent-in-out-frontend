@@ -32,6 +32,7 @@ const Main = () => {
     }
     const doApi = async () => {
         // console.log(page)
+
         let url_posts = `/posts?page=${page}`
         let { data } = await doGetApiMethod(url_posts);
         setPostArray([...postsArray, ...data]);

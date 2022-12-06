@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { doGetApiMethod, errorHandler } from "../../services/service";
@@ -12,7 +12,9 @@ const UserCard = ({ item }) => {
     try {
       const url = "/users/info/" + item._id;
       const { data } = await doGetApiMethod(url, "GET");
-      nav("/profile/" + item._id);
+      user.role === "admin"
+        ? nav(`admin/profile/${item._id}`)
+        : nav(`/profile/${item._id}`);
     } catch (err) {
       errorHandler(err.response.data.msg);
     }

@@ -16,6 +16,7 @@ import SignIn from "../../../components/icons/signIn";
 import SignOut from "../../../components/icons/signOut";
 import Bell from "../../../components/icons/bell";
 import Search from "./../../../components/icons/search";
+import WishList from "../../../components/icons/wishlist";
 const Header = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -135,6 +136,17 @@ const Header = () => {
             <div className="flex justify-between items-center">
               <p>Profile</p> <Users />
             </div>
+          </li>
+          <li
+            className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
+          >
+            <Link
+              className="flex justify-between items-center"
+              to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
+            >
+              <span>Wish List</span>
+              <WishList />
+            </Link>
           </li>
           <li
             onClick={() => dispatch(onSearchToggle())}
