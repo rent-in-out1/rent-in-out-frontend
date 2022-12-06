@@ -27,6 +27,9 @@ const userSlice = createSlice({
 
         upload: (state, action) => {
             state.user = action.payload 
+        },
+        wishListupdate: (state, action) => {
+            state.user.wishList = action.payload
         }
        
 
