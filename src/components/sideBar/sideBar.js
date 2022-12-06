@@ -15,6 +15,7 @@ import SignOut from "../icons/signOut";
 import Search from "../icons/search";
 import Home from './../icons/home';
 import WishList from "../icons/wishlist";
+import { onLogin } from "../../redux/features/userSlice";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ const SideBar = () => {
                 >
                   <WishList color={"#6B7280"}/>
                   <span className="flex-1 ml-3">Wish List</span>
+                  <aside>{user.wishList.length}</aside>
                 </Link>
               </li>
               <li>

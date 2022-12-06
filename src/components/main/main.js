@@ -37,6 +37,7 @@ const Main = () => {
         let { data } = await doGetApiMethod(url_posts);
         setPostArray([...postsArray, ...data]);
         endScreenEnd()
+        
     }
     return (
         <main className='w-full min-h-screen p-1 md:p-3 bg-gray-100 text-center justify-center'>

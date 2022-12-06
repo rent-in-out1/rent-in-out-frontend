@@ -1,6 +1,7 @@
 import React,{useState , useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../../../components/card";
+import { onLogin } from "../../../redux/features/userSlice";
 import { doGetApiMethod } from "../../../services/service";
 
 const WishList = () => {
@@ -15,6 +16,7 @@ const WishList = () => {
     let url = `/users/info/${user._id}`
     const {data} =  await doGetApiMethod(url)
     setWishList(data.userInfo.wishList)
+    dispatch(onLogin(data.userInfo))
     setIsChange(false)
   }
   return (

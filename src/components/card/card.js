@@ -11,6 +11,7 @@ import { Wrapper } from "../style/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
 import { onLikesToggle, onRegisterShow } from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
+import { onLogin } from "../../redux/features/userSlice";
 
 const Card = ({ post, setIsChange }) => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Card = ({ post, setIsChange }) => {
     let url = "/posts/likePost/" + post._id;
     await doApiMethod(url, "POST");
     setIsChange(true);
+    
   };
   useEffect(() => {
     getPostCreatorInfo(post?.creator_id);

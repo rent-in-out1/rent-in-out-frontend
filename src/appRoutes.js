@@ -82,7 +82,7 @@ const AppRoutes = () => {
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
-                <Route path="/wishList" element={<WishList />} />
+                <Route path="/wishlist" element={<WishList />} />
                 <Route path="*" element={<Page404 />} />
               </React.Fragment>
             )}
@@ -97,6 +97,7 @@ const AppRoutes = () => {
               <Route path="/admin/posts" element={<Posts />} />
               <Route path="/admin/profile/:userId" element={<UserProfile />} />
               <Route path="/admin/profile" element={<MyProfile />} />
+              <Route path="/admin/wishlist" element={<WishList />} />
               <Route path="/admin/profileEdit" element={<ProfileEdit />} />
               <Route path="/admin/*" element={<Page404 />} />
             </Route>
