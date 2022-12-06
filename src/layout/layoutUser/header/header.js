@@ -17,6 +17,8 @@ import Settings from "../../../components/icons/settings";
 import Inbox from "../../../components/icons/inbox";
 import SignIn from "../../../components/icons/signIn";
 import SignOut from "../../../components/icons/signOut";
+import WishList from "../../../components/icons/wishlist";
+import { useEffect } from "react";
 
 const Header = () => {
   const nav = useNavigate();
@@ -24,7 +26,19 @@ const Header = () => {
   const isLogin = useSelector((state) => state.userSlice?.user !== null);
   const { user } = useSelector((state) => state.userSlice);
   const [isOpen, setIsOpen] = useState(false);
-
+  useEffect(()=>{
+    window.addEventListener("scroll", ()=> closeNav())
+  },[])
+  let timeOut;
+  const openNav = () => {
+    clearTimeout(timeOut);
+    setIsOpen(true)
+  }
+  const closeNav = () => {
+    timeOut = setTimeout(() => {
+      setIsOpen(false)
+    }, 100)
+  }
   return (
     <Wrapper>
       <section>
@@ -79,8 +93,8 @@ const Header = () => {
           </nav>
           <div
             className="relative avatar"
-            onMouseOver={() => setIsOpen(true)}
-            onClick={() => setIsOpen(true)}
+            onMouseLeave={() => closeNav()}
+            onClick={() =>{isOpen ? closeNav() : openNav()}}
           >
             <img
               className="rounded-full"
@@ -92,23 +106,23 @@ const Header = () => {
               alt=""
             />
             <span
-              className={`${
-                isLogin ? "bg-green-400" : "bg-red-400"
-              } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
+              className={`${isLogin ? "bg-green-400" : "bg-red-400"
+                } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
             ></span>
           </div>
         </div>
       </section>
       {isOpen && (
         <ul
-          onMouseLeave={() => setIsOpen(false)}
+          onMouseOver={() => openNav()}
+          onMouseLeave={() => closeNav()}
           className="absolute dropdown transition shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30"
         >
           {isLogin && (
             <React.Fragment>
               <li
                 onClick={() => {
-                  setIsOpen(false);
+                  closeNav();
                   nav("/");
                 }}
                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
@@ -119,30 +133,40 @@ const Header = () => {
               </li>
               <li
                 onClick={() => {
-                  setIsOpen(false);
+                  closeNav();
                   nav("/profile");
                 }}
                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
               >
                 <div className="flex justify-between items-center">
-                  {" "}
                   <p>Profile</p> <Profile color="black" />
                 </div>
               </li>
               <li
                 onClick={() => {
-                  setIsOpen(false);
+                  closeNav();
                   nav("/profile1");
                 }}
                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
               >
                 <div className="flex justify-between items-center">
-                  {" "}
                   <p>Settings</p> <Settings />
                 </div>
               </li>
+              <li
+                className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
+              >
+                <Link
+                  className="flex justify-between items-center"
+                  to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
+                >
+                  <span>Wish List</span>
+                  <WishList />
+                </Link>
+              </li>
             </React.Fragment>
           )}
+
           <li
             onClick={() => dispatch(onSearchToggle())}
             className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
@@ -158,11 +182,11 @@ const Header = () => {
                 localStorage.removeItem("token");
                 window.open(API_URL_CLIENT, "_self");
                 dispatch(onLogout());
-                setIsOpen(false);
+                closeNav();
               } else {
                 // nav("/register")
                 dispatch(onRegisterShow());
-                setIsOpen(false);
+                closeNav();
               }
             }}
             className={`w-full p-2 rounded cursor-pointer`}

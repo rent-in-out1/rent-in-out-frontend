@@ -9,14 +9,13 @@ import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
 import Likes from "./pages/client/likes";
-import CreatePost from "./components/createPost";
+import CreatePost from "./components/createPost"
+import WishList from "./pages/client/wishList";
 
 // Lazy loading of routes
-
 const LayoutAdmin = React.lazy(() =>
   import("./layout/layoutAdmin/layoutAdmin")
 );
-
 const Users = React.lazy(() => import("./pages/admin/users"));
 const MyProfile = React.lazy(() => import("./pages/client/myProfile"));
 const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
@@ -29,15 +28,12 @@ const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
-
-
 const AppRoutes = () => {
   // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
   let {search , register } = useSelector((state) => state.toggleSlice)
   let {likes } = useSelector((state) => state.toggleSlice)
-
   useEffect(() => {
     let token;
     if (localStorage["token"]) {
@@ -60,7 +56,6 @@ const AppRoutes = () => {
     }
     dispatch(onLogin(data.userInfo));
   };
-
   return (
     <Suspense
       fallback={
@@ -82,7 +77,11 @@ const AppRoutes = () => {
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
+
                 <Route path="/createpost" element={<CreatePost />} />
+
+                <Route path="/wishlist" element={<WishList />} />
+
                 <Route path="*" element={<Page404 />} />
               </React.Fragment>
             )}
@@ -95,7 +94,9 @@ const AppRoutes = () => {
               <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />
               <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/profile/:userId" element={<UserProfile />} />
               <Route path="/admin/profile" element={<MyProfile />} />
+              <Route path="/admin/wishlist" element={<WishList />} />
               <Route path="/admin/profileEdit" element={<ProfileEdit />} />
               <Route path="/admin/*" element={<Page404 />} />
             </Route>

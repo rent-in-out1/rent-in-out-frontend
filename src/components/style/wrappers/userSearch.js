@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-
+  min-height: 384px;
   .search {
     width: 85%;
     border: 3px solid #c2cceb;
@@ -27,6 +27,7 @@ export const Wrapper = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      max-height: 384px;
     }
 
     input {
@@ -36,6 +37,14 @@ export const Wrapper = styled.div`
       height: 100%;
       width: 85%;
       outline: none;
+    }
+  }
+  @media(max-width:768px){
+    height: 100vh;
+    max-height: 100vh;
+    .dropdown{
+      height: 80vh;
+      max-height: 80vh;
     }
   }
 `;

@@ -14,6 +14,8 @@ import Notifications from "../icons/notifications";
 import SignOut from "../icons/signOut";
 import Search from "../icons/search";
 import Home from './../icons/home';
+import WishList from "../icons/wishlist";
+import { onLogin } from "../../redux/features/userSlice";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const SideBar = () => {
           ) : null}
           <li onClick={()=> dispatch(onSearchToggle())}>
             <Link>
-              <Search />
+              <Search color={"#6B7280"} />
               <span className="ml-3">Search</span>
             </Link>
           </li>
@@ -55,6 +57,15 @@ const SideBar = () => {
                 >
                   <Profile />
                   <span className="flex-1 ml-3">Profile</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
+                >
+                  <WishList color={"#6B7280"}/>
+                  <span className="flex-1 ml-3">Wish List</span>
+                  <aside>{user.wishList.length}</aside>
                 </Link>
               </li>
               <li>
