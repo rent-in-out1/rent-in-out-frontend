@@ -14,16 +14,21 @@ const CreatePost = () => {
   const [selecterange, setSelecterange] = useState("short-term");
   const rangeRef = useRef();
   const postRef = useRef();
+  const images= [];
 
   const changePostImage = async (images) => {
+    let result= []
     const img_ar = Array.from(images);
     if(img_ar.length > 4) return errorHandler("can't upload 5 images together")
     img_ar.forEach (async element => {
       if (element.size > 2 * 1024 * 1024) {
         return errorHandler("file too big")
       }
-      await uploadPostImages(element);
+      let image =await uploadPostImages(element);
+        result =  await result.push(image);
     });
+    console.log(images)
+    images= result;
     successHandler("images uploaded")
   }
   const onSubForm = (_dataBody) => {

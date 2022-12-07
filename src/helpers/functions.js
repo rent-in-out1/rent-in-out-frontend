@@ -26,7 +26,7 @@ import { doApiMethod, errorHandler, successHandler } from './../services/service
                 "https://api.cloudinary.com/v1_1/dgxzsxpoe/image/upload",
                 formData
             );
-            successHandler("Upload post succesfully!")
+            successHandler("Upload image succesfully!")
            return ({url:resp.data.url , img_id: resp.data.public_id })
         }
         catch(err){
@@ -43,7 +43,7 @@ import { doApiMethod, errorHandler, successHandler } from './../services/service
                 "https://api.cloudinary.com/v1_1/dpmpi8dwb/image/upload",
                 formData
             );
-           console.log(resp)
+            return ({url:resp.data.url , img_id: resp.data.public_id })
         }
         catch(err){
             errorHandler(err)
