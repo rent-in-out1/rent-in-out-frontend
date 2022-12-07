@@ -10,6 +10,7 @@ import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
 import Likes from "./pages/client/likes";
 import WishList from "./pages/client/wishList";
+import ConfirmHandler from './components/UI/confirm/confirm';
 
 // Lazy loading of routes
 
@@ -29,6 +30,7 @@ const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
+
 
 
 const AppRoutes = () => {
@@ -75,6 +77,7 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/resetPassword/:id/:resetString" element={<ResetPass />} />
+            <Route path="/confirm" element={<ConfirmHandler action={"action"} messege={"messege"} showAction={"showAction"} />} />
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
