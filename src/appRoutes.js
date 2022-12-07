@@ -51,7 +51,7 @@ const AppRoutes = () => {
   }, []);
 
   const getUserInfo = async (_id, token) => {
-    let url = "/users/info/" + _id;
+    let url = "/users/infoToken/" + _id;
     const { data } = await doApiMethod(url, "GET", token);
     if (!data.userInfo) {
       errorHandler("invalid user");
