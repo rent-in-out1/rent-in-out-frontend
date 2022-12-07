@@ -23,7 +23,7 @@ const WishList = () => {
     <main className="w-full min-h-screen p-1 md:p-3 bg-gray-100 text-center justify-center">
       <div className="flex flex-wrap">
         {wishListArr.length>0 ? wishListArr?.map(( post , i) => (
-          <div className="w-1/2 lg:p-3">
+          <div className="w-1/2">
             <Card key={i} post={post} setIsChange={setIsChange} />
           </div>
         )):<h2 className="flex justify-center items-center w-screen h-screen"> No items to show ....</h2>

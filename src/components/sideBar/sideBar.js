@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { onLogout, onRegisterShow, onSearchToggle } from "../../redux/features/toggleSlice";
 import { API_URL_CLIENT } from "../../services/service";
-import { useNavigate } from "react-router-dom";
 //style
 import { Wrapper } from "../style/wrappers/sideBar";
 // icons import
@@ -15,19 +14,17 @@ import SignOut from "../icons/signOut";
 import Search from "../icons/search";
 import Home from './../icons/home';
 import WishList from "../icons/wishlist";
-import { onLogin } from "../../redux/features/userSlice";
 
 const SideBar = () => {
   const dispatch = useDispatch();
-  const nav = useNavigate();
   const isLogin = useSelector((state) => state.userSlice?.user !== null);
   const user = useSelector((state) => state.userSlice?.user);
   return (
     <Wrapper
-      className="w-2/12 z-10 top-16 left-0 fixed hidden lg:flex"
+      className="w-3/12 z-10 p-3 top-16 left-0 fixed hidden lg:flex"
       aria-label="Sidebar"
     >
-      <div className="overflow-y-auto py-4 px-3 w-full bg-white rounded">
+      <div className="overflow-y-auto py-4 mt-4 px-3 w-full bg-white shadow-xl rounded">
         <ul className="space-y-2">
           <li>
             <Link to={user?.role === "admin" ? "/admin" : "/"}>

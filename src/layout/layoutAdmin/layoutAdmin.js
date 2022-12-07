@@ -5,13 +5,13 @@ import Sidebar from '../../components/sideBar'
 
 const LayoutAdmin = () => {
   return (
-    <React.Fragment>
+    <div className='bg-gray-100'>
       <Header/>
       <Sidebar />
-      <div className='lg:w-10/12 ml-auto'>
+      <div className='lg:w-9/12 ml-auto'>
       <Outlet />
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

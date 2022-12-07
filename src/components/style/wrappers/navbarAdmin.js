@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    background: var(--skyblue-50);
+    /* background: var(--skyblue-50); */
+    background: var(--white);
     position:sticky;
     top:0;
     left:0;
@@ -56,11 +57,13 @@ export const Wrapper = styled.div`
         align-items: center;
         height: inherit;
         .avatar{
+            
             cursor: pointer;
             margin-left: 12px;
             width: 40px;
             height: 40px;
             img{
+                object-fit: cover;
                 width: 100%;
                 height: 100%;
             }
