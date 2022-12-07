@@ -11,7 +11,7 @@ const Main = () => {
     const [countPosts, setCountPosts] = useState(0)
     const [page, setPage] = useState(1);
     const [endScreen, endScreenEnd] = useScroll(900)
-    // const [isChange, setIsChange] = useState(false);
+    const [isChange, setIsChange] = useState(false);
     const [firstLoad, setFirstLoad] = useState(true)
     /** check first how many posts */
     useEffect(() => {
@@ -45,7 +45,7 @@ const Main = () => {
                 {postsArray &&
                     postsArray.map((post) => (
                         <div key={post._id} className='w-1/2 lg:p-3'>
-                            <Card post={post} />
+                            <Card post={post} setIsChange={setIsChange} />
                         </div>
                     ))}
             </div>
