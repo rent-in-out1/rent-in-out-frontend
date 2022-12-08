@@ -6,6 +6,7 @@ import { doApiMethod } from "../../../services/service";
 import { doGetApiMethod } from "./../../../services/service";
 import { useDispatch } from "react-redux";
 import { onMessegeToggle } from "../../../redux/features/toggleSlice";
+import { deleteCategory, editCategory } from "../../../redux/features/categorieSlice";
 
 const CategoryItem = (props) => {
   const dispatch = useDispatch();
@@ -26,38 +27,38 @@ const CategoryItem = (props) => {
     let url = "/users/info/" + category?.creator_id;
     let data = await doGetApiMethod(url);
     setCreator(data);
-    props.setIsChange(true)
+    props.setIsChange(true);
   };
   const getEditor = async () => {
     let url = "/users/info/" + category?.editor_id;
     let data = await doGetApiMethod(url);
     setEditor(data);
-    props.setIsChange(true)
+    props.setIsChange(true);
   };
-  const deleteCategory = async (_id, categoryName ="") => {
-    // if (window.confirm(`Are you sure you want to delete ${categoryName}`)) {
-      const url = "/categories/" + category._id;
-      await doApiMethod(url, "DELETE");
-    // }
-    
-  };
+  // const deleteCategory = async (_id, categoryName ="") => {
+  //   // if (window.confirm(`Are you sure you want to delete ${categoryName}`)) {
+  //     const url = "/categories/" + category._id;
+  //     await doApiMethod(url, "DELETE");
+  //   // }
 
-  const editCategory = async (_id, categoryName) => {
-    const url = "/categories/" + _id;
-    if (
-      !editData ||
-      editData.name === "" ||
-      editData.url_name === "" ||
-      editData.info === ""
-    ) {
-      errorHandler("Please fill in all fields");
-      return;
-    }
-    if (window.confirm(`Are you sure you want to edit ${categoryName}`)) {
-      setOnEdit(true);
-      await doApiMethod(url, "PUT", editData);
-    }
-  };
+  // };
+
+  // const editCategory = async (_id, categoryName) => {
+  //   const url = "/categories/" + _id;
+  //   if (
+  //     !editData ||
+  //     editData.name === "" ||
+  //     editData.url_name === "" ||
+  //     editData.info === ""
+  //   ) {
+  //     errorHandler("Please fill in all fields");
+  //     return;
+  //   }
+  //   if (window.confirm(`Are you sure you want to edit ${categoryName}`)) {
+  //     setOnEdit(true);
+  //     await doApiMethod(url, "PUT", editData);
+  //   }
+  // };
   return (
     <tr>
       <td>
@@ -173,10 +174,11 @@ const CategoryItem = (props) => {
               <span className="btn text-xl text-blue-300 relative cursor-pointer inline-block p-2 font-semibold leading-tight hover:text-green-900 ">
                 <FaCheckCircle
                   className="mx-2 absolute left-3 bottom-0 inset-0 opacity-50 rounded-full"
-                  onClick={async () => {
-                    await editCategory(category?._id, category?.name);
-                    setOnEdit(false);
-                    props.setIsChange(true);
+                  onClick={() => {
+                    dispatch(editCategory({id: category._id, name: category?._id, editData, setOnEdit}))
+                    // await editCategory(category?._id, category?.name);
+                    // setOnEdit(false);
+                    // props.setIsChange(true);
                   }}
                 />
               </span>
@@ -212,10 +214,7 @@ const CategoryItem = (props) => {
         <span
           onClick={() => {
             // deleteCategory(category._id, category.name);
-            dispatch(onMessegeToggle({
-              info: `Are you sure you want to delete ${category.name}?`,
-              action: deleteCategory()
-            }))
+            dispatch(deleteCategory({ id: category._id, name: category.name }));
             props.setIsChange(true);
           }}
           className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"

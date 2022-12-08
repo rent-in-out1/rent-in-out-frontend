@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCatgories } from './../../../redux/features/categorieSlice';
 const Categories = () => {
   const dispatch = useDispatch();
-  const categories = useSelector(state=> state.categories)
+  const {categories} = useSelector(state=> state.categoriesSlice)
+
   // const [categories, setCategories] = useState([]);
   const [isChange, setIsChange] = useState(false);
   const [onAdd, setOnAdd] = useState(false);
@@ -20,15 +21,9 @@ const Categories = () => {
   { name: "Date created", value: "createdAt" },
   { name: "Date updated", value: "updatedAt" }]
 
-  // const getAllcategories = async () => {
-  //   let url = `/categories/search/?s=${search}&sort=${option}`;
-  //   const { data } = await doGetApiMethod(url);
-  //   setCategories(data);
-  //   setIsChange(false);
-  // };
   useEffect(() => {
     dispatch(getCatgories({ search, option , page}));
-  }, []);
+  }, [page , option , search]);
   return (
     <Wrapper className="mb-4">
       <Controllers
