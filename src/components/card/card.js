@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { doApiMethod, doGetApiMethod } from "../../services/service";
+import { deletePost } from "../../redux/features/postsSlice";
 import Chat from "../icons/chat";
 import Dots from "../icons/dots";
 import Send from "../icons/send";
 import FillHeart from "../icons/fillHeart";
 import Heart from "../icons/heart";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { Wrapper } from "../style/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
-import { onLikesToggle, onRegisterShow } from "../../redux/features/toggleSlice";
+import {
+  onLikesToggle,
+  onRegisterShow,
+} from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
 import { likePost } from "../../redux/features/postsSlice";
-import LazyLoad from 'react-lazy-load';
+import LazyLoad from "react-lazy-load";
 
-const Card = ({ post, setIsChange, key }) => {
+const Card = ({ post, key }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
@@ -24,27 +28,15 @@ const Card = ({ post, setIsChange, key }) => {
   let timeOut;
   const openNav = () => {
     clearTimeout(timeOut);
-    setDisplayOptions(true)
-  }
+    setDisplayOptions(true);
+  };
   const closeNav = () => {
     timeOut = setTimeout(() => {
-      setDisplayOptions(false)
-    }, 100)
-  }
-  const heartClick = async () => {
-    // check if the user is logged in
-    if (!user) {
-      dispatch(onRegisterShow());
-      return;
-    }
-    setLike(!like);
-    let url = "/posts/likePost/" + post._id;
-    let likes = await doApiMethod(url, "POST");
-    dispatch(likePost(likes))
-    setIsChange(true);
+      setDisplayOptions(false);
+    }, 100);
   };
   useEffect(() => {
-    window.addEventListener("scroll", () => closeNav())
+    window.addEventListener("scroll", () => closeNav());
     getPostCreatorInfo(post?.creator_id);
   }, [like]);
   const getPostCreatorInfo = async (id) => {
@@ -57,9 +49,9 @@ const Card = ({ post, setIsChange, key }) => {
         <div className="flex justify-between items-center pr-2 p-1">
           <div
             onClick={() => {
-              user.role === "admin" ?
-                nav(`/admin/profile/${owner._id}`)
-                : nav(`/profile/${owner._id}`)
+              user.role === "admin"
+                ? nav(`/admin/profile/${owner._id}`)
+                : nav(`/profile/${owner._id}`);
             }}
             className="flex items-center cursor-pointer"
           >
@@ -80,23 +72,45 @@ const Card = ({ post, setIsChange, key }) => {
           <div
             className="z-10"
             onMouseLeave={() => closeNav()}
-            onClick={() => { displayOptions ? closeNav() : openNav() }}
+            onClick={() => {
+              displayOptions ? closeNav() : openNav();
+            }}
           >
             <Dots />
           </div>
           {displayOptions && (
-            <ul onTouchCancel={() => closeNav()} onMouseOver={() => openNav()} onMouseLeave={() => closeNav()} className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-10 md:top-12 z-10 right-0">
-              <li onClick={() => closeNav()} className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${user?._id !== post?.creator_id && "rounded-b-xl hover:rounded-b-xl"}`}>
+            <ul
+              onTouchCancel={() => closeNav()}
+              onMouseOver={() => openNav()}
+              onMouseLeave={() => closeNav()}
+              className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-10 md:top-12 z-10 right-0"
+            >
+              <li
+                onClick={() => closeNav()}
+                className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${
+                  user?._id !== post?.creator_id &&
+                  "rounded-b-xl hover:rounded-b-xl"
+                }`}
+              >
                 <p>Share</p>
                 <Send />
               </li>
-              {user?._id === post?.creator_id && (
+              {(user?._id === post?.creator_id || user?.role === "admin") && (
                 <React.Fragment>
-                  <li onClick={() => closeNav()} className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200">
+                  <li
+                    onClick={() => closeNav()}
+                    className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200"
+                  >
                     <p>Edit</p>
                     <p>icon</p>
                   </li>
-                  <li onClick={() => closeNav()} className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200">
+                  <li
+                    onClick={() => {
+                      dispatch(deletePost({ id: post._id, name: post.title }));
+                      closeNav();
+                    }}
+                    className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200"
+                  >
                     <p>Delete</p>
                     <p>icon</p>
                   </li>
@@ -105,13 +119,29 @@ const Card = ({ post, setIsChange, key }) => {
             </ul>
           )}
         </div>
-        <div className="relative cursor-pointer"
-          onDoubleClick={() => heartClick()}>
+        <div
+          className="relative cursor-pointer"
+          // onDoubleClick={() => heartClick()}
+          onDoubleClick={() => {
+            !user ? dispatch(onRegisterShow()) :
+            dispatch(likePost({id : post._id}))
+          }}
+        >
           <LazyLoad className="overflow-hidden w-full postImg">
-            <img className="w-full h-full object-cover" src={post.img[0]?.url} alt="post"/>
+            <img
+              className="w-full h-full object-cover"
+              src={post.img[0]?.url}
+              alt="post"
+            />
           </LazyLoad>
-          <div className="absolute top-0 right-4 p-2" onClick={() => {heartClick()}}>
-            {!post.likes.some((el) => el.user_id === user?._id) ? (
+          <div
+            className="absolute top-0 right-4 p-2"
+            onClick={() => {
+              !user ? dispatch(onRegisterShow()) :
+              dispatch(likePost({id : post._id}))
+            }}
+          >
+            {!post?.likes?.some((el) => el.user_id === user?._id) ? (
               <Heart color="red" width="20px" height={"20px"} />
             ) : (
               <FillHeart color="red" width="20px" height={"20px"} />
@@ -131,7 +161,7 @@ const Card = ({ post, setIsChange, key }) => {
               </span>
               <div
                 onClick={() => {
-                  dispatch(onLikesToggle(post?.likes))
+                  dispatch(onLikesToggle(post?.likes));
                 }}
                 className="flex items-center justify-between relative "
               >
@@ -139,8 +169,9 @@ const Card = ({ post, setIsChange, key }) => {
                   return (
                     <div
                       key={uuidv4()}
-                      className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4
-                        }`}
+                      className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${
+                        i * 4
+                      }`}
                     >
                       <img
                         title={like.fullName.firstName}
@@ -177,7 +208,6 @@ const Card = ({ post, setIsChange, key }) => {
           </div>
         </div>
       </div>
-
     </Wrapper>
   );
 };

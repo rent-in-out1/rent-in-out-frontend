@@ -1,11 +1,10 @@
-
 import { useScroll } from "../../hooks/useScroll";
 import React, { useState, useEffect, useRef } from "react";
 import { doGetApiMethod } from "../../services/service";
 import Card from "../card";
 import Loader from "../loader";
 import { useDispatch, useSelector } from "react-redux";
-import { clear, onLoad } from "../../redux/features/postsSlice";
+import {  clearPosts, getPosts } from "../../redux/features/postsSlice";
 import Controllers from "./../controllers/controllers";
 import MultiRangeSlider from "../UI/multiRangeSlider/MultiRangeSlider";
 import CreatePost from '../createPost/createPost'
@@ -13,14 +12,14 @@ import CreatePost from '../createPost/createPost'
 
 const Main = () => {
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.postsSlice);
+  const { posts  , loading} = useSelector((state) => state.postsSlice);
   const [search, setSearch] = useState("");
+  const [max, setMax] = useState();
+  const [min, setMin] = useState();
   const [option, setOption] = useState();
   const [countPosts, setCountPosts] = useState(0);
   const [page, setPage] = useState(1);
   const [endScreen, endScreenEnd] = useScroll(900);
-  const [isChange, setIsChange] = useState(false);
-  const [firstLoad, setFirstLoad] = useState(true);
   const options = [
     { name: "Category", value: "category_url" },
     { name: "Country", value: "country" },
@@ -29,28 +28,17 @@ const Main = () => {
     { name: "City", value: "city" },
   ];
 
-  useEffect(() => {
-    doApi();
-  }, [page]);
-  /** count all the posts */
-  const countP = async () => {
-    let { data } = await doGetApiMethod("/posts/count");
-    setCountPosts(data.count);
-  };
-  const doApi = async () => {
-    // console.log(page)
-    if (isChange) {
-      document.querySelector("#posts").innerHTML = "";
+  useEffect(()=>{
+    return () =>{
+      dispatch(clearPosts())
     }
-    let url_posts = `/posts/search/?s=${search}&sort=${option}&page=${page}`;
-    let { data } = await doGetApiMethod(url_posts);
-    if (!isChange) dispatch(onLoad([...posts, ...data]));
-    endScreenEnd();
-    setIsChange(false);
-  };
+  },[])
+  useEffect(() => {
+    dispatch(getPosts({ search, option, page, min , max , endScreenEnd  , setPage}))
+  }, [endScreen]);
   return (
     <React.Fragment>
-      <main className="w-full min-h-screen p-1 md:p-3 text-center justify-center">
+      <main className="w-9/12 min-h-screen p-1 md:p-3 text-center justify-center">
         <div className="bg-white p-3 space-x-1 md:w-10/12 w-full mx-auto rounded-xl drop-shadow-xl">
         <CreatePost/>
         <Controllers
@@ -61,25 +49,23 @@ const Main = () => {
           setOption={setOption}
         />
         <div className="flex items-center justify-center">
-          <MultiRangeSlider
-            min={0}
-            max={1000}
+          <MultiRangeSlider min={0} max={1000}
             onChange={({ min, max }) =>
               console.log(`min = ${min}, max = ${max}`)
             }
           />
           </div>
         </div>
-        <div className="overflow-scroll border">
+        <div>
         <div id="posts" className="flex flex-wrap">
           {posts &&
-            posts.map((post, i) => (
+            posts?.map((post, i) => (
               <div key={post._id} className="w-1/2">
-                <Card post={post} key={i} setIsChange={setIsChange} />
+                <Card post={post} key={i} />
               </div>
             ))}
         </div>
-        {endScreen && Math.ceil(countPosts / 10) >= page + 1 && (
+        {loading && (
           <div className="flex items-center justify-center min-h-40">
             <Loader width={"200px"} height={"200px"} />
           </div>
