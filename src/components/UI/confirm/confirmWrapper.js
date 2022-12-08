@@ -27,15 +27,10 @@ export const Modal = styled.div`
     z-index: 30;
     animation: slide-down 600ms ease-in-out forwards;
   }
-  .modal .data{
-    overflow-y: scroll;
-  }
-  .modal .h2{
-    display: none;
-  }
+
   @media (max-width: 1024px) {
     .modal {
-        top: 10vh;
+    top: 10vh;
       width: 60%;
       left: 20%;
     }

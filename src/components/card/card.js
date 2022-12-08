@@ -56,7 +56,7 @@ const Card = ({ post, setIsChange }) => {
           <div
             onClick={() => {
               user.role === "admin" ?
-                nav(`admin/profile/${owner._id}`)
+                nav(`/admin/profile/${owner._id}`)
                 : nav(`/profile/${owner._id}`)
             }}
             className="flex items-center cursor-pointer"

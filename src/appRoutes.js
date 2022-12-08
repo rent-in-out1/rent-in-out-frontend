@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
+import { onMessegeToggle } from "./redux/features/toggleSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
 import Likes from "./pages/client/likes";
@@ -14,10 +15,7 @@ import ConfirmHandler from './components/UI/confirm/confirm';
 
 // Lazy loading of routes
 
-const LayoutAdmin = React.lazy(() =>
-  import("./layout/layoutAdmin/layoutAdmin")
-);
-
+const LayoutAdmin = React.lazy(() => import("./layout/layoutAdmin/layoutAdmin"));
 const Users = React.lazy(() => import("./pages/admin/users"));
 const MyProfile = React.lazy(() => import("./pages/client/myProfile"));
 const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
@@ -39,6 +37,7 @@ const AppRoutes = () => {
   let { user } = useSelector((state) => state.userSlice);
   let {search , register } = useSelector((state) => state.toggleSlice)
   let {likes } = useSelector((state) => state.toggleSlice)
+  let {messege} = useSelector((state) => state.toggleSlice)
 
   useEffect(() => {
     let token;
@@ -55,7 +54,6 @@ const AppRoutes = () => {
   const getUserInfo = async (_id, token) => {
     let url = "/users/infoToken/" + _id;
     const { data } = await doApiMethod(url, "GET", token);
-    console.log(data);
     if (!data.userInfo) {
       errorHandler("invalid user");
       window.open(API_URL_CLIENT, "_self");
@@ -81,14 +79,13 @@ const AppRoutes = () => {
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
-            <Route path="passwordReset/*" element={<Dashboard />} />
             <Route path="/profile/:userId" element={<UserProfile />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
+                <Route path="*" element={<Page404 />} />
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/wishlist" element={<WishList />} />
-                <Route path="*" element={<Page404 />} />
               </React.Fragment>
             )}
           </Route>
@@ -113,6 +110,7 @@ const AppRoutes = () => {
         {search? <UserSearch/> : null}
         {register? <Register/> : null}
         {likes.active ? <Likes likesArr={likes.likesArr}/>: null}
+        {/* {messege.isShow ? <ConfirmHandler action={onMessegeToggle} messege={messege.info} />: null} */}
       </Router>
     </Suspense>
   );

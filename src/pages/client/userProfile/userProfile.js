@@ -20,7 +20,7 @@ const UserProfile = () => {
     const getUser = async () => {
         // if user id same as search user send him to his profile
         if (user?._id === userId) {
-            nav("/profile")
+            user?.role=== "admin" ? nav("/admin/profile") :nav("/profile")
         }
         const url = "/users/info/" + userId;
         const { data } = await doGetApiMethod(url);

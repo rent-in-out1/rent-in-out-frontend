@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
     const initialstate = {
         register: false,
-        error : {
-            status: false,
-            massege :""
+        messege : {
+            isShow: false,
+            info :"",
+            approve: false,
         },
         search: false,
         likes:{
@@ -32,13 +33,14 @@ const toggleSlice = createSlice({
             state.likes.active = !state.likes.active
             state.likes.likesArr = action.payload
         },
-        onErrorToggle: (state, action) =>{
-            state.error.status = !state.error.status
-            state.error.message = action.payload.error.message
+        onMessegeToggle: async(state, action) =>{
+            state.messege.isShow = !state.messege.isShow
+            state.messege.info = action.payload.info
+            state.messege.approve = action.payload.approve
         },
 
     }
 })
 
-export const {onToggle , onRegisterToggle,onSearchToggle, onLogout , onRegisterShow, onLikesToggle } = toggleSlice.actions
+export const {onToggle , onRegisterToggle,onSearchToggle, onLogout , onRegisterShow, onLikesToggle , onMessegeToggle } = toggleSlice.actions
 export default toggleSlice.reducer
