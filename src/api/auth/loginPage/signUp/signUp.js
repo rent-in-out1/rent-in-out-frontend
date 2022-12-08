@@ -1,4 +1,3 @@
-import { filterProps } from "framer-motion";
 import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../../../../src/components/style/wrappers/registerPage";

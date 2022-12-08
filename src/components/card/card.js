@@ -11,8 +11,10 @@ import { Wrapper } from "../style/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
 import { onLikesToggle, onRegisterShow } from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
+import { likePost } from "../../redux/features/postsSlice";
+import LazyLoad from 'react-lazy-load';
 
-const Card = ({ post, setIsChange }) => {
+const Card = ({ post, setIsChange, key }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
@@ -37,12 +39,13 @@ const Card = ({ post, setIsChange }) => {
     }
     setLike(!like);
     let url = "/posts/likePost/" + post._id;
-    await doApiMethod(url, "POST");
+    let likes = await doApiMethod(url, "POST");
+    dispatch(likePost(likes))
     setIsChange(true);
 
   };
   useEffect(() => {
-    window.addEventListener("scroll", ()=> closeNav())
+    window.addEventListener("scroll", () => closeNav())
     getPostCreatorInfo(post?.creator_id);
   }, [like]);
   const getPostCreatorInfo = async (id) => {
@@ -61,13 +64,13 @@ const Card = ({ post, setIsChange }) => {
             }}
             className="flex items-center cursor-pointer"
           >
-            <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
+            <LazyLoad className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
               <img
                 className="w-full h-full rounded-full object-cover"
                 src={owner?.profile_img?.url}
                 alt=""
               />
-            </div>
+            </LazyLoad>
             <span className="pl-1 flex">
               {owner.fullName?.firstName}{" "}
               <span className="ml-1 hidden md:flex">
@@ -85,17 +88,17 @@ const Card = ({ post, setIsChange }) => {
           </div>
           {displayOptions && (
             <ul onTouchCancel={() => closeNav()} onMouseOver={() => openNav()} onMouseLeave={() => closeNav()} className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-10 md:top-12 z-10 right-0">
-              <li onClick={()=>closeNav()} className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${user?._id !== post?.creator_id && "rounded-b-xl hover:rounded-b-xl"}`}>
+              <li onClick={() => closeNav()} className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${user?._id !== post?.creator_id && "rounded-b-xl hover:rounded-b-xl"}`}>
                 <p>Share</p>
                 <Send />
               </li>
               {user?._id === post?.creator_id && (
                 <React.Fragment>
-                  <li onClick={()=>closeNav()} className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200">
+                  <li onClick={() => closeNav()} className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200">
                     <p>Edit</p>
                     <p>icon</p>
                   </li>
-                  <li onClick={()=>closeNav()} className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200">
+                  <li onClick={() => closeNav()} className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200">
                     <p>Delete</p>
                     <p>icon</p>
                   </li>
@@ -108,13 +111,13 @@ const Card = ({ post, setIsChange }) => {
           className="relative cursor-pointer"
           onDoubleClick={() => heartClick()}
         >
-          <div className="overflow-hidden w-full postImg">
+          <LazyLoad className="overflow-hidden w-full postImg">
             <img
               className="w-full h-full object-cover"
               src={post.img[0]?.url}
               alt="post"
             />
-          </div>
+          </LazyLoad>
           <div
             className="absolute top-0 right-4 p-2"
             onClick={() => {

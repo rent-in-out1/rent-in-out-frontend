@@ -1,13 +1,14 @@
 import { useScroll } from '../../hooks/useScroll'
-import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { doGetApiMethod } from '../../services/service'
 import Card from '../card'
-import Loader from '../loader/loader'
+import Loader from '../loader'
+import { useDispatch, useSelector } from 'react-redux'
+import { clear, onLoad } from '../../redux/features/postsSlice'
 
 const Main = () => {
-    const [postsArray, setPostArray] = useState([]);
+    const dispatch = useDispatch();
+    const { posts } = useSelector(state => state.postsSlice)
     const [countPosts, setCountPosts] = useState(0)
     const [page, setPage] = useState(1);
     const [endScreen, endScreenEnd] = useScroll(900)
@@ -32,20 +33,24 @@ const Main = () => {
     }
     const doApi = async () => {
         // console.log(page)
-
+        if(isChange){
+            document.querySelector("#posts").innerHTML = "";
+        } 
+        console.log(posts)
         let url_posts = `/posts?page=${page}`
         let { data } = await doGetApiMethod(url_posts);
-        setPostArray([...postsArray, ...data]);
+        console.log([...posts, ...data])
+        if(!isChange) dispatch(onLoad([...posts, ...data]))
         endScreenEnd()
-        
+        setIsChange(false)
     }
     return (
         <main className='w-full min-h-screen p-1 md:p-3 text-center justify-center'>
-            <div className='flex flex-wrap'>
-                {postsArray &&
-                    postsArray.map((post) => (
+            <div id='posts' className='flex flex-wrap'>
+                {posts &&
+                    posts.map((post,i) => (
                         <div key={post._id} className='w-1/2'>
-                            <Card post={post} setIsChange={setIsChange} />
+                            <Card post={post} key={i} setIsChange={setIsChange} />
                         </div>
                     ))}
             </div>
