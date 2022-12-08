@@ -9,34 +9,77 @@ import { uploadPostImages } from "../../helpers/functions";
 
 const CreatePost = () => {
   const { user } = useSelector((state) => state.userSlice);
+  const [display, setDisplay] = useState(false);
+  const [data, setData] = useState({});
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { display, setDisplay } = useState(false)
-  const [selecterange, setSelecterange] = useState("short-term");
+  const [selecterange, setSelecterange] = useState("category");
+  const [selectCountry, setSelectCountry] = useState("category");
   const rangeRef = useRef();
+  const categoryRef = useRef();
   const postRef = useRef();
-  const images= [];
+
 
   const changePostImage = async (images) => {
-    let result= []
+    let result = []
     const img_ar = Array.from(images);
-    if(img_ar.length > 4) return errorHandler("can't upload 5 images together")
-    img_ar.forEach (async element => {
+    if (img_ar.length > 4) return errorHandler("can't upload 5 images together")
+    img_ar.forEach(async element => {
       if (element.size > 2 * 1024 * 1024) {
         return errorHandler("file too big")
       }
-      let image =await uploadPostImages(element);
-        result =  await result.push(image);
+      let image = await uploadPostImages(element);
+      result = await result.push(image);
     });
     console.log(images)
-    images= result;
+    images = result;
     successHandler("images uploaded")
   }
-  const onSubForm = (_dataBody) => {
-    console.log(_dataBody);
-    console.log(rangeRef.current.value)
-    alert("done")
-    return;
+
+
+  // firstForm
+  const onSubForm = async (_dataBody) => {
+    // if(!postRef.current.files.length>0){
+    //   return errorHandler("you must to choose some images")
+    // }
+    let form1 = {
+      img:[...postRef.current.files] ,
+      title: _dataBody.title,
+      info: _dataBody.textarea,
+      range: rangeRef.current.value
+    }
+    setData(form1)
+    if(form1) console.log(form1)
+    setDisplay(true)
   }
+
+  const onSubForm2 = (_dataBody) => {
+    let form2 = {
+    
+      price: _dataBody.price,
+      category_url: categoryRef.current.value,
+      country: _dataBody.country,
+      city: _dataBody.city
+    }
+    console.log(form2)
+    setData({...data,...form2})
+    console.log(data)
+    uploadPost(data);
+    successHandler("you upload new post")
+   
+  }
+
+  const uploadPost = async (_data) => {
+    try {
+      const url = "/posts";
+      const { data } = await doApiMethod(url, "POST", _data);
+      console.log(data)
+    }
+   catch (err) {
+    errorHandler(err.response.data.msg)
+  }
+
+
+}
 
   return (
     <Wrapper>
@@ -49,91 +92,102 @@ const CreatePost = () => {
             <img className="object-cover w-full h-full" src={user.profile_img.url} alt="avatar" />
           </div>
         </div>
-        <form onSubmit={handleSubmit(onSubForm)} className="">
-          <div className="flex px-3">
-            <div className="w-full md:w-1/3 px-3">
-              <label className="cursor-pointer flex items-center justify-center bg-white w-full rounded-xl p-3 h-full border border-gray-200">
-                <input ref={postRef} accept="image/png,image/jpeg, image/jpg, image/svg" type="file" multiple="multiple" style={{ display: 'none' }} onChange={() => changePostImage(postRef.current.files)} />
-                <ImageFill width={"60px"} height="60px" />
-              </label>
-            </div>
-            <div className="w-full md:w-2/3">
-              <input
-                {...register("title", {
-                  required: true,
-                  minLength: 2,
-                  maxLength: 25,
-                })}
-                type="text" placeholder=' choose a title'
-              />
-              {errors.title && errorHandler("Enter valid title.")}
-              <textarea className='w-full border border-gray-200 rounded-lg' rows={3} {...register("textarea", {
+        {!display && <form form onSubmit={handleSubmit(onSubForm)} className="">
+        <div className="flex px-3">
+          <div className="w-full md:w-1/3 px-3">
+            <label className="cursor-pointer flex items-center justify-center bg-white w-full rounded-xl p-3 h-full border border-gray-200">
+              <input ref={postRef} accept="image/png,image/jpeg, image/jpg, image/svg" type="file" multiple="multiple" style={{ display: 'none' }} onChange={() => changePostImage(postRef.current.files)} />
+              <ImageFill width={"60px"} height="60px" />
+            </label>
+          </div>
+          <div className="w-full md:w-2/3">
+            <input
+              {...register("title", {
                 required: true,
                 minLength: 2,
-                maxLength: 100,
-              })} type="text" placeholder="What do you want to share?" ></textarea>
-              {errors.textarea && errorHandler("Enter at least two characters at description.")}
-              <select ref={rangeRef} onChange={() => setSelecterange(rangeRef.current.value)}>
-                <option selected value="short-term" key={0} >
-                  short-term
-                </option>
-                <option value="long-term" key={1} >
-                  long-term
-                </option>
-              </select>
-            </div>
+                maxLength: 25,
+              })}
+              type="text" placeholder=' choose a title'
+            />
+            {errors.title && errorHandler("Enter valid title.")}
+            <textarea className='w-full border border-gray-200 rounded-lg' rows={3} {...register("textarea", {
+              required: true,
+              minLength: 2,
+              maxLength: 100,
+            })} type="text" placeholder="What do you want to share?" ></textarea>
+            {errors.textarea && errorHandler("Enter at least two characters at description.")}
+            <select ref={rangeRef} onChange={() => setSelecterange(rangeRef.current.value)}>
+              <option selected value="short-term" key={0} >
+                short-term
+              </option>
+              <option value="long-term" key={1} >
+                long-term
+              </option>
+            </select>
           </div>
-          <div className="  flex justify-end ">
-            <button type="submit" >
-              Next
-            </button>
-          </div>
-        </form>
-        {/* second form  */}
+        </div>
+        <div className="  flex justify-end ">
+          <button type="submit" >
+            Next
+          </button>
+        </div>
+      </form>}
+      {/* second form  */}
 
-        {display && <form onSubmit={handleSubmit(onSubForm)} className="border border-blue-700 rounded-full p-5 ">
-          <div className="flex  -mx-3 mb-2">
-            <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
-
+      {display && <form onSubmit={handleSubmit(onSubForm2)} className="secondform w-full ">
+        <div className="w-full md:w-2/3">
+          <input className="mt-2"
+            {...register("price", {
+              required: true,
+              minLength: 2,
+              maxLength: 25,
+            })}
+            type="number" placeholder=' choose a price'
+          />
+          {errors.price && errorHandler("Enter valid price.")}
+          <select className="mt-2" ref={categoryRef} onChange={() => setSelectCountry(categoryRef.current.value)}>
+            <option selected value="category" key={0} >
+              category
+            </option>
+            <option value="" key={1} >
+            </option>
+          </select>
+          <div className="filters w-full flex ">
+            <div className="w-1/2 mr-1">
               <input
-                {...register("price", {
+                {...register("country", {
                   required: true,
                   minLength: 2,
-                  maxLength: 25,
+                  maxLength: 12,
                 })}
-                type="text"
-                placeholder="price"
+                type="text" placeholder="Enter your country"
               />
-              {errors.price && <small>Enter valid price.</small>}
+              {errors.country && errorHandler("Enter your country.")}
             </div>
-            <div className="w-full md:w-1/2 px-3">
-
+            <div className="w-full md:w-1/2 px-1 mt-2  md:mb-0 ">
               <input
-                {...register("category", {
+                {...register("city", {
                   required: true,
                   minLength: 2,
-                  maxLength: 25,
+                  maxLength: 12,
                 })}
-                type="text"
-                placeholder="choose category"
+                type="text" placeholder="Enter your city"
               />
-              {errors.category && <small>Enter valid  category.</small>}
+              {errors.city && errorHandler("Enter your city.")}
             </div>
           </div>
-
-
-          <div className="  flex justify-end ">
-            <button type="submit" >
-              Next
-            </button>
-
+          <div className="  flex justify-center ">
+            <div className="flex">
+              <button type="submit" >
+                Upload
+              </button>
+              <button onClick={()=>setDisplay(false)} type="submit"> Back</button>
+            </div>
           </div>
-        </form>}
-
-
-
-      </main>
-    </Wrapper>
+        </div>
+      </form>}
+    </main>
+    </Wrapper >
   )
 }
 

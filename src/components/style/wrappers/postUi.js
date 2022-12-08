@@ -12,7 +12,7 @@ padding:12px;
     margin-top: 20px;
     height: 400px;
     form{
-        margin-top: 28px;
+        margin-top: 70px;
      display: block;
      text-align: center;
      justify-content: center;
@@ -56,6 +56,9 @@ padding:12px;
                }  
          }
    }
+}
+.secondform{
+
 }
 }
  
