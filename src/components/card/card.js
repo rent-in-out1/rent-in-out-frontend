@@ -11,8 +11,10 @@ import { Wrapper } from "../style/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
 import { onLikesToggle, onRegisterShow } from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
+import { likePost } from "../../redux/features/postsSlice";
+import LazyLoad from 'react-lazy-load';
 
-const Card = ({ post, setIsChange }) => {
+const Card = ({ post, setIsChange, key }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
@@ -37,12 +39,13 @@ const Card = ({ post, setIsChange }) => {
     }
     setLike(!like);
     let url = "/posts/likePost/" + post._id;
-    await doApiMethod(url, "POST");
+    let likes = await doApiMethod(url, "POST");
+    dispatch(likePost(likes))
     setIsChange(true);
 
   };
   useEffect(() => {
-    window.addEventListener("scroll", ()=> closeNav())
+    window.addEventListener("scroll", () => closeNav())
     getPostCreatorInfo(post?.creator_id);
   }, [like]);
   const getPostCreatorInfo = async (id) => {
@@ -56,18 +59,18 @@ const Card = ({ post, setIsChange }) => {
           <div
             onClick={() => {
               user.role === "admin" ?
-                nav(`admin/profile/${owner._id}`)
+                nav(`/admin/profile/${owner._id}`)
                 : nav(`/profile/${owner._id}`)
             }}
             className="flex items-center cursor-pointer"
           >
-            <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
+            <LazyLoad className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
               <img
                 className="w-full h-full rounded-full object-cover"
                 src={owner?.profile_img?.url}
                 alt=""
               />
-            </div>
+            </LazyLoad>
             <span className="pl-1 flex">
               {owner.fullName?.firstName}{" "}
               <span className="ml-1 hidden md:flex">
@@ -84,18 +87,18 @@ const Card = ({ post, setIsChange }) => {
             <Dots />
           </div>
           {displayOptions && (
-            <ul onTouchCancel={() => closeNav()} onMouseOver={() => openNav()} onMouseLeave={() => closeNav()} className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl top-10 md:top-12 z-10 right-0">
-              <li className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200">
+            <ul onTouchCancel={() => closeNav()} onMouseOver={() => openNav()} onMouseLeave={() => closeNav()} className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-10 md:top-12 z-10 right-0">
+              <li onClick={() => closeNav()} className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${user?._id !== post?.creator_id && "rounded-b-xl hover:rounded-b-xl"}`}>
                 <p>Share</p>
                 <Send />
               </li>
               {user?._id === post?.creator_id && (
                 <React.Fragment>
-                  <li className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:bg-gray-200">
+                  <li onClick={() => closeNav()} className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200">
                     <p>Edit</p>
                     <p>icon</p>
                   </li>
-                  <li className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:bg-gray-200">
+                  <li onClick={() => closeNav()} className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200">
                     <p>Delete</p>
                     <p>icon</p>
                   </li>
@@ -108,13 +111,13 @@ const Card = ({ post, setIsChange }) => {
           className="relative cursor-pointer"
           onDoubleClick={() => heartClick()}
         >
-          <div className="overflow-hidden w-full postImg">
+          <LazyLoad className="overflow-hidden w-full postImg">
             <img
               className="w-full h-full object-cover"
               src={post.img[0]?.url}
               alt="post"
             />
-          </div>
+          </LazyLoad>
           <div
             className="absolute top-0 right-4 p-2"
             onClick={() => {
@@ -134,14 +137,13 @@ const Card = ({ post, setIsChange }) => {
               {post?.title}
             </h5>
           </div>
-          <div className="lg:flex lg:justify-between lg:items-center ">
+          <div className="flex justify-between items-center ">
             <div className="flex items-center mt-2.5 mb-5 cursor-pointer ">
               <span className="text-xs font-semibold mr-1 rounded">
                 {post?.likes.length || "Likes: 0"}
               </span>
               <div
                 onClick={() => {
-                  // console.log(post?._id)
                   dispatch(onLikesToggle(post?.likes))
                 }}
                 className="flex items-center justify-between relative "
@@ -167,13 +169,13 @@ const Card = ({ post, setIsChange }) => {
 
             <span className="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded lg:mr-2">
               <Clock />
-              3 days ago
+              3d
             </span>
           </div>
 
           <div className="md:flex items-center justify-between">
-            <div className="flex items-center">
-              <span className="text-xl md:text-3xl font-bold text-gray-900 mr-1">
+            <div className="flex items-center justify-center mb-2 md:mb-0">
+              <span className="text-xl md:text-2xl font-bold text-gray-900 mr-1">
                 {post?.price}$
               </span>
               <span className="text-xs capitalize text-gray-400">per day</span>

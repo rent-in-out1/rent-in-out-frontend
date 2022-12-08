@@ -17,14 +17,29 @@ import SignOut from "../../../components/icons/signOut";
 import Bell from "../../../components/icons/bell";
 import Search from "./../../../components/icons/search";
 import WishList from "../../../components/icons/wishlist";
+import { useEffect } from "react";
 const Header = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.userSlice?.user !== null);
   const user = useSelector((state) => state.userSlice.user);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => closeNav())
+  }, [])
+  let timeOut;
+  const openNav = () => {
+    clearTimeout(timeOut);
+    setIsOpen(true)
+  }
+  const closeNav = () => {
+    timeOut = setTimeout(() => {
+      setIsOpen(false)
+    }, 100)
+  }
   return (
-    <Wrapper>
+    <Wrapper className="drop-shadow-xl">
       <section>
         <div className="left flex flex-wrap">
           <Link to={"/admin"}>
@@ -53,8 +68,8 @@ const Header = () => {
           </nav>
           <div
             className="relative avatar"
-            onMouseOver={() => setIsOpen(true)}
-            onClick={() => setIsOpen(true)}
+            onMouseLeave={() => closeNav()}
+            onClick={() => { isOpen ? closeNav() : openNav() }}
           >
             <img
               className="rounded-full"
@@ -66,16 +81,16 @@ const Header = () => {
               alt=""
             />
             <span
-              className={`${
-                isLogin ? "bg-green-400" : "bg-red-400"
-              } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
+              className={`${isLogin ? "bg-green-400" : "bg-red-400"
+                } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
             ></span>
           </div>
         </div>
       </section>
       {isOpen && (
         <ul
-          onMouseLeave={() => setIsOpen(false)}
+          onMouseOver={() => openNav()}
+          onMouseLeave={() => closeNav()}
           className="absolute shadow dropdown z-50 bg-white w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30"
         >
           <li

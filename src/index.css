@@ -59,6 +59,7 @@
 * {
     scrollbar-width: auto;
     scrollbar-color: var(--skyblue-200) var(--skyblue-200);
+    font-family: sans-serif;
   }
 
   /* Chrome, Edge, and Safari */

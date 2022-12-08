@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    background: var(--skyblue-50);
+    /* background: var(--skyblue-50); */
+    background: var(--white);
     position: sticky;
     width: 100%;
     top: 0;
@@ -105,13 +106,7 @@ export const Wrapper = styled.div`
             }
         }
         .right{
-            .avatar{
-                /* width: 30px; */
-                /* height: 30px; */
-             }   
             width: auto;
-            nav{
-            }
         }
     }
     }
@@ -132,7 +127,6 @@ margin: 0;
 cursor: pointer;
     p{
         margin: 0 4px;
-        /* display: none; */
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
     img{
@@ -150,7 +144,6 @@ cursor: pointer;
             margin: 0;
         }
         p{
-            /* display: none; */
             margin: 0;
         }
     }

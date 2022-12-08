@@ -40,16 +40,16 @@ const Header = () => {
     }, 100)
   }
   return (
-    <Wrapper>
+    <Wrapper className ="drop-shadow-xl">
       <section>
         <div className="left flex flex-wrap">
           <Link to={"/"}>
             <Logo>
-              <img src="./img/LOGO.png" alt="logo" />
+              <img src="../img/LOGO.png" alt="logo" />
               <p>rentInOut</p>
             </Logo>
           </Link>
-          <div className="search">
+          {/* <div className="search">
             <input
               type="text"
               placeholder="Search..."
@@ -58,7 +58,7 @@ const Header = () => {
             <div className="icon">
               <Search color="#333" width="16" height="16" />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="right">
           <nav>
@@ -116,7 +116,7 @@ const Header = () => {
         <ul
           onMouseOver={() => openNav()}
           onMouseLeave={() => closeNav()}
-          className="absolute dropdown transition shadow bg-white z-50 w-full rounded right-0 -top-15 md:w-1/4 md:-bottom-30"
+          className="absolute dropdown transition shadow bg-white z-50 w-full rounded-b right-0 -top-15 md:w-1/4 md:-bottom-30"
         >
           {isLogin && (
             <React.Fragment>

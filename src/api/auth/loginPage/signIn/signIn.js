@@ -8,10 +8,14 @@ import { onLogout } from "../../../../redux/features/toggleSlice";
 import { errorHandler } from "./../../../../services/service";
 import { Button } from "../../../../../src/components/style/wrappers/registerPage";
 import LoadingButton from './../../../../components/UI/spinnerButton';
+import OpenEye from "../../../../components/icons/openEye";
+import { eyeShowHide } from "../../../../helpers/functions";
+import CloseEye from "../../../../components/icons/closeEye";
 
 const SignIn = (props) => {
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   const [load, setLoad] = useState(false);
+  const [show, setShow] = useState(false);
   let {
     register,
     handleSubmit,
@@ -79,17 +83,23 @@ const SignIn = (props) => {
                 }}
                 className="text-blue-400 hover:text-blue-700"
               >
-                Forgot Password ? 
+                Forgot Password ?
               </button></label>
-            <input
-              {...register("password", {
-                required: true,
-                minLength: 6,
-                maxLength: 25,
-              })}
-              type="password"
-              placeholder="******************"
-            />
+            <div id="password">
+              <input
+                id="passInput"
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 25,
+                })}
+                type="password"
+                placeholder="********"
+              />
+              <div className="cursor-pointer" onClick={()=>eyeShowHide(setShow)}> 
+                {show ? <OpenEye /> : <CloseEye/>}
+              </div>
+            </div>
             {errors.password && (
               <small>
                 Please fill out valid password (Upper/Lowercase , Number

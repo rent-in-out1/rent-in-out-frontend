@@ -47,13 +47,15 @@ const AppRoutes = () => {
   }, []);
 
   const getUserInfo = async (_id, token) => {
-    let url = "/users/info/" + _id;
+    let url = "/users/infoToken/" + _id;
     const { data } = await doApiMethod(url, "GET", token);
+    console.log(data);
     if (!data.userInfo) {
       errorHandler("invalid user");
       window.open(API_URL_CLIENT, "_self");
       return;
     }
+    localStorage.setItem("token" , JSON.stringify(data.newAccessToken))
     dispatch(onLogin(data.userInfo));
   };
   return (

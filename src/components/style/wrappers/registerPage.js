@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   align-items: center;
   box-sizing: border-box;
   margin-bottom: 20px;
-
+  user-select: none;
   .inside_box {
     min-height: inherit;
     background: var(--white);
@@ -31,6 +31,21 @@ export const Wrapper = styled.div`
   }
 
   .right {
+      label {
+      display: block;
+      color: var(--grey-700);
+      font-size: x-small;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    small {
+      color: var(--red);
+      margin: 0;
+      padding: 0;
+      font-size: x-small;
+      font-style: italic;
+    }
     input {
       display: block;
       width: 100%;
@@ -46,44 +61,34 @@ export const Wrapper = styled.div`
         border: 1px solid var(--grey-500);
       }
     }
+    #password{
+      background: var(--grey-100);
+      display: flex;
+      /* padding: 8px; */
+      align-items: center;
+      border: 1px solid var(--grey-200);
+      border-radius: 8px;
+      input{
+        height: 100%;
+      background: none;
+      border: 0;
+      border-radius: 8px;
+      margin-bottom: 0;
+      box-shadow: none;
+      &:focus {
+        outline: none;
+        background: none;
+        border: none;
+      }
+      }
+    }
     padding: 12px 12px 0px 0px;
     @media (max-width: 768px) {
       padding: 24px;
     }
   }
 
-  label {
-    display: block;
-    color: var(--grey-700);
-    font-size: x-small;
-    font-weight: bold;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-  small {
-    color: var(--red);
-    margin: 0;
-    padding: 0;
-    font-size: x-small;
-    font-style: italic;
-  }
-  .input {
-    display: block;
-    width: 100%;
-    background: var(--grey-100);
-    color: var(--black);
-    border: 1px solid var(--grey-200);
-    border-radius: 8px;
-    padding: 8px 8px;
-    margin-bottom: 2px;
-    cursor: pointer;
 
-    &:focus {
-      outline: none;
-      background: var(--white);
-      border: 1px solid var(--grey-500);
-    }
-  }
   .left {
     display: flex;
     flex-direction: column;
