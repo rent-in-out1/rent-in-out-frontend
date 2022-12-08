@@ -2,8 +2,11 @@ import React, { useRef, useState } from "react";
 import { doApiMethod, successHandler } from "../../../services/service";
 import { errorHandler } from "./../../../services/service";
 import { FaCheckCircle, FaBan } from "react-icons/fa";
+import { createNewCategory } from "../../../redux/features/categorieSlice";
+import { useDispatch } from "react-redux";
 
 const AddCategoryForm = (props) => {
+  const dispatch = useDispatch()
   const infoRef = useRef();
   const nameRef = useRef();
   const urlRef = useRef();
@@ -11,7 +14,6 @@ const AddCategoryForm = (props) => {
   const addNewCategory = async () => {
     let url = "/categories";
     console.log(addData)
-    try {
       if (
         !addData ||
         addData.name === "" ||
@@ -21,13 +23,10 @@ const AddCategoryForm = (props) => {
         errorHandler("Please fill in all fields");
         return;
       }
-      await doApiMethod(url, "POST", addData);
+      dispatch(createNewCategory(addData))
       props.setIsChange(true);
       props.setOnAdd(false);
       successHandler("Added new category successfully");
-    } catch (err) {
-      errorHandler(err.data);
-    }
   };
 
   return (

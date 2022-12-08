@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BackDropS, Modal } from "./confirmWrapper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ExitFill from "./../../icons/exitFill";
 import ExitNoFill from "./../../icons/exitNoFill";
 import LoadingButton from "./../spinnerButton";
 import { Button } from "../../style/wrappers/registerPage";
+import { onMessegeToggle } from "../../../redux/features/toggleSlice";
 
 const Backdrop = ({ action }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const Backdrop = ({ action }) => {
   );
 };
 
-const Confirm = ({ messege, action, children }) => {
+const Confirm = ({ children , action }) => {
+  const {message} = useSelector(state => state.toggleSlice)
   const [over, setOver] = useState(false);
   const dispatch = useDispatch();
   const [pressed, setIsPressed] = useState(false);
@@ -31,7 +33,11 @@ const Confirm = ({ messege, action, children }) => {
           onMouseOver={() => setOver(true)}
           onMouseLeave={() => setOver(false)}
           onClick={() => {
-            dispatch(action());
+            dispatch(onMessegeToggle({
+              isShow: false,
+              info :"",
+              action: null,
+          }));
           }}
         >
           {over ? (
@@ -41,11 +47,11 @@ const Confirm = ({ messege, action, children }) => {
           )}
         </h2>
         <div className="text-center">
-          <h1>{messege}</h1>
+          <h1>{message.info}</h1>
           <div className="flex justify-around">
             <Button
               onClick={() => {
-                return dispatch(action({ info: "", approve: true }));
+                dispatch(action())
               }}
               className="w-2/5"
             >
@@ -53,7 +59,11 @@ const Confirm = ({ messege, action, children }) => {
             </Button>
             <Button
               onClick={() => {
-                return dispatch(action({ info: "", approve: false }));
+                dispatch(onMessegeToggle({
+                  isShow: false,
+                  info :"",
+                  action: null,
+              }));
               }}
               className="w-2/5"
             >
@@ -67,12 +77,12 @@ const Confirm = ({ messege, action, children }) => {
 };
 
 const portalElement = document.getElementById("overlays");
-const ConfirmHandler = ({ action, children, messege }) => {
+const ConfirmHandler = ({ children }) => {
   return (
     <React.Fragment>
-      {ReactDOM.createPortal(<Backdrop action={action} />, portalElement)}
+      {ReactDOM.createPortal(<Backdrop />, portalElement)}
       {ReactDOM.createPortal(
-        <Confirm action={action} messege={messege}>
+        <Confirm >
           {children}
         </Confirm>,
         portalElement

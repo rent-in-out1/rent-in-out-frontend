@@ -37,7 +37,7 @@ const AppRoutes = () => {
   let { user } = useSelector((state) => state.userSlice);
   let {search , register } = useSelector((state) => state.toggleSlice)
   let {likes } = useSelector((state) => state.toggleSlice)
-  let {messege} = useSelector((state) => state.toggleSlice)
+  let {message} = useSelector((state) => state.toggleSlice)
 
   useEffect(() => {
     let token;
@@ -109,8 +109,8 @@ const AppRoutes = () => {
         <ToastContainer position="bottom-right" />
         {search? <UserSearch/> : null}
         {register? <Register/> : null}
-        {likes.active ? <Likes likesArr={likes.likesArr}/>: null}
-        {/* {messege.isShow ? <ConfirmHandler action={onMessegeToggle} messege={messege.info} />: null} */}
+        {/* {likes.active ? <Likes likesArr={likes.likesArr}/>: null} */}
+        {message.isShow ? <ConfirmHandler action={message.action}/>: null}
       </Router>
     </Suspense>
   );

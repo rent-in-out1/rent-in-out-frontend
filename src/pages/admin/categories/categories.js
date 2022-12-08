@@ -4,26 +4,31 @@ import { Wrapper } from "../../../components/style/wrappers/table";
 import CategoryItem from "./categoryItem";
 import AddCategoryForm from "../../../components/general/addCategoryForm/addCategoryForm";
 import Controllers from './../../../components/controllers/controllers';
+import { useDispatch, useSelector } from "react-redux";
+import { getCatgories } from './../../../redux/features/categorieSlice';
 const Categories = () => {
-  const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
+  const categories = useSelector(state=> state.categories)
+  // const [categories, setCategories] = useState([]);
   const [isChange, setIsChange] = useState(false);
   const [onAdd, setOnAdd] = useState(false);
   const [search, setSearch] = useState("");
   const [option, setOption] = useState();
+  const [page, setPage] = useState(1);
   const options =
   [{ name: "Title", value: "name" },
   { name: "Date created", value: "createdAt" },
   { name: "Date updated", value: "updatedAt" }]
 
-  const getAllcategories = async () => {
-    let url = `/categories/search/?s=${search}&sort=${option}`;
-    const { data } = await doGetApiMethod(url);
-    setCategories(data);
-    setIsChange(false);
-  };
+  // const getAllcategories = async () => {
+  //   let url = `/categories/search/?s=${search}&sort=${option}`;
+  //   const { data } = await doGetApiMethod(url);
+  //   setCategories(data);
+  //   setIsChange(false);
+  // };
   useEffect(() => {
-    getAllcategories();
-  }, [isChange, onAdd , search, option]);
+    dispatch(getCatgories({ search, option , page}));
+  }, []);
   return (
     <Wrapper className="mb-4">
       <Controllers
@@ -48,7 +53,7 @@ const Categories = () => {
               </tr>
             </thead>
             <tbody>
-              {categories.map((category) => (
+              {categories?.map((category) => (
                 <CategoryItem
                   key={category._id}
                   item={category}

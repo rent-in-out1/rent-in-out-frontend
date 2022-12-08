@@ -29,9 +29,6 @@ const categoriesSlice = createSlice({
             } catch (error) {
                 console.log(error)
             }
-            console.log(action.payload)
-
-            // getCatgories()
         },
         deleteCategory: (state , action)=>{
 
@@ -47,10 +44,11 @@ const categoriesSlice = createSlice({
         [getCatgories.fulfilled] :(state, action) =>{
             state.loading = false;
             state.categories = action.payload
+            console.log(action.payload)
         },
         [getCatgories.rejected] :(state , action) =>{
             state.loading = false;
-            state.error = action.payload.message
+            state.error = action.payload
         }
 
     }

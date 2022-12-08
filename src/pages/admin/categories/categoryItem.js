@@ -4,8 +4,11 @@ import { FaBan, FaCheckCircle } from "react-icons/fa";
 import { errorHandler } from "./../../../services/service";
 import { doApiMethod } from "../../../services/service";
 import { doGetApiMethod } from "./../../../services/service";
+import { useDispatch } from "react-redux";
+import { onMessegeToggle } from "../../../redux/features/toggleSlice";
 
 const CategoryItem = (props) => {
+  const dispatch = useDispatch();
   const infoRef = useRef();
   const nameRef = useRef();
   const urlRef = useRef();
@@ -31,11 +34,12 @@ const CategoryItem = (props) => {
     setEditor(data);
     props.setIsChange(true)
   };
-  const deleteCategory = async (_id, categoryName) => {
-    if (window.confirm(`Are you sure you want to delete ${categoryName}`)) {
-      const url = "/categories/" + _id;
+  const deleteCategory = async (_id, categoryName ="") => {
+    // if (window.confirm(`Are you sure you want to delete ${categoryName}`)) {
+      const url = "/categories/" + category._id;
       await doApiMethod(url, "DELETE");
-    }
+    // }
+    
   };
 
   const editCategory = async (_id, categoryName) => {
@@ -207,7 +211,11 @@ const CategoryItem = (props) => {
       <td>
         <span
           onClick={() => {
-            deleteCategory(category._id, category.name);
+            // deleteCategory(category._id, category.name);
+            dispatch(onMessegeToggle({
+              info: `Are you sure you want to delete ${category.name}?`,
+              action: deleteCategory()
+            }))
             props.setIsChange(true);
           }}
           className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
