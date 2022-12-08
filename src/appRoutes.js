@@ -9,7 +9,6 @@ import { onLogin } from "./redux/features/userSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
 import Likes from "./pages/client/likes";
-import CreatePost from "./components/createPost"
 import WishList from "./pages/client/wishList";
 
 // Lazy loading of routes
@@ -29,7 +28,6 @@ const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
 const AppRoutes = () => {
-  // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
   let {search , register } = useSelector((state) => state.toggleSlice)
@@ -63,9 +61,7 @@ const AppRoutes = () => {
       fallback={
         <div className="w-100 h-screen flex items-center justify-center">
           <Loader load={true} height="400" width="400" />
-        </div>
-      }
-    >
+        </div>}>
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -79,11 +75,7 @@ const AppRoutes = () => {
               <React.Fragment>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
-
-                <Route path="/createpost" element={<CreatePost />} />
-
                 <Route path="/wishlist" element={<WishList />} />
-
                 <Route path="*" element={<Page404 />} />
               </React.Fragment>
             )}

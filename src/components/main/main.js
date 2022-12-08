@@ -5,6 +5,7 @@ import Card from '../card'
 import Loader from '../loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { clear, onLoad } from '../../redux/features/postsSlice'
+import CreatePost from '../createPost/createPost'
 
 const Main = () => {
     const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const Main = () => {
     }
     return (
         <main className='w-full min-h-screen p-1 md:p-3 text-center justify-center'>
+            <CreatePost/>
             <div id='posts' className='flex flex-wrap'>
                 {posts &&
                     posts.map((post,i) => (

@@ -9,10 +9,9 @@ padding:12px;
    box-shadow: none;
 }
    main{
-    margin-top: 20px;
-    height: 400px;
+    margin-top: 12px;
     form{
-        margin-top: 70px;
+     margin-top: 12px;
      display: block;
      text-align: center;
      justify-content: center;

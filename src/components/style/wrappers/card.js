@@ -12,6 +12,9 @@ export const Wrapper = styled.div`
     border-radius: 8px;
     margin-bottom: 12px;
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+    span{
+        font-size: 1em;
+    }
     }
     img{
         width: 100%;
@@ -22,18 +25,30 @@ export const Wrapper = styled.div`
     /* smart phones */
     @media screen and (min-width: 320px) and (max-width:480px) {
         padding:4px;
-        .postImg{
-        height: 200px;
-    }
+        .card{
+         .postImg{
+            height: 200px;
+            }
+            span{
+                font-size: 0.8em;
+            }
+        }
+
+
     }
     /* For tablets and ipads */
     @media screen and (min-width: 481px) and (max-width:768px) {
         width: 100%;
         padding: 6px;
         margin: 12px 0 0px 0;
-        .postImg{
-        height: 300px;
-    }
+        .card{
+         .postImg{
+            height: 300px;
+            }
+            span{
+                font-size: 0.8em;
+            }
+        }
     }
     /* For laptops */
     @media screen and (min-width: 769px) and (max-width:1024px) {
