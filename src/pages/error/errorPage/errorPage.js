@@ -1,5 +1,5 @@
 import React from 'react'
-
+/** return svg */
 const ErrorPage = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="891.38051" height="573.8863" viewBox="0 0

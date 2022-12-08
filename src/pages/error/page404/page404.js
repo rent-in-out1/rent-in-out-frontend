@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ErrorPage from '../errorPage'
-
+/** page 404 */
 const Page404 = () => {
   return (
     <div>
