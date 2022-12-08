@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { doApiMethod, successHandler } from "../../../services/service";
 import { errorHandler } from "./../../../services/service";
 import { FaCheckCircle, FaBan } from "react-icons/fa";
-import { createNewCategory } from "../../../redux/features/categorieSlice";
+import { addCategory, createNewCategory } from "../../../redux/features/categorieSlice";
 import { useDispatch } from "react-redux";
 
 const AddCategoryForm = (props) => {
@@ -12,8 +12,6 @@ const AddCategoryForm = (props) => {
   const urlRef = useRef();
   const [addData, setAddData] = useState({});
   const addNewCategory = async () => {
-    let url = "/categories";
-    console.log(addData)
       if (
         !addData ||
         addData.name === "" ||
@@ -23,7 +21,7 @@ const AddCategoryForm = (props) => {
         errorHandler("Please fill in all fields");
         return;
       }
-      dispatch(createNewCategory(addData))
+      dispatch(addCategory(addData))
       props.setIsChange(true);
       props.setOnAdd(false);
       successHandler("Added new category successfully");
@@ -32,7 +30,7 @@ const AddCategoryForm = (props) => {
   return (
     <tr>
       <td>
-        <div className="w-full mb-2 md:mb-0 flex justify-center">
+        <div className="w-full mb-1 md:mb-0 flex justify-center">
           <input
             onChange={() => {
               setAddData({
@@ -50,7 +48,7 @@ const AddCategoryForm = (props) => {
         </div>
       </td>
       <td>
-        <div className="w-full mb-2 md:mb-0 flex justify-center">
+        <div className="w-full mb-1 md:mb-0 flex justify-center">
           <input
             onChange={() => {
               setAddData({
@@ -68,10 +66,10 @@ const AddCategoryForm = (props) => {
         </div>
       </td>
       <td>
-        <p>***********</p>
+        <p>***</p>
       </td>
       <td>
-        <div className="w-full mb-2 md:mb-0 flex justify-center">
+        <div className="w-full mb-1 md:mb-0 flex justify-center">
           <input
             onChange={() => {
               setAddData({
@@ -89,16 +87,16 @@ const AddCategoryForm = (props) => {
         </div>
       </td>
       <td>
-        <p>***********</p>
+        <p>-</p>
       </td>
       <td>
-        <p>***********</p>
+        <p>-</p>
       </td>
       <td>
-        <p>***********</p>
+        <p>-</p>
       </td>
       <td>
-        <p>***********</p>
+        <p>-</p>
       </td>
       <td>
         <span className="relative">

@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BsTrash, BsHammer } from "react-icons/bs";
 import { FaBan, FaCheckCircle } from "react-icons/fa";
-import { errorHandler } from "./../../../services/service";
-import { doApiMethod } from "../../../services/service";
 import { doGetApiMethod } from "./../../../services/service";
 import { useDispatch } from "react-redux";
-import { onMessegeToggle } from "../../../redux/features/toggleSlice";
 import { deleteCategory, editCategory } from "../../../redux/features/categorieSlice";
 
 const CategoryItem = (props) => {
@@ -35,30 +32,6 @@ const CategoryItem = (props) => {
     setEditor(data);
     props.setIsChange(true);
   };
-  // const deleteCategory = async (_id, categoryName ="") => {
-  //   // if (window.confirm(`Are you sure you want to delete ${categoryName}`)) {
-  //     const url = "/categories/" + category._id;
-  //     await doApiMethod(url, "DELETE");
-  //   // }
-
-  // };
-
-  // const editCategory = async (_id, categoryName) => {
-  //   const url = "/categories/" + _id;
-  //   if (
-  //     !editData ||
-  //     editData.name === "" ||
-  //     editData.url_name === "" ||
-  //     editData.info === ""
-  //   ) {
-  //     errorHandler("Please fill in all fields");
-  //     return;
-  //   }
-  //   if (window.confirm(`Are you sure you want to edit ${categoryName}`)) {
-  //     setOnEdit(true);
-  //     await doApiMethod(url, "PUT", editData);
-  //   }
-  // };
   return (
     <tr>
       <td>
@@ -138,12 +111,12 @@ const CategoryItem = (props) => {
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {category?.craetedAt.split("T")[0]}
+          {category?.craetedAt?.split("T")[0]}
         </p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {category?.updatedAt.split("T")[0]}
+          {category?.updatedAt?.split("T")[0]}
         </p>
       </td>
       {!onEdit ? (
@@ -176,9 +149,6 @@ const CategoryItem = (props) => {
                   className="mx-2 absolute left-3 bottom-0 inset-0 opacity-50 rounded-full"
                   onClick={() => {
                     dispatch(editCategory({id: category._id, name: category?._id, editData, setOnEdit}))
-                    // await editCategory(category?._id, category?.name);
-                    // setOnEdit(false);
-                    // props.setIsChange(true);
                   }}
                 />
               </span>
@@ -213,7 +183,6 @@ const CategoryItem = (props) => {
       <td>
         <span
           onClick={() => {
-            // deleteCategory(category._id, category.name);
             dispatch(deleteCategory({ id: category._id, name: category.name }));
             props.setIsChange(true);
           }}

@@ -20,15 +20,14 @@ export const deleteCategory = createAsyncThunk(
       if (window.confirm(`Are you sure you want to delete${name}`)) {
         const url = "/categories/" + id;
         await doApiMethod(url, "DELETE");
+        return id;
       }
-      return id;
     } catch (error) {
       console.log(error);
     }
   }
 );
-// אני יצאתי לשיעור פרטי תמחוק את מה שעשיתי 
-// דרך הקומיטים אם זה לא רלוונטי
+
 export const editCategory = createAsyncThunk(
   "editCategory/edit",
   async ({ id, editData, setOnEdit }) => {
@@ -55,6 +54,20 @@ export const editCategory = createAsyncThunk(
     }
   }
 );
+export const addCategory = createAsyncThunk(
+  "addCategory/add",
+  async ( addData ) => {
+    console.log(addData)
+    try {
+      let url = "/categories";
+      const {data} = await doApiMethod(url, "POST", addData);
+      // console.log(data)
+      return data
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 const categoriesSlice = createSlice({
   name: "catgories",
@@ -62,23 +75,6 @@ const categoriesSlice = createSlice({
     categories: [],
     error: "",
     loading: false,
-  },
-  reducers: {
-    createNewCategory: async (state, action) => {
-      try {
-        let url = "/categories";
-        await doApiMethod(url, "POST", action.payload);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    delete: async (state, action) => {
-      // filter our state
-      state.categories = state.categories.filter(
-        (category) => category._id !== action.payload.id
-      );
-    },
-    // editCategory: (state, action) => {},
   },
   extraReducers: {
     // get categories status
@@ -122,7 +118,18 @@ const categoriesSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    [addCategory.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [addCategory.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.categories= [...state.categories,action.payload]
+    },
+    [addCategory.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
-export const { createNewCategory } = categoriesSlice.actions;
+// export const { createNewCategory } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

@@ -25,7 +25,7 @@ const Categories = () => {
     dispatch(getCatgories({ search, option , page}));
   }, [page , option , search]);
   return (
-    <Wrapper className="mb-4">
+    <Wrapper className="mb-2">
       <Controllers
         title={"Categories"}
         options={options}
@@ -50,7 +50,7 @@ const Categories = () => {
             <tbody>
               {categories?.map((category) => (
                 <CategoryItem
-                  key={category._id}
+                  key={category?._id}
                   item={category}
                   setIsChange={setIsChange}
                   isChange={isChange}

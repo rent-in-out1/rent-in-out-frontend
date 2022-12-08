@@ -70,10 +70,10 @@ const CreatePost = () => {
       <main className='mx-auto md:w-2/3 p-3 bg-white w-full rounded-xl drop-shadow-xl'>
         <div className='flex p-2 mx-auto  space-x-1 justify-center'>
           <div>
-            {user.fullName.firstName}  {user.fullName.lastName}
+            {user?.fullName.firstName}  {user?.fullName.lastName}
           </div>
           <div className="rounded-full w-8 h-8 overflow-hidden ">
-            <img className="object-cover w-full h-full" src={user.profile_img.url} alt="avatar" />
+            <img className="object-cover w-full h-full" src={user?.profile_img.url} alt="avatar" />
           </div>
         </div>
         {/* first process */}
