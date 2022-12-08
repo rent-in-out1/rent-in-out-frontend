@@ -6,11 +6,11 @@ import Sidebar from '../../components/sideBar'
 
 const Layout = () => {
   return (
-    <div>
+    <div className='bg-gray-100'>
 
       <Header />
       <Sidebar />
-      <div className='w-full bg-gray-100 lg:w-10/12 ml-auto min-h-screen'>
+      <div className='w-full bg-gray-100 lg:w-9/12 ml-auto min-h-screen'>
         <Outlet />
       </div>
     </div>

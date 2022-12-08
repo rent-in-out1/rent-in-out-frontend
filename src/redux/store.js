@@ -4,6 +4,7 @@ import errorsSlice from './features/errorSlice'
 import toggleSlice from './features/toggleSlice'
 import accessTokenSlice from './features/access-token-slice'
 import categoriesSlice from './features/categorieSlice';
+import postsSlice from './features/postsSlice';
 
 
 const store = configureStore({
@@ -13,6 +14,7 @@ const store = configureStore({
         toggleSlice,
         accessTokenSlice,
         categoriesSlice,
+        postsSlice
     }
 })
 
