@@ -1,7 +1,7 @@
 import React from "react";
 // should send title options and set search set option
 // controllers of all the tables 
-const Controllers = ({ title, options, setSearch, setOption }) => {
+const Controllers = ({ title , placeHolder="", options, setSearch, setOption }) => {
   return (
     <div className="flex flex-wrap controllers">
       <div className="title w-full text-center">
@@ -31,7 +31,7 @@ const Controllers = ({ title, options, setSearch, setOption }) => {
             type="text"
             id="voice-search"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search users ..."
+            placeholder={`Search ${placeHolder} ...`}
             required
           ></input>
         </div>
