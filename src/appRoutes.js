@@ -14,7 +14,6 @@ import WishList from "./pages/client/wishList";
 import ConfirmHandler from './components/UI/confirm/confirm';
 
 // Lazy loading of routes
-
 const LayoutAdmin = React.lazy(() => import("./layout/layoutAdmin/layoutAdmin"));
 const Users = React.lazy(() => import("./pages/admin/users"));
 const MyProfile = React.lazy(() => import("./pages/client/myProfile"));
@@ -28,17 +27,11 @@ const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
-
-
-
 const AppRoutes = () => {
-  // const nav = useNavigate()
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
   let {search , register } = useSelector((state) => state.toggleSlice)
   let {likes } = useSelector((state) => state.toggleSlice)
-  let {message} = useSelector((state) => state.toggleSlice)
-
   useEffect(() => {
     let token;
     if (localStorage["token"]) {
@@ -62,15 +55,12 @@ const AppRoutes = () => {
     localStorage.setItem("token" , JSON.stringify(data.newAccessToken))
     dispatch(onLogin(data.userInfo));
   };
-
   return (
     <Suspense
       fallback={
         <div className="w-100 h-screen flex items-center justify-center">
           <Loader load={true} height="400" width="400" />
-        </div>
-      }
-    >
+        </div>}>
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -110,7 +100,6 @@ const AppRoutes = () => {
         {search? <UserSearch/> : null}
         {register? <Register/> : null}
         {/* {likes.active ? <Likes likesArr={likes.likesArr}/>: null} */}
-        {message.isShow ? <ConfirmHandler action={message.action}/>: null}
       </Router>
     </Suspense>
   );

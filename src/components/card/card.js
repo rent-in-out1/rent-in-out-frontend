@@ -42,7 +42,6 @@ const Card = ({ post, setIsChange, key }) => {
     let likes = await doApiMethod(url, "POST");
     dispatch(likePost(likes))
     setIsChange(true);
-
   };
   useEffect(() => {
     window.addEventListener("scroll", () => closeNav())
@@ -68,13 +67,12 @@ const Card = ({ post, setIsChange, key }) => {
               <img
                 className="w-full h-full rounded-full object-cover"
                 src={owner?.profile_img?.url}
-                alt=""
+                alt="avatar"
               />
             </LazyLoad>
             <span className="pl-1 flex">
-              {owner.fullName?.firstName}{" "}
+              {owner.fullName?.firstName}
               <span className="ml-1 hidden md:flex">
-                {" "}
                 {owner.fullName?.lastName}
               </span>
             </span>
@@ -107,23 +105,12 @@ const Card = ({ post, setIsChange, key }) => {
             </ul>
           )}
         </div>
-        <div
-          className="relative cursor-pointer"
-          onDoubleClick={() => heartClick()}
-        >
+        <div className="relative cursor-pointer"
+          onDoubleClick={() => heartClick()}>
           <LazyLoad className="overflow-hidden w-full postImg">
-            <img
-              className="w-full h-full object-cover"
-              src={post.img[0]?.url}
-              alt="post"
-            />
+            <img className="w-full h-full object-cover" src={post.img[0]?.url} alt="post"/>
           </LazyLoad>
-          <div
-            className="absolute top-0 right-4 p-2"
-            onClick={() => {
-              heartClick();
-            }}
-          >
+          <div className="absolute top-0 right-4 p-2" onClick={() => {heartClick()}}>
             {!post.likes.some((el) => el.user_id === user?._id) ? (
               <Heart color="red" width="20px" height={"20px"} />
             ) : (

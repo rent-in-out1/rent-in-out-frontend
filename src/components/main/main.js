@@ -1,3 +1,4 @@
+
 import { useScroll } from "../../hooks/useScroll";
 import React, { useState, useEffect, useRef } from "react";
 import { doGetApiMethod } from "../../services/service";
@@ -7,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { clear, onLoad } from "../../redux/features/postsSlice";
 import Controllers from "./../controllers/controllers";
 import MultiRangeSlider from "../UI/multiRangeSlider/MultiRangeSlider";
+import CreatePost from '../createPost/createPost'
+
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -25,16 +28,6 @@ const Main = () => {
     { name: "City", value: "city" },
     { name: "City", value: "city" },
   ];
-
-  /** check first how many posts */
-  useEffect(() => {
-    countP();
-  }, []);
-  useEffect(() => {
-    if (!firstLoad && endScreen && Math.ceil(countPosts / 10) >= page)
-      setPage(page + 1);
-    setFirstLoad(false);
-  }, [endScreen]);
 
   useEffect(() => {
     doApi();
@@ -58,6 +51,8 @@ const Main = () => {
   return (
     <React.Fragment>
       <main className="w-full min-h-screen p-1 md:p-3 text-center justify-center">
+        <div className="bg-white p-3 space-x-1 md:w-10/12 w-full mx-auto rounded-xl drop-shadow-xl">
+        <CreatePost/>
         <Controllers
           title={""}
           placeHolder={"Posts"}
@@ -66,7 +61,6 @@ const Main = () => {
           setOption={setOption}
         />
         <div className="flex items-center justify-center">
-          <div className="">
           <MultiRangeSlider
             min={0}
             max={1000}
@@ -76,6 +70,7 @@ const Main = () => {
           />
           </div>
         </div>
+        <div className="overflow-scroll border">
         <div id="posts" className="flex flex-wrap">
           {posts &&
             posts.map((post, i) => (
@@ -89,6 +84,7 @@ const Main = () => {
             <Loader width={"200px"} height={"200px"} />
           </div>
         )}
+        </div>
       </main>
     </React.Fragment>
   );
