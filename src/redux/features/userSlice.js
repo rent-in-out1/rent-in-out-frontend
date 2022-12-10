@@ -28,13 +28,20 @@ const userSlice = createSlice({
         upload: (state, action) => {
             state.user = action.payload 
         },
-        wishListupdate: (state, action) => {
-            state.user.wishList = action.payload
+        updateWishList: (state, action) => {
+            let like = state.user.wishList.some(post=> post._id === action.payload._id)
+            console.log(like)
+            console.log(state.user)
+            if (like) state.user.wishList = state.user.wishList.filter(post=> post._id !== action.payload._id)
+            else state.user.wishList.push(action.payload)
+        },
+        removeFromWishlist: (state, action) => {
+            state.user.wishList = state.user.wishList.filter(post=> post._id !== action.payload.id)
         }
        
 
     }
 })
 
-export const { onRegister, onLogin, changeRole, onLogout, uploadBanner, uploadProfileImage,upload } = userSlice.actions
+export const { onRegister, onLogin, changeRole, onLogout, uploadBanner, uploadProfileImage,upload ,updateWishList, removeFromWishlist} = userSlice.actions
 export default userSlice.reducer

@@ -17,6 +17,7 @@ import {
 import Clock from "../icons/clock";
 import { likePost } from "../../redux/features/postsSlice";
 import LazyLoad from "react-lazy-load";
+import { removeFromWishlist, updateWishList } from "../../redux/features/userSlice";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
@@ -125,6 +126,7 @@ const Card = ({ post }) => {
           onDoubleClick={() => {
             !user ? dispatch(onRegisterShow()) :
             dispatch(likePost({id : post._id}))
+            dispatch(updateWishList(post))
           }}
         >
           <LazyLoad className="overflow-hidden w-full postImg">
