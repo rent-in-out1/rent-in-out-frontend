@@ -14,8 +14,8 @@ const Main = () => {
   const dispatch = useDispatch();
   const { posts  , loading} = useSelector((state) => state.postsSlice);
   const [search, setSearch] = useState("");
-  const [max, setMax] = useState();
-  const [min, setMin] = useState();
+  const [maxP, setMax] = useState();
+  const [minP, setMin] = useState();
   const [option, setOption] = useState();
   const [countPosts, setCountPosts] = useState(0);
   const [page, setPage] = useState(1);
@@ -29,13 +29,12 @@ const Main = () => {
   ];
 
   useEffect(()=>{
-    
     return () =>{
       dispatch(clearPosts())
     }
   },[])
   useEffect(() => {
-    dispatch(getPosts({ search, option, page, min , max , endScreenEnd  , setPage}))
+    dispatch(getPosts({ search, option, page, minP , maxP, endScreenEnd  , setPage}))
   }, [endScreen]);
   return (
     <React.Fragment>
@@ -51,9 +50,10 @@ const Main = () => {
         />
         <div className="flex items-center justify-center">
           <MultiRangeSlider min={0} max={1000}
-            onChange={({ min, max }) =>
-              console.log(`min = ${min}, max = ${max}`)
-            }
+            onChange={({ min, max }) =>{
+              setMax(max)
+              setMin(min)
+            }}
           />
           </div>
         </div>
