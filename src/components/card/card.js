@@ -143,7 +143,7 @@ const Card = ({ post }) => {
               dispatch(likePost({id : post._id}))
             }}
           >
-            {!post?.likes?.some((el) => el.user_id === user?._id) ? (
+            {!user?.wishList?.some((el) => el._id === post?._id) ? (
               <Heart color="red" width="20px" height={"20px"} />
             ) : (
               <FillHeart color="red" width="20px" height={"20px"} />
