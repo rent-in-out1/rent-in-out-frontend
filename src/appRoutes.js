@@ -99,7 +99,7 @@ const AppRoutes = () => {
         <ToastContainer position="bottom-right" />
         {search? <UserSearch/> : null}
         {register? <Register/> : null}
-        {/* {likes.active ? <Likes likesArr={likes.likesArr}/>: null} */}
+        {likes.active ? <Likes likesArr={likes.likesArr}/>: null}
       </Router>
     </Suspense>
   );

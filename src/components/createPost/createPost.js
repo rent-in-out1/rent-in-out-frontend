@@ -102,7 +102,7 @@ const CreatePost = () => {
               })} type="text" placeholder="What do you want to share?" ></textarea>
               {errors.textarea && errorHandler("Enter at least two characters at description.")}
               <select ref={rangeRef}>
-                <option selected value="short-term" key={0} >
+                <option defaultValue="short-term" key={0} >
                   short-term
                 </option>
                 <option value="long-term" key={1} >
@@ -130,7 +130,7 @@ const CreatePost = () => {
             />
             {errors.price && errorHandler("Enter valid price.")}
             <select className="mt-2" ref={categoryRef}>
-              <option selected value="category" key={0} >
+              <option defaultValue="category" key={0} >
                 category
               </option>
               <option value="" key={1} >

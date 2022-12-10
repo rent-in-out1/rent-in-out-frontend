@@ -18,7 +18,7 @@ import Clock from "../icons/clock";
 import { likePost } from "../../redux/features/postsSlice";
 import LazyLoad from "react-lazy-load";
 
-const Card = ({ post, key }) => {
+const Card = ({ post }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);

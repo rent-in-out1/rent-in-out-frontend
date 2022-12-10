@@ -29,6 +29,7 @@ const Main = () => {
   ];
 
   useEffect(()=>{
+    
     return () =>{
       dispatch(clearPosts())
     }
