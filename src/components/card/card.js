@@ -50,7 +50,7 @@ const Card = ({ post }) => {
         <div className="flex justify-between items-center pr-2 p-1">
           <div
             onClick={() => {
-              user.role === "admin"
+              user?.role === "admin"
                 ? nav(`/admin/profile/${owner._id}`)
                 : nav(`/profile/${owner._id}`);
             }}

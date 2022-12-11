@@ -12,7 +12,7 @@ const SingleLike = ({item}) => {
       <li
         onClick={() => {
           dispatch(onLikesToggle(""))
-          user.role === "admin"
+          user?.role === "admin"
         ? nav(`admin/profile/${item.user_id}`)
         : nav(`/profile/${item.user_id}`);
         }}
@@ -23,7 +23,7 @@ const SingleLike = ({item}) => {
             <img
               className=" object-cover w-full h-full "
               src={
-                user !== null && user?.active
+                item?.profile_img
                   ? item.profile_img
                   : "https://freesvg.org/img/Male-Avatar.png"
               }
