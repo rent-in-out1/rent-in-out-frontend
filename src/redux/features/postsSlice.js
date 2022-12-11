@@ -14,10 +14,12 @@ export const getPosts = createAsyncThunk(
   }) => {
     try {
       console.log(page);
-      let url = `/posts/search/?s=${search}&sort=${option}&page=${page}&min=${min}&max=${max}`;
+      let url = `/posts?page=${page}`;
       let { data } = await doGetApiMethod(url);
-      endScreenEnd();
-      setPage(page + 1);
+      if (data.length > 0) {
+        endScreenEnd();
+        setPage(page + 1);
+      }
       return data;
     } catch (error) {
       console.log(error);
@@ -38,6 +40,19 @@ export const deletePost = createAsyncThunk(
     }
   }
 );
+export const uploadPost = createAsyncThunk(
+  "uploadPost/upload",
+  async (post) => {
+    try {
+      const url = "/posts";
+      let { data } = await doApiMethod(url, "POST", post);
+      console.log(data)
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 export const likePost = createAsyncThunk("likePost/like", async ({ id }) => {
   try {
     const url = "/posts/likePost/" + id;
@@ -48,9 +63,6 @@ export const likePost = createAsyncThunk("likePost/like", async ({ id }) => {
     console.log(error);
   }
 });
-export const clearPosts = createAsyncThunk("deletePost/delete", async () => {
-  return;
-});
 const initialState = {
   posts: [],
   loading: false,
@@ -60,6 +72,11 @@ const initialState = {
 const postsSlice = createSlice({
   name: "posts",
   initialState: initialState,
+  reducers: {
+    clearPosts: (state) => {
+      state.posts = []
+    }
+  },
   extraReducers: {
     // get posts
     [getPosts.pending]: (state, action) => {
@@ -92,12 +109,23 @@ const postsSlice = createSlice({
       state.loading = true;
     },
     [likePost.fulfilled]: (state, action) => {
-        state.loading = false;
-        state.posts.forEach((post,i) =>{
-          if(post._id === action.payload.id) state.posts[i].likes = action.payload.data.posts
-        })
-      },
+      state.loading = false;
+      state.posts.forEach((post, i) => {
+        if (post._id === action.payload.id) state.posts[i].likes = action.payload.data.posts
+      })
+    },
     [likePost.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [uploadPost.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [uploadPost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.posts.push(action.payload);
+    },
+    [uploadPost.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -105,5 +133,5 @@ const postsSlice = createSlice({
   },
 });
 
-// export const { clearPosts } = postsSlice.actions;
+export const { clearPosts } = postsSlice.actions;
 export default postsSlice.reducer;

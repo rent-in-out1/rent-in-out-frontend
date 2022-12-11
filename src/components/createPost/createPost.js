@@ -1,12 +1,14 @@
 import React, { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import { useForm } from "react-hook-form"
 import { doApiMethod, errorHandler, successHandler } from "../../services/service";
 import { Wrapper } from '../style/wrappers/postUi';
 import ImageFill from "../icons/imageFill";
 import { uploadPostImages } from "../../helpers/functions";
+import { uploadPost } from "../../redux/features/postsSlice";
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
   const [display, setDisplay] = useState(false);
   const [data, setData] = useState({});
@@ -53,21 +55,11 @@ const CreatePost = () => {
       country: _dataBody.country,
       city: _dataBody.city
     }
+    dispatch(uploadPost({ ...data, ...form2}))
     setData({ ...data, ...form2 })
-    uploadPost(data);
-    console.log(data)
     successHandler("you upload new post")
+  }
 
-  }
-  const uploadPost = async (_data) => {
-    try {
-      const url = "/posts";
-      await doApiMethod(url, "POST", _data);
-    }
-    catch (err) {
-      errorHandler(err.response.data.msg)
-    }
-  }
   return (
     <Wrapper>
       <main className='mx-auto md:w-2/3 p-3 bg-white w-full rounded-xl drop-shadow-xl'>
