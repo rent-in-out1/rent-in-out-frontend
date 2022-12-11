@@ -13,7 +13,8 @@ import CreatePost from '../createPost/createPost'
 const Main = () => {
   const dispatch = useDispatch();
   const { posts, loading } = useSelector((state) => state.postsSlice);
-  const [search, setSearch] = useState("");
+  const { user } = useSelector((state) => state.userSlice);
+    const [search, setSearch] = useState("");
   const [maxP, setMax] = useState();
   const [minP, setMin] = useState();
   const [option, setOption] = useState();
@@ -38,8 +39,8 @@ const Main = () => {
   }, [endScreen]);
   return (
     <React.Fragment>
-      <main className="w-9/12 min-h-screen p-1 md:p-3 text-center justify-center">
-        <div className="bg-white p-3 space-x-1 md:w-10/12 w-full mx-auto rounded-xl drop-shadow-xl">
+      <main className="min-h-screen p-1 md:p-3 text-center justify-center">
+        {user && <div className="bg-white p-3 space-x-1 md:w-10/12 w-full mx-auto rounded-xl drop-shadow-xl">
           <CreatePost />
           <Controllers
             title={""}
@@ -56,7 +57,7 @@ const Main = () => {
               }}
             />
           </div>
-        </div>
+        </div>}
         <div>
           <div id="posts" className="flex flex-wrap">
             {posts &&
