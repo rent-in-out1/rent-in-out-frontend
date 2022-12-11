@@ -13,7 +13,7 @@ const MyProfile = () => {
     <div>
       <BannerProfile />
       <Profile />
-      <OwnPosts id={userId || user._id} />
+      {/* <OwnPosts id={userId || user._id} /> */}
       <Footer />
     </div>
   )

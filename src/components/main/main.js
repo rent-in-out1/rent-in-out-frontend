@@ -68,7 +68,7 @@ const Main = () => {
               ))}
           </div>
           {loading && (
-            <div className="flex items-center justify-center min-h-40">
+            <div className="flex items-center justify-center w-screen min-h-40">
               <Loader width={"200px"} height={"200px"} />
             </div>
           )}

@@ -53,6 +53,11 @@ export const Wrapper = styled.div`
                 font-size: 1.2em;
                 font-weight: 600;
             }
+            #ads{
+                .ad{
+                    min-height: 300px;
+                }
+            }
         }
         section{
             width: 56%;
