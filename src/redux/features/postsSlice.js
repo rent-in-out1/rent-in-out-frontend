@@ -60,11 +60,6 @@ const initialState = {
 const postsSlice = createSlice({
   name: "posts",
   initialState: initialState,
-  reducer: {
-    uploadNewPost: (state, action)=>{
-        
-    }
-  },
   extraReducers: {
     // get posts
     [getPosts.pending]: (state, action) => {

@@ -10,6 +10,7 @@ const CreatePost = () => {
   const { user } = useSelector((state) => state.userSlice);
   const [display, setDisplay] = useState(false);
   const [data, setData] = useState({});
+  const [images, setImages] = useState({});
   const { register, handleSubmit, formState: { errors } } = useForm();
   const rangeRef = useRef();
   const categoryRef = useRef();
@@ -24,9 +25,10 @@ const CreatePost = () => {
         return errorHandler("file too big")
       }
       let image = await uploadPostImages(element);
-      result = await result.push(image);
+      
+      result.push(image);
     });
-    images = result;
+    setImages(result)
     successHandler("images uploaded")
   }
   /** first form */
@@ -35,7 +37,7 @@ const CreatePost = () => {
       return errorHandler("you must to choose some images")
     }
     let form1 = {
-      img: [...postRef.current.files],
+      img: images,
       title: _dataBody.title,
       info: _dataBody.textarea,
       range: rangeRef.current.value
@@ -53,6 +55,7 @@ const CreatePost = () => {
     }
     setData({ ...data, ...form2 })
     uploadPost(data);
+    console.log(data)
     successHandler("you upload new post")
 
   }
