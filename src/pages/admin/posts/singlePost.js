@@ -20,11 +20,13 @@ const SinglePost = (props) => {
   const changeActive = async (_id) => {
     const url = "/posts/changeActive/" + _id;
       await doApiMethod(url, "PATCH");
+      // props.setIsChange(true)
   };
   const deletePost = async (_id, postName) => {
     if (window.confirm(`Are you sure you want to delete ${postName}`)) {
       const url = "/posts/" + _id;
       await doApiMethod(url, "DELETE");
+      // props.setIsChange(true)
     }
   };
 
@@ -58,17 +60,17 @@ const SinglePost = (props) => {
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {post?.createdAt.split("T")[0]}
+          {post?.createdAt}
         </p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {post?.updatedAt.split("T")[0]}
+          {post?.updatedAt}
         </p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {post?.available_from.split("T")[0]}
+          {post?.available_from}
         </p>
       </td>
       <td>

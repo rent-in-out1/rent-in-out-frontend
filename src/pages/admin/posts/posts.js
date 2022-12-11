@@ -3,12 +3,15 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SinglePost from "./singlePost";
 import Controllers from "../../../components/controllers/controllers";
+import { API_URL } from './../../../services/service';
+import PageNav from './../../../helpers/pageNav';
 
 
 const Posts = () => {
   const [search, setSearch] = useState("");
   const [option, setOption] = useState();
   const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
   const [isChange, setIsChange] = useState(false);
   const options =
     [{ name: "Title", value: "title" },
@@ -17,7 +20,7 @@ const Posts = () => {
     { name: "Active", value: "active" }]
 
   const getAllposts = async () => {
-    let url = `/posts/search/?s=${search}&sort=${option}`;
+    let url = `/posts/search/?s=${search}&sort=${option}&page=${page}`;
     const { data } = await doGetApiMethod(url);
     setPosts(data);
     setIsChange(false)
@@ -30,6 +33,8 @@ const Posts = () => {
     <React.Fragment>
       <Wrapper>
         <Controllers title={"posts list"} options={options} setSearch={setSearch} setOption={setOption} />
+        <PageNav urlPageApi={"/posts/count"} perPage={10} setPage={setPage} page={page} setIsChange={setIsChange} cssClass="flex justify-center justify-between p-3 items-center justify-center w-10/12 md:w-8/12 mx-auto"/>
+
         <div className="wrapper">
           <table>
             <thead>
@@ -51,6 +56,7 @@ const Posts = () => {
               ))}
             </tbody>
           </table>
+          
         </div>
       </Wrapper>
     </React.Fragment>
