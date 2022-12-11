@@ -5,7 +5,7 @@ export const getPosts = createAsyncThunk(
   "posts/get",
   async ({
     search = "",
-    option = "",
+    option = "createdAt",
     page = 1,
     min = 0,
     max = 10000,
@@ -14,12 +14,10 @@ export const getPosts = createAsyncThunk(
   }) => {
     try {
       console.log(page);
-      let url = `/posts?page=${page}`;
+      let url = `/posts/search?s=${search}&page=${page}&sort=${option}&min=${min}&max=${max}&reverse=yes`;
       let { data } = await doGetApiMethod(url);
-      if (data.length > 0) {
-        endScreenEnd();
-        setPage(page + 1);
-      }
+      endScreenEnd();
+      setPage(page + 1);
       return data;
     } catch (error) {
       console.log(error);
@@ -123,7 +121,7 @@ const postsSlice = createSlice({
     },
     [uploadPost.fulfilled]: (state, action) => {
       state.loading = false;
-      state.posts.push(action.payload);
+      state.posts.unshift(action.payload);
     },
     [uploadPost.rejected]: (state, action) => {
       state.loading = false;
