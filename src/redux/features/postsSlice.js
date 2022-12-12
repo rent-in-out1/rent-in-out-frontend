@@ -16,8 +16,10 @@ export const getPosts = createAsyncThunk(
       console.log(page);
       let url = `/posts/search?s=${search}&page=${page}&sort=${option}&min=${min}&max=${max}&reverse=yes`;
       let { data } = await doGetApiMethod(url);
-      endScreenEnd();
-      setPage(page + 1);
+      if (data.length > 0) {
+        endScreenEnd();
+        setPage(page + 1);
+      }
       return data;
     } catch (error) {
       console.log(error);

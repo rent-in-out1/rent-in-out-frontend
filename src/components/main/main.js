@@ -29,6 +29,7 @@ const Main = () => {
   ];
 
   useEffect(() => {
+    setPage(1)
     dispatch(clearPosts())
     return () => {
       dispatch(clearPosts())
@@ -67,12 +68,12 @@ const Main = () => {
                 </div>
               ))}
           </div>
-          {loading && (
-            <div className="flex items-center justify-center w-screen min-h-40">
+        </div>
+        {loading && (
+            <div className="flex items-center justify-center min-h-40">
               <Loader width={"200px"} height={"200px"} />
             </div>
           )}
-        </div>
       </main>
     </React.Fragment>
   );
