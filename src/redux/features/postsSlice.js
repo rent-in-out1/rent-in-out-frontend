@@ -102,9 +102,6 @@ const postsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    [deletePost.fulfilled]: (state) => {
-      state.posts = [];
-    },
     [likePost.pending]: (state, action) => {
       state.loading = true;
     },
