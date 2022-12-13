@@ -49,7 +49,6 @@ export const uploadPost = createAsyncThunk(
     try {
       const url = "/posts";
       let { data } = await doApiMethod(url, "POST", post);
-      console.log(data)
       return data;
     } catch (error) {
       console.log(error);
@@ -90,7 +89,6 @@ const postsSlice = createSlice({
       state.posts = [...state.posts, ...action.payload];
       state.posts = state.posts.filter(element => {
         const isDuplicate = state.posts.includes(element._id);
-        console.log(isDuplicate)
         if (!isDuplicate) {
           state.posts.push(element._id);
           return true;
