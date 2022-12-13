@@ -126,7 +126,10 @@ const Card = ({ post }) => {
           onDoubleClick={() => {
             !user ? dispatch(onRegisterShow()) :
             dispatch(likePost({id : post._id}))
-            dispatch(updateWishList(post))
+            if(post.creator_id !== user._id){
+              dispatch(updateWishList(post))
+
+            }
           }}
         >
           <LazyLoad className="overflow-hidden w-full postImg">
@@ -143,11 +146,11 @@ const Card = ({ post }) => {
               dispatch(likePost({id : post._id}))
             }}
           >
-            {!user?.wishList?.some((el) => el._id === post?._id) ? (
-              <Heart color="red" width="20px" height={"20px"} />
-            ) : (
+            {(post?.likes?.some((el) => el.user_id === user?._id) || user?.wishList?.some((el) => el._id === post?._id)) ? (
               <FillHeart color="red" width="20px" height={"20px"} />
-            )}
+              ) : (
+                <Heart color="red" width="20px" height={"20px"} />
+                )}
           </div>
         </div>
         <div className="px-5 pb-5 pt-2 md:pt-4">
