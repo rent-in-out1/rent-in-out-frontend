@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { doApiMethod, doGetApiMethod } from "../../services/service";
+import { useNavigate } from "react-router-dom";
+import { doGetApiMethod } from "../../services/service";
 import { deletePost } from "../../redux/features/postsSlice";
 import Chat from "../icons/chat";
 import Dots from "../icons/dots";
@@ -17,13 +17,12 @@ import {
 import Clock from "../icons/clock";
 import { likePost } from "../../redux/features/postsSlice";
 import LazyLoad from "react-lazy-load";
-import { removeFromWishlist, updateWishList } from "../../redux/features/userSlice";
+import { updateWishList } from "../../redux/features/userSlice";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
-  const [like, setLike] = useState(false);
   const [displayOptions, setDisplayOptions] = useState(false);
   const [owner, setOwner] = useState({});
   let timeOut;
@@ -39,7 +38,7 @@ const Card = ({ post }) => {
   useEffect(() => {
     window.addEventListener("scroll", () => closeNav());
     getPostCreatorInfo(post?.creator_id);
-  }, [like]);
+  }, []);
   const getPostCreatorInfo = async (id) => {
     const { data } = await doGetApiMethod("/users/info/" + id);
     setOwner(data.userInfo);
