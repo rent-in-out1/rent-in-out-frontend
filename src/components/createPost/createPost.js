@@ -72,7 +72,7 @@ const CreatePost = () => {
           </div>
         </div>
         {/* first process */}
-        {!display && <form form onSubmit={handleSubmit(onSubForm)}>
+        {!display && <form onSubmit={handleSubmit(onSubForm)}>
           <div className="flex px-3">
             <div className="w-full md:w-1/3 px-3">
               <label className="cursor-pointer flex items-center justify-center bg-white w-full rounded-xl p-3 h-full border border-gray-200">
