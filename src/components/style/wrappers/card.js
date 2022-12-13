@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     width: 100%;
-    height: 100%;
+    max-height: 80%;
     padding: 12px;
     user-select: none;
     .card{
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
     background: var(--white);
     z-index: 0;
     border-radius: 8px;
-    margin-bottom: 12px;
+    margin:20px 20px;
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
     span{
         font-size: 1em;
@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
         width: 100%;
     }
     .postImg{
-        height: 600px;
+        height: 400px;
     }
     /* smart phones */
     @media screen and (min-width: 320px) and (max-width:480px) {

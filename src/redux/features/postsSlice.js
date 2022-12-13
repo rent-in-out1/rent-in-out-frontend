@@ -7,14 +7,17 @@ export const getPosts = createAsyncThunk(
     search = "",
     option = "createdAt",
     page = 1,
-    min = 0,
-    max = 10000,
+    min=0,
+    max= 1000,
+    range,
     endScreenEnd,
     setPage,
   }) => {
+    
     try {
-      console.log(page);
+      if(page===1) clearPosts();
       let url = `/posts/search?s=${search}&page=${page}&sort=${option}&min=${min}&max=${max}&reverse=yes`;
+      // let url = `/posts?page=${page}&sort=${option}&reverse=yes`;
       let { data } = await doGetApiMethod(url);
       if (data.length > 0) {
         endScreenEnd();
@@ -85,6 +88,15 @@ const postsSlice = createSlice({
     [getPosts.fulfilled]: (state, action) => {
       state.loading = false;
       state.posts = [...state.posts, ...action.payload];
+      state.posts = state.posts.filter(element => {
+        const isDuplicate = state.posts.includes(element._id);
+        console.log(isDuplicate)
+        if (!isDuplicate) {
+          state.posts.push(element._id);
+          return true;
+        }
+        return false;
+      });
     },
     [getPosts.rejected]: (state, action) => {
       state.loading = false;
