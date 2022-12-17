@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { doGetApiMethod } from "../../services/service";
 import { deletePost } from "../../redux/features/postsSlice";
 import Chat from "../icons/chat";
@@ -15,9 +15,11 @@ import {
   onRegisterShow,
 } from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
+import Mail from "../icons/mail";
 import { likePost } from "../../redux/features/postsSlice";
 import LazyLoad from "react-lazy-load";
 import { updateWishList } from "../../redux/features/userSlice";
+import WebChat from './../icons/webChat';
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
@@ -123,11 +125,11 @@ const Card = ({ post }) => {
           className="relative cursor-pointer"
           // onDoubleClick={() => heartClick()}
           onDoubleClick={() => {
-            !user ? dispatch(onRegisterShow()) :
-            dispatch(likePost({id : post._id}))
-            if(post.creator_id !== user._id){
-              dispatch(updateWishList(post))
-
+            !user
+              ? dispatch(onRegisterShow())
+              : dispatch(likePost({ id: post._id }));
+            if (post.creator_id !== user._id) {
+              dispatch(updateWishList(post));
             }
           }}
         >
@@ -141,15 +143,17 @@ const Card = ({ post }) => {
           <div
             className="absolute top-0 right-4 p-2"
             onClick={() => {
-              !user ? dispatch(onRegisterShow()) :
-              dispatch(likePost({id : post._id}))
+              !user
+                ? dispatch(onRegisterShow())
+                : dispatch(likePost({ id: post._id }));
             }}
           >
-            {(post?.likes?.some((el) => el.user_id === user?._id) || user?.wishList?.some((el) => el._id === post?._id)) ? (
+            {post?.likes?.some((el) => el.user_id === user?._id) ||
+            user?.wishList?.some((el) => el._id === post?._id) ? (
               <FillHeart color="red" width="20px" height={"20px"} />
-              ) : (
-                <Heart color="red" width="20px" height={"20px"} />
-                )}
+            ) : (
+              <Heart color="red" width="20px" height={"20px"} />
+            )}
           </div>
         </div>
         <div className="px-5 pb-5 pt-2 md:pt-4">
@@ -195,18 +199,43 @@ const Card = ({ post }) => {
             </span>
           </div>
 
-          <div className="md:flex items-center justify-between">
-            <div className="flex items-center justify-center mb-2 md:mb-0">
-              <span className="text-xl md:text-2xl font-bold text-gray-900 mr-1">
-                {post?.price}$
-              </span>
-              <span className="text-xs capitalize text-gray-400">per day</span>
+          
+            <div className="md:flex items-center justify-around h-full">
+              <div className="flex items-center justify-center mb-2 md:mb-0">
+                <span className="text-xl md:text-2xl font-bold py-1 text-gray-900 mr-1">
+                  {post?.price}$
+                </span>
+                <span className="text-xs capitalize text-gray-400">
+                  per day
+                </span>
+              </div>
+              {user._id != owner._id ? (
+                <>
+              <a
+                href={`https://wa.me/+972${owner?.phone}?text=Hello ${owner?.fullName?.firstName} ${owner?.fullName?.lastName} i saw your item ${post.title} from rentInOut. \n i would like to rent it !`}
+                target={"_blank"}
+                rel="noreferrer"
+                className=" mb-1 md:mb-0 text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1.5"
+              >
+                <p className="mr-1 text-xs capitalize lg:text-lg">What's App</p>
+                <Chat color="white" />
+              </a>
+              <a href="#"
+                onClick={() => {
+                  !user
+                    ? dispatch(onRegisterShow())
+                    : nav(`/chat/${owner._id}${user._id}`);
+                }}
+                className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
+              >
+                <p className="mr-1  text-xs capitalize lg:text-lg">
+                  Chat
+                </p>
+                  <WebChat color="white"/>
+              </a>
+              </>
+          ) : null}
             </div>
-            <a href={`https://wa.me/+972${owner?.phone}?text=Hello ${owner?.fullName?.firstName} ${owner?.fullName?.lastName} i saw your item ${post.title} from rentInOut. \n i would like to rent it !`} target={"_blank"} rel="noreferrer" className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2 md:px-5 md:py-2.5">
-              <p className="mr-2 text-xs capitalize lg:text-lg">Rent now</p>
-              <Chat color="white" />
-            </a>
-          </div>
         </div>
       </div>
     </Wrapper>

@@ -49,7 +49,7 @@ const Main = () => {
             {!onAdd ? (
               <div className="flex justify-center mt-2 mb-8">
                 <button
-                  className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-full md:w-1/6 inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
+                  className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-1/2 md:w-1/6 inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
                   type="button"
                   onClick={() => setOnAdd(true)}
                 >
@@ -61,7 +61,7 @@ const Main = () => {
             {onAdd ? (
               <div className="flex justify-center mt-2 mb-8">
                 <button
-                  className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-full md:w-1/6 inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
+                  className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-1/2 md:w-1/6 inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
                   type="button"
                   onClick={() => setOnAdd(false)}
                 >
@@ -76,7 +76,7 @@ const Main = () => {
               setSearch={setSearch}
               setOption={setOption}
             />
-            <div className="flex items-center justify-center">
+            {/* <div className="flex items-center justify-center">
               <MultiRangeSlider
                 min={0}
                 max={1000}
@@ -85,7 +85,7 @@ const Main = () => {
                   setMin(min);
                 }}
               />
-            </div>
+            </div> */}
           </div>
         )}
         <div
@@ -94,7 +94,7 @@ const Main = () => {
         >
           {posts &&
             posts?.map((post, i) => (
-              <div key={post?._id} className="w-1/2 flex">
+              <div key={post?._id} className="md:w-1/2 w-full flex">
                 <Card post={post} key={i} />
               </div>
             ))}
