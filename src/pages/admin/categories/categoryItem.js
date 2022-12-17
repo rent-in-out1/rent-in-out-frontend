@@ -22,12 +22,14 @@ const CategoryItem = (props) => {
   }, []);
   const getCreator = async () => {
     let url = "/users/info/" + category?.creator_id;
+    if(!category.creator_id) return
     let data = await doGetApiMethod(url);
     setCreator(data);
     props.setIsChange(true);
   };
   const getEditor = async () => {
     let url = "/users/info/" + category?.editor_id;
+    if(!category.editor_id) return
     let data = await doGetApiMethod(url);
     setEditor(data);
     props.setIsChange(true);
@@ -111,12 +113,12 @@ const CategoryItem = (props) => {
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {category?.craetedAt?.split("T")[0]}
+          {new Date(category?.craetedAt).toLocaleDateString()} {new Date(category?.craetedAt).toLocaleTimeString()}
         </p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {category?.updatedAt?.split("T")[0]}
+          {new Date(category?.updatedAt).toLocaleDateString()} {new Date(category?.updatedAt).toLocaleTimeString()}
         </p>
       </td>
       {!onEdit ? (

@@ -3,13 +3,11 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SingleUser from "./singleUser";
 import Controllers from "../../../components/controllers/controllers";
-import Loader from "../../../components/loader/loader";
 import PageNav from "./../../../helpers/pageNav";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [option, setOption] = useState("role");
-  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [isChange, setIsChange] = useState(false);
   const options = [
@@ -24,10 +22,8 @@ const Users = () => {
   }, [isChange, option, search]);
 
   const getAllUsers = async () => {
-    setIsLoading(true);
     let url = `/users/userSearch/?s=${search}&sort=${option}&page=${page}`;
     let { data } = await doGetApiMethod(url);
-    setIsLoading(false);
     setUsers(data);
     setIsChange(false);
   };
@@ -50,7 +46,6 @@ const Users = () => {
       />
 
       <div className="wrapper">
-        {!isLoading ? (
           <table>
             <thead>
               <tr>
@@ -79,11 +74,6 @@ const Users = () => {
                 })}
             </tbody>
           </table>
-        ) : (
-          <div className="flex justify-center w-full">
-            <Loader />
-          </div>
-        )}
       </div>
     </Wrapper>
   );

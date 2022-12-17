@@ -60,17 +60,17 @@ const SinglePost = (props) => {
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {post?.createdAt}
+          {new Date(post?.createdAt).toLocaleDateString()} {new Date(post?.createdAt).toLocaleTimeString()}
         </p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {post?.updatedAt}
+          {new Date(post?.updatedAt).toLocaleDateString()} {new Date(post?.updatedAt).toLocaleTimeString()}
         </p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {post?.available_from}
+          {new Date(post?.available_from).toLocaleDateString()} {new Date(post?.available_from).toLocaleTimeString()}
         </p>
       </td>
       <td>

@@ -29,7 +29,6 @@ export default function PageNav({
     let totalPages = Math.ceil(resp.data.count / perPage);
     // מגדיר את מספר העמודים
     setPages(totalPages);
-    console.log(resp.data);
   };
 
   return (

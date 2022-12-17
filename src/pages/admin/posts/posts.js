@@ -3,7 +3,6 @@ import { doGetApiMethod } from "../../../services/service";
 import { Wrapper } from "../../../components/style/wrappers/table";
 import SinglePost from "./singlePost";
 import Controllers from "../../../components/controllers/controllers";
-import { API_URL } from './../../../services/service';
 import PageNav from './../../../helpers/pageNav';
 
 
