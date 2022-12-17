@@ -44,7 +44,7 @@ const Main = () => {
     <React.Fragment>
       <main className="min-h-screen p-1 md:p-3 text-center justify-center">
         {user && (
-          <div className="bg-white p-3 space-x-1 md:w-10/12 w-full mx-auto rounded-xl drop-shadow-xl">
+          <div className="bg-white p-3 space-x-1 md:w-10/12 w-full mx-auto rounded-xl drop-shadow-xlfixed top-2 left-2">
             
             {!onAdd ? (
               <div className="flex justify-center mt-2 mb-8">
