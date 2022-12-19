@@ -69,7 +69,7 @@ const AppRoutes = () => {
         </div>}>
       <Router>
         <Routes>
-            <Route path="/chat/:roomID" element={<Chat socket={socket}/>}/>
+            
           <Route path="/" element={<Layout />}>
             <Route path="/resetPassword/:id/:resetString" element={<ResetPass />} />
             <Route path="/confirm" element={<ConfirmHandler action={"action"} messege={"messege"} showAction={"showAction"} />} />
@@ -80,6 +80,7 @@ const AppRoutes = () => {
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="*" element={<Page404 />} />
+                <Route path="/chat/:roomID" element={<Chat socket={socket}/>}/>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/wishlist" element={<WishList />} />
@@ -90,6 +91,7 @@ const AppRoutes = () => {
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
               <Route index element={<Dashboard />} />
+              <Route path="/admin/chat/:roomID" element={<Chat socket={socket}/>}/>
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />

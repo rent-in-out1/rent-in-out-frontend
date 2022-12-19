@@ -15,7 +15,6 @@ import {
   onRegisterShow,
 } from "../../redux/features/toggleSlice";
 import Clock from "../icons/clock";
-import Mail from "../icons/mail";
 import { likePost } from "../../redux/features/postsSlice";
 import LazyLoad from "react-lazy-load";
 import { updateWishList } from "../../redux/features/userSlice";
@@ -209,7 +208,7 @@ const Card = ({ post }) => {
                   per day
                 </span>
               </div>
-              {user._id != owner._id ? (
+              {user?._id != owner?._id ? (
                 <>
               <a
                 href={`https://wa.me/+972${owner?.phone}?text=Hello ${owner?.fullName?.firstName} ${owner?.fullName?.lastName} i saw your item ${post.title} from rentInOut. \n i would like to rent it !`}
@@ -220,7 +219,7 @@ const Card = ({ post }) => {
                 <p className="mr-1 text-xs capitalize lg:text-lg">What's App</p>
                 <Chat color="white" />
               </a>
-              <a href="#"
+              <span
                 onClick={() => {
                   !user
                     ? dispatch(onRegisterShow())
@@ -232,7 +231,7 @@ const Card = ({ post }) => {
                   Chat
                 </p>
                   <WebChat color="white"/>
-              </a>
+              </span>
               </>
           ) : null}
             </div>
