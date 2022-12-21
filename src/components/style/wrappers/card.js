@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
     width: 100%;
-    max-height: 80%;
-    padding: 12px;
+    height: 100%;
+    padding: 4px;
     user-select: none;
     .card{
     position: relative;
     background: var(--white);
     z-index: 0;
+    height: 100%;
     border-radius: 8px;
     margin:20px 20px;
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));

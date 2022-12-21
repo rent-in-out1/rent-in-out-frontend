@@ -43,7 +43,7 @@ const Main = () => {
   return (
     <React.Fragment>
       <main className="min-h-screen p-1 md:p-3 text-center justify-center">
-        {user && (
+        {/* {user && (
           <div className="bg-white p-3 space-x-1 md:w-10/12 w-full mx-auto rounded-xl drop-shadow-xl">
             
             {!onAdd ? (
@@ -87,14 +87,14 @@ const Main = () => {
               />
             </div>
           </div>
-        )}
+        )} */}
         <div
           id="posts"
-          className="flex flex-wrap mx-auto mt-3 justify-between px-5"
+          className="flex flex-wrap mx-auto mt-3 justify-between px-1"
         >
           {posts &&
             posts?.map((post, i) => (
-              <div key={post?._id} className="w-1/2 flex">
+              <div key={post?._id} className="w-1/2">
                 <Card post={post} key={i} />
               </div>
             ))}

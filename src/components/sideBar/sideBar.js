@@ -20,8 +20,9 @@ const SideBar = () => {
   const isLogin = useSelector((state) => state.userSlice?.user !== null);
   const user = useSelector((state) => state.userSlice?.user);
   return (
+    
     <Wrapper
-      className="w-3/12 z-10 p-3 top-16 left-0 fixed hidden lg:flex"
+      className="lg:w-3/12 z-10 p-3 top-16 left-0 fixed hidden lg:inline-block"
       aria-label="Sidebar"
     >
       <div className="overflow-y-auto py-4 mt-4 px-3 w-full bg-white shadow-xl rounded">
