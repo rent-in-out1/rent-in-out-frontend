@@ -1,8 +1,6 @@
 import { useScroll } from "../../hooks/useScroll";
 import React, { useState, useEffect, useRef } from "react";
-import { doGetApiMethod } from "../../services/service";
 import Card from "../card";
-import Loader from "../loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearPosts, getPosts } from "../../redux/features/postsSlice";
 import Controllers from "./../controllers/controllers";

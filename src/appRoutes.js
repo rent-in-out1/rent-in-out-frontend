@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
-import { io } from "socket.io-client";
 import { onMessegeToggle } from "./redux/features/toggleSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
@@ -30,7 +29,6 @@ const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
 const AppRoutes = () => {
-  const [socket, setSocket] = useState(null);
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
   let {search , register } = useSelector((state) => state.toggleSlice)
@@ -77,7 +75,7 @@ const AppRoutes = () => {
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="*" element={<Page404 />} />
-                <Route path="/chat/:roomID/:creatorID" element={<Chat socket={socket}/>}/>
+                <Route path="/chat/:roomID/:creatorID" element={<Chat/>}/>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/wishlist" element={<WishList />} />
@@ -88,7 +86,7 @@ const AppRoutes = () => {
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
               <Route index element={<Dashboard />} />
-              <Route path="/admin/chat/:roomID/:creatorID" element={<Chat socket={socket}/>}/>
+              <Route path="/admin/chat/:roomID/:creatorID" element={<Chat/>}/>
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />

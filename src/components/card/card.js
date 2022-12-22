@@ -225,7 +225,7 @@ const Card = ({ post }) => {
                     ? dispatch(onRegisterShow())
                     : user.role === "admin" ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`):nav(`/chat/${owner._id}${user._id}/${owner._id}`) ;
                 }}
-                className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
+                className="text-white justify-center items-center flex bg-blue-400 cursor-pointer hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
               >
                 <p className="mr-1  text-xs capitalize lg:text-lg">
                   Chat

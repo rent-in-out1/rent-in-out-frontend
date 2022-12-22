@@ -4,7 +4,6 @@ import Chat from '../icons/chat';
 import UserSingleChat from '../userSingleChat/userSingleChat';
 const SideBarChat = () => {
     const { user } = useSelector(state => state.userSlice);
-    console.log(user)
     return (
         <div className='md:w-3/12 lg:w-2/12 p-2 fixed top-16 hidden md:flex'>
             <div className="overflow-y-auto py-4 w-full mt-4 px-2 bg-white shadow-xl rounded">
