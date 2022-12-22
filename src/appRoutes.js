@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense } from "react";
+import React, { useEffect, Suspense , useState } from "react";
 import jwt_decode from "jwt-decode";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -6,12 +6,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
 import { onLogin } from "./redux/features/userSlice";
+import { io } from "socket.io-client";
 import { onMessegeToggle } from "./redux/features/toggleSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
 import Likes from "./pages/client/likes";
 import WishList from "./pages/client/wishList";
 import ConfirmHandler from './components/UI/confirm/confirm';
+import Chat from "./components/chat/chat";
 
 // Lazy loading of routes
 const LayoutAdmin = React.lazy(() => import("./layout/layoutAdmin/layoutAdmin"));
@@ -28,6 +30,7 @@ const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/error/page404"));
 const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
 const AppRoutes = () => {
+  const [socket, setSocket] = useState(null);
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
   let {search , register } = useSelector((state) => state.toggleSlice)
@@ -63,6 +66,7 @@ const AppRoutes = () => {
         </div>}>
       <Router>
         <Routes>
+            
           <Route path="/" element={<Layout />}>
             <Route path="/resetPassword/:id/:resetString" element={<ResetPass />} />
             <Route path="/confirm" element={<ConfirmHandler action={"action"} messege={"messege"} showAction={"showAction"} />} />
@@ -73,6 +77,7 @@ const AppRoutes = () => {
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="*" element={<Page404 />} />
+                <Route path="/chat/:roomID/:creatorID" element={<Chat socket={socket}/>}/>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/wishlist" element={<WishList />} />
@@ -83,6 +88,7 @@ const AppRoutes = () => {
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
               <Route index element={<Dashboard />} />
+              <Route path="/admin/chat/:roomID/:creatorID" element={<Chat socket={socket}/>}/>
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />
@@ -95,7 +101,6 @@ const AppRoutes = () => {
             </Route>
           )}
         </Routes>
-
         <ToastContainer position="bottom-right" />
         {search? <UserSearch/> : null}
         {register? <Register/> : null}

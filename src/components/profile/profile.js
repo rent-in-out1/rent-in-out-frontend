@@ -31,11 +31,11 @@ const Profile = () => {
           else nav("/profileEdit");
         }}>
           <div className='flex items-center justify-center'>
-            <div className="userDetails bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
-              <h3 className="flex items-center justify-between mb-1"><span>{user.fullName?.firstName} {user.fullName?.lastName}</span> <Pencil/></h3>
+            <div className="userDetails capitalize bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
+              <h3 className="flex items-center justify-between mb-1 capitalize"><span>{user.fullName?.firstName} {user.fullName?.lastName}</span> <Pencil/></h3>
               <h5 className='flex items-center mb-1'><Location /> {user?.country} {user?.city}</h5>
               <h5 className='flex items-center mb-1'><Telephone /> {user?.phone}</h5>
-              <h5 className='flex items-center mb-1'><Mail /> {user?.email}</h5>
+              <h5 className='flex items-center mb-1 lowercase'><Mail /> {user?.email}</h5>
 
               {user.birthdate && <h5 className='flex items-center'><Calendar /> Birthdate : {user?.birthdate?.split("T")[0]}</h5>}
             </div>
