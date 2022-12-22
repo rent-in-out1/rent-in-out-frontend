@@ -223,7 +223,7 @@ const Card = ({ post }) => {
                 onClick={() => {
                   !user
                     ? dispatch(onRegisterShow())
-                    : nav(`/chat/${owner._id}${user._id}`);
+                    : user.role === "admin" ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`):nav(`/chat/${owner._id}${user._id}/${owner._id}`) ;
                 }}
                 className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
               >

@@ -46,9 +46,6 @@ const AppRoutes = () => {
       else errorHandler("Your authorization is expired please login again")
     }
   }, []);
-  useEffect(() => {
-    setSocket(io("http://localhost:3001"));
-  }, []);
 
   const getUserInfo = async (_id, token) => {
     let url = "/users/infoToken/" + _id;
@@ -80,7 +77,7 @@ const AppRoutes = () => {
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="*" element={<Page404 />} />
-                <Route path="/chat/:roomID" element={<Chat socket={socket}/>}/>
+                <Route path="/chat/:roomID/:creatorID" element={<Chat socket={socket}/>}/>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/wishlist" element={<WishList />} />
@@ -91,7 +88,7 @@ const AppRoutes = () => {
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
               <Route index element={<Dashboard />} />
-              <Route path="/admin/chat/:roomID" element={<Chat socket={socket}/>}/>
+              <Route path="/admin/chat/:roomID/:creatorID" element={<Chat socket={socket}/>}/>
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />
