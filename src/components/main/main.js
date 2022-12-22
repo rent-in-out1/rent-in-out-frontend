@@ -77,18 +77,9 @@ const Main = () => {
               setSearch={setSearch}
               setOption={setOption}
             />
-            {/* <div className="flex items-center justify-center">
-              <MultiRangeSlider
-                min={0}
-                max={1000}
-                onChange={({ min, max }) => {
-                  setMax(max);
-                  setMin(min);
-                }}
-              />
-            </div> */}
+
           </div>
-        )} */}
+        )}
         <div
           id="posts"
           className="flex flex-wrap mx-auto mt-3 justify-between px-1"
@@ -101,11 +92,6 @@ const Main = () => {
               </div>
             ))}
         </div>
-        {/* {loading && (
-          <div className="flex items-center justify-center min-h-40">
-            <Loader width={"200px"} height={"200px"} />
-          </div>
-        )} */}
       </main>
     </React.Fragment>
   );
