@@ -1,10 +1,10 @@
-import { data } from "autoprefixer";
+
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { Button } from "../style/wrappers/registerPage";
 import LoadingButton from "./../UI/spinnerButton";
 import { Wrapper } from "./../style/wrappers/chat";
-import { doApiMethod, doGetApiMethod, errorHandler } from "./../../services/service";
+import { API_URL, doApiMethod, doGetApiMethod, errorHandler } from "./../../services/service";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -20,7 +20,7 @@ const Chat = ({post}) => {
   const [typingTimeOut, setTypingTimeOut] = useState(null);
   const { roomID ,creatorID} = useParams();
   useEffect(() => {
-    setSocket(io("http://localhost:3001"));
+    setSocket(io(API_URL));
     const getChatHistory = async()=>{
       let {data} = await doGetApiMethod(`/users/getChat/${roomID}`) 
       setChat(data[0].messagesArr)
@@ -32,8 +32,10 @@ const Chat = ({post}) => {
     let messageObj = {
       name: post?.title,
       roomID,
+      creatorID,
       messagesArr: chat,
     };
+    // console.log(messageObj)
     await doApiMethod(url, "PATCH", { messageObj, userID: user._id , creatorID: creatorID });
   };
   useEffect(() => {
