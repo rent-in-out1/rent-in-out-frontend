@@ -2,10 +2,12 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './header'
 import Sidebar from '../../components/sideBar'
-import SidebarChat from "../../components/sideBarChat"
+import { useSelector } from 'react-redux'
+import SideBarChat from '../../components/sideBarChat/sideBarChat'
 
 
 const Layout = () => {
+  let { user } = useSelector((state) => state.userSlice);
   return (
     <React.Fragment>
       <Header />
@@ -16,9 +18,11 @@ const Layout = () => {
         <div className='bg-gray-100 md:w-9/12 lg:w-7/12 min-h-screen'>
           <Outlet />
         </div>
-        <div className='hidden md:flex md:w-3/12 lg:w-2/12'>
-          <SidebarChat />
-        </div>
+        {user ? (
+          <div className="hidden md:flex md:w-3/12 lg:w-2/12">
+            <SideBarChat />
+          </div>
+        ) : null}
       </div>
     </React.Fragment>
   )

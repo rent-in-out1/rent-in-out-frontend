@@ -18,7 +18,7 @@ import Clock from "../icons/clock";
 import { likePost } from "../../redux/features/postsSlice";
 import LazyLoad from "react-lazy-load";
 import { updateWishList } from "../../redux/features/userSlice";
-import WebChat from './../icons/webChat';
+import WebChat from "./../icons/webChat";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
@@ -41,8 +41,10 @@ const Card = ({ post }) => {
     getPostCreatorInfo(post?.creator_id);
   }, []);
   const getPostCreatorInfo = async (id) => {
-    const { data } = await doGetApiMethod("/users/info/" + id);
-    setOwner(data.userInfo);
+    if (id) {
+      const { data } = await doGetApiMethod("/users/info/" + id);
+      setOwner(data.userInfo);
+    }
   };
   return (
     <Wrapper>
@@ -135,7 +137,7 @@ const Card = ({ post }) => {
           <LazyLoad className="overflow-hidden w-full postImg">
             <img
               className="w-full h-full object-cover"
-              src={post.img[0]?.url}
+              src={post?.img[0]?.url}
               alt="post"
             />
           </LazyLoad>
@@ -198,43 +200,42 @@ const Card = ({ post }) => {
             </span>
           </div>
 
-          
-            <div className="md:flex items-center justify-around h-full">
-              <div className="flex items-center justify-center mb-2 md:mb-0">
-                <span className="text-xl md:text-2xl font-bold py-1 text-gray-900 mr-1">
-                  {post?.price}$
-                </span>
-                <span className="text-xs capitalize text-gray-400">
-                  per day
-                </span>
-              </div>
-              {user?._id != owner?._id ? (
-                <>
-              <a
-                href={`https://wa.me/+972${owner?.phone}?text=Hello ${owner?.fullName?.firstName} ${owner?.fullName?.lastName} i saw your item ${post.title} from rentInOut. \n i would like to rent it !`}
-                target={"_blank"}
-                rel="noreferrer"
-                className=" mb-1 md:mb-0 text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1.5"
-              >
-                <p className="mr-1 text-xs capitalize lg:text-lg">What's App</p>
-                <Chat color="white" />
-              </a>
-              <span
-                onClick={() => {
-                  !user
-                    ? dispatch(onRegisterShow())
-                    : user.role === "admin" ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`):nav(`/chat/${owner._id}${user._id}/${owner._id}`) ;
-                }}
-                className="text-white justify-center items-center flex bg-blue-400 cursor-pointer hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
-              >
-                <p className="mr-1  text-xs capitalize lg:text-lg">
-                  Chat
-                </p>
-                  <WebChat color="white"/>
+          <div className="md:flex items-center justify-around h-full">
+            <div className="flex items-center justify-center mb-2 md:mb-0">
+              <span className="text-xl md:text-2xl font-bold py-1 text-gray-900 mr-1">
+                {post?.price}$
               </span>
-              </>
-          ) : null}
+              <span className="text-xs capitalize text-gray-400">per day</span>
             </div>
+            {user?._id != owner?._id ? (
+              <>
+                <a
+                  href={`https://wa.me/+972${owner?.phone}?text=Hello ${owner?.fullName?.firstName} ${owner?.fullName?.lastName} i saw your item ${post.title} from rentInOut. \n i would like to rent it !`}
+                  target={"_blank"}
+                  rel="noreferrer"
+                  className=" mb-1 md:mb-0 text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1.5"
+                >
+                  <p className="mr-1 text-xs capitalize lg:text-lg">
+                    What's App
+                  </p>
+                  <Chat color="white" />
+                </a>
+                <span
+                  onClick={() => {
+                    !user
+                      ? dispatch(onRegisterShow())
+                      : user.role === "admin"
+                      ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`)
+                      : nav(`/chat/${owner._id}${user._id}/${owner._id}`);
+                  }}
+                  className="text-white justify-center items-center flex bg-blue-400 cursor-pointer hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
+                >
+                  <p className="mr-1  text-xs capitalize lg:text-lg">Chat</p>
+                  <WebChat color="white" />
+                </span>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
     </Wrapper>

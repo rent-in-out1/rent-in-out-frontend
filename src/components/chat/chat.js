@@ -1,14 +1,15 @@
 
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { API_URL, doApiMethod, doGetApiMethod, errorHandler } from "./../../services/service";
 import { io } from "socket.io-client";
 import { Button } from "../style/wrappers/registerPage";
-import LoadingButton from "./../UI/spinnerButton";
 import { Wrapper } from "./../style/wrappers/chat";
-import { API_URL, doApiMethod, doGetApiMethod, errorHandler } from "./../../services/service";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import LoadingButton from "./../UI/spinnerButton";
 
 const Chat = ({post}) => {
+  const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
   const { firstName, lastName } = useSelector(
     (state) => state.userSlice.user.fullName
@@ -17,26 +18,32 @@ const Chat = ({post}) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [typing, setTyping] = useState(false);
+  const [owner, setOwner] = useState({});
   const [typingTimeOut, setTypingTimeOut] = useState(null);
   const { roomID ,creatorID} = useParams();
   useEffect(() => {
     setSocket(io(API_URL));
     const getChatHistory = async()=>{
       let {data} = await doGetApiMethod(`/users/getChat/${roomID}`) 
-      setChat(data[0].messagesArr)
+      if(data[0]?.messagesArr) setChat(data[0]?.messagesArr)
     }
     getChatHistory()
+    getPostCreatorInfo(creatorID)
   }, [roomID]);
+  const getPostCreatorInfo = async (id) => {
+    const { data } = await doGetApiMethod("/users/info/" + id);
+    setOwner({name: data.userInfo.fullName , img: data.userInfo.profile_img?.url});
+  };
   const disconnect = async () => {
     let url = "/users/chatUpdate";
     let messageObj = {
-      name: post?.title,
+      name: owner.name.firstName+ " " + owner.name.lastName,
+      img: owner.img,
       roomID,
       creatorID,
       messagesArr: chat,
     };
-    // console.log(messageObj)
-    await doApiMethod(url, "PATCH", { messageObj, userID: user._id , creatorID: creatorID });
+    if(chat?.length> 0) await doApiMethod(url, "PATCH", { messageObj, userID: user._id , creatorID: creatorID });
   };
   useEffect(() => {
     if (!socket) return;
@@ -136,7 +143,12 @@ const Chat = ({post}) => {
             </Button>
           </div>
         </form>
-          <span type="button" onClick={()=>disconnect()}>Back</span>
+          <span type="button" onClick={()=>{
+            disconnect()
+            user?.role === "admin"
+            ? nav(`/admin`)
+            : nav(`/`);
+          }}>Back</span>
       </div>
     </Wrapper>
   );
