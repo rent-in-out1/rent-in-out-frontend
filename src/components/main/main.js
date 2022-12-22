@@ -48,7 +48,7 @@ const Main = () => {
             {!onAdd ? (
               <div className="flex justify-center mt-2 mb-8">
                 <button
-                  className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-1/2 md:w-1/6 inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
+                  className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-1/2  inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
                   type="button"
                   onClick={() => setOnAdd(true)}
                 >
