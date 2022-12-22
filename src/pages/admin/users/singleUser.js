@@ -50,14 +50,14 @@ const SingleUser = (props) => {
         <p className="text-gray-900 whitespace-no-wrap">{user?.city}</p>
       </td>
       <td>
-        <p className="text-gray-900 whitespace-no-wrap">{() => unixToAge(Math.floor(new Date(user?.birthdate).getTime()))}</p>
+        <p className="text-gray-900 whitespace-no-wrap">{Math.floor(new Date(Date.now()).getFullYear() - new Date(user?.birthdate).getFullYear())}</p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">{user?.phone}</p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">
-          {user?.craetedAt?.split("T")[0]}
+          {new Date(user?.createdAt).toLocaleDateString()} {new Date(user?.createdAt).toLocaleTimeString()}
         </p>
       </td>
       <td>
