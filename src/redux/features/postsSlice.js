@@ -79,12 +79,13 @@ const postsSlice = createSlice({
       state.posts = []
     }
   },
-  extraReducers: {
+  extraReducers(builder) {
+    builder.
     // get posts
-    [getPosts.pending]: (state, action) => {
+    addCase(getPosts.pending, (state, action) => {
       state.loading = true;
-    },
-    [getPosts.fulfilled]: (state, action) => {
+    })
+    .addCase(getPosts.fulfilled, (state, action) => {
       state.loading = false;
       state.posts = [...state.posts, ...action.payload];
       state.posts = state.posts.filter(element => {
@@ -95,48 +96,47 @@ const postsSlice = createSlice({
         }
         return false;
       });
-    },
-    [getPosts.rejected]: (state, action) => {
+    })
+    .addCase(getPosts.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
+    })
     // delete post
-    [deletePost.pending]: (state, action) => {
+    .addCase(deletePost.pending, (state, action) => {
       state.loading = true;
-    },
-    [deletePost.fulfilled]: (state, action) => {
+    })
+    .addCase(deletePost.fulfilled, (state, action) => {
       state.loading = false;
       state.posts = state.posts.filter((post) => post._id !== action.payload);
-    },
-    [deletePost.rejected]: (state, action) => {
+    })
+    .addCase(deletePost.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-    [likePost.pending]: (state, action) => {
+    })
+    .addCase(likePost.pending, (state, action) => {
       state.loading = true;
-    },
-    [likePost.fulfilled]: (state, action) => {
+    })
+    .addCase(likePost.fulfilled, (state, action) => {
       state.loading = false;
       state.posts.forEach((post, i) => {
         if (post._id === action.payload.id) state.posts[i].likes = action.payload.data.posts
       })
-    },
-    [likePost.rejected]: (state, action) => {
+    })
+    .addCase(likePost.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-    [uploadPost.pending]: (state, action) => {
+    })
+    .addCase(uploadPost.pending, (state, action) => {
       state.loading = true;
-    },
-    [uploadPost.fulfilled]: (state, action) => {
+    })
+    .addCase(uploadPost.fulfilled, (state, action) => {
       state.loading = false;
       state.posts.unshift(action.payload);
-    },
-    [uploadPost.rejected]: (state, action) => {
+    })
+    .addCase(uploadPost.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-
+    })
   },
 });
 

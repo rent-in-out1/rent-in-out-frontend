@@ -61,7 +61,6 @@ export const addCategory = createAsyncThunk(
     try {
       let url = "/categories";
       const {data} = await doApiMethod(url, "POST", addData);
-      // console.log(data)
       return data
     } catch (error) {
       console.log(error);
@@ -76,60 +75,60 @@ const categoriesSlice = createSlice({
     error: "",
     loading: false,
   },
-  extraReducers: {
+  extraReducers(builder) {
     // get categories status
-    [getCatgories.pending]: (state, action) => {
+    builder.
+    addCase(getCatgories.pending ,(state, action) => {
       state.loading = true;
-    },
-    [getCatgories.fulfilled]: (state, action) => {
+    })
+    .addCase(getCatgories.fulfilled,(state, action) => {
       state.loading = false;
       state.categories = action.payload;
-    },
-    [getCatgories.rejected]: (state, action) => {
+    })
+    .addCase(getCatgories.rejected,(state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
+    })
     // delete categories
-    [deleteCategory.pending]: (state, action) => {
+    .addCase(deleteCategory.pending, (state, action) => {
       state.loading = true;
-    },
-    [deleteCategory.fulfilled]: (state, action) => {
+    })
+    .addCase(deleteCategory.fulfilled, (state, action) => {
       state.loading = false;
       state.categories = state.categories.filter(
         (category) => category._id !== action.payload
       );
-    },
-    [deleteCategory.rejected]: (state, action) => {
+    })
+    .addCase(deleteCategory.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
+    })
     // edit categories status
-    [editCategory.pending]: (state, action) => {
+    .addCase(editCategory.pending, (state, action) => {
       state.loading = true;
-    },
-    [editCategory.fulfilled]: (state, action) => {
+    })
+    .addCase(editCategory.fulfilled, (state, action) => {
       state.loading = false;
       state.categories = state.categories.filter(
         (category) => category._id !== action.payload.id
       );
       state.categories= [...state.categories,action.payload.data.category]
-    },
-    [editCategory.rejected]: (state, action) => {
+    })
+    .addCase(editCategory.rejected ,(state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-    [addCategory.pending]: (state, action) => {
+    })
+    .addCase(addCategory.pending, (state, action) => {
       state.loading = true;
-    },
-    [addCategory.fulfilled]: (state, action) => {
+    })
+    .addCase(addCategory.fulfilled, (state, action) => {
       state.loading = false;
       state.categories= [...state.categories,action.payload]
-    },
-    [addCategory.rejected]: (state, action) => {
+    })
+    .addCase(addCategory.rejected,  (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
+    })
   },
 });
-// export const { createNewCategory } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

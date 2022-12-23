@@ -1,16 +1,21 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { API_URL, doApiMethod, doGetApiMethod, errorHandler } from "./../../services/service";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  API_URL,
+  doApiMethod,
+  doGetApiMethod,
+  errorHandler,
+} from "./../../services/service";
 import { io } from "socket.io-client";
 import { Button } from "../style/wrappers/registerPage";
 import { Wrapper } from "./../style/wrappers/chat";
 import LoadingButton from "./../UI/spinnerButton";
+import { getUserInbox } from './../../redux/features/userSlice';
 
-const Chat = ({post}) => {
-  const nav = useNavigate();
+const Chat = ({ post }) => {
   const { user } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch();
   const { firstName, lastName } = useSelector(
     (state) => state.userSlice.user.fullName
   );
@@ -20,30 +25,47 @@ const Chat = ({post}) => {
   const [typing, setTyping] = useState(false);
   const [owner, setOwner] = useState({});
   const [typingTimeOut, setTypingTimeOut] = useState(null);
-  const { roomID ,creatorID} = useParams();
+  const { roomID, creatorID } = useParams();
   useEffect(() => {
     setSocket(io(API_URL));
-    const getChatHistory = async()=>{
-      let {data} = await doGetApiMethod(`/users/getChat/${roomID}`) 
-      if(data[0]?.messagesArr) setChat(data[0]?.messagesArr)
+    const getChatHistory = async () => {
+      let { data } = await doGetApiMethod(`/users/getChat/${roomID}`);
+      if (data[0]?.messagesArr) setChat(data[0]?.messagesArr);
+    };
+    getChatHistory();
+    getPostCreatorInfo(creatorID);
+    return()=>{
+      dispatch(getUserInbox())
     }
-    getChatHistory()
-    getPostCreatorInfo(creatorID)
   }, [roomID]);
   const getPostCreatorInfo = async (id) => {
     const { data } = await doGetApiMethod("/users/info/" + id);
-    setOwner({name: data.userInfo.fullName , img: data.userInfo.profile_img?.url});
+    setOwner({
+      name: data.userInfo.fullName,
+      img: data.userInfo.profile_img?.url,
+    });
   };
-  const disconnect = async () => {
+  const messageSave = async () => {
     let url = "/users/chatUpdate";
     let messageObj = {
-      name: owner.name.firstName+ " " + owner.name.lastName,
-      img: owner.img,
+      name: owner?.name?.firstName + " " + owner?.name?.lastName,
+      img: owner?.img,
       roomID,
       creatorID,
-      messagesArr: chat,
+      messagesArr: [
+        ...chat,
+        {
+          message: message,
+          userName: firstName + " " + lastName,
+          sender: user._id,
+        },
+      ],
     };
-    if(chat?.length> 0) await doApiMethod(url, "PATCH", { messageObj, userID: user._id , creatorID: creatorID });
+      await doApiMethod(url, "PATCH", {
+        messageObj,
+        userID: user._id,
+        creatorID: creatorID,
+      });
   };
   useEffect(() => {
     if (!socket) return;
@@ -76,6 +98,7 @@ const Chat = ({post}) => {
         sender: user._id,
       },
     ]);
+    messageSave();
     setMessage("");
   };
   const handleInput = (e) => {
@@ -91,32 +114,32 @@ const Chat = ({post}) => {
   };
   return (
     <Wrapper>
-        <h1>{post?.title}</h1>
+      <h1>{post?.title}</h1>
       <div className="w-8/12 flex flex-col items-center justify-center text-center mx-auto shadow-xl p-3 bg-gray-300 rounded-xl">
         {chat.length > 0 && (
           <ul className="mb-5 w-full flex flex-col bg-gray-200 p-4 rounded">
-            {chat.map((data, i) => (
+            {chat.map((msg, i) => (
               <li
                 key={i}
                 className={`shadow-xl mt-3 ${
-                  data.sender === user._id ? "self-start" : "self-end"
+                  msg.sender === user._id ? "self-start" : "self-end"
                 } py-1 px-4 bg-white rounded`}
               >
                 <div className="flex flex-col">
                   <small
                     className={`p-0 capitalize ${
-                      data.sender === user._id ? "self-start" : "self-end"
+                      msg.sender === user._id ? "self-start" : "self-end"
                     }`}
                   >
-                    {data.userName}
+                    {msg.userName}
                   </small>
                   <hr />
                   <p
                     className={`p-0 ${
-                      !data.sender === user._id ? "self-start" : "self-end"
+                      !msg.sender === user._id ? "self-start" : "self-end"
                     }`}
                   >
-                    {data.message}
+                    {msg.message}
                   </p>
                 </div>
               </li>
@@ -143,12 +166,6 @@ const Chat = ({post}) => {
             </Button>
           </div>
         </form>
-          <span type="button" onClick={()=>{
-            disconnect()
-            user?.role === "admin"
-            ? nav(`/admin`)
-            : nav(`/`);
-          }}>Back</span>
       </div>
     </Wrapper>
   );
