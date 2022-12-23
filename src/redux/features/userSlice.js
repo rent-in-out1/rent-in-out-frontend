@@ -20,7 +20,6 @@ export const getUserWishList = createAsyncThunk("getUserWishList/get", async () 
   try {
     const url = "/users/getWishList";
     let { data } = await doGetApiMethod(url);
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -63,7 +62,7 @@ const userSlice = createSlice({
       else state.wishList.push(action.payload);
     },
     updateInbox: (state, action) => {
-        
+
     }
   },
   extraReducers(builder) {

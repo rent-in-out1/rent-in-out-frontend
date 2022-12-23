@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
-import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
-import { getUserWishList, onLogin } from "./redux/features/userSlice";
+import { API_URL, API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
+import { getUserInbox, getUserWishList, onLogin } from "./redux/features/userSlice";
+import { io } from "socket.io-client";
 import { onMessegeToggle } from "./redux/features/toggleSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
@@ -42,6 +43,10 @@ const AppRoutes = () => {
         getUserInfo(decoded._id, token);
       }
       else errorHandler("Your authorization is expired please login again")
+    }
+    const getInbox = setInterval(() => dispatch(getUserInbox()) , 3000)
+    return ()=>{
+      clearInterval(getInbox)
     }
   }, []);
 

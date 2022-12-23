@@ -24,9 +24,9 @@ const SideBarChat = () => {
           </h2>
         </div>
         {/* all users with last chat here */}
-        <div className="overflow-y-auto ">
+        <div className="overflow-y-auto rounded">
         {inbox?.map((msg) => (
-          <div
+          <div className="overflow-hidden" 
             key={msg.roomID}
             onClick={() => {
               user.role === "admin"
@@ -34,7 +34,7 @@ const SideBarChat = () => {
                 : nav(`/chat/${msg.roomID}/${msg.creatorID}`);
             }}
           >
-            <UserSingleChat msg={msg} />
+            <UserSingleChat msg={msg}/>
           </div>
         ))}
       </div>
