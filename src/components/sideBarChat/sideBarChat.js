@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { doGetApiMethod } from "../../services/service";
 import Chat from "../icons/chat";
 import UserSingleChat from "../userSingleChat/userSingleChat";
 import { getUserInbox } from "./../../redux/features/userSlice";
