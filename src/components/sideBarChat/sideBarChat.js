@@ -26,7 +26,7 @@ const SideBarChat = () => {
         </div>
         {/* all users with last chat here */}
         <div className="overflow-y-auto ">
-        {inbox.map((msg) => (
+        {inbox?.map((msg) => (
           <div
             key={msg.roomID}
             onClick={() => {

@@ -3,6 +3,7 @@ import { doGetApiMethod } from "./../../services/service";
 const initialState = {
   user: null,
   inbox: [],
+  wishList: [],
   loading: false,
   error: "",
 };
@@ -10,6 +11,16 @@ export const getUserInbox = createAsyncThunk("getUserInbox/get", async () => {
   try {
     const url = "/users/getAllChat";
     let { data } = await doGetApiMethod(url);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+export const getUserWishList = createAsyncThunk("getUserWishList/get", async () => {
+  try {
+    const url = "/users/getWishList";
+    let { data } = await doGetApiMethod(url);
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -42,14 +53,14 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     updateWishList: (state, action) => {
-      let like = state.user.wishList.some(
+      let like = state.wishList.some(
         (post) => post._id === action.payload._id
       );
       if (like)
-        state.user.wishList = state.user.wishList.filter(
+        state.wishList = state.wishList.filter(
           (post) => post._id !== action.payload._id
         );
-      else state.user.wishList.push(action.payload);
+      else state.wishList.push(action.payload);
     },
   },
   extraReducers(builder) {
@@ -62,6 +73,17 @@ const userSlice = createSlice({
         state.inbox = action.payload;
       })
       .addCase(getUserInbox.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(getUserWishList.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUserWishList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.wishList = action.payload;
+      })
+      .addCase(getUserWishList.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

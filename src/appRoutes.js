@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
-import { onLogin } from "./redux/features/userSlice";
+import { getUserWishList, onLogin } from "./redux/features/userSlice";
 import { onMessegeToggle } from "./redux/features/toggleSlice";
 import Loader from "./components/loader/loader";
 import UserSearch from "./pages/client/userSearch/userSearch";
@@ -55,6 +55,7 @@ const AppRoutes = () => {
     }
     localStorage.setItem("token" , JSON.stringify(data.newAccessToken))
     dispatch(onLogin(data.userInfo));
+    dispatch(getUserWishList())
   };
   return (
     <Suspense

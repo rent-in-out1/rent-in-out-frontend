@@ -18,7 +18,7 @@ import WishList from "../icons/wishlist";
 const SideBar = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.userSlice?.user !== null);
-  const user = useSelector((state) => state.userSlice?.user);
+  const {user , wishList} = useSelector((state) => state.userSlice);
   return (
     
     <Wrapper
@@ -63,7 +63,7 @@ const SideBar = () => {
                 >
                   <WishList color={"#6B7280"}/>
                   <span className="flex-1 ml-3">Wish List</span>
-                  <aside>{user.wishList.length}</aside>
+                  <aside>{wishList.length}</aside>
                 </Link>
               </li>
               <li>

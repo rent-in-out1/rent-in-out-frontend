@@ -9,8 +9,8 @@ const UserSingleChat = ({ msg }) => {
           <div className="profile w-5 h-5 mr-1">
             <img
               className="h-full w-full object-cover rounded-full"
-              src={user._id === msg.creatorID ? msg.userImg : msg.ownerImg}
-              alt={user._id === msg.creatorID ? msg.userName :msg.ownerName}
+              src={user?._id === msg.creatorID ? msg?.userImg : msg?.ownerImg}
+              alt={user?._id === msg.creatorID ? msg?.userName :msg?.ownerName}
             />
           </div>
           <div className="firstName text-sm capitalize">
@@ -19,7 +19,7 @@ const UserSingleChat = ({ msg }) => {
           </div>
         </div>
       <div className="chatOverView bg-gray-50 text-xs mt-2 p-1">
-        {msg?.messagesArr[msg?.messagesArr.length - 1].message}
+        {msg?.messagesArr[msg?.messagesArr?.length - 1].message}
       </div>
     </div>
   );
