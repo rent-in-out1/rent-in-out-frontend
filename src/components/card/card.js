@@ -148,7 +148,7 @@ const Card = ({ post }) => {
             }}
           >
             {post?.likes?.some((el) => el.user_id === user?._id) ||
-            user.wishList?.some((el) => el._id === post?._id) ||
+            user?.wishList?.some((el) => el._id === post?._id) ||
             wishList?.some((el) => el._id === post?._id) ? (
               <FillHeart color="red" width="20px" height={"20px"} />
             ) : (

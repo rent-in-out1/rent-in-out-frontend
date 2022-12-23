@@ -14,7 +14,7 @@ const LayoutAdmin = () => {
         <div className="lg:w-3/12 hidden lg:flex">
           <Sidebar />
         </div>
-        <div className="bg-gray-100 md:w-9/12 lg:w-7/12 min-h-screen">
+        <div className="bg-gray-100 md:w-9/12 lg:w-7/12 ">
           <Outlet />
         </div>
         {user ? (
