@@ -17,7 +17,7 @@ const SideBarChat = () => {
       <div className="overflow-y-auto py-4 w-full mt-4 px-2 bg-white shadow-xl rounded">
         <div className="flex justify-between">
           <h2 className="flex items-center">
-            <span className="mx-auto text-center">Chats</span>
+            <span className="mx-auto text-center mr-1">Chats</span>
             <hr/>
             <span>
               <Chat />
