@@ -11,7 +11,7 @@ import { io } from "socket.io-client";
 import { Button } from "../style/wrappers/registerPage";
 import { Wrapper } from "./../style/wrappers/chat";
 import LoadingButton from "./../UI/spinnerButton";
-import { getUserInbox } from './../../redux/features/userSlice';
+import { getUserInbox } from "./../../redux/features/userSlice";
 
 const Chat = ({ post }) => {
   const { user } = useSelector((state) => state.userSlice);
@@ -34,9 +34,9 @@ const Chat = ({ post }) => {
     };
     getChatHistory();
     getPostCreatorInfo(creatorID);
-    return()=>{
-      dispatch(getUserInbox())
-    }
+    return () => {
+      dispatch(getUserInbox());
+    };
   }, [roomID]);
   const getPostCreatorInfo = async (id) => {
     const { data } = await doGetApiMethod("/users/info/" + id);
@@ -48,8 +48,10 @@ const Chat = ({ post }) => {
   const messageSave = async () => {
     let url = "/users/chatUpdate";
     let messageObj = {
-      name: owner?.name?.firstName + " " + owner?.name?.lastName,
-      img: owner?.img,
+      ownerName: owner?.name?.firstName + " " + owner?.name?.lastName,
+      ownerImg: owner?.img,
+      userName: firstName + " " + lastName,
+      userImg: user?.profile_img.url,
       roomID,
       creatorID,
       messagesArr: [
@@ -61,11 +63,11 @@ const Chat = ({ post }) => {
         },
       ],
     };
-      await doApiMethod(url, "PATCH", {
-        messageObj,
-        userID: user._id,
-        creatorID: creatorID,
-      });
+    await doApiMethod(url, "PATCH", {
+      messageObj,
+      userID: user._id,
+      creatorID: creatorID,
+    });
   };
   useEffect(() => {
     if (!socket) return;

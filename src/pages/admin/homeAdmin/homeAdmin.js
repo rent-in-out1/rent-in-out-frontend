@@ -5,7 +5,7 @@ const HomeAdmin = () => {
   const user = useSelector(state => state.userSlice.user)
   return (
     <div className="text-center mt-4">
-      <h1 className="text-3xl font-sans">Welcome back {user?.fullName.firstName} {user?.fullName.lastName} !</h1>
+      <h1 className="text-3xl font-sans capitalize">Welcome back {user?.fullName.firstName} {user?.fullName.lastName} !</h1>
       <h3 className="text-2xl mt-2">List Of Tables : </h3>
       <div className="flex wrap p-3">
       <Link to={"/admin/users"} className="box w-1/3 p-2">
