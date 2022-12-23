@@ -68,6 +68,7 @@ const Chat = ({ post }) => {
       userID: user._id,
       creatorID: creatorID,
     });
+    dispatch(getUserInbox())
   };
   useEffect(() => {
     if (!socket) return;

@@ -82,7 +82,7 @@ const postsSlice = createSlice({
   extraReducers(builder) {
     builder.
     // get posts
-    addCase(getPosts.pending, (state, action) => {
+    addCase(getPosts.pending, (state) => {
       state.loading = true;
     })
     .addCase(getPosts.fulfilled, (state, action) => {
@@ -102,7 +102,7 @@ const postsSlice = createSlice({
       state.error = action.payload;
     })
     // delete post
-    .addCase(deletePost.pending, (state, action) => {
+    .addCase(deletePost.pending, (state) => {
       state.loading = true;
     })
     .addCase(deletePost.fulfilled, (state, action) => {
@@ -113,7 +113,7 @@ const postsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     })
-    .addCase(likePost.pending, (state, action) => {
+    .addCase(likePost.pending, (state) => {
       state.loading = true;
     })
     .addCase(likePost.fulfilled, (state, action) => {
@@ -126,7 +126,7 @@ const postsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     })
-    .addCase(uploadPost.pending, (state, action) => {
+    .addCase(uploadPost.pending, (state) => {
       state.loading = true;
     })
     .addCase(uploadPost.fulfilled, (state, action) => {

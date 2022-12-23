@@ -62,6 +62,9 @@ const userSlice = createSlice({
         );
       else state.wishList.push(action.payload);
     },
+    updateInbox: (state, action) => {
+        
+    }
   },
   extraReducers(builder) {
     builder
