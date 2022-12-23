@@ -63,7 +63,7 @@ const SideBar = () => {
                 >
                   <WishList color={"#6B7280"}/>
                   <span className="flex-1 ml-3">Wish List</span>
-                  <aside>{wishList.length}</aside>
+                  <aside>{wishList?.length}</aside>
                 </Link>
               </li>
               <li>
