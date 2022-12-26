@@ -12,8 +12,10 @@ import { Button } from "../style/wrappers/registerPage";
 import { Wrapper } from "./../style/wrappers/chat";
 import LoadingButton from "./../UI/spinnerButton";
 import { getUserInbox } from "./../../redux/features/userSlice";
+import SingleMessage from './singleMessage';
 
 const Chat = ({ post }) => {
+  const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
   const { firstName, lastName } = useSelector(
@@ -45,6 +47,14 @@ const Chat = ({ post }) => {
       img: data.userInfo.profile_img?.url,
     });
   };
+  const deleteMsg =(_id) => {
+    setChat(chat.filter(msg => msg._id !== _id))
+    if(chat.length === 1 ) {
+      user.role === "admin"
+      ? nav(`/admin`)
+      : nav(`/`);
+    }
+  }
   const messageSave = async () => {
     let url = "/users/chatUpdate";
     let messageObj = {
@@ -54,6 +64,7 @@ const Chat = ({ post }) => {
       userImg: user?.profile_img.url,
       roomID,
       creatorID,
+      userID:user._id,
       messagesArr: [
         ...chat,
         {
@@ -122,30 +133,7 @@ const Chat = ({ post }) => {
         {chat.length > 0 && (
           <ul className="mb-5 w-full flex flex-col bg-gray-200 p-4 rounded">
             {chat.map((msg, i) => (
-              <li
-                key={i}
-                className={`shadow-xl mt-3 ${
-                  msg.sender === user._id ? "self-start" : "self-end"
-                } py-1 px-4 bg-white rounded`}
-              >
-                <div className="flex flex-col">
-                  <small
-                    className={`p-0 capitalize ${
-                      msg.sender === user._id ? "self-start" : "self-end"
-                    }`}
-                  >
-                    {msg.userName}
-                  </small>
-                  <hr />
-                  <p
-                    className={`p-0 ${
-                      !msg.sender === user._id ? "self-start" : "self-end"
-                    }`}
-                  >
-                    {msg.message}
-                  </p>
-                </div>
-              </li>
+              <SingleMessage key={i} roomID={roomID} user={user} msg={msg} deleteMsg={deleteMsg}/>
             ))}
           </ul>
         )}

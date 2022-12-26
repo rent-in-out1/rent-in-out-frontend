@@ -61,9 +61,6 @@ const userSlice = createSlice({
         );
       else state.wishList.push(action.payload);
     },
-    updateInbox: (state, action) => {
-
-    }
   },
   extraReducers(builder) {
     builder
@@ -101,5 +98,6 @@ export const {
   uploadProfileImage,
   upload,
   updateWishList,
+  updateInbox
 } = userSlice.actions;
 export default userSlice.reducer;
