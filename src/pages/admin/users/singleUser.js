@@ -1,13 +1,8 @@
 import React from 'react'
 import { BsTrash } from 'react-icons/bs'
-import { doApiMethod } from '../../../services/service';
+import { doApiMethod } from '../../../services/axios-service/axios-service';
 const SingleUser = (props) => {
   const user = props.item;
-
-  const unixToAge = (birthday) => {
-    let age = (Date.now() - birthday) / (1000 * 60 * 60 * 24 * 365)
-    return Math.floor(age);
-  }
   const changeRole = async (_id) => {
     const url = "/users/changeRole/" + _id;
     await doApiMethod(url, "PATCH");

@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./headerAdmin";
-import Sidebar from "../../components/sideBar";
-import SideBarChat from "./../../components/sideBarChat/sideBarChat";
+import Sidebar from "../../shared/components/sideBar";
+import SideBarChat from "../../shared/components/sideBarChat/sideBarChat";
 import { useSelector } from "react-redux";
 
 const LayoutAdmin = () => {

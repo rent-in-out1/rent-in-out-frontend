@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Card from "../../../components/card";
+import Card from "../../../shared/components/card";
 
 const WishList = () => {
   let {wishList } = useSelector((state) => state.userSlice);

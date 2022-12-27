@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { doGetApiMethod } from "../../../services/service";
-import { Wrapper } from "../../../components/style/wrappers/table";
+import { doGetApiMethod } from "../../../services/axios-service/axios-service";
+import { Wrapper } from "../../../assets/styles/wrappers/table";
 import SinglePost from "./singlePost";
-import Controllers from "../../../components/controllers/controllers";
-import PageNav from './../../../helpers/pageNav';
-
+import Controllers from "../../../shared/components/controllers/controllers";
+import PageNav from '../../../shared/UI/page-nav/page-nav';
 
 const Posts = () => {
   const [search, setSearch] = useState("");
@@ -17,7 +16,9 @@ const Posts = () => {
     { name: "Rent duration", value: "range" },
     { name: "Location", value: "location" },
     { name: "Active", value: "active" }]
-
+  const posts_headers = [
+      "Title","Created by","location","category","created at","updated at","availability","active","delete"
+  ]
   const getAllposts = async () => {
     let url = `/posts/search/?s=${search}&sort=${option}&page=${page}`;
     const { data } = await doGetApiMethod(url);
@@ -38,15 +39,9 @@ const Posts = () => {
           <table>
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Created by</th>
-                <th>location</th>
-                <th>category</th>
-                <th>created at</th>
-                <th>updated at</th>
-                <th>availability</th>
-                <th>active</th>
-                <th>delete</th>
+                {posts_headers.map((header,i)=>(
+                    <th key={i}>{header}</th>
+                ))}
               </tr>
             </thead>
             <tbody>

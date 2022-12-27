@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { doGetApiMethod } from "./../../services/service";
+import { doGetApiMethod } from "../../services/axios-service/axios-service";
 const initialState = {
   user: null,
   inbox: [],
@@ -64,7 +64,7 @@ const userSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getUserInbox.pending, (state, action) => {
+      .addCase(getUserInbox.pending, (state) => {
         state.loading = true;
       })
       .addCase(getUserInbox.fulfilled, (state, action) => {

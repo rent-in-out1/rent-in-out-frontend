@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { doGetApiMethod } from "../../../services/service";
-import { Wrapper } from "../../../components/style/wrappers/table";
+import { doGetApiMethod } from "../../../services/axios-service/axios-service";
+import { Wrapper } from "../../../assets/styles/wrappers/table";
 import SingleUser from "./singleUser";
-import Controllers from "../../../components/controllers/controllers";
-import PageNav from "./../../../helpers/pageNav";
+import Controllers from "../../../shared/components/controllers/controllers";
+import PageNav from "../../../shared/UI/page-nav/page-nav";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");

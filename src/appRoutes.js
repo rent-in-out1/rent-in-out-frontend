@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
-import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/service";
+import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/axios-service/axios-service";
 import { getUserInbox, getUserWishList, onLogin } from "./redux/features/userSlice";
-import Loader from "./components/loader/loader";
+import Loader from "./shared/components/loader/loader";
 import WishList from "./pages/client/wishList";
-import ConfirmHandler from './components/UI/confirm/confirm';
-import Chat from "./components/chat/chat";
+import ConfirmHandler from './shared/UI/confirm/confirm';
+import Chat from "./pages/client/chat/chat";
 import MyProfile from "./pages/client/myProfile"
 
 // Lazy loading of routes
@@ -19,13 +19,13 @@ const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
-const ProfileEdit = React.lazy(() => import("./components/profile/profileEdit"));
+const ProfileEdit = React.lazy(() => import("./pages/client/profile-edit/profileEdit"));
 const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
-const Page404 = React.lazy(() => import("./pages/error/page404"));
-const ResetPass = React.lazy(() => import("./api/auth/loginPage/resetPass"))
-const Likes = React.lazy(() => import("./pages/client/likes"))
+const Page404 = React.lazy(() => import("./pages/page-not-found"));
+const ResetPass = React.lazy(() => import("./api/auth/resetPass"))
+const Likes = React.lazy(() => import("./pages/client/posts-likes"))
 const UserSearch = React.lazy(() => import("./pages/client/userSearch/userSearch"))
 const AppRoutes = () => {
 

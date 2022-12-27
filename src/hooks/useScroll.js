@@ -1,5 +1,4 @@
 import { useState,useEffect } from "react";
-
 export function useScroll(offsetY = 0){
   const [endScreen,setEndScreen] = useState(false);
 

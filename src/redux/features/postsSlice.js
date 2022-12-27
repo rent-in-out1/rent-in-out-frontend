@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { doApiMethod, doGetApiMethod } from "../../services/service";
+import { doApiMethod, doGetApiMethod } from "../../services/axios-service/axios-service";
 
 export const getPosts = createAsyncThunk(
   "posts/get",

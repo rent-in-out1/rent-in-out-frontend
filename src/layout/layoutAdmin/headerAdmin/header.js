@@ -4,19 +4,19 @@ import {
   onRegisterToggle,
   onSearchToggle,
 } from "../../../redux/features/toggleSlice";
-import { Logo, Wrapper } from "../../../components/style/wrappers/navbarAdmin";
+import { Logo, Wrapper } from "../../../assets/styles/wrappers/navbarAdmin";
 import { useSelector, useDispatch } from "react-redux";
 import { onLogout } from "../../../redux/features/userSlice";
-import Profile from "../../../components/icons/profile";
-import Users from "../../../components/icons/users";
-import Posts from "../../../components/icons/posts";
-import Categories from "../../../components/icons/categories";
-import Home from "../../../components/icons/home";
-import SignIn from "../../../components/icons/signIn";
-import SignOut from "../../../components/icons/signOut";
-import Bell from "../../../components/icons/bell";
-import Search from "./../../../components/icons/search";
-import WishList from "../../../components/icons/wishlist";
+import Profile from "../../../assets/icons/profile";
+import Users from "../../../assets/icons/users";
+import Posts from "../../../assets/icons/posts";
+import Categories from "../../../assets/icons/categories";
+import Home from "../../../assets/icons/home";
+import SignIn from "../../../assets/icons/signIn";
+import SignOut from "../../../assets/icons/signOut";
+import Bell from "../../../assets/icons/bell";
+import Search from "../../../assets/icons/search";
+import WishList from "../../../assets/icons/wishlist";
 import { useEffect } from "react";
 const Header = () => {
   const nav = useNavigate();
@@ -44,7 +44,7 @@ const Header = () => {
         <div className="left flex flex-wrap">
           <Link to={"/admin"}>
             <Logo>
-              <img src="../img/LOGO.png" alt="logo" />
+              <img src="../../public/img/LOGO.png" alt="logo" />
               <p>rentInOut</p>
             </Logo>
           </Link>
@@ -156,7 +156,7 @@ const Header = () => {
             className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
           >
             <Link
-              className="flex justify-between items-center"
+              className="flex justify-between items-center cursor-pointer"
               to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
             >
               <span>Wish List</span>
@@ -167,10 +167,10 @@ const Header = () => {
             onClick={() => dispatch(onSearchToggle())}
             className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
           >
-            <Link className="flex justify-between items-center">
+            <a className="flex justify-between items-center cursor-pointer">
               <span>Search</span>
               <Search />
-            </Link>
+            </a>
           </li>
           <li
             onClick={() => {

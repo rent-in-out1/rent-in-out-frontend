@@ -1,9 +1,9 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './header'
-import Sidebar from '../../components/sideBar'
+import Sidebar from '../../shared/components/sideBar'
 import { useSelector } from 'react-redux'
-import SideBarChat from '../../components/sideBarChat/sideBarChat'
+import SideBarChat from '../../shared/components/sideBarChat/sideBarChat'
 
 
 const Layout = () => {

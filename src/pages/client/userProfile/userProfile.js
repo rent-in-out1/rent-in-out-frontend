@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { doGetApiMethod } from '../../../services/service'
+import { doGetApiMethod } from '../../../services/axios-service/axios-service'
 import { useSelector } from 'react-redux'
-import Loader from '../../../components/loader/loader'
-import { Wrapper } from '../../../components/style/wrappers/userProfile'
-import Location from '../../../components/icons/location'
-import Telephone from '../../../components/icons/telephone'
-import Mail from '../../../components/icons/mail'
-import Calendar from '../../../components/icons/calendar'
-import OwnPosts from '../../../components/ownPosts'
+import Loader from '../../../shared/components/loader/loader'
+import { Wrapper } from '../../../assets/styles/wrappers/userProfile'
+import Location from '../../../assets/icons/location'
+import Telephone from '../../../assets/icons/telephone'
+import Mail from '../../../assets/icons/mail'
+import Calendar from '../../../assets/icons/calendar'
+import OwnPosts from '../myProfile/ownPosts'
 const UserProfile = () => {
     const nav = useNavigate();
     const { user } = useSelector(state => state.userSlice)

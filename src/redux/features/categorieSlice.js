@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { doApiMethod, doGetApiMethod } from "./../../services/service";
-import { errorHandler } from "./../../services/service";
+import { doApiMethod, doGetApiMethod } from "../../services/axios-service/axios-service";
+import { errorHandler } from "../../services/axios-service/axios-service";
 export const getCatgories = createAsyncThunk(
   "categories/get",
   async ({ search, option, page }) => {
@@ -78,7 +78,7 @@ const categoriesSlice = createSlice({
   extraReducers(builder) {
     // get categories status
     builder.
-    addCase(getCatgories.pending ,(state, action) => {
+    addCase(getCatgories.pending ,(state) => {
       state.loading = true;
     })
     .addCase(getCatgories.fulfilled,(state, action) => {
@@ -90,7 +90,7 @@ const categoriesSlice = createSlice({
       state.error = action.payload;
     })
     // delete categories
-    .addCase(deleteCategory.pending, (state, action) => {
+    .addCase(deleteCategory.pending, (state) => {
       state.loading = true;
     })
     .addCase(deleteCategory.fulfilled, (state, action) => {
@@ -104,7 +104,7 @@ const categoriesSlice = createSlice({
       state.error = action.payload;
     })
     // edit categories status
-    .addCase(editCategory.pending, (state, action) => {
+    .addCase(editCategory.pending, (state) => {
       state.loading = true;
     })
     .addCase(editCategory.fulfilled, (state, action) => {
@@ -118,7 +118,7 @@ const categoriesSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     })
-    .addCase(addCategory.pending, (state, action) => {
+    .addCase(addCategory.pending, (state) => {
       state.loading = true;
     })
     .addCase(addCategory.fulfilled, (state, action) => {
