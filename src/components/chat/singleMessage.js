@@ -5,12 +5,12 @@ import { doApiMethod } from "../../services/service";
 import ExitFill from "../icons/exitFill";
 import ExitNoFill from "../icons/exitNoFill";
 
-const SingleMessage = ({ msg, user, roomID, deleteMsg }) => {
+const SingleMessage = ({ msg, user, roomID, deleteMsg ,location }) => {
   const dispatch = useDispatch();
   const [over, setOver] = useState(false);
   const [showDel, setShowDel] = useState(false);
   const deleteMessage = async () => {
-    let url = `/users/deleteMessage/${roomID}/${msg._id}`;
+    let url = `/users/deleteMessage/${roomID}/${location}`;
     await doApiMethod(url, "DELETE");
     dispatch(getUserInbox());
   };
@@ -29,7 +29,7 @@ const SingleMessage = ({ msg, user, roomID, deleteMsg }) => {
           onMouseLeave={() => setOver(false)}
           onClick={() => {
             deleteMessage();
-            deleteMsg(msg?._id);
+            deleteMsg(location);
           }}
         >
           {over ? (

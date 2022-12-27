@@ -47,9 +47,9 @@ const Chat = ({ post }) => {
       img: data.userInfo.profile_img?.url,
     });
   };
-  const deleteMsg =(_id) => {
-    setChat(chat.filter(msg => msg._id !== _id))
-    if(chat.length === 1 ) {
+  const deleteMsg =(location) => {
+    setChat(chat.splice(location , 1))
+    if(chat.length  < 1 ) {
       user.role === "admin"
       ? nav(`/admin`)
       : nav(`/`);
@@ -133,7 +133,7 @@ const Chat = ({ post }) => {
         {chat.length > 0 && (
           <ul className="mb-5 w-full flex flex-col bg-gray-200 p-4 rounded">
             {chat.map((msg, i) => (
-              <SingleMessage key={i} roomID={roomID} user={user} msg={msg} deleteMsg={deleteMsg}/>
+              <SingleMessage key={i} roomID={roomID} user={user} msg={msg} location={i} deleteMsg={deleteMsg}/>
             ))}
           </ul>
         )}
