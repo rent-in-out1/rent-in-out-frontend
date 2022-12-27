@@ -47,7 +47,6 @@ margin-bottom: 12px;
                font-weight: bold;
                margin-bottom: 20px;
                cursor: pointer;
-               display:flex;
                justify-content: center;
                margin-right: 36px;
                &:hover{

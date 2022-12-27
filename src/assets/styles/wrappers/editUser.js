@@ -13,7 +13,7 @@ form{
     padding:48px 24px 12px 24px;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);  
+    box-shadow: 0 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);  
     div{ 
         width: 100%;
     input{
@@ -39,7 +39,6 @@ button,a{
       font-weight: bold;
       margin-bottom: 20px;
       cursor: pointer;
-      display:flex;
       justify-content: center;
       
 }

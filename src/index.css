@@ -79,3 +79,7 @@
 body{
   background: var(--grey-100);
 }
+a{
+    text-decoration: none;
+    text-underline: none;
+}

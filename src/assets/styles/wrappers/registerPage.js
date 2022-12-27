@@ -82,7 +82,7 @@ export const Wrapper = styled.div`
       }
       }
     }
-    padding: 12px 12px 0px 0px;
+    padding: 12px 12px 0 0;
     @media (max-width: 768px) {
       padding: 24px;
     }
@@ -96,7 +96,6 @@ export const Wrapper = styled.div`
     justify-content: center;
     margin-bottom: 35px;
     @media (max-width: 768px) {
-      margin-bottom: 0;
       margin: 8px;
       flex-direction: row;
       justify-content: space-around;

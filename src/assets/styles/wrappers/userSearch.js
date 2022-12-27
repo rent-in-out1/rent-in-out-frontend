@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
     height: 80%;
     background: var(--white);
     border-radius: 60px;
-    padding: 0px 8px;
+    padding: 0 8px;
     transition: 800ms;
 
     .icon {

@@ -41,7 +41,7 @@ export const Wrapper = styled.div`
     @media screen and (min-width: 481px) and (max-width:768px) {
         width: 100%;
         padding: 6px;
-        margin: 12px 0 0px 0;
+        margin: 12px 0 0 0;
         .card{
          .postImg{
             height: 300px;
