@@ -45,7 +45,7 @@ const Header = () => {
                 <div className="left flex flex-wrap">
                     <Link to={"/"}>
                         <Logo>
-                            <img src="../../public/img/LOGO.png" alt="logo"/>
+                            <img src="/img/LOGO.png" alt="logo"/>
                             <p>rentInOut</p>
                         </Logo>
                     </Link>

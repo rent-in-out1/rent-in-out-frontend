@@ -16,7 +16,6 @@ import {
 } from "../../../redux/features/toggleSlice";
 import Clock from "../../../assets/icons/clock";
 import { likePost } from "../../../redux/features/postsSlice";
-import LazyLoad from "react-lazy-load";
 import { updateWishList } from "../../../redux/features/userSlice";
 import WebChat from "../../../assets/icons/webChat";
 
@@ -56,13 +55,13 @@ const Card = ({ post }) => {
             }}
             className="flex items-center cursor-pointer"
           >
-            <LazyLoad className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
+            <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
               <img
                 className="w-full h-full rounded-full object-cover"
                 src={owner?.profile_img?.url}
                 alt="avatar"
               />
-            </LazyLoad>
+            </div>
             <span className="pl-1 flex">
               {owner.fullName?.firstName}
               <span className="ml-1 hidden md:flex">
@@ -88,10 +87,9 @@ const Card = ({ post }) => {
             >
               <li
                 onClick={() => closeNav()}
-                className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${
-                  user?._id !== post?.creator_id &&
+                className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${user?._id !== post?.creator_id &&
                   "rounded-b-xl hover:rounded-b-xl"
-                }`}
+                  }`}
               >
                 <p>Share</p>
                 <Send />
@@ -132,13 +130,13 @@ const Card = ({ post }) => {
             }
           }}
         >
-          <LazyLoad className="overflow-hidden w-full postImg">
+          <div className="overflow-hidden w-full postImg">
             <img
               className="w-full h-full object-cover"
               src={post.img[0]?.url}
               alt="post"
             />
-          </LazyLoad>
+          </div>
           <div
             className="absolute top-0 right-4 p-2"
             onClick={() => {
@@ -148,8 +146,8 @@ const Card = ({ post }) => {
             }}
           >
             {post?.likes?.some((el) => el.user_id === user?._id) ||
-            user?.wishList?.some((el) => el._id === post?._id) ||
-            wishList?.some((el) => el._id === post?._id) ? (
+              user?.wishList?.some((el) => el._id === post?._id) ||
+              wishList?.some((el) => el._id === post?._id) ? (
               <FillHeart color="red" width="20px" height={"20px"} />
             ) : (
               <Heart color="red" width="20px" height={"20px"} />
@@ -158,7 +156,13 @@ const Card = ({ post }) => {
         </div>
         <div className="px-5 pb-5 pt-2 md:pt-4">
           <div>
-            <h5 className="text-sm capitalize text-lg lg:text-3xl font-semibold sm:tracking-tight text-gray-900">
+
+            {/* post title */}
+            <h5 onClick={() => {
+              user?.role === "admin" ?
+                nav("/admin/singlePost/" + post._id) : nav("/singlePost/" + post._id)
+            }}
+              className="text-sm capitalize text-lg lg:text-3xl font-semibold sm:tracking-tight text-gray-900 cursor-pointer">
               {post?.title}
             </h5>
           </div>
@@ -177,9 +181,8 @@ const Card = ({ post }) => {
                   return (
                     <div
                       key={uuidv4()}
-                      className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${
-                        i * 4
-                      }`}
+                      className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4
+                        }`}
                     >
                       <img
                         title={like.fullName.firstName}
@@ -224,8 +227,8 @@ const Card = ({ post }) => {
                     !user
                       ? dispatch(onRegisterShow())
                       : user.role === "admin"
-                      ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`)
-                      : nav(`/chat/${owner._id}${user._id}/${owner._id}`);
+                        ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`)
+                        : nav(`/chat/${owner._id}${user._id}/${owner._id}`);
                   }}
                   className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
                 >

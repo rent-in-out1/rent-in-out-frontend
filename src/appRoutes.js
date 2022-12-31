@@ -27,6 +27,7 @@ const Page404 = React.lazy(() => import("./pages/page-not-found"));
 const ResetPass = React.lazy(() => import("./api/auth/resetPass"))
 const Likes = React.lazy(() => import("./pages/client/posts-likes"))
 const UserSearch = React.lazy(() => import("./pages/client/userSearch/userSearch"))
+const SinglePost = React.lazy(() => import("./pages/client/singlePost"))
 const AppRoutes = () => {
 
   const dispatch = useDispatch();
@@ -79,11 +80,12 @@ const AppRoutes = () => {
             <Route path="/profile/:userId" element={<UserProfile />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
-                <Route path="*" element={<Page404 />} />
                 <Route path="/chat/:roomID/:creatorID" element={<Chat/>}/>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/wishlist" element={<WishList />} />
+                <Route path="/singlePost/:postID" element={<SinglePost />} />
+                <Route path="*" element={<Page404 />} />
               </React.Fragment>
             )}
           </Route>
@@ -100,6 +102,7 @@ const AppRoutes = () => {
               <Route path="/admin/profile" element={<MyProfile />} />
               <Route path="/admin/wishlist" element={<WishList />} />
               <Route path="/admin/profileEdit" element={<ProfileEdit />} />
+              <Route path="/admin/singlePost/:postID" element={<SinglePost />} />
               <Route path="/admin/*" element={<Page404 />} />
             </Route>
           )}
