@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { doGetApiMethod } from "../../../services/axios-service/axios-service";
-import { deletePost } from "../../../redux/features/postsSlice";
 import Chat from "../../../assets/icons/chat";
-import Dots from "../../../assets/icons/dots";
-import Send from "../../../assets/icons/send";
 import FillHeart from "../../../assets/icons/fillHeart";
 import Heart from "../../../assets/icons/heart";
 import { v4 as uuidv4 } from "uuid";
@@ -18,25 +15,14 @@ import Clock from "../../../assets/icons/clock";
 import { likePost } from "../../../redux/features/postsSlice";
 import { updateWishList } from "../../../redux/features/userSlice";
 import WebChat from "../../../assets/icons/webChat";
+import PostHeader from "../postHeader/postHeader";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const { user, wishList } = useSelector((state) => state.userSlice);
-  const [displayOptions, setDisplayOptions] = useState(false);
   const [owner, setOwner] = useState({});
-  let timeOut;
-  const openNav = () => {
-    clearTimeout(timeOut);
-    setDisplayOptions(true);
-  };
-  const closeNav = () => {
-    timeOut = setTimeout(() => {
-      setDisplayOptions(false);
-    }, 100);
-  };
   useEffect(() => {
-    window.addEventListener("scroll", () => closeNav());
     getPostCreatorInfo(post?.creator_id);
   }, []);
   const getPostCreatorInfo = async (id) => {
@@ -46,81 +32,9 @@ const Card = ({ post }) => {
   return (
     <Wrapper>
       <div className="card">
-        <div className="flex justify-between items-center pr-2 p-1">
-          <div
-            onClick={() => {
-              user?.role === "admin"
-                ? nav(`/admin/profile/${owner._id}`)
-                : nav(`/profile/${owner._id}`);
-            }}
-            className="flex items-center cursor-pointer"
-          >
-            <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
-              <img
-                className="w-full h-full rounded-full object-cover"
-                src={owner?.profile_img?.url}
-                alt="avatar"
-              />
-            </div>
-            <span className="pl-1 flex">
-              {owner.fullName?.firstName}
-              <span className="ml-1 hidden md:flex">
-                {owner.fullName?.lastName}
-              </span>
-            </span>
-          </div>
-          <div
-            className="z-10"
-            onMouseLeave={() => closeNav()}
-            onClick={() => {
-              displayOptions ? closeNav() : openNav();
-            }}
-          >
-            <Dots />
-          </div>
-          {displayOptions && (
-            <ul
-              onTouchCancel={() => closeNav()}
-              onMouseOver={() => openNav()}
-              onMouseLeave={() => closeNav()}
-              className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-10 md:top-12 z-10 right-0"
-            >
-              <li
-                onClick={() => closeNav()}
-                className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${user?._id !== post?.creator_id &&
-                  "rounded-b-xl hover:rounded-b-xl"
-                  }`}
-              >
-                <p>Share</p>
-                <Send />
-              </li>
-              {(user?._id === post?.creator_id || user?.role === "admin") && (
-                <React.Fragment>
-                  <li
-                    onClick={() => closeNav()}
-                    className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200"
-                  >
-                    <p>Edit</p>
-                    <p>icon</p>
-                  </li>
-                  <li
-                    onClick={() => {
-                      dispatch(deletePost({ id: post._id, name: post.title }));
-                      closeNav();
-                    }}
-                    className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200"
-                  >
-                    <p>Delete</p>
-                    <p>icon</p>
-                  </li>
-                </React.Fragment>
-              )}
-            </ul>
-          )}
-        </div>
+        <PostHeader post={post}/>
         <div
           className="relative cursor-pointer"
-          // onDoubleClick={() => heartClick()}
           onDoubleClick={() => {
             !user
               ? dispatch(onRegisterShow())
@@ -154,14 +68,16 @@ const Card = ({ post }) => {
             )}
           </div>
         </div>
-        <div className="px-5 pb-5 pt-2 md:pt-4">
+
+        {/* card footer */}
+        <div onClick={() => {
+          user?.role === "admin" ?
+            nav("/admin/singlePost/" + post._id) : nav("/singlePost/" + post._id)
+        }} className="px-5 pt-2 md:pt-4">
           <div>
 
             {/* post title */}
-            <h5 onClick={() => {
-              user?.role === "admin" ?
-                nav("/admin/singlePost/" + post._id) : nav("/singlePost/" + post._id)
-            }}
+            <h5
               className="text-sm capitalize text-lg lg:text-3xl font-semibold sm:tracking-tight text-gray-900 cursor-pointer">
               {post?.title}
             </h5>
@@ -172,7 +88,8 @@ const Card = ({ post }) => {
                 {post?.likes.length || "Likes: 0"}
               </span>
               <div
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
                   dispatch(onLikesToggle(post?.likes));
                 }}
                 className="flex items-center justify-between relative "
@@ -210,32 +127,34 @@ const Card = ({ post }) => {
               <span className="text-xs capitalize text-gray-400">per day</span>
             </div>
             {user?._id !== owner?._id ? (
-              <>
-                <a
-                  href={`https://wa.me/+972${owner?.phone}?text=Hello ${owner?.fullName?.firstName} ${owner?.fullName?.lastName} i saw your item ${post.title} from rentInOut. \n i would like to rent it !`}
-                  target={"_blank"}
-                  rel="noreferrer"
-                  className=" mb-1 md:mb-0 text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1.5"
-                >
-                  <p className="mr-1 text-xs capitalize lg:text-lg">
-                    What's App
-                  </p>
-                  <Chat color="white" />
-                </a>
-                <span
-                  onClick={() => {
+              <div className="flex h-8 overflow-hidden">
+                <div className="h-full mr-1">
+                  <a
+                    href={`https://wa.me/+972${owner?.phone}?text=Hello ${owner?.fullName?.firstName} ${owner?.fullName?.lastName} i saw your item ${post.title} from rentInOut. \n i would like to rent it !`}
+                    target={"_blank"}
+                    rel="noreferrer"
+                    onClick={(e)=>e.stopPropagation()}
+                    style={{ background: "	#25D366" }}
+                    className="h-full mb-1 items-center md:mb-0 flex font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1.5"
+                  >
+                    <Chat color="white" />
+                  </a>
+                </div>
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation()
                     !user
                       ? dispatch(onRegisterShow())
                       : user.role === "admin"
                         ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`)
                         : nav(`/chat/${owner._id}${user._id}/${owner._id}`);
                   }}
-                  className="text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
+                  className="h-full cursor-pointer text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
                 >
                   <p className="mr-1  text-xs capitalize lg:text-lg">Chat</p>
                   <WebChat color="white" />
-                </span>
-              </>
+                </div>
+              </div>
             ) : null}
           </div>
         </div>

@@ -49,7 +49,8 @@ const UserSingleChat = ({ msg }) => {
           className="mr-1 rounded-full"
           onMouseOver={() => setOver(true)}
           onMouseLeave={() => setOver(false)}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
             deleteChat()
           }}
         >
