@@ -3,12 +3,12 @@ import Star from "../../../assets/icons/star";
 import StarFill from "../../../assets/icons/starFill";
 import { doApiMethod } from "../../../services/axios-service/axios-service";
 
-const UserRating = ({ rank , post}) => {
-  const [fill, setFill] = useState(rank?.userRank);
+const UserRating = ({ rank , post , setIsChange , isChange}) => {
+  const [fill, setFill] = useState(rank?.userRank-1);
   const rankUser= async(rnk) =>{
-    console.log(rnk)
     let url = `/users/rankUser/${post?.creator_id}`
-    // await doApiMethod(url, "PATCH" , {rnk})
+    await doApiMethod(url, "PATCH" , {rnk})
+    setIsChange(!isChange)
   }
   return (
     <div className="flex justify-between items-center">
@@ -22,7 +22,7 @@ const UserRating = ({ rank , post}) => {
                 key={i}
                 onClick={() => {
                   setFill(i - 1);
-                  rankUser(i+1)
+                  rankUser(i)
                 }}
               >
                 <StarFill />
@@ -35,7 +35,7 @@ const UserRating = ({ rank , post}) => {
                 key={i}
                 onClick={() => {
                   setFill(fill + i + 1)
-                  rankUser(fill+i)
+                  rankUser(fill+ i + 2)
                 }}
               >
                 <Star />

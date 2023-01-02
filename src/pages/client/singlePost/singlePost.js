@@ -13,12 +13,13 @@ const SinglePost = () => {
   const [post, setPost] = useState({});
   const [image, setImage] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isChange, setIsChange] = useState(false);
   const [rank, setRank] = useState({});
   const { user } = useSelector((state) => state.userSlice);
 
   useEffect(() => {
     getPostByID();
-  }, []);
+  }, [isChange]);
 
   /** get post from api */
   const getPostByID = async () => {
@@ -51,7 +52,7 @@ const SinglePost = () => {
             <div className="user-header">
               {post && <PostHeader post={post} />}
             </div>
-            <UserRating rank={rank} post={post} />
+            <UserRating rank={rank} post={post} isChange={isChange} setIsChange={setIsChange} />
             <div className="post-info"></div>
             <div className="post-likes"></div>
             <div className="contact"></div>
