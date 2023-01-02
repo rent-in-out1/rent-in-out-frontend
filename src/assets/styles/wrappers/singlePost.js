@@ -24,6 +24,7 @@ export const Wrapper = styled.div`
             }
         }
         main{
+            padding:0 16px;
             width: 50%;
         }
     }
