@@ -44,7 +44,7 @@ const AppRoutes = () => {
       }
       else errorHandler("Your authorization is expired please login again")
     }
-    const getInbox = setInterval(() => dispatch(getUserInbox()) , 3000)
+    const getInbox = user? setInterval(() => dispatch(getUserInbox()) , 3000) : null
     return ()=>{
       clearInterval(getInbox)
     }
@@ -78,13 +78,13 @@ const AppRoutes = () => {
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
             <Route path="/profile/:userId" element={<UserProfile />} />
+            <Route path="/singlePost/:postID" element={<SinglePost />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="/chat/:roomID/:creatorID" element={<Chat/>}/>
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/wishlist" element={<WishList />} />
-                <Route path="/singlePost/:postID" element={<SinglePost />} />
                 <Route path="*" element={<Page404 />} />
               </React.Fragment>
             )}
