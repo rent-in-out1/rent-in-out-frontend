@@ -5,13 +5,11 @@ import Loader from "../../../shared/components/loader/loader";
 import { Wrapper } from "../../../assets/styles/wrappers/singlePost";
 import PostHeader from "../../../shared/components/postHeader/postHeader";
 import { useSelector } from "react-redux";
-import Star from "../../../assets/icons/star";
-import StarFill from "./../../../assets/icons/starFill";
 import UserRating from "./userRating";
+import ImgController from "./imgController";
 const SinglePost = () => {
   const params = useParams();
   const [post, setPost] = useState({});
-  const [image, setImage] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
   const [rank, setRank] = useState({});
@@ -44,9 +42,7 @@ const SinglePost = () => {
       ) : (
         // images
         <section>
-          <div className="images-carousel">
-            <img src={post.img[0].url} alt="" />
-          </div>
+          <ImgController post={post}/>
           {/* post context */}
           <main>
             <div className="user-header">

@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
     section{
         display: flex;
         .images-carousel{
+            position: relative;
             width: 50%;
             height:100vh;
             overflow: hidden;
@@ -21,6 +22,15 @@ export const Wrapper = styled.div`
             img{
                 object-fit: cover;
                 object-position: top;
+            }
+            .controllers{
+
+                position: absolute;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                height: 100%;
             }
         }
         main{
