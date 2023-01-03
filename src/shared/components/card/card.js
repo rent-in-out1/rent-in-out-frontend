@@ -16,19 +16,13 @@ import { likePost } from "../../../redux/features/postsSlice";
 import { updateWishList } from "../../../redux/features/userSlice";
 import WebChat from "../../../assets/icons/webChat";
 import PostHeader from "../postHeader/postHeader";
+import { usePostCreator } from "../../../hooks/usePostCreator";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const { user, wishList } = useSelector((state) => state.userSlice);
-  const [owner, setOwner] = useState({});
-  useEffect(() => {
-    getPostCreatorInfo(post?.creator_id);
-  }, []);
-  const getPostCreatorInfo = async (id) => {
-    const { data } = await doGetApiMethod("/users/info/" + id);
-    setOwner(data.userInfo);
-  };
+  const [owner] = usePostCreator(post?.creator_id)
   return (
     <Wrapper>
       <div className="card">
@@ -71,8 +65,7 @@ const Card = ({ post }) => {
 
         {/* card footer */}
         <div onClick={() => {
-          user?.role === "admin" ?
-            nav("/admin/singlePost/" + post._id) : nav("/singlePost/" + post._id)
+          nav("/singlePost/" + post._id)
         }} className="px-5 pt-2 md:pt-4">
           <div>
 

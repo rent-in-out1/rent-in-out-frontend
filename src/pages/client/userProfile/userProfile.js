@@ -24,7 +24,6 @@ const UserProfile = () => {
         }
         const url = "/users/info/" + userId;
         const { data } = await doGetApiMethod(url);
-        console.log(data.userInfo)
         setUserDetails(data.userInfo);
     }
     return (

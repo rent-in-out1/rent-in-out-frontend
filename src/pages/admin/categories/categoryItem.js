@@ -4,36 +4,20 @@ import {FaBan, FaCheckCircle} from "react-icons/fa";
 import {doGetApiMethod} from "../../../services/axios-service/axios-service";
 import {useDispatch} from "react-redux";
 import {deleteCategory, editCategory} from "../../../redux/features/categorieSlice";
+import { usePostCreator } from './../../../hooks/usePostCreator';
 
-const CategoryItem = (props) => {
+const CategoryItem = ({item , setIsChange}) => {
     const dispatch = useDispatch();
     const infoRef = useRef();
     const nameRef = useRef();
     const urlRef = useRef();
-    const [creator, setCreator] = useState({});
-    const [editor, setEditor] = useState({});
+    // const [creator, setCreator] = useState({});
+    // const [editor, setEditor] = useState({});
+    const category = item;
+    const [creator] = usePostCreator(category?.creator_id);
+    const [editor] = usePostCreator(category?.editor_id);
     const [onEdit, setOnEdit] = useState(false);
     const [editData, setEditData] = useState({});
-
-    const category = props.item;
-    useEffect(() => {
-        getCreator();
-        getEditor();
-    }, []);
-    const getCreator = async () => {
-        let url = "/users/info/" + category?.creator_id;
-        if (!category.creator_id) return
-        let data = await doGetApiMethod(url);
-        setCreator(data);
-        props.setIsChange(true);
-    };
-    const getEditor = async () => {
-        let url = "/users/info/" + category?.editor_id;
-        if (!category.editor_id) return
-        let data = await doGetApiMethod(url);
-        setEditor(data);
-        props.setIsChange(true);
-    };
     return (
         <tr>
             <td>
@@ -87,8 +71,8 @@ const CategoryItem = (props) => {
             </td>
             <td>
                 <p className="text-gray-900 whitespace-no-wrap">
-                    {creator.data?.userInfo.fullName.firstName}{" "}
-                    {creator.data?.userInfo.fullName.lastName}
+                    {creator?.fullName?.firstName}{" "}
+                    {creator?.fullName?.lastName}
                 </p>
             </td>
             <td>
@@ -155,6 +139,7 @@ const CategoryItem = (props) => {
                     className="mx-2 absolute left-3 bottom-0 inset-0 opacity-50 rounded-full"
                     onClick={() => {
                         dispatch(editCategory({id: category._id, name: category?._id, editData, setOnEdit}))
+                        setIsChange(true)
                     }}
                 />
               </span>
@@ -171,7 +156,7 @@ const CategoryItem = (props) => {
                               )
                           )
                               setOnEdit(false);
-                          props.setIsChange(true);
+                          setIsChange(true);
                       }}
                       className="absolute -left-4 -bottom-0 inset-0  opacity-50 rounded-full"
                   />
@@ -183,15 +168,15 @@ const CategoryItem = (props) => {
             )}
             <td>
                 <p className="text-gray-900 whitespace-no-wrap">
-                    {editor.data?.userInfo.fullName.firstName}{" "}
-                    {editor.data?.userInfo.fullName.lastName}
+                    {editor?.fullName?.firstName}{" "}
+                    {editor?.fullName?.lastName}
                 </p>
             </td>
             <td>
         <span
             onClick={() => {
                 dispatch(deleteCategory({id: category._id, name: category.name}));
-                props.setIsChange(true);
+                setIsChange(true);
             }}
             className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
         >

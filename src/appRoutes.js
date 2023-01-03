@@ -4,36 +4,51 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
-import { API_URL_CLIENT, doApiMethod, errorHandler } from "./services/axios-service/axios-service";
-import { getUserInbox, getUserWishList, onLogin } from "./redux/features/userSlice";
+import {
+  API_URL_CLIENT,
+  doApiMethod,
+  errorHandler,
+} from "./services/axios-service/axios-service";
+import {
+  getUserInbox,
+  getUserWishList,
+  onLogin,
+} from "./redux/features/userSlice";
 import Loader from "./shared/components/loader/loader";
 import WishList from "./pages/client/wishList";
-import ConfirmHandler from './shared/UI/confirm/confirm';
+import ConfirmHandler from "./shared/UI/confirm/confirm";
 import Chat from "./pages/client/chat/chat";
-import MyProfile from "./pages/client/myProfile"
+import MyProfile from "./pages/client/myProfile";
+import PostLayout from "./layout/postLayout/post-layout";
 
 // Lazy loading of routes
-const LayoutAdmin = React.lazy(() => import("./layout/layoutAdmin/layoutAdmin"));
+const LayoutAdmin = React.lazy(() =>
+  import("./layout/layoutAdmin/layoutAdmin")
+);
 const Users = React.lazy(() => import("./pages/admin/users"));
 const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
-const ProfileEdit = React.lazy(() => import("./pages/client/profile-edit/profileEdit"));
+const ProfileEdit = React.lazy(() =>
+  import("./pages/client/profile-edit/profileEdit")
+);
 const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/page-not-found"));
-const ResetPass = React.lazy(() => import("./api/auth/resetPass"))
-const Likes = React.lazy(() => import("./pages/client/posts-likes"))
-const UserSearch = React.lazy(() => import("./pages/client/userSearch/userSearch"))
-const SinglePost = React.lazy(() => import("./pages/client/singlePost"))
+const ResetPass = React.lazy(() => import("./api/auth/resetPass"));
+const Likes = React.lazy(() => import("./pages/client/posts-likes"));
+const UserSearch = React.lazy(() =>
+  import("./pages/client/userSearch/userSearch")
+);
+const SinglePost = React.lazy(() => import("./pages/client/singlePost"));
 const AppRoutes = () => {
 
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
-  let {search , register } = useSelector((state) => state.toggleSlice)
-  let {likes } = useSelector((state) => state.toggleSlice)
+  let { search, register } = useSelector((state) => state.toggleSlice);
+  let { likes } = useSelector((state) => state.toggleSlice);
   useEffect(() => {
     let token;
     if (localStorage["token"]) {
@@ -41,13 +56,14 @@ const AppRoutes = () => {
       const decoded = jwt_decode(token);
       if (decoded.exp < Date.now()) {
         getUserInfo(decoded._id, token);
-      }
-      else errorHandler("Your authorization is expired please login again")
+      } else errorHandler("Your authorization is expired please login again");
     }
-    const getInbox = user? setInterval(() => dispatch(getUserInbox()) , 3000) : null
-    return ()=>{
-      clearInterval(getInbox)
-    }
+    const getInbox = user
+      ? setInterval(() => dispatch(getUserInbox()), 3000)
+      : null;
+    return () => {
+      clearInterval(getInbox);
+    };
   }, []);
 
   const getUserInfo = async (_id, token) => {
@@ -58,30 +74,46 @@ const AppRoutes = () => {
       window.open(API_URL_CLIENT, "_self");
       return;
     }
-    localStorage.setItem("token" , JSON.stringify(data.newAccessToken))
+    localStorage.setItem("token", JSON.stringify(data.newAccessToken));
     dispatch(onLogin(data.userInfo));
-    dispatch(getUserWishList())
+    dispatch(getUserWishList());
   };
   return (
     <Suspense
       fallback={
         <div className="w-100 h-screen flex items-center justify-center">
           <Loader load={true} height="400" width="400" />
-        </div>}>
+        </div>
+      }
+    >
       <Router>
         <Routes>
-            
+          <Route path="/" element={<PostLayout />}>
+            <Route path="/singlePost/:postID" element={<SinglePost />} />
+          </Route>
           <Route path="/" element={<Layout />}>
-            <Route path="/resetPassword/:id/:resetString" element={<ResetPass />} />
-            <Route path="/confirm" element={<ConfirmHandler action={"action"} messege={"messege"} showAction={"showAction"} />} />
+            <Route
+              path="/resetPassword/:id/:resetString"
+              element={<ResetPass />}
+            />
+            <Route
+              path="/confirm"
+              element={
+                <ConfirmHandler
+                  action={"action"}
+                  messege={"messege"}
+                  showAction={"showAction"}
+                />
+              }
+            />
             {/* outLet */}
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
             <Route path="/profile/:userId" element={<UserProfile />} />
-            <Route path="/singlePost/:postID" element={<SinglePost />} />
+
             {user?.role === "user" && user?.active && (
               <React.Fragment>
-                <Route path="/chat/:roomID/:creatorID" element={<Chat/>}/>
+                <Route path="/chat/:roomID/:creatorID" element={<Chat />} />
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
                 <Route path="/wishlist" element={<WishList />} />
@@ -93,7 +125,7 @@ const AppRoutes = () => {
             <Route path="/admin" element={<LayoutAdmin />}>
               {/* OutLet */}
               <Route index element={<Dashboard />} />
-              <Route path="/admin/chat/:roomID/:creatorID" element={<Chat/>}/>
+              <Route path="/admin/chat/:roomID/:creatorID" element={<Chat />} />
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />
@@ -102,15 +134,14 @@ const AppRoutes = () => {
               <Route path="/admin/profile" element={<MyProfile />} />
               <Route path="/admin/wishlist" element={<WishList />} />
               <Route path="/admin/profileEdit" element={<ProfileEdit />} />
-              <Route path="/admin/singlePost/:postID" element={<SinglePost />} />
               <Route path="/admin/*" element={<Page404 />} />
             </Route>
           )}
         </Routes>
         <ToastContainer position="bottom-right" />
-        {search? <UserSearch/> : null}
-        {register? <Register/> : null}
-        {likes.active ? <Likes likesArr={likes.likesArr}/>: null}
+        {search ? <UserSearch /> : null}
+        {register ? <Register /> : null}
+        {likes.active ? <Likes likesArr={likes.likesArr} /> : null}
       </Router>
     </Suspense>
   );

@@ -27,6 +27,7 @@ const Users = () => {
     setUsers(data);
     setIsChange(false);
   };
+  const users_hedaers = ["Name", "email" ,"country" ,"city" ,"age", "phone" , "Created at" ,"active" , "Role" , "delete"]
 
   return (
     <Wrapper className="border">
@@ -49,16 +50,9 @@ const Users = () => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>email</th>
-                <th>country</th>
-                <th>city</th>
-                <th>age</th>
-                <th>phone</th>
-                <th>Created at</th>
-                <th>Status</th>
-                <th>Role</th>
-                <th>delete</th>
+              {users_hedaers.map((header,i)=>(
+                    <th key={i}>{header}</th>
+                ))}
               </tr>
             </thead>
             <tbody id="tbody">

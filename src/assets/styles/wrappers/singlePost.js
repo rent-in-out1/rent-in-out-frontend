@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    position: fixed;
+    position: sticky;
     height: 100vh;
     top: 0;
     left: 0;
-    z-index: 999999;
+    /* z-index: 999999; */
     width: 100%;
-    background: white;
+    background: transparent;
     section{
         display: flex;
         .images-carousel{

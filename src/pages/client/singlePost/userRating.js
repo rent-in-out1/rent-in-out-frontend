@@ -1,14 +1,35 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Star from "../../../assets/icons/star";
 import StarFill from "../../../assets/icons/starFill";
-import { doApiMethod } from "../../../services/axios-service/axios-service";
+import { usePostCreator } from "../../../hooks/usePostCreator";
+import { onRegisterShow } from "../../../redux/features/toggleSlice";
+import {
+  doApiMethod,
+  successHandler,
+  errorHandler,
+} from "../../../services/axios-service/axios-service";
 
 const UserRating = ({ rank, post, setIsChange, isChange }) => {
+  const dispatch = useDispatch();
+  const [creator] = usePostCreator(post?.creator_id)
   const [fill, setFill] = useState(rank?.userRank - 1);
+  const { user } = useSelector((state) => state.userSlice);
   const rankUser = async (rnk) => {
-    let url = `/users/rankUser/${post?.creator_id}`;
-    await doApiMethod(url, "PATCH", { rnk });
-    setIsChange(!isChange);
+    if (!user){
+        setFill(-1)
+        dispatch(onRegisterShow());
+    } 
+    else {
+      try {
+        let url = `/users/rankUser/${post?.creator_id}`;
+        await doApiMethod(url, "PATCH", { rnk });
+        setIsChange(!isChange);
+        successHandler("Rating updated");
+      } catch (err) {
+        errorHandler(err.response.data.msg);
+      }
+    }
   };
   return (
     <div className="flex justify-between items-center">

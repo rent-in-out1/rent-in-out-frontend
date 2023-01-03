@@ -4,25 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Dots from '../../../assets/icons/dots';
 import Send from '../../../assets/icons/send';
+import { usePostCreator } from '../../../hooks/usePostCreator';
 import { deletePost } from '../../../redux/features/postsSlice';
 import { doGetApiMethod } from '../../../services/axios-service/axios-service';
 
 const PostHeader = ({ post }) => {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.userSlice);
-  const [owner, setOwner] = useState({});
+  // const [owner, setOwner] = useState({})
+  const [owner] = usePostCreator(post?.creator_id)
   const [displayOptions, setDisplayOptions] = useState(false);
   const nav = useNavigate();
   let timeOut;
   useEffect(() => {
     window.addEventListener("scroll", () => closeNav());
-    getPostCreatorInfo(post.creator_id)
   }, []);
 
-  const getPostCreatorInfo = async (id) => {
-    const { data } = await doGetApiMethod("/users/info/" + id);
-    setOwner(data.userInfo);
-  };
   const openNav = () => {
     clearTimeout(timeOut);
     setDisplayOptions(true);

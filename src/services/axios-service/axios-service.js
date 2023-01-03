@@ -42,6 +42,7 @@ export const doApiMethod = async(_url, _method, _body = {}, _headers = {}) => {
 }
 
 export const errorHandler = (err) => {
+    console.log(err);
     toast.info(err , {
     autoClose: 3000,
     hideProgressBar: false,

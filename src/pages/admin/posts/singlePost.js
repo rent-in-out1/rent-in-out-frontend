@@ -2,31 +2,19 @@ import React, {useEffect} from "react";
 import {BsTrash} from "react-icons/bs";
 import {doApiMethod, doGetApiMethod} from "../../../services/axios-service/axios-service";
 import {useState} from "react";
+import { usePostCreator } from "../../../hooks/usePostCreator";
 
-const SinglePost = (props) => {
-    const [creator, setCreator] = useState({});
-    const post = props.item;
-    useEffect(() => {
-        getCreator();
-    }, [creator]);
-
-    const getCreator = async () => {
-        let url = "/users/info/" + post?.creator_id;
-        let data = await doGetApiMethod(url);
-        setCreator(data);
-    };
-
-
+const SinglePost = ({item , setIsChange}) => {
+    const post = item;
+    const [creator] = usePostCreator(post?.creator_id);
     const changeActive = async (_id) => {
         const url = "/posts/changeActive/" + _id;
         await doApiMethod(url, "PATCH");
-        // props.setIsChange(true)
     };
     const deletePost = async (_id, postName) => {
         if (window.confirm(`Are you sure you want to delete ${postName}`)) {
             const url = "/posts/" + _id;
             await doApiMethod(url, "DELETE");
-            // props.setIsChange(true)
         }
     };
 
@@ -48,8 +36,8 @@ const SinglePost = (props) => {
             </td>
             <td>
                 <p className="btn relative inline-block px-2 py-1 leading-tight cursor-pointer text-gray-900 whitespace-no-wrap hover:border rounded-full color-red">
-                    {creator.data?.userInfo?.fullName.firstName}{" "}
-                    {creator.data?.userInfo?.fullName.lastName}
+                    {creator?.fullName?.firstName}{" "}
+                    {creator?.fullName?.lastName}
                 </p>
             </td>
             <td>
@@ -77,7 +65,7 @@ const SinglePost = (props) => {
         <span
             onClick={() => {
                 changeActive(post?._id);
-                props.setIsChange(true);
+                setIsChange(true);
 
             }}
             className="btn relative inline-block px-3 py-1 font-semibold leading-tight cursor-pointer"
@@ -97,7 +85,7 @@ const SinglePost = (props) => {
         <span
             onClick={() => {
                 deletePost(post._id, post.title);
-                props.setIsChange(true);
+                setIsChange(true);
             }}
             className="btn relative cursor-pointer inline-block px-2 py-2 font-semibold leading-tight hover:text-red-900"
         >
