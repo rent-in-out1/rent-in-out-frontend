@@ -11,8 +11,7 @@ import { usePostCreator } from "../../../hooks/usePostCreator";
 const SinglePost = () => {
   const params = useParams();
   const [post, setPost] = useState({});
-  const [owner] = usePostCreator(post?.creator_id)
-  console.log(owner)
+  const [owner, setOwner] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
   const [rank, setRank] = useState({});
@@ -28,13 +27,19 @@ const SinglePost = () => {
     const { data } = await doGetApiMethod(url);
     setPost(data);
     await getUserRating(data?.creator_id);
+    await getPostCreatorInfo(data?.creator_id);
     setIsLoading(false);
   };
   /** get rating from api */
   const getUserRating = async (id) => {
-    let url = `/users/getRank/${id}?rankingUser=${user?._id}`;
+    let url = `/users/getRank/${id}?rankingUser=${post?._id}`;
     const { data } = await doGetApiMethod(url);
     setRank(data);
+  };
+    /** get creator from api */
+  const getPostCreatorInfo = async (id) => {
+    const { data } = await doGetApiMethod(`/users/info/${id}`);
+    setOwner(data.userInfo);
   };
   return (
     <Wrapper>
@@ -48,20 +53,33 @@ const SinglePost = () => {
           <ImgController post={post} />
           {/* post context */}
           <main>
-            <div className="user-header capitalize">
-              {post && <PostHeader post={post} />}
-              <div>
-              <h4>{owner?.country}, {owner?.city}</h4>
-              <h5>active since: {new Date(user?.createdAt).toLocaleDateString()}</h5>
-              <h5 >email: <span className="lowercase">{owner?.email}</span> </h5>
+            {post && <PostHeader post={post} />}
+            <hr />
+            <div className="user-header capitalize shadow-xl mb-2 p-2">
+              <div className="">
+                <ul >
+                  <li>
+                    {owner?.country}, {owner?.city}
+                  </li>
+                  <li>
+                    active since:
+                    {new Date(user?.createdAt).toLocaleDateString()}
+                  </li>
+                  <li>
+                    email: <span className="lowercase">{owner?.email}</span>
+                  </li>
+                </ul>
+                <ul>
+                  
+                </ul>
               </div>
+              <UserRating
+                rank={rank}
+                post={post}
+                isChange={isChange}
+                setIsChange={setIsChange}
+              />
             </div>
-            <UserRating
-              rank={rank}
-              post={post}
-              isChange={isChange}
-              setIsChange={setIsChange}
-            />
             <div className="post-info"></div>
             <div className="post-likes"></div>
             <div className="contact"></div>

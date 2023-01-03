@@ -12,7 +12,6 @@ import {
 
 const UserRating = ({ rank, post, setIsChange, isChange }) => {
   const dispatch = useDispatch();
-  const [creator] = usePostCreator(post?.creator_id)
   const [fill, setFill] = useState(rank?.userRank - 1);
   const { user } = useSelector((state) => state.userSlice);
   const rankUser = async (rnk) => {
