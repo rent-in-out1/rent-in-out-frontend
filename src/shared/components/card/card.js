@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
-import { doGetApiMethod } from "../../../services/axios-service/axios-service";
 import Chat from "../../../assets/icons/chat";
 import FillHeart from "../../../assets/icons/fillHeart";
 import Heart from "../../../assets/icons/heart";
