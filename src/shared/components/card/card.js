@@ -7,6 +7,7 @@ import { Wrapper } from "../../../assets/styles/wrappers/card";
 import { useDispatch, useSelector } from "react-redux";
 import {
   onLikesToggle,
+  onPostToggle,
   onRegisterShow,
 } from "../../../redux/features/toggleSlice";
 import Clock from "../../../assets/icons/clock";
@@ -63,7 +64,7 @@ const Card = ({ post }) => {
 
         {/* card footer */}
         <div onClick={() => {
-          nav("/singlePost/" + post._id)
+          dispatch(onPostToggle(post))
         }} className="px-5 pt-2 md:pt-4">
           <div>
 

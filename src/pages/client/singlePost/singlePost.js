@@ -11,9 +11,10 @@ import UserInfo from "./userInfo";
 import PostInfo from "./postInfo";
 import Home from "./../../../assets/icons/home";
 import Map from "./map";
-const SinglePost = () => {
-  const params = useParams();
-  const [post, setPost] = useState({});
+import PopUPModel from "./../../../shared/UI/popup/popUpSinglePost";
+import { onPostToggle } from "../../../redux/features/toggleSlice";
+const SinglePost = ({post}) => {
+  console.log(post)
   const [owner, setOwner] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
@@ -21,23 +22,16 @@ const SinglePost = () => {
   const { user } = useSelector((state) => state.userSlice);
 
   useEffect(() => {
-    getPostByID();
+    getUserRating();
+    
   }, [isChange]);
-
-  /** get post from api */
-  const getPostByID = async () => {
-    let url = "/posts/getPostByID/" + params.postID;
-    const { data } = await doGetApiMethod(url);
-    setPost(data);
-    await getUserRating(data?.creator_id);
-    await getPostCreatorInfo(data?.creator_id);
-    setIsLoading(false);
-  };
   /** get rating from api */
-  const getUserRating = async (id) => {
-    let url = `/users/getRank/${id}?rankingUser=${post?._id}`;
+  const getUserRating = async () => {
+    let url = `/users/getRank/${post?.creator_id}?rankingUser=${post?._id}`;
     const { data } = await doGetApiMethod(url);
     setRank(data);
+    await getPostCreatorInfo(post?.creator_id)
+    setIsLoading(false);
   };
   /** get creator from api */
   const getPostCreatorInfo = async (id) => {
@@ -45,51 +39,53 @@ const SinglePost = () => {
     setOwner(data.userInfo);
   };
   return (
-    <Wrapper>
-      {isLoading ? (
-        <div className="w-full flex justify-center border items-center min-h-12 ">
-          <Loader width={"150px"} height={"100%"} />
-        </div>
-      ) : (
-        // images
-        <section>
-          <ImgController post={post} />
-          {/* post context */}
-          <main>
-            <div className="flex justify-center my-2">
-              <Link
-                className="flex"
-                to={user.role === "admin" ? "/admin" : "/"}
-              >
-                Home{" "}
-                <span className="ml-2">
-                  <Home color="gray" />
-                </span>
-              </Link>
-            </div>
-            <hr />
-            {post && <PostHeader post={post} />}
-            <hr />
-            <div className="flex flex-wrap mt-2">
-              <div className="post-info md:w-1/2 border w-full">
-                <PostInfo post={post} owner={owner} />
+    <PopUPModel action={onPostToggle}>
+      <Wrapper>
+        {isLoading ? (
+          <div className="w-full flex justify-center border items-center min-h-12 ">
+            <Loader width={"150px"} height={"100%"} />
+          </div>
+        ) : (
+          // images
+          <section>
+            <ImgController post={post} />
+            {/* post context */}
+            <main>
+              <div className="flex justify-center my-2">
+                <Link
+                  className="flex"
+                  to={user.role === "admin" ? "/admin" : "/"}
+                >
+                  Home{" "}
+                  <span className="ml-2">
+                    <Home color="gray" />
+                  </span>
+                </Link>
               </div>
-              <div className="post-likes md:w-1/2 border w-full">
-                <Likes post={post} />
+              <hr />
+              {post && <PostHeader post={post} />}
+              <hr />
+              <div className="flex flex-wrap mt-2">
+                <div className="post-info md:w-1/2 border w-full">
+                  <PostInfo post={post} owner={owner} />
+                </div>
+                <div className="post-likes md:w-1/2 border w-full">
+                  <Likes post={post} />
+                </div>
               </div>
-            </div>
-            <UserInfo
-              owner={owner}
-              rank={rank}
-              post={post}
-              isChange={isChange}
-              setIsChange={setIsChange}
-            />
-            <Map />
-          </main>
-        </section>
-      )}
-    </Wrapper>
+              <UserInfo
+                owner={owner}
+                rank={rank}
+                post={post}
+                isChange={isChange}
+                setIsChange={setIsChange}
+              />
+              <Map />
+            </main>
+          </section>
+        )}
+      </Wrapper>
+    </PopUPModel>
   );
 };
 
