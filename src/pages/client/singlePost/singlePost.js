@@ -14,7 +14,6 @@ import Map from "./map";
 import PopUPModel from "./../../../shared/UI/popup/popUpSinglePost";
 import { onPostToggle } from "../../../redux/features/toggleSlice";
 const SinglePost = ({post}) => {
-  console.log(post)
   const [owner, setOwner] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
@@ -70,7 +69,7 @@ const SinglePost = ({post}) => {
                   <PostInfo post={post} owner={owner} />
                 </div>
                 <div className="post-likes md:w-1/2 border w-full">
-                  <Likes post={post} />
+                  <Likes likes={post?.likes} />
                 </div>
               </div>
               <UserInfo
