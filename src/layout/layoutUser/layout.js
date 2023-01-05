@@ -4,6 +4,7 @@ import Header from './header'
 import Sidebar from '../../shared/components/sideBar'
 import { useSelector } from 'react-redux'
 import SideBarChat from '../../shared/components/sideBarChat/sideBarChat'
+import Footer from './footer/footer';
 
 
 const Layout = () => {
@@ -24,6 +25,7 @@ const Layout = () => {
           </div>
         ) : null}
       </div>
+      <Footer className="mt-7"/>
     </React.Fragment>
   )
 }

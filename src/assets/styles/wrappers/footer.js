@@ -1,8 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  margin-top: 20px;
   padding: 12px;
   background-color: var(--skyblue-50);
+  @media (max-width: 768px) {
+    margin-top: 50px;
+
+  }
   main {
     display: flex;
     justify-content: space-between;
@@ -36,7 +41,8 @@ export const Wrapper = styled.div`
       flex-direction: column;
     }
 
-    input , textarea{
+    input,
+    textarea {
       display: block;
       width: 100%;
       background: var(--white);

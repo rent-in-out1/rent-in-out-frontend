@@ -802,12 +802,24 @@ nagishli .nagishli-tab > div:not(#NagishLiOptions) kbd {
   border-radius: 0 50% 50% 0;
   box-shadow: 0 0 0 2px #fff;
 }
+@media (max-width: 768px) {
+  #NagishLiTrigger {
+    top: 7px;
+    left: 50px;
+    max-width: 40px;
+    max-height: 40px;
+  }
+  .nagishli-trigger-icon {
+    border-radius: 50%;
+  }
+}
 .nagishli-header-text {
   font-size: 25px;
   position: relative;
   margin-right: 10px;
   top: -15px;
 }
+
 nagishli[data-direction="rtl"] .nagishli-accessibility-statement i,
 nagishli[data-direction="rtl"] .nagishli-trigger-icon img {
   -webkit-transform: scaleX(-1);
