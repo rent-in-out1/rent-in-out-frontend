@@ -4,12 +4,11 @@ import { useSelector } from 'react-redux'
 
 
 const PostLayout = () => {
-  let { user } = useSelector((state) => state.userSlice);
   return (
     <React.Fragment>
-      <div className='bg-gray-100 flex'>
-        <div className='bg-gray-100 w-full'>
-          <Outlet />
+      <div className='flex'>
+        <div className='w-full'>
+          <Outlet/>
         </div>
       </div>
     </React.Fragment>
