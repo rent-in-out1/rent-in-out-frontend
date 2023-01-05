@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
     height: 100vh;
     width: 100%;
-    background: transparent;
+    background-color: var(--white);
     color: var(--grey-500);
     section{
         display: flex;
         .images-carousel{
+            user-select: none;
             position: relative;
             width: 50%;
             height:100vh;

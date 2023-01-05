@@ -12,7 +12,7 @@ import { Button } from "../../../assets/styles/wrappers/registerPage";
 import { Wrapper } from "../../../assets/styles/wrappers/chat";
 import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
 import { getUserInbox } from "../../../redux/features/userSlice";
-import SingleMessage from './singleMessage';
+import SingleMessage from "./singleMessage";
 
 const Chat = ({ post }) => {
   const nav = useNavigate();
@@ -47,14 +47,12 @@ const Chat = ({ post }) => {
       img: data.userInfo.profile_img?.url,
     });
   };
-  const deleteMsg =(location) => {
-    setChat(chat.splice(location , 1))
-    if(chat.length  < 1 ) {
-      user.role === "admin"
-      ? nav(`/admin`)
-      : nav(`/`);
+  const deleteMsg = (location) => {
+    setChat(chat.splice(location, 1));
+    if (chat.length < 1) {
+      user.role === "admin" ? nav(`/admin`) : nav(`/`);
     }
-  }
+  };
   const messageSave = async () => {
     let url = "/users/chatUpdate";
     let messageObj = {
@@ -64,7 +62,7 @@ const Chat = ({ post }) => {
       userImg: user?.profile_img.url,
       roomID,
       creatorID,
-      userID:user._id,
+      userID: user._id,
       messagesArr: [
         ...chat,
         {
@@ -79,7 +77,7 @@ const Chat = ({ post }) => {
       userID: user._id,
       creatorID: creatorID,
     });
-    dispatch(getUserInbox())
+    dispatch(getUserInbox());
   };
   useEffect(() => {
     if (!socket) return;
@@ -129,17 +127,24 @@ const Chat = ({ post }) => {
   return (
     <Wrapper>
       <h1>{post?.title}</h1>
-      <div className="w-8/12 flex flex-col items-center justify-center text-center mx-auto shadow-xl p-3 bg-gray-300 rounded-xl">
+      <div className="md:w-10/12 w-11/12 flex flex-col items-center justify-center text-center mx-auto shadow-xl p-3 bg-gray-300 rounded-xl">
         {chat.length > 0 && (
           <ul className="mb-5 w-full flex flex-col bg-gray-200 p-4 rounded">
             {chat.map((msg, i) => (
-              <SingleMessage key={i} roomID={roomID} user={user} msg={msg} location={i} deleteMsg={deleteMsg}/>
+              <SingleMessage
+                key={i}
+                roomID={roomID}
+                user={user}
+                msg={msg}
+                location={i}
+                deleteMsg={deleteMsg}
+              />
             ))}
           </ul>
         )}
         <form
           onSubmit={handleSubmit}
-          className="w-8/12 md:w-full text-center mt-3"
+          className="w-full md:w-full text-center mt-3"
         >
           <div className="flex flex-col justify-center">
             <small className={`self-start ${!typing ? "hidden" : ""}`}>

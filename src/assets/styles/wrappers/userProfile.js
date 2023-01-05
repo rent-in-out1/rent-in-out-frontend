@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+    text-transform:capitalize ;
     nav{
         background: var(--white);
         & > div{

@@ -15,7 +15,7 @@ const Layout = () => {
         <div className='lg:w-3/12 hidden lg:flex'>
           <Sidebar />
         </div>
-        <div className='bg-gray-100 md:w-9/12 lg:w-7/12'>
+        <div className='bg-gray-100 md:w-9/12 lg:w-7/12 w-full'>
           <Outlet />
         </div>
         {user ? (

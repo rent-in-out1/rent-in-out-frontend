@@ -40,11 +40,14 @@ const toggleSlice = createSlice({
             state.message.action = action.payload.action
         },
         onInboxToggle: (state) =>{
-            state.showInbox =!state.showInbox
+            state.showInbox = !state.showInbox
+        },
+        onInboxClose: (state) =>{
+            state.showInbox =false
         }
 
     }
 })
 
-export const {onToggle , onRegisterToggle,onSearchToggle, onLogout , onRegisterShow, onLikesToggle , onMessegeToggle ,onInboxToggle } = toggleSlice.actions
+export const {onToggle , onRegisterToggle,onSearchToggle, onLogout , onRegisterShow, onLikesToggle , onMessegeToggle ,onInboxToggle , onInboxClose } = toggleSlice.actions
 export default toggleSlice.reducer

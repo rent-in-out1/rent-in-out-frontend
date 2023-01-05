@@ -12,12 +12,12 @@ const Footer = () => {
                     <div>
                         <Link to={"/"}>
                             <Logo>
-                                <img src="../../public/img/LOGO.png" alt="logo"/>
+                                <img src="/img/LOGO.png" alt="logo"/>
                                 <p>rentInOut</p>
                             </Logo>
                         </Link>
                         <p><i className="fa fa-phone" aria-hidden="true"></i> +9725641124</p>
-                        <p><i className="fa fa-envelope-o" aria-hidden="true"></i> RentMe@gmail.com</p>
+                        <p><i className="fa fa-envelope-o" aria-hidden="true"></i> rentMe@gmail.com</p>
                         <p><i className="fa fa-map-marker" aria-hidden="true"></i> KING GEORGE STREET, TEL AVIV</p>
                         <ul className='social'>
                             <li><i className="fa fa-linkedin-square" aria-hidden="true"></i></li>

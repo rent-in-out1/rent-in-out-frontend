@@ -9,14 +9,13 @@ export const getPosts = createAsyncThunk(
     page = 1,
     min=0,
     max= 1000,
-    range,
     endScreenEnd,
     setPage,
   }) => {
     
     try {
       if(page===1) clearPosts();
-      let url = `/posts/search?s=${search}&page=${page}&sort=${option}&min=${min}&max=${max}&reverse=yes`;
+      let url = `/posts/search?page=${page}&reverse=yes&sort=${option}`;
       // let url = `/posts?page=${page}&sort=${option}&reverse=yes`;
       let { data } = await doGetApiMethod(url);
       if (data.length > 0) {

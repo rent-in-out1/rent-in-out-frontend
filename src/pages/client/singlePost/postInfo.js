@@ -1,5 +1,5 @@
 import React from "react";
-import ChatAndWhatsup from "../../../shared/components/chatAndWhatsup";
+import ChatAndWhatsup from "../../../shared/components/chat-whatsUp";
 
 const PostInfo = ({ post, user, owner }) => {
   return (

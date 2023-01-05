@@ -9,13 +9,13 @@ import ImgController from "./imgController";
 import Likes from "./../posts-likes/likes";
 import UserInfo from "./userInfo";
 import PostInfo from "./postInfo";
-import Home from './../../../assets/icons/home';
+import Home from "./../../../assets/icons/home";
+import Map from "./map";
 const SinglePost = () => {
   const params = useParams();
   const [post, setPost] = useState({});
   const [owner, setOwner] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
   const [isChange, setIsChange] = useState(false);
   const [rank, setRank] = useState({});
   const { user } = useSelector((state) => state.userSlice);
@@ -47,7 +47,7 @@ const SinglePost = () => {
   return (
     <Wrapper>
       {isLoading ? (
-        <div className="w-full flex justify-center items-center min-h-12 ">
+        <div className="w-full flex justify-center border items-center min-h-12 ">
           <Loader width={"150px"} height={"100%"} />
         </div>
       ) : (
@@ -57,20 +57,25 @@ const SinglePost = () => {
           {/* post context */}
           <main>
             <div className="flex justify-center my-2">
-              <Link className="flex" to={user.role === "admin" ? "/admin" : "/"}>Home <span className="ml-2"><Home color="gray"/></span></Link>
-              
+              <Link
+                className="flex"
+                to={user.role === "admin" ? "/admin" : "/"}
+              >
+                Home{" "}
+                <span className="ml-2">
+                  <Home color="gray" />
+                </span>
+              </Link>
             </div>
-            <hr/>
+            <hr />
             {post && <PostHeader post={post} />}
             <hr />
             <div className="flex flex-wrap mt-2">
-              <div className="post-info md:w-1/2 w-full shadow-xl">
-                <ul>
-                  <PostInfo post={post} owner={owner} />
-                </ul>
+              <div className="post-info md:w-1/2 border w-full">
+                <PostInfo post={post} owner={owner} />
               </div>
-              <div className="post-likes md:w-1/2 w-full shadow-xl mt-2">
-                <Likes likesArr={post?.likes} />
+              <div className="post-likes md:w-1/2 border w-full">
+                <Likes post={post} />
               </div>
             </div>
             <UserInfo
@@ -80,7 +85,7 @@ const SinglePost = () => {
               isChange={isChange}
               setIsChange={setIsChange}
             />
-            <div className="contact"></div>
+            <Map />
           </main>
         </section>
       )}

@@ -5,10 +5,10 @@ import Telephone from './../../../assets/icons/telephone';
 const UserInfo = ({owner ,rank , post , isChange , setIsChange}) => {
     const [show, setIsShow] = useState(true);
   return (
-    <div className="user-header capitalize shadow-xl mb-2 p-2 relative">
+    <div className="user-header capitalize mb-2 border p-2 relative">
       <h2 className="text-center">publisher Info</h2>
       <div className="">
-        <ul className="relative">
+        <ul className="relative leading-8 ">
           <li>
             {owner?.country}, {owner?.city}
           </li>

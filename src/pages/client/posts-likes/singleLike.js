@@ -13,7 +13,7 @@ const SingleLike = ({item}) => {
         onClick={() => {
           dispatch(onLikesToggle(""))
           user?.role === "admin"
-        ? nav(`admin/profile/${item.user_id}`)
+        ? nav(`/admin/profile/${item.user_id}`)
         : nav(`/profile/${item.user_id}`);
         }}
         className={`p-3 sm:py-3 mx-auto flex items-center justify-between w-full mt-3 w-10/12 cursor-pointer bg-white transition ease-in-out delay-150 hover:bg-gray-300 border rounded-lg shadow-md sm:p-8 `}

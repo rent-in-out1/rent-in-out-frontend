@@ -141,8 +141,8 @@ const AppRoutes = () => {
         <ToastContainer position="bottom-right" />
         {search ? <UserSearch /> : null}
         {register ? <Register /> : null}
-        {likes.active ? <PopUpLikes likesArr={likes.likesArr} /> : null}
-        {showInbox? <PopUpSideBarChat/>: null}
+        {likes?.active ? <PopUpLikes likesArr={likes?.likesArr} /> : null}
+        {showInbox && user? <PopUpSideBarChat/>: null}
       </Router>
     </Suspense>
   );

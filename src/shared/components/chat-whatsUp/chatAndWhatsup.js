@@ -1,7 +1,7 @@
 import React from 'react'
-import WebChat from '../../assets/icons/webChat';
-import { onRegisterShow } from '../../redux/features/toggleSlice';
-import Chat from './../../assets/icons/chat';
+import WebChat from '../../../assets/icons/webChat';
+import { onRegisterShow } from '../../../redux/features/toggleSlice';
+import Chat from '../../../assets/icons/chat';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

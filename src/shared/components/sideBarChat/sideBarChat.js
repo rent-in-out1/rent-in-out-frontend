@@ -4,7 +4,8 @@ import { useNavigate } from "react-router";
 import Chat from "../../../assets/icons/chat";
 import UserSingleChat from "./userSingleChat/userSingleChat";
 import { getUserInbox } from "../../../redux/features/userSlice";
-const SideBarChat = ({ style }) => {
+import { onInboxClose } from "../../../redux/features/toggleSlice";
+const SideBarChat = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const { user, inbox } = useSelector((state) => state.userSlice);
@@ -33,6 +34,7 @@ const SideBarChat = ({ style }) => {
                 user.role === "admin"
                   ? nav(`/admin/chat/${msg.roomID}/${msg.creatorID}`)
                   : nav(`/chat/${msg.roomID}/${msg.creatorID}`);
+                  dispatch(onInboxClose());
               }}
             >
               <UserSingleChat msg={msg} />
