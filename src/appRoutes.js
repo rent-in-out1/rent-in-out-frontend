@@ -39,7 +39,7 @@ const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/page-not-found"));
 const ResetPass = React.lazy(() => import("./api/auth/resetPass"));
-const Likes = React.lazy(() => import("./pages/client/posts-likes"));
+const PopUpLikes = React.lazy(() => import("./pages/client/posts-likes/popUpLikes"));
 const UserSearch = React.lazy(() =>
   import("./pages/client/userSearch/userSearch")
 );
@@ -141,7 +141,7 @@ const AppRoutes = () => {
         <ToastContainer position="bottom-right" />
         {search ? <UserSearch /> : null}
         {register ? <Register /> : null}
-        {likes.active ? <Likes likesArr={likes.likesArr} /> : null}
+        {likes.active ? <PopUpLikes likesArr={likes.likesArr} /> : null}
         {showInbox? <PopUpSideBarChat/>: null}
       </Router>
     </Suspense>

@@ -26,14 +26,15 @@ const UserRating = ({ rank, post, setIsChange, isChange }) => {
         setIsChange(!isChange);
         successHandler("Rating updated");
       } catch (err) {
+        setFill(-1)
         errorHandler(err.response.data.msg);
       }
     }
   };
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center border rounded-xl px-2 mt-1 mx-5">
       <h2>User Rating: {rank.average ? rank.average.toFixed(2) : "0"}</h2>
-      <div className="flex flex-col text-center mr-5">
+      <div className="flex flex-col text-center">
         <small>Rate user</small>
         <div className="flex">
           {[...Array(fill + 1)].map((star, i) => {

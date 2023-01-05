@@ -16,6 +16,7 @@ import { updateWishList } from "../../../redux/features/userSlice";
 import WebChat from "../../../assets/icons/webChat";
 import PostHeader from "../postHeader/postHeader";
 import { usePostCreator } from "../../../hooks/usePostCreator";
+import ChatAndWhatsup from "../chatAndWhatsup";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
@@ -118,7 +119,7 @@ const Card = ({ post }) => {
               </span>
               <span className="text-xs capitalize text-gray-400">per day</span>
             </div>
-            {user?._id !== owner?._id ? (
+            {/* {user?._id !== owner?._id ? (
               <div className="flex h-8 overflow-hidden">
                 <div className="h-full mr-1">
                   <a
@@ -147,7 +148,8 @@ const Card = ({ post }) => {
                   <WebChat color="white" />
                 </div>
               </div>
-            ) : null}
+            ) : null} */}
+            <ChatAndWhatsup post={post} user={user} owner={owner}/>
           </div>
         </div>
       </div>

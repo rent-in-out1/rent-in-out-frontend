@@ -17,16 +17,16 @@ const ImgController = ({ post }) => {
       <div className="controllers">
         <span onClick={() => prevImg()} className="cursor-pointer ml-1">
           <ArrowLeft
-            width="100px"
-            height="100px"
-            color="rgba(238, 238, 238, 0.419)"
+            width="50px"
+            height="50px"
+            color="rgba(238, 238, 238, 0.8)"
           />
         </span>
         <span onClick={() => nextImg()} className="cursor-pointer mr-1">
           <ArrowRight
-            width="100px"
-            height="100px"
-            color="rgba(238, 238, 238, 0.419)"
+            width="50px"
+            height="50px"
+            color="rgba(238, 238, 238, 0.8)"
           />
         </span>
       </div>

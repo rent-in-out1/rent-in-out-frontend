@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { doGetApiMethod } from "../../../services/axios-service/axios-service";
 import Loader from "../../../shared/components/loader/loader";
 import { Wrapper } from "../../../assets/styles/wrappers/singlePost";
 import PostHeader from "../../../shared/components/postHeader/postHeader";
 import { useSelector } from "react-redux";
-import UserRating from "./userRating";
 import ImgController from "./imgController";
+import Likes from "./../posts-likes/likes";
+import UserInfo from "./userInfo";
+import PostInfo from "./postInfo";
+import Home from './../../../assets/icons/home';
 const SinglePost = () => {
   const params = useParams();
   const [post, setPost] = useState({});
   const [owner, setOwner] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   const [isChange, setIsChange] = useState(false);
   const [rank, setRank] = useState({});
   const { user } = useSelector((state) => state.userSlice);
@@ -35,7 +39,7 @@ const SinglePost = () => {
     const { data } = await doGetApiMethod(url);
     setRank(data);
   };
-    /** get creator from api */
+  /** get creator from api */
   const getPostCreatorInfo = async (id) => {
     const { data } = await doGetApiMethod(`/users/info/${id}`);
     setOwner(data.userInfo);
@@ -43,7 +47,7 @@ const SinglePost = () => {
   return (
     <Wrapper>
       {isLoading ? (
-        <div className="w-full flex justify-center items-center min-h-12">
+        <div className="w-full flex justify-center items-center min-h-12 ">
           <Loader width={"150px"} height={"100%"} />
         </div>
       ) : (
@@ -52,35 +56,30 @@ const SinglePost = () => {
           <ImgController post={post} />
           {/* post context */}
           <main>
+            <div className="flex justify-center my-2">
+              <Link className="flex" to={user.role === "admin" ? "/admin" : "/"}>Home <span className="ml-2"><Home color="gray"/></span></Link>
+              
+            </div>
+            <hr/>
             {post && <PostHeader post={post} />}
             <hr />
-            <div className="user-header capitalize shadow-xl mb-2 p-2">
-              <div className="">
-                <ul >
-                  <li>
-                    {owner?.country}, {owner?.city}
-                  </li>
-                  <li>
-                    active since:
-                    {new Date(user?.createdAt).toLocaleDateString()}
-                  </li>
-                  <li>
-                    email: <span className="lowercase">{owner?.email}</span>
-                  </li>
-                </ul>
+            <div className="flex flex-wrap mt-2">
+              <div className="post-info md:w-1/2 w-full shadow-xl">
                 <ul>
-                  
+                  <PostInfo post={post} owner={owner} />
                 </ul>
               </div>
-              <UserRating
-                rank={rank}
-                post={post}
-                isChange={isChange}
-                setIsChange={setIsChange}
-              />
+              <div className="post-likes md:w-1/2 w-full shadow-xl mt-2">
+                <Likes likesArr={post?.likes} />
+              </div>
             </div>
-            <div className="post-info"></div>
-            <div className="post-likes"></div>
+            <UserInfo
+              owner={owner}
+              rank={rank}
+              post={post}
+              isChange={isChange}
+              setIsChange={setIsChange}
+            />
             <div className="contact"></div>
           </main>
         </section>

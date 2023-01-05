@@ -1,13 +1,10 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    position: sticky;
     height: 100vh;
-    top: 0;
-    left: 0;
-    /* z-index: 999999; */
     width: 100%;
     background: transparent;
+    color: var(--grey-500);
     section{
         display: flex;
         .images-carousel{
@@ -16,7 +13,7 @@ export const Wrapper = styled.div`
             height:100vh;
             overflow: hidden;
             display: flex;
-            background: royalblue;
+            background: var(--black);
             justify-content: center;
             align-items: center;
             img{
@@ -37,5 +34,16 @@ export const Wrapper = styled.div`
             padding:0 16px;
             width: 50%;
         }
-    }
+        @media (max-width: 768px) {
+                flex-wrap: wrap;
+                .images-carousel{
+                    width: 100%;
+                    height: 50vh;
+                }
+                main{
+                    padding:0 4px;
+                    width: 100%;
+                }
+            }
+        }
 `

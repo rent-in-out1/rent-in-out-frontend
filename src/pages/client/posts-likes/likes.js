@@ -1,19 +1,16 @@
 import React from "react";
-import { onLikesToggle } from "../../../redux/features/toggleSlice";
-import PopUPModel from "../../../shared/UI/popup/popUpModel";
 import SingleLike from "./singleLike";
 
 const Likes = ({ likesArr }) => {
   return (
-    <PopUPModel action={onLikesToggle}>
-      <ul className="dropdown overflow-y-scroll max-h-96 w-full mb-3 flex flex-col">
+    <React.Fragment>
+      <h2 className="text-center">Post Likes</h2>
+      <ul className="dropdown overflow-y-scroll p-3 h-full w-full mb-3 flex flex-col">
         {likesArr?.map((item) => {
-          return (
-            <SingleLike key={item._id} item={item}/>
-          );
+          return <SingleLike key={item._id} item={item} />;
         })}
       </ul>
-    </PopUPModel>
+    </React.Fragment>
   );
 };
 
