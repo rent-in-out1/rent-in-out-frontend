@@ -19,7 +19,6 @@ import WishList from "./pages/client/wishList";
 import ConfirmHandler from "./shared/UI/confirm/confirm";
 import Chat from "./pages/client/chat/chat";
 import MyProfile from "./pages/client/myProfile";
-import PostLayout from "./layout/postLayout/post-layout";
 import PopUpSideBarChat from './shared/components/sideBarChat/popUpSideBarChat';
 
 // Lazy loading of routes
@@ -49,6 +48,7 @@ const AppRoutes = () => {
   let { user } = useSelector((state) => state.userSlice);
   let { search, register ,showInbox} = useSelector((state) => state.toggleSlice);
   let { likes } = useSelector((state) => state.toggleSlice);
+  let { postShow } = useSelector((state) => state.toggleSlice);
   useEffect(() => {
     let token;
     if (localStorage["token"]) {
@@ -88,9 +88,6 @@ const AppRoutes = () => {
     >
       <Router>
         <Routes>
-          <Route path="/" element={<PostLayout />}>
-            <Route path="/singlePost/:postID" element={<SinglePost />} />
-          </Route>
           <Route path="/" element={<Layout />}>
             <Route
               path="/resetPassword/:id/:resetString"
@@ -139,6 +136,7 @@ const AppRoutes = () => {
           )}
         </Routes>
         <ToastContainer position="bottom-right" />
+        {postShow?.active ? <SinglePost post={postShow?.post}/>:null}
         {search ? <UserSearch /> : null}
         {register ? <Register /> : null}
         {likes?.active ? <PopUpLikes likesArr={likes?.likesArr} /> : null}
