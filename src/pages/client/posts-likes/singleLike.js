@@ -1,9 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { onLikesToggle, onPostToggle } from '../../../redux/features/toggleSlice';
-
-const SingleLike = ({item}) => {
+const SingleLike = ({item , action}) => {
 
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -11,7 +9,7 @@ const SingleLike = ({item}) => {
   return (
       <li
         onClick={() => {
-          dispatch(onPostToggle())
+          dispatch(action())
           user?.role === "admin"
         ? nav(`/admin/profile/${item.user_id}`)
         : nav(`/profile/${item.user_id}`);

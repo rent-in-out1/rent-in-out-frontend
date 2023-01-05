@@ -1,5 +1,3 @@
-
-import { useNavigate } from "react-router-dom";
 import FillHeart from "../../../assets/icons/fillHeart";
 import Heart from "../../../assets/icons/heart";
 import { v4 as uuidv4 } from "uuid";
@@ -19,7 +17,6 @@ import ChatAndWhatsup from "../chat-whatsUp";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
-  const nav = useNavigate();
   const { user, wishList } = useSelector((state) => state.userSlice);
   const [owner] = usePostCreator(post?.creator_id)
   return (

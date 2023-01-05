@@ -20,6 +20,7 @@ import ConfirmHandler from "./shared/UI/confirm/confirm";
 import Chat from "./pages/client/chat/chat";
 import MyProfile from "./pages/client/myProfile";
 import PopUpSideBarChat from './shared/components/sideBarChat/popUpSideBarChat';
+import { onLikesToggle } from "./redux/features/toggleSlice";
 
 // Lazy loading of routes
 const LayoutAdmin = React.lazy(() =>
@@ -139,7 +140,7 @@ const AppRoutes = () => {
         {postShow?.active ? <SinglePost post={postShow?.post}/>:null}
         {search ? <UserSearch /> : null}
         {register ? <Register /> : null}
-        {likes?.active ? <PopUpLikes likesArr={likes?.likesArr} /> : null}
+        {likes?.active ? <PopUpLikes likesArr={likes?.likesArr} action={onLikesToggle}/> : null}
         {showInbox && user? <PopUpSideBarChat/>: null}
       </Router>
     </Suspense>

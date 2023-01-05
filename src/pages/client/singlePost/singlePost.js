@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { doGetApiMethod } from "../../../services/axios-service/axios-service";
 import Loader from "../../../shared/components/loader/loader";
 import { Wrapper } from "../../../assets/styles/wrappers/singlePost";
@@ -69,7 +69,7 @@ const SinglePost = ({post}) => {
                   <PostInfo post={post} owner={owner} />
                 </div>
                 <div className="post-likes md:w-1/2 border w-full">
-                  <Likes likes={post?.likes} />
+                  <Likes likes={post?.likes} action={onPostToggle} />
                 </div>
               </div>
               <UserInfo
