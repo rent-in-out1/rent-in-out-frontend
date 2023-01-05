@@ -10,7 +10,8 @@ import { createSlice } from "@reduxjs/toolkit";
         likes:{
             active: false,
             likesArr:[]
-        } 
+        },
+        showInbox: false
     }
 
 const toggleSlice = createSlice({
@@ -38,9 +39,12 @@ const toggleSlice = createSlice({
             state.message.info = action.payload.info
             state.message.action = action.payload.action
         },
+        onInboxToggle: (state) =>{
+            state.showInbox =!state.showInbox
+        }
 
     }
 })
 
-export const {onToggle , onRegisterToggle,onSearchToggle, onLogout , onRegisterShow, onLikesToggle , onMessegeToggle } = toggleSlice.actions
+export const {onToggle , onRegisterToggle,onSearchToggle, onLogout , onRegisterShow, onLikesToggle , onMessegeToggle ,onInboxToggle } = toggleSlice.actions
 export default toggleSlice.reducer

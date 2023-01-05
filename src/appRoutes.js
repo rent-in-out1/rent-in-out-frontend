@@ -20,6 +20,7 @@ import ConfirmHandler from "./shared/UI/confirm/confirm";
 import Chat from "./pages/client/chat/chat";
 import MyProfile from "./pages/client/myProfile";
 import PostLayout from "./layout/postLayout/post-layout";
+import PopUpSideBarChat from './shared/components/sideBarChat/popUpSideBarChat';
 
 // Lazy loading of routes
 const LayoutAdmin = React.lazy(() =>
@@ -44,10 +45,9 @@ const UserSearch = React.lazy(() =>
 );
 const SinglePost = React.lazy(() => import("./pages/client/singlePost"));
 const AppRoutes = () => {
-
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
-  let { search, register } = useSelector((state) => state.toggleSlice);
+  let { search, register ,showInbox} = useSelector((state) => state.toggleSlice);
   let { likes } = useSelector((state) => state.toggleSlice);
   useEffect(() => {
     let token;
@@ -142,6 +142,7 @@ const AppRoutes = () => {
         {search ? <UserSearch /> : null}
         {register ? <Register /> : null}
         {likes.active ? <Likes likesArr={likes.likesArr} /> : null}
+        {showInbox? <PopUpSideBarChat/>: null}
       </Router>
     </Suspense>
   );

@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import ExitFill from "../../../assets/icons/exitFill";
 import ExitNoFill from "../../../assets/icons/exitNoFill";
-import classes from "./Model.module.css";
 import { useDispatch } from "react-redux";
+import { Wrapper } from "./../../../assets/styles/wrappers/registerModel";
 
 const Backdrop = ({ action }) => {
   const dispatch = useDispatch();
   return (
-    <div
-      onClick={() => {
-        dispatch(action());
-      }}
-      className={classes.backdrop}
-    ></div>
+    <Wrapper>
+      <div
+        onClick={() => {
+          dispatch(action());
+        }}
+        className="backdrop"
+      ></div>
+    </Wrapper>
   );
 };
 
@@ -21,25 +23,27 @@ const PopUpOverlay = ({ action, children }) => {
   const [over, setOver] = useState(false);
   const dispatch = useDispatch();
   return (
+    <Wrapper>
       <div className="data">
-    <div className={classes.model}>
-        <h2
-          className=" exit w-full md:hidden flex justify-end "
-          onMouseOver={() => setOver(true)}
-          onMouseLeave={() => setOver(false)}
-          onClick={() => {
-            dispatch(action());
-          }}
-        >
-          {over ? (
-            <ExitFill className="icon" width={32} height={32} />
-          ) : (
-            <ExitNoFill className="icon" width={32} height={32} />
-          )}
-        </h2>
-        <div>{children}</div>
+        <div className="model">
+          <h2
+            className="exit w-full md:hidden flex justify-end "
+            onMouseOver={() => setOver(true)}
+            onMouseLeave={() => setOver(false)}
+            onClick={() => {
+              dispatch(action());
+            }}
+          >
+            {over ? (
+              <ExitFill className="icon" width={32} height={32} />
+            ) : (
+              <ExitNoFill className="icon" width={32} height={32} />
+            )}
+          </h2>
+          <div>{children}</div>
+        </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 const portalElement = document.getElementById("overlays");

@@ -7,7 +7,6 @@ import PostHeader from "../../../shared/components/postHeader/postHeader";
 import { useSelector } from "react-redux";
 import UserRating from "./userRating";
 import ImgController from "./imgController";
-import { usePostCreator } from "../../../hooks/usePostCreator";
 const SinglePost = () => {
   const params = useParams();
   const [post, setPost] = useState({});

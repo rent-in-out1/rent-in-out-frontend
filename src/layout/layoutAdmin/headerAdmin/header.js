@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  onInboxToggle,
   onRegisterToggle,
   onSearchToggle,
 } from "../../../redux/features/toggleSlice";
@@ -18,6 +19,7 @@ import Bell from "../../../assets/icons/bell";
 import Search from "../../../assets/icons/search";
 import WishList from "../../../assets/icons/wishlist";
 import { useEffect } from "react";
+import Inbox from "./../../../assets/icons/inbox";
 const Header = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -26,18 +28,18 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => closeNav())
-  }, [])
+    window.addEventListener("scroll", () => closeNav());
+  }, []);
   let timeOut;
   const openNav = () => {
     clearTimeout(timeOut);
-    setIsOpen(true)
-  }
+    setIsOpen(true);
+  };
   const closeNav = () => {
     timeOut = setTimeout(() => {
-      setIsOpen(false)
-    }, 100)
-  }
+      setIsOpen(false);
+    }, 100);
+  };
   return (
     <Wrapper className="drop-shadow-xl">
       <section>
@@ -50,8 +52,20 @@ const Header = () => {
           </Link>
         </div>
         <div className="right">
-          <nav>
+          <nav className="md:hidden block">
             <ul>
+              <li onClick={()=> dispatch(onInboxToggle())}>
+                <button
+                  type="button"
+                  className="inline-flex relative items-center p-3 text-sm  text-center"
+                >
+                  <Inbox color="black" width="20" height="20" />
+                  <span className="sr-only">Notifications</span>
+                  <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
+                    1
+                  </div>
+                </button>
+              </li>
               <li>
                 <button
                   type="button"
@@ -69,7 +83,9 @@ const Header = () => {
           <div
             className="relative avatar"
             onMouseLeave={() => closeNav()}
-            onClick={() => { isOpen ? closeNav() : openNav() }}
+            onClick={() => {
+              isOpen ? closeNav() : openNav();
+            }}
           >
             <img
               className="rounded-full"
@@ -81,8 +97,9 @@ const Header = () => {
               alt=""
             />
             <span
-              className={`${isLogin ? "bg-green-400" : "bg-red-400"
-                } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
+              className={`${
+                isLogin ? "bg-green-400" : "bg-red-400"
+              } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
             ></span>
           </div>
         </div>

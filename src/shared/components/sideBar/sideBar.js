@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { onLogout, onRegisterShow, onSearchToggle } from "../../../redux/features/toggleSlice";
+import { onInboxToggle, onLogout, onRegisterShow, onSearchToggle } from "../../../redux/features/toggleSlice";
 import { API_URL_CLIENT } from "../../../services/axios-service/axios-service";
 //style
 import { Wrapper } from "../../../assets/styles/wrappers/sideBar";
@@ -66,12 +66,12 @@ const SideBar = () => {
                   <aside>{wishList?.length}</aside>
                 </Link>
               </li>
-              <li>
-                <Link to={user?.role === "admin" ? "/admin" : "/"}>
+              <li onClick={()=> dispatch(onInboxToggle())}>
+                <a>
                   <Inbox />
                   <span className="flex-1 ml-3">Inbox</span>
                   <aside>1</aside>
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to={user?.role === "admin" ? "/admin" : "/"}>

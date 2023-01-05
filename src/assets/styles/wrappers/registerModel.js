@@ -1,3 +1,6 @@
+import styled from "styled-components";
+
+export const Wrapper = styled.div`
 .backdrop {
   position: fixed;
   top: 0;
@@ -57,7 +60,6 @@
   }
   .model .exit:hover{
     color: var(--skyblue-900);
-    transform:scale(1.1);
   }
 }
 
@@ -71,3 +73,4 @@
     transform: translateY(0);
   }
 }
+`
