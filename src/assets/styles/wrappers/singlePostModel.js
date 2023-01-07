@@ -46,13 +46,15 @@ export const Wrapper = styled.div`
       padding: 0;
     }
   
-    .model .h2 {
+    .model >h2 {
+      position: fixed;
+      width: 100%;
+      height: 20px;
       padding: 0;
       margin: 0;
-      top: 0;
+      top: 10px;
       z-index: 30;
-      right: 20px;
-      width: 20px;
+      right: 10px;
       color: var(--skyblue-600);
       font-size: 2em;
       cursor: pointer;

@@ -11,6 +11,7 @@
     "classnames": "^2.3.2",
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.3",
+    "leaflet-geosearch": "^3.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-file-input-custom": "^1.0.7",

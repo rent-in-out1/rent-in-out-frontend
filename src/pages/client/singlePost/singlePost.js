@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { doGetApiMethod } from "../../../services/axios-service/axios-service";
-import Loader from "../../../shared/components/loader/loader";
 import { Wrapper } from "../../../assets/styles/wrappers/singlePost";
 import PostHeader from "../../../shared/components/postHeader/postHeader";
 import { useSelector } from "react-redux";
@@ -9,11 +7,13 @@ import ImgController from "./imgController";
 import Likes from "./../posts-likes/likes";
 import UserInfo from "./userInfo";
 import PostInfo from "./postInfo";
-import Home from "./../../../assets/icons/home";
 import Map from "./map";
 import PopUPModel from "./../../../shared/UI/popup/popUpSinglePost";
 import { onPostToggle } from "../../../redux/features/toggleSlice";
-const SinglePost = ({post}) => {
+import BallTriangleLoader from "./../../../shared/components/loader/ballTriangle/ballTriangle";
+import MapBylocation from "./mapBylocation";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
+const SinglePost = ({ post }) => {
   const [owner, setOwner] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
@@ -22,14 +22,14 @@ const SinglePost = ({post}) => {
 
   useEffect(() => {
     getUserRating();
-    
+    doSearchOnMap();
   }, [isChange]);
   /** get rating from api */
   const getUserRating = async () => {
     let url = `/users/getRank/${post?.creator_id}?rankingUser=${post?._id}`;
     const { data } = await doGetApiMethod(url);
     setRank(data);
-    await getPostCreatorInfo(post?.creator_id)
+    await getPostCreatorInfo(post?.creator_id);
     setIsLoading(false);
   };
   /** get creator from api */
@@ -37,30 +37,40 @@ const SinglePost = ({post}) => {
     const { data } = await doGetApiMethod(`/users/info/${id}`);
     setOwner(data.userInfo);
   };
+  //dummy adresses
+  const locations = [
+    "תל אביב גלגלי הפלדה 5",
+    "תל אביב גלגלי הפלדה 8",
+    "תל אביב שדרות אבא אבן 7",
+  ];
+
+  const [results, setResults] = useState([]);
+  const [center, setCenter] = useState({ x: 0, y: 0 });
+  useEffect(() => {}, []);
+  const serachProvider = new OpenStreetMapProvider();
+  const doSearchOnMap = async () => {
+    let results = [];
+    locations.map(async (loc, i) => {
+      let result = await serachProvider.search({ query: loc });
+      results.push(result[0]);
+      if (i === 0) setCenter(result[0]);
+      setResults((prev) => [...prev, result[0]]);
+    });
+    // setResults(results);
+  };
   return (
     <PopUPModel action={onPostToggle}>
       <Wrapper>
         {isLoading ? (
-          <div className="w-full flex justify-center border items-center min-h-12 ">
-            <Loader width={"150px"} height={"100%"} />
+          <div className="loader w-full flex justify-center items-center h-full">
+            <BallTriangleLoader width={"150px"} height={"150px"} />
           </div>
         ) : (
           // images
-          <section>
+          <section className="flex flex-wrap">
             <ImgController post={post} />
             {/* post context */}
-            <main>
-              <div className="flex justify-center my-2">
-                <Link
-                  className="flex"
-                  to={user.role === "admin" ? "/admin" : "/"}
-                >
-                  Home{" "}
-                  <span className="ml-2">
-                    <Home color="gray" />
-                  </span>
-                </Link>
-              </div>
+            <main className="overflow-y-scroll">
               <hr />
               {post && <PostHeader post={post} />}
               <hr />
@@ -79,7 +89,9 @@ const SinglePost = ({post}) => {
                 isChange={isChange}
                 setIsChange={setIsChange}
               />
-              <Map />
+              <div className="p-2 overflow-hidden">
+                <MapBylocation results={results} center={center} />
+              </div>
             </main>
           </section>
         )}

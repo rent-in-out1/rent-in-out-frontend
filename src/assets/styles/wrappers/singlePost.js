@@ -1,50 +1,63 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    height: 100vh;
-    width: 100%;
-    background-color: var(--white);
-    color: var(--grey-500);
-    section{
-        display: flex;
-        .images-carousel{
-            user-select: none;
-            position: relative;
-            width: 50%;
-            height:100vh;
-            overflow: hidden;
-            display: flex;
-            background: var(--black);
-            justify-content: center;
-            align-items: center;
-            img{
-                object-fit: cover;
-                object-position: top;
-            }
-            .controllers{
+  height: inherit;
+  width: 100%;
+  background-color: var(--white);
+  color: var(--grey-500);
+  .loader {
+    min-height: 90vh;
+  }
+  section {
+    display: flex;
 
-                position: absolute;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-            }
+    .images-carousel {
+      user-select: none;
+      position: relative;
+      width: 50%;
+      height: 90vh;
+      overflow: hidden;
+      display: flex;
+      background: var(--black);
+      justify-content: center;
+      align-items: center;
+      img {
+        object-fit: cover;
+        object-position: top;
+      }
+      .controllers {
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    main {
+      height: 85vh;
+      padding: 0 16px;
+      width: 50%;
+      overflow-y: scroll;
+      .leaflet-container {
+        width: 100%;
+        height: 50vh;
+      }
+    }
+    @media (max-width: 768px) {
+      .images-carousel {
+        width: 100%;
+        height: 100vh;
+      }
+      main {
+        padding: 4px 4px;
+        height: auto;
+        width: 100%;
+        .leaflet-container {
+          width: 100%;
+          height: 45vh;
         }
-        main{
-            padding:0 16px;
-            width: 50%;
-        }
-        @media (max-width: 768px) {
-                flex-wrap: wrap;
-                .images-carousel{
-                    width: 100%;
-                    height: 50vh;
-                }
-                main{
-                    padding:0 4px;
-                    width: 100%;
-                }
-            }
-        }
-`
+      }
+    }
+  }
+`;

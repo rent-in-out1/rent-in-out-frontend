@@ -1,9 +1,9 @@
 import React from 'react'
-import { Rings } from 'react-loader-spinner'
+import { BallTriangle } from 'react-loader-spinner'
 
-const Loader = ({ load = true, height, width, color = "#97aef8" }) => {
+const BallTriangleLoader = ({ load = true, height, width, color = "#97aef8" }) => {
     return (
-        <Rings
+        <BallTriangle
             height={height}
             width={width}
             color={color}
@@ -11,9 +11,10 @@ const Loader = ({ load = true, height, width, color = "#97aef8" }) => {
             wrapperStyle={{}}
             wrapperclassName=""
             visible={load}
-            ariaLabel="rings-loading"
+            ariaLabel="ball-triangle-loading"
+
         />
     )
 }
 
-export default Loader
+export default BallTriangleLoader

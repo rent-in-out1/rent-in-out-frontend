@@ -24,7 +24,7 @@ const PopUpOverlay = ({ action, children }) => {
   const dispatch = useDispatch();
   return (
     <Wrapper>
-      <div className="data">
+      <div>
         <div className="model">
           <h2
             className=" exit w-full md:hidden flex justify-end "
@@ -35,9 +35,9 @@ const PopUpOverlay = ({ action, children }) => {
             }}
           >
             {over ? (
-              <ExitFill className="icon" width={32} height={32} />
+              <ExitFill className="icon" color="white" width={32} height={32} />
             ) : (
-              <ExitNoFill className="icon" width={32} height={32} />
+              <ExitNoFill className="icon" color="white" width={32} height={32} />
             )}
           </h2>
           <div>{children}</div>
