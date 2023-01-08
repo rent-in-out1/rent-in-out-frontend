@@ -10,7 +10,7 @@ const SingleMessage = ({ msg, user, roomID, deleteMsg ,location }) => {
   const [over, setOver] = useState(false);
   const [showDel, setShowDel] = useState(false);
   const deleteMessage = async () => {
-    let url = `/users/deleteMessage/${roomID}/${location}`;
+    let url = `/users/deleteMessage/${roomID}/${location-1}`;
     await doApiMethod(url, "DELETE");
     dispatch(getUserInbox());
   };

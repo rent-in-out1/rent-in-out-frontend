@@ -45,8 +45,8 @@ const Posts = () => {
               </tr>
             </thead>
             <tbody>
-              {posts.map((post) => (
-                <SinglePost key={post._id} item={post} setIsChange={setIsChange} />
+              {posts?.map((post) => (
+                <SinglePost key={post._id} post={post} setIsChange={setIsChange} />
               ))}
             </tbody>
           </table>

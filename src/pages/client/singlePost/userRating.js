@@ -19,7 +19,7 @@ const UserRating = ({ rank, post, setIsChange, isChange }) => {
       dispatch(onRegisterShow());
     } else {
       try {
-        let url = `/users/rankUser/${post?.creator_id}`;
+        let url = `/users/rankUser/${post?.creator_id._id}`;
         await doApiMethod(url, "PATCH", { rnk });
         setIsChange(!isChange);
         successHandler("Rating updated");

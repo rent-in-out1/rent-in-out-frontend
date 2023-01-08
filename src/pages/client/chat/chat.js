@@ -136,7 +136,7 @@ const Chat = ({ post }) => {
                 roomID={roomID}
                 user={user}
                 msg={msg}
-                location={i}
+                location={i-1}
                 deleteMsg={deleteMsg}
               />
             ))}

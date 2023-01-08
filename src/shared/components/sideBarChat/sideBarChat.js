@@ -13,7 +13,7 @@ const SideBarChat = () => {
     dispatch(getUserInbox());
   }, []);
   return (
-    <div className="search md:w-3/12 lg:w-2/12 p-2 fixed top-16 hidden md:flex">
+    <div className="search md:w-3/12 lg:w-2/12 pl-4 fixed top-16 hidden md:flex">
       <div className="overflow-y-auto py-4 w-full mt-4 px-2 bg-white shadow-xl rounded">
         <div className="flex justify-between">
           <h2 className="flex items-center">

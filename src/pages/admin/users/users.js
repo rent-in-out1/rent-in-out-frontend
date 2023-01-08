@@ -30,7 +30,7 @@ const Users = () => {
   const users_hedaers = ["Name", "email" ,"country" ,"city" ,"age", "phone" , "Created at" ,"active" , "Role" , "delete"]
 
   return (
-    <Wrapper className="border">
+    <Wrapper className="mb-2">
       <Controllers
         title={"users list"}
         options={options}

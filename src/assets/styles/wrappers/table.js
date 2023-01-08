@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+width: 100%;
   .wrapper {
     margin-bottom: 3em;
     display: flex;
@@ -16,8 +17,8 @@ export const Wrapper = styled.div`
   }
   table {
     overflow-x: scroll;
-    max-width: 85%;
-    table-layout: auto;
+    width: 100%;
+    /* table-layout: auto; */
     thead {
       tr {
         background: var(--grey-50);
@@ -37,18 +38,19 @@ export const Wrapper = styled.div`
     tbody {
       tr {
         td {
-          padding: 20px 8px;
+          padding: 8px 8px;
           border-bottom: 2px solid var(--grey-100);
           background: var(--white);
-          font-size: 0.8em;
+          font-size: 0.7em;
           text-align: center;
           input {
+            font-size: 0.7em;
             display: block;
             background: var(--grey-100);
             color: var(--black);
             border: 1px solid var(--grey-200);
             border-radius: 8px;
-            padding: 8px;
+            padding: 4px;
             margin-bottom: 2px;
             &:focus {
               outline: none;
@@ -58,12 +60,6 @@ export const Wrapper = styled.div`
           }
           p {
             text-transform: capitalize;
-          }
-          .btn {
-            transition: 0.5s;
-          }
-          .btn:hover {
-            transform: scale(1.2);
           }
         }
       }

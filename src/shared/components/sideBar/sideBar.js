@@ -22,7 +22,7 @@ const SideBar = () => {
   return (
     
     <Wrapper
-      className="lg:w-3/12 z-10 p-3 top-16 left-0 fixed hidden lg:inline-block"
+      className="lg:w-1/5 z-10 p-1 top-16 -left-1 fixed hidden lg:inline-block"
       aria-label="Sidebar"
     >
       <div className="overflow-y-auto py-4 mt-4 px-3 w-full bg-white shadow-xl rounded">

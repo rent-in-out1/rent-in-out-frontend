@@ -1,8 +1,9 @@
 import { BsTrash } from "react-icons/bs";
 import { doApiMethod } from "../../../services/axios-service/axios-service";
+import { useNavigate } from 'react-router-dom';
 
-const SinglePost = ({ item, setIsChange }) => {
-  const post = item;
+const SinglePost = ({ post, setIsChange }) => {
+  const nav = useNavigate()
   const changeActive = async (_id) => {
     const url = "/posts/changeActive/" + _id;
     await doApiMethod(url, "PATCH");
@@ -31,7 +32,7 @@ const SinglePost = ({ item, setIsChange }) => {
         </div>
       </td>
       <td>
-        <p className="btn relative inline-block px-2 py-1 leading-tight cursor-pointer text-gray-900 whitespace-no-wrap hover:border rounded-full color-red">
+        <p onClick={()=>nav(`/admin/profile/${post?.creator_id?._id}`)} className="btn relative inline-block px-2 py-1 leading-tight cursor-pointer text-gray-900 whitespace-no-wrap hover:text-red-300">
           {post?.creator_id?.fullName?.firstName}{" "}
           {post?.creator_id?.fullName?.lastName}
         </p>

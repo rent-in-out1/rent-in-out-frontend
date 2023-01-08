@@ -11,14 +11,14 @@ const LayoutAdmin = () => {
     <React.Fragment>
       <Header />
       <div className="bg-gray-100 flex">
-        <div className="lg:w-3/12 hidden lg:flex">
+        <div className="lg:w-2/12 hidden lg:flex">
           <Sidebar />
         </div>
-        <div className="bg-gray-100 md:w-9/12 lg:w-7/12 w-full ">
+        <div className="bg-gray-100 lg:w-8/12 w-full lg:ml-12 lg:-mr-4  lg:pl-6 lg:pr-3">
           <Outlet />
         </div>
         {user ? (
-          <div className="hidden md:flex md:w-3/12 lg:w-2/12">
+          <div className="lg:w-2/12 hidden lg:flex pr-6">
             <SideBarChat />
           </div>
         ) : null}
