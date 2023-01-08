@@ -1,21 +1,16 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useRef} from "react";
 import {BsTrash, BsHammer} from "react-icons/bs";
 import {FaBan, FaCheckCircle} from "react-icons/fa";
-import {doGetApiMethod} from "../../../services/axios-service/axios-service";
 import {useDispatch} from "react-redux";
 import {deleteCategory, editCategory} from "../../../redux/features/categorieSlice";
-import { usePostCreator } from './../../../hooks/usePostCreator';
 
 const CategoryItem = ({item , setIsChange}) => {
     const dispatch = useDispatch();
     const infoRef = useRef();
     const nameRef = useRef();
     const urlRef = useRef();
-    // const [creator, setCreator] = useState({});
-    // const [editor, setEditor] = useState({});
     const category = item;
-    const [creator] = usePostCreator(category?.creator_id);
-    const [editor] = usePostCreator(category?.editor_id);
+    console.log(category)
     const [onEdit, setOnEdit] = useState(false);
     const [editData, setEditData] = useState({});
     return (
@@ -71,8 +66,8 @@ const CategoryItem = ({item , setIsChange}) => {
             </td>
             <td>
                 <p className="text-gray-900 whitespace-no-wrap">
-                    {creator?.fullName?.firstName}{" "}
-                    {creator?.fullName?.lastName}
+                    {category?.creator_id?.fullName?.firstName}{" "}
+                    {category?.creator_id?.fullName?.lastName}
                 </p>
             </td>
             <td>
@@ -168,8 +163,8 @@ const CategoryItem = ({item , setIsChange}) => {
             )}
             <td>
                 <p className="text-gray-900 whitespace-no-wrap">
-                    {editor?.fullName?.firstName}{" "}
-                    {editor?.fullName?.lastName}
+                    {category?.editor_id?.fullName?.firstName}{" "}
+                    {category?.editor_id?.fullName?.lastName}
                 </p>
             </td>
             <td>

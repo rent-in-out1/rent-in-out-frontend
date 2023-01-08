@@ -4,13 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Dots from '../../../assets/icons/dots';
 import Send from '../../../assets/icons/send';
-import { usePostCreator } from '../../../hooks/usePostCreator';
 import { deletePost } from '../../../redux/features/postsSlice';
 
 const PostHeader = ({ post }) => {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.userSlice);
-  const [owner] = usePostCreator(post?.creator_id)
   const [displayOptions, setDisplayOptions] = useState(false);
   const nav = useNavigate();
   let timeOut;
@@ -32,22 +30,22 @@ const PostHeader = ({ post }) => {
       <div
         onClick={() => {
           user?.role === "admin"
-            ? nav(`/admin/profile/${owner._id}`)
-            : nav(`/profile/${owner._id}`);
+            ? nav(`/admin/profile/${post?.creator_id._id}`)
+            : nav(`/profile/${post?.creator_id._id}`);
         }}
         className="flex items-center cursor-pointer capitalize"
       >
         <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
           <img
             className="w-full h-full rounded-full object-cover"
-            src={owner?.profile_img?.url}
+            src={post?.creator_id?.profile_img?.url}
             alt="avatar"
           />
         </div>
         <span className="pl-1 flex">
-          {owner.fullName?.firstName}
+          {post?.creator_id.fullName?.firstName}
           <span className="ml-1 hidden md:flex">
-            {owner.fullName?.lastName}
+            {post?.creator_id.fullName?.lastName}
           </span>
         </span>
       </div>

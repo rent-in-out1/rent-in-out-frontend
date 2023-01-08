@@ -27,6 +27,7 @@ const ChatAndWhatsup = ({user, owner, post}) => {
           <div
             onClick={(e) => {
               e.stopPropagation()
+              
               !user
                 ? dispatch(onRegisterShow())
                 : user.role === "admin"

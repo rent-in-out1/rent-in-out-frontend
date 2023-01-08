@@ -12,13 +12,11 @@ import Clock from "../../../assets/icons/clock";
 import { likePost } from "../../../redux/features/postsSlice";
 import { updateWishList } from "../../../redux/features/userSlice";
 import PostHeader from "../postHeader/postHeader";
-import { usePostCreator } from "../../../hooks/usePostCreator";
 import ChatAndWhatsup from "../chat-whatsUp";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
   const { user, wishList } = useSelector((state) => state.userSlice);
-  const [owner] = usePostCreator(post?.creator_id)
   return (
     <Wrapper>
       <div className="card">
@@ -115,7 +113,7 @@ const Card = ({ post }) => {
               </span>
               <span className="text-xs capitalize text-gray-400">per day</span>
             </div>
-            <ChatAndWhatsup post={post} user={user} owner={owner}/>
+            <ChatAndWhatsup post={post} user={user} owner={post.creator_id}/>
           </div>
         </div>
       </div>

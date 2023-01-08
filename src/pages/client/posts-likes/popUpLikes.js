@@ -10,7 +10,7 @@ const PopUpLikes = ({ likesArr }) => {
       <ul className="dropdown overflow-y-scroll max-h-96 w-full mb-3 flex flex-col">
         {likesArr?.map((item) => {
           return (
-            <SingleLike key={item._id} item={item}/>
+            <SingleLike key={item._id} item={item} action={onLikesToggle}/>
           );
         })}
       </ul>
