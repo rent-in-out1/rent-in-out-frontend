@@ -65,7 +65,7 @@ const AddCategoryForm = (props) => {
                 </div>
             </td>
             <td>
-                <p>***</p>
+                <p>-</p>
             </td>
             <td>
                 <div className="w-full mb-1 md:mb-0 flex justify-center">

@@ -36,7 +36,7 @@ const SingleUser = (props) => {
         </div>
       </td>
       <td>
-        <p className="text-gray-900 whitespace-no-wrap">{user?.email}</p>
+        <p className="text-gray-900 whitespace-no-wrap"><span className='lowercase'>{user?.email}</span></p>
       </td>
       <td>
         <p className="text-gray-900 whitespace-no-wrap">{user?.country}</p>
