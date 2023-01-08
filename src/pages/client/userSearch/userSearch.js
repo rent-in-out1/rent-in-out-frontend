@@ -1,11 +1,12 @@
 import React from "react";
 import { useState, useRef } from "react";
 import UserCard from "./userCard";
-import { doGetApiMethod, errorHandler } from "../../../services/axios-service/axios-service";
+import { doGetApiMethod} from "../../../services/axios-service/axios-service";
 import Search from "../../../assets/icons/search";
 import { Wrapper } from "../../../assets/styles/wrappers/userSearch";
 import PopUPModel from "../../../shared/UI/popup/popUpModel";
 import { onSearchToggle } from "../../../redux/features/toggleSlice";
+import { errorHandler } from "../../../services/extra-services/extra-services";
 
 
 const UserSearch = () => {

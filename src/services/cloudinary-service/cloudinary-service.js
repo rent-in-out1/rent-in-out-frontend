@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { doApiMethod, errorHandler, successHandler } from '../axios-service/axios-service';
+import { doApiMethod } from '../axios-service/axios-service';
+import { successHandler , errorHandler} from './../extra-services/extra-services';
 export const uploadBannerImg = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -67,15 +68,6 @@ export const uploadBannerImg = async (file) => {
         } catch (err) {
             errorHandler(err)
         }
-    }
-    export const eyeShowHide = (setShow) => {
-        let passType = document.querySelector("#passInput").type
-        if (passType === "text") {
-            document.querySelector("#passInput").type = "password";
-            return setShow(false)
-        }
-        document.querySelector("#passInput").type = "text"
-        setShow(true)
     }
 
 

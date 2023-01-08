@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useSelector, useDispatch} from "react-redux";
 import { useForm } from "react-hook-form"
-import { errorHandler, successHandler } from "../../../../services/axios-service/axios-service";
 import { Wrapper } from '../../../../assets/styles/wrappers/postUi';
 import ImageFill from "../../../../assets/icons/imageFill";
 import { uploadPostImages } from "../../../../services/cloudinary-service/cloudinary-service";
 import { uploadPost } from "../../../../redux/features/postsSlice";
+import { errorHandler, successHandler } from '../../../../services/extra-services/extra-services';
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,9 @@ const CreatePost = () => {
 
   const changePostImage = async (images) => {
     let result = []
+    console.log(images)
     const img_ar = Array.from(images);
+    console.log(img_ar)
     if (img_ar.length > 4) return errorHandler("can't upload 5 images together")
     img_ar.forEach(async element => {
       if (element.size > 2 * 1024 * 1024) {
@@ -30,6 +32,7 @@ const CreatePost = () => {
       
       result.push(image);
     });
+    console.log(result)
     setImages(result)
     successHandler("images uploaded")
   }

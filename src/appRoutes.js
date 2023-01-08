@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   API_URL_CLIENT,
   doApiMethod,
-  errorHandler,
 } from "./services/axios-service/axios-service";
 import {
   getUserInbox,
@@ -21,6 +20,7 @@ import Chat from "./pages/client/chat/chat";
 import MyProfile from "./pages/client/myProfile";
 import PopUpSideBarChat from './shared/components/sideBarChat/popUpSideBarChat';
 import { onLikesToggle } from "./redux/features/toggleSlice";
+import { errorHandler } from "./services/extra-services/extra-services";
 
 // Lazy loading of routes
 const LayoutAdmin = React.lazy(() =>

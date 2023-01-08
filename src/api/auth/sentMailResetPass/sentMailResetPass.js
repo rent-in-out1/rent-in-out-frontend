@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "../../../assets/styles/wrappers/registerPage";
 import { useForm } from "react-hook-form";
-import { errorHandler, API_URL_CLIENT, doApiMethod, successHandler } from '../../../services/axios-service/axios-service';
+import {  API_URL_CLIENT, doApiMethod} from '../../../services/axios-service/axios-service';
 import { onLogout } from "../../../redux/features/toggleSlice";
 import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
+import {errorHandler, successHandler } from "../../../services/extra-services/extra-services";
 
 const SentMailResetPass = (props) => {
   const nav = useNavigate()

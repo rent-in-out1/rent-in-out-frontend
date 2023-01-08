@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { doApiMethod, doGetApiMethod } from "../../services/axios-service/axios-service";
-import { errorHandler } from "../../services/axios-service/axios-service";
+import { errorHandler } from "../../services/extra-services/extra-services";
 export const getCatgories = createAsyncThunk(
   "categories/get",
   async ({ search, option, page }) => {

@@ -5,7 +5,6 @@ import {
   API_URL,
   doApiMethod,
   doGetApiMethod,
-  errorHandler,
 } from "../../../services/axios-service/axios-service";
 import { io } from "socket.io-client";
 import { Button } from "../../../assets/styles/wrappers/registerPage";
@@ -13,6 +12,7 @@ import { Wrapper } from "../../../assets/styles/wrappers/chat";
 import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
 import { getUserInbox } from "../../../redux/features/userSlice";
 import SingleMessage from "./singleMessage";
+import { errorHandler } from "../../../services/extra-services/extra-services";
 
 const Chat = ({ post }) => {
   const nav = useNavigate();

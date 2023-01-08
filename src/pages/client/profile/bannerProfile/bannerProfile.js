@@ -3,8 +3,9 @@ import { FaCamera } from "react-icons/fa"
 import { deleteBannerImage, deleteProfileImage, uploadBannerImg, uploadProfileImg } from '../../../../services/cloudinary-service/cloudinary-service'
 import Loader from '../../../../shared/components/loader/loader'
 import { useSelector, useDispatch} from 'react-redux'
-import { doApiMethod, errorHandler, successHandler } from '../../../../services/axios-service/axios-service'
+import { doApiMethod } from '../../../../services/axios-service/axios-service'
 import { uploadBanner, uploadProfileImage } from '../../../../redux/features/userSlice'
+import {  successHandler , errorHandler } from './../../../../services/extra-services/extra-services';
 const BannerProfile = () => {
   const dispatch = useDispatch();
   const {cover_img ,profile_img } = useSelector(state => state.userSlice?.user)

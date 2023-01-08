@@ -2,31 +2,29 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Star from "../../../assets/icons/star";
 import StarFill from "../../../assets/icons/starFill";
-import { usePostCreator } from "../../../hooks/usePostCreator";
 import { onRegisterShow } from "../../../redux/features/toggleSlice";
 import {
-  doApiMethod,
-  successHandler,
   errorHandler,
-} from "../../../services/axios-service/axios-service";
+  successHandler,
+} from "./../../../services/extra-services/extra-services";
+import { doApiMethod } from "../../../services/axios-service/axios-service";
 
 const UserRating = ({ rank, post, setIsChange, isChange }) => {
   const dispatch = useDispatch();
   const [fill, setFill] = useState(rank?.userRank - 1);
   const { user } = useSelector((state) => state.userSlice);
   const rankUser = async (rnk) => {
-    if (!user){
-        setFill(-1)
-        dispatch(onRegisterShow());
-    } 
-    else {
+    if (!user) {
+      setFill(-1);
+      dispatch(onRegisterShow());
+    } else {
       try {
         let url = `/users/rankUser/${post?.creator_id}`;
         await doApiMethod(url, "PATCH", { rnk });
         setIsChange(!isChange);
         successHandler("Rating updated");
       } catch (err) {
-        setFill(-1)
+        setFill(-1);
         errorHandler(err.response.data.msg);
       }
     }

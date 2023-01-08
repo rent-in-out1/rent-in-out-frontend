@@ -1,9 +1,9 @@
 import React from "react";
 import {
   doApiMethod,
-  successHandler,
 } from "../../../services/axios-service/axios-service";
 import { useForm } from "react-hook-form";
+import { successHandler } from "../../../services/extra-services/extra-services";
 
 const ContactForm = () => {
   let {

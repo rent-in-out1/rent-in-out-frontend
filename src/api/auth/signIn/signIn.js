@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { doApiMethod, successHandler } from "../../../services/axios-service/axios-service";
+import { doApiMethod } from "../../../services/axios-service/axios-service";
 import { onLogin } from "../../../redux/features/userSlice";
 import { onLogout } from "../../../redux/features/toggleSlice";
-import { errorHandler } from "../../../services/axios-service/axios-service";
 import { Button } from "../../../assets/styles/wrappers/registerPage";
 import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
 import OpenEye from "../../../assets/icons/openEye";
-import { eyeShowHide } from "../../../services/cloudinary-service/cloudinary-service";
+import { eyeShowHide } from "../../../services/extra-services/extra-services";
 import CloseEye from "../../../assets/icons/closeEye";
+import {errorHandler  , successHandler } from "../../../services/extra-services/extra-services";
 
 const SignIn = (props) => {
   const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;

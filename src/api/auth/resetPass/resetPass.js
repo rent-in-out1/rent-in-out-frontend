@@ -2,17 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../../assets/styles/wrappers/registerPage";
 import { Wrapper } from "../../../assets/styles/wrappers/registerPage";
 import { useForm } from "react-hook-form";
-import {
-  errorHandler,
-  doApiMethod,
-  successHandler,
-} from "../../../services/axios-service/axios-service";
+import { doApiMethod } from "../../../services/axios-service/axios-service";
 import { useParams } from "react-router-dom";
-import { useState } from 'react';
-import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
+import { useState } from "react";
+import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
 import { onRegisterShow } from "../../../redux/features/toggleSlice";
 import { useDispatch } from "react-redux";
-import PopUPModel from '../../../shared/UI/popup/registerModel';
+import PopUPModel from "../../../shared/UI/popup/registerModel";
+import { errorHandler, successHandler } from "../../../services/extra-services/extra-services";
 
 const ResetPass = () => {
   const dispatch = useDispatch();
@@ -29,7 +26,7 @@ const ResetPass = () => {
   } = useForm();
 
   const onSub = async (_dataBody) => {
-    setLoad(true)
+    setLoad(true);
     delete _dataBody.password2;
     const requestData = {
       userId: id,
@@ -39,17 +36,17 @@ const ResetPass = () => {
     try {
       const url = "/users/resetPassword";
       const { data } = await doApiMethod(url, "POST", requestData);
-      console.log(data)
+      console.log(data);
       if (data.status === "Success") {
         successHandler(data.msg);
         nav("/");
       } else {
         errorHandler(data.msg);
       }
-      dispatch(onRegisterShow())
-      setLoad(false)
+      dispatch(onRegisterShow());
+      setLoad(false);
     } catch (err) {
-      setLoad(false)
+      setLoad(false);
       errorHandler(err.response.data.msg);
     }
   };
@@ -95,10 +92,9 @@ const ResetPass = () => {
               </div>
             </div>
             <Button>
-            <LoadingButton isLoading={load}>Change Password</LoadingButton>
+              <LoadingButton isLoading={load}>Change Password</LoadingButton>
             </Button>
           </form>
-
         </div>
       </Wrapper>
     </PopUPModel>

@@ -46,6 +46,7 @@ export const uploadPost = createAsyncThunk(
   "uploadPost/upload",
   async (post) => {
     try {
+      console.log(post)
       const url = "/posts";
       let { data } = await doApiMethod(url, "POST", post);
       return data;

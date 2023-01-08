@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../../assets/styles/wrappers/registerPage";
@@ -6,14 +5,10 @@ import {
   getCountries,
   getCities,
 } from "../../../services/get-locations-service/get-locations-service";
-import {
-  doApiMethod,
-  errorHandler,
-  successHandler,
-} from "../../../services/axios-service/axios-service";
-import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
-
-
+import { doApiMethod } from "../../../services/axios-service/axios-service";
+import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
+import { successHandler , errorHandler } from "./../../../services/extra-services/extra-services";
+ 
 const SignUp = (props) => {
   const [load, setLoad] = useState(false);
   const countryRef = useRef();
@@ -52,7 +47,7 @@ const SignUp = (props) => {
   } = useForm();
 
   const onSub = (_dataBody) => {
-    setLoad(true)
+    setLoad(true);
     delete _dataBody.password2;
     delete _dataBody.email2;
 
@@ -76,9 +71,9 @@ const SignUp = (props) => {
       await doApiMethod(url, "POST", _dataBody);
       props.setState("signIn");
       successHandler("Sign Up Success, please verify your email");
-      setLoad(false)
+      setLoad(false);
     } catch (err) {
-      setLoad(false)
+      setLoad(false);
       errorHandler(err.response.data.msg);
     }
   };
@@ -228,25 +223,24 @@ const SignUp = (props) => {
                 ))}
             </select>
           </div>
-            <div className="w-4/5 mr-1">
-              <label>City</label>
-              <select
-                ref={cityRef}
-                defaultValue={selectedCountry}
-                onChange={() => setSelectedCity(cityRef.current.value)}
-                className="block py-2.5 px-2 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-              >
-                {cities?.map((city, i) => (
-                  <option value={city} key={i} className="capitalize">
-                    {city}
-                  </option>
-                ))}
-              </select>
-            </div>
-          
+          <div className="w-4/5 mr-1">
+            <label>City</label>
+            <select
+              ref={cityRef}
+              defaultValue={selectedCountry}
+              onChange={() => setSelectedCity(cityRef.current.value)}
+              className="block py-2.5 px-2 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+            >
+              {cities?.map((city, i) => (
+                <option value={city} key={i} className="capitalize">
+                  {city}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
         <Button>
-        <LoadingButton isLoading={load}>Sign Up</LoadingButton>
+          <LoadingButton isLoading={load}>Sign Up</LoadingButton>
         </Button>
       </form>
       <span className="flex items-center justify-center">

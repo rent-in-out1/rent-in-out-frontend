@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { upload } from "../../../redux/features/userSlice";
 import {
   doApiMethod,
-  errorHandler,
   doGetApiMethod,
 } from "../../../services/axios-service/axios-service";
 import { toast } from "react-toastify";
 import { Wrapper } from "../../../assets/styles/wrappers/editUser";
+import { errorHandler } from "../../../services/extra-services/extra-services";
 
 const ProfileEdit = () => {
   const nav = useNavigate();
