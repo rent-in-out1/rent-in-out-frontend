@@ -2,19 +2,26 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   min-height: 384px;
-  .search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* overflow: hidden; */
+  .chats {
     width: 95%;
-    /* border: 3px solid #c2cceb; */
-    margin: 0 auto;
+    margin: -70px auto;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between;
-    height: 80%;
+    height: 100%;
     background: var(--white);
-    border-radius: 60px;
-    /* padding: 0 8px; */
     transition: 800ms;
-
+    h2{
+      font-size: larger;
+        width: 50%;
+        font-weight: bolder;
+        margin: 12px auto;
+        text-align: center;
+      }
     .icon {
       width: 15%;
       display: flex;
@@ -22,29 +29,22 @@ export const Wrapper = styled.div`
       justify-content: center;
       cursor: pointer;
     }
-    .dropdown{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      max-height: 384px;
+    .dropdown {
+      overflow-y: scroll;
+      max-height: inherit;
     }
-
-    input {
-      border-radius: 8px;
-      background: transparent;
-      border: 0;
-      height: 100%;
-      width: 85%;
-      outline: none;
-    }
+    /*  */
   }
-  @media(max-width:768px){
+  @media (max-width: 768px) {
+    /* margin-top: 40px; */
     height: 100vh;
     max-height: 100vh;
-    .dropdown{
-      height: 80vh;
-      max-height: 80vh;
+    .chats {
+      margin-top: -30px;
+      .dropdown {
+        height: 80vh;
+        max-height: 80vh;
+      }
     }
   }
 `;

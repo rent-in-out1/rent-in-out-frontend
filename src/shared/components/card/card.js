@@ -20,14 +20,14 @@ const Card = ({ post }) => {
   return (
     <Wrapper>
       <div className="card">
-        <PostHeader post={post}/>
+        <PostHeader post={post} />
         <div
           className="relative cursor-pointer"
           onDoubleClick={() => {
             !user
               ? dispatch(onRegisterShow())
               : dispatch(likePost({ id: post._id }));
-            if (post.creator_id !== user._id) {
+            if (post.creator_id._id !== user._id) {
               dispatch(updateWishList(post));
             }
           }}
@@ -48,8 +48,8 @@ const Card = ({ post }) => {
             }}
           >
             {post?.likes?.some((el) => el.user_id === user?._id) ||
-              user?.wishList?.some((el) => el._id === post?._id) ||
-              wishList?.some((el) => el._id === post?._id) ? (
+            user?.wishList?.some((el) => el._id === post?._id) ||
+            wishList?.some((el) => el._id === post?._id) ? (
               <FillHeart color="red" width="20px" height={"20px"} />
             ) : (
               <Heart color="red" width="20px" height={"20px"} />
@@ -58,14 +58,15 @@ const Card = ({ post }) => {
         </div>
 
         {/* card footer */}
-        <div onClick={() => {
-          dispatch(onPostToggle(post))
-        }} className="px-5 pt-2 md:pt-4">
+        <div
+          onClick={() => {
+            dispatch(onPostToggle(post));
+          }}
+          className="px-5 pt-2 md:pt-4"
+        >
           <div>
-
             {/* post title */}
-            <h5
-              className="text-sm capitalize text-lg lg:text-3xl font-semibold sm:tracking-tight text-gray-900 cursor-pointer">
+            <h5 className="text-sm capitalize text-lg lg:text-3xl font-semibold sm:tracking-tight text-gray-900 cursor-pointer">
               {post?.title}
             </h5>
           </div>
@@ -76,7 +77,7 @@ const Card = ({ post }) => {
               </span>
               <div
                 onClick={(e) => {
-                  e.stopPropagation()
+                  e.stopPropagation();
                   dispatch(onLikesToggle(post?.likes));
                 }}
                 className="flex items-center justify-between relative "
@@ -85,8 +86,9 @@ const Card = ({ post }) => {
                   return (
                     <div
                       key={uuidv4()}
-                      className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4
-                        }`}
+                      className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${
+                        i * 4
+                      }`}
                     >
                       <img
                         title={like.fullName.firstName}
@@ -113,7 +115,7 @@ const Card = ({ post }) => {
               </span>
               <span className="text-xs capitalize text-gray-400">per day</span>
             </div>
-            <ChatAndWhatsup post={post} user={user} owner={post.creator_id}/>
+            <ChatAndWhatsup post={post} user={user} owner={post.creator_id} />
           </div>
         </div>
       </div>

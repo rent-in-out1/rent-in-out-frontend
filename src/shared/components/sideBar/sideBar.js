@@ -20,9 +20,8 @@ const SideBar = () => {
   const isLogin = useSelector((state) => state.userSlice?.user !== null);
   const {user , wishList} = useSelector((state) => state.userSlice);
   return (
-    
     <Wrapper
-      className="lg:w-1/5 z-10 p-1 top-16 -left-1 fixed hidden lg:inline-block"
+      className="lg:w-1/6 z-10 p-1 top-16 -left-1 fixed hidden lg:inline-block"
       aria-label="Sidebar"
     >
       <div className="overflow-y-auto py-4 mt-4 px-3 w-full bg-white shadow-xl rounded">
@@ -66,13 +65,13 @@ const SideBar = () => {
                   <aside>{wishList?.length}</aside>
                 </Link>
               </li>
-              <li onClick={()=> dispatch(onInboxToggle())}>
+              {/* <li onClick={()=> dispatch(onInboxToggle())}>
                 <a>
                   <Inbox />
                   <span className="flex-1 ml-3">Inbox</span>
                   <aside>1</aside>
                 </a>
-              </li>
+              </li> */}
               <li>
                 <Link to={user?.role === "admin" ? "/admin" : "/"}>
                   <Notifications />

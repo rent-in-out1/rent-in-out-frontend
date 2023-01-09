@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import Chat from "../../../assets/icons/chat";
 import UserSingleChat from "./userSingleChat/userSingleChat";
 import { getUserInbox } from "../../../redux/features/userSlice";
 import { onInboxClose } from "../../../redux/features/toggleSlice";
+// import Chat from "./../../../assets/icons/chat";
 const SideBarChat = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -13,34 +13,34 @@ const SideBarChat = () => {
     dispatch(getUserInbox());
   }, []);
   return (
-    <div className="search md:w-3/12 lg:w-2/12 pl-4 fixed top-16 hidden md:flex">
-      <div className="overflow-y-auto py-4 w-full mt-4 px-2 bg-white shadow-xl rounded">
+    <div className="chats lg:w-1/6 p-1 top-16 -right-1 fixed hidden lg:inline-block">
+      <div className="overflow-y-auto py-4 w-full mt-4 text-center px-2 bg-white lg:shadow-xl rounded">
         <div className="flex justify-between">
           <h2 className="flex items-center">
-            <span className="mx-auto text-center mr-1">Chats</span>
-            <hr />
-            <span>
-              <Chat />
-            </span>
+            <span className="mx-auto text-center">Chats</span>
           </h2>
         </div>
         {/* all users with last chat here */}
-        <div className="overflow-y-auto rounded">
-          {inbox?.map((msg) => (
-            <div
-              className="overflow-hidden"
-              key={msg.roomID}
-              onClick={() => {
-                user.role === "admin"
-                  ? nav(`/admin/chat/${msg.roomID}/${msg.creatorID}`)
-                  : nav(`/chat/${msg.roomID}/${msg.creatorID}`);
+        {inbox.length > 0 ? (
+          <div className=" dropdown rounded">
+            {inbox?.map((msg) => (
+              <div
+                className="overflow-hidden"
+                key={msg.roomID}
+                onClick={() => {
+                  user.role === "admin"
+                    ? nav(`/admin/chat/${msg.roomID}/${msg.creatorID}`)
+                    : nav(`/chat/${msg.roomID}/${msg.creatorID}`);
                   dispatch(onInboxClose());
-              }}
-            >
-              <UserSingleChat msg={msg} />
-            </div>
-          ))}
-        </div>
+                }}
+              >
+                <UserSingleChat msg={msg} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <h2 className="w-full text-center shadow rounded py-1">Your inbox is empty</h2>
+        )}
       </div>
     </div>
   );

@@ -11,7 +11,8 @@ import { doApiMethod } from "../../../services/axios-service/axios-service";
 
 const UserRating = ({ rank, post, setIsChange, isChange }) => {
   const dispatch = useDispatch();
-  const [fill, setFill] = useState(rank.userRank-1);
+  let userRanks = rank?.userRank ? rank.userRank : 0 
+  const [fill, setFill] = useState(userRanks-1);
   const { user } = useSelector((state) => state.userSlice);
   const rankUser = async (rnk) => {
     if (!user) {

@@ -6,19 +6,17 @@ width: 100%;
     margin-bottom: 3em;
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 98%;
+    overflow-y: scroll;
   }
 
   h1 {
     text-align: center;
     margin: 8px 0;
-    font-size: 2em;
+    font-size: 1em;
     font-family: sans-serif;
   }
   table {
-    overflow-x: scroll;
-    width: 100%;
-    /* table-layout: auto; */
     thead {
       tr {
         background: var(--grey-50);

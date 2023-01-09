@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 import Card from "../../../shared/components/card";
 
 const WishList = () => {
-  let {wishList } = useSelector((state) => state.userSlice);
+  let { wishList } = useSelector((state) => state.userSlice);
+  console.log(wishList);
   return (
     <main className="w-full min-h-screen p-1 md:p-3 bg-gray-100 text-center justify-center">
       <div className="flex flex-wrap">
