@@ -11,7 +11,7 @@ import { doApiMethod } from "../../../services/axios-service/axios-service";
 
 const UserRating = ({ rank, post, setIsChange, isChange }) => {
   const dispatch = useDispatch();
-  const [fill, setFill] = useState(rank?.userRank - 1);
+  const [fill, setFill] = useState(rank.userRank-1);
   const { user } = useSelector((state) => state.userSlice);
   const rankUser = async (rnk) => {
     if (!user) {
@@ -41,8 +41,8 @@ const UserRating = ({ rank, post, setIsChange, isChange }) => {
                 className="cursor-pointer mr-1"
                 key={i}
                 onClick={() => {
-                  setFill(i - 1);
-                  rankUser(i);
+                  setFill(i);
+                  rankUser(i+1);
                 }}
               >
                 <StarFill />

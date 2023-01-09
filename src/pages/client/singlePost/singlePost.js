@@ -11,7 +11,9 @@ import { onPostToggle } from "../../../redux/features/toggleSlice";
 import BallTriangleLoader from "./../../../shared/components/loader/ballTriangle/ballTriangle";
 import MapBylocation from "./mapBylocation";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
+import { useSelector } from "react-redux";
 const SinglePost = ({ post }) => {
+  const { user } = useSelector((state) => state.userSlice);
   const [isLoading, setIsLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
   const [rank, setRank] = useState({});
@@ -22,7 +24,7 @@ const SinglePost = ({ post }) => {
   }, [isChange]);
   /** get rating from api */
   const getUserRating = async () => {
-    let url = `/users/getRank/${post?.creator_id._id}?rankingUser=${post?._id}`;
+    let url = `/users/getRank/${post?.creator_id._id}?rankingUser=${user?._id}`;
     const { data } = await doGetApiMethod(url);
     setRank(data);
     setIsLoading(false);
