@@ -30,7 +30,7 @@ const ImgController = ({ post }) => {
           />
         </span>
       </div>
-      <img src={post?.img[image].url} alt="post image" />
+      <img src={post?.img[image]?.url} alt="post image" />
     </div>
   );
 };
