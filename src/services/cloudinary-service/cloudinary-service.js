@@ -37,7 +37,7 @@ export const uploadBannerImg = async (file) => {
     export const uploadPostImages = async (files) => {
         const formData = new FormData();
         formData.append("file", files);
-        formData.append("upload_preset", "rentinoutprofile");
+        formData.append("upload_preset", "dpmpi8dwb");
         formData.append("cloud_name", "dpmpi8dwb");
         try{
             const resp = await axios.post(

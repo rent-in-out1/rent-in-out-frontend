@@ -3,10 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "../../../assets/styles/wrappers/registerPage";
 import { useForm } from "react-hook-form";
-import {  API_URL_CLIENT, doApiMethod} from '../../../services/axios-service/axios-service';
+import { doApiMethod} from '../../../services/axios-service/axios-service';
 import { onLogout } from "../../../redux/features/toggleSlice";
 import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
 import {errorHandler, successHandler } from "../../../services/extra-services/extra-services";
+import { secret } from './../../../services/secrets';
 
 const SentMailResetPass = (props) => {
   const nav = useNavigate()
@@ -24,7 +25,7 @@ const SentMailResetPass = (props) => {
     setLoad(true)
     const requestData = {
       email: _dataBody.email,
-      redirectUrl: API_URL_CLIENT + "/resetPassword",
+      redirectUrl: secret.CLIENT_API_URL + "/resetPassword",
     };
     try {
       const url = "/users/requestPasswordReset";

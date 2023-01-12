@@ -4,10 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  API_URL_CLIENT,
-  doApiMethod,
-} from "./services/axios-service/axios-service";
+import { secret } from "./services/secrets";
+import { doApiMethod } from "./services/axios-service/axios-service";
 import {
   getUserInbox,
   getUserWishList,
@@ -18,7 +16,7 @@ import WishList from "./pages/client/wishList";
 import ConfirmHandler from "./shared/UI/confirm/confirm";
 import Chat from "./pages/client/chat/chat";
 import MyProfile from "./pages/client/myProfile";
-import PopUpSideBarChat from './shared/components/sideBarChat/popUpSideBarChat';
+import PopUpSideBarChat from "./shared/components/sideBarChat/popUpSideBarChat";
 import { onLikesToggle } from "./redux/features/toggleSlice";
 import { errorHandler } from "./services/extra-services/extra-services";
 
@@ -39,7 +37,9 @@ const Register = React.lazy(() => import("./api/auth/register"));
 const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/page-not-found"));
 const ResetPass = React.lazy(() => import("./api/auth/resetPass"));
-const PopUpLikes = React.lazy(() => import("./pages/client/posts-likes/popUpLikes"));
+const PopUpLikes = React.lazy(() =>
+  import("./pages/client/posts-likes/popUpLikes")
+);
 const UserSearch = React.lazy(() =>
   import("./pages/client/userSearch/userSearch")
 );
@@ -47,7 +47,9 @@ const SinglePost = React.lazy(() => import("./pages/client/singlePost"));
 const AppRoutes = () => {
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
-  let { search, register ,showInbox} = useSelector((state) => state.toggleSlice);
+  let { search, register, showInbox } = useSelector(
+    (state) => state.toggleSlice
+  );
   let { likes } = useSelector((state) => state.toggleSlice);
   let { postShow } = useSelector((state) => state.toggleSlice);
   useEffect(() => {
@@ -72,7 +74,7 @@ const AppRoutes = () => {
     const { data } = await doApiMethod(url, "GET", token);
     if (!data.userInfo) {
       errorHandler("invalid user");
-      window.open(API_URL_CLIENT, "_self");
+      window.open(secret.CLIENT_API_URL, "_self");
       return;
     }
     localStorage.setItem("token", JSON.stringify(data.newAccessToken));
@@ -137,11 +139,13 @@ const AppRoutes = () => {
           )}
         </Routes>
         <ToastContainer position="bottom-right" />
-        {postShow?.active ? <SinglePost post={postShow?.post}/>:null}
+        {postShow?.active ? <SinglePost post={postShow?.post} /> : null}
         {search ? <UserSearch /> : null}
         {register ? <Register /> : null}
-        {likes?.active ? <PopUpLikes likesArr={likes?.likesArr} action={onLikesToggle}/> : null}
-        {showInbox && user? <PopUpSideBarChat/>: null}
+        {likes?.active ? (
+          <PopUpLikes likesArr={likes?.likesArr} action={onLikesToggle} />
+        ) : null}
+        {showInbox && user ? <PopUpSideBarChat /> : null}
       </Router>
     </Suspense>
   );

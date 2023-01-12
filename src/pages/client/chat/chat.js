@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  API_URL,
   doApiMethod,
   doGetApiMethod,
 } from "../../../services/axios-service/axios-service";
@@ -13,6 +12,7 @@ import LoadingButton from "../../../shared/components/spinner-button/spinnerButt
 import { getUserInbox } from "../../../redux/features/userSlice";
 import SingleMessage from "./singleMessage";
 import { errorHandler } from "../../../services/extra-services/extra-services";
+import { secret } from "./../../../services/secrets";
 
 const Chat = ({ post }) => {
   const nav = useNavigate();
@@ -29,7 +29,7 @@ const Chat = ({ post }) => {
   const [typingTimeOut, setTypingTimeOut] = useState(null);
   const { roomID, creatorID } = useParams();
   useEffect(() => {
-    setSocket(io(API_URL));
+    setSocket(io(secret.SERVER_API_URL));
     const getChatHistory = async () => {
       let { data } = await doGetApiMethod(`/users/getChat/${roomID}`);
       if (data[0]?.messagesArr) setChat(data[0]?.messagesArr);
@@ -136,7 +136,7 @@ const Chat = ({ post }) => {
                 roomID={roomID}
                 user={user}
                 msg={msg}
-                location={i-1}
+                location={i - 1}
                 deleteMsg={deleteMsg}
               />
             ))}

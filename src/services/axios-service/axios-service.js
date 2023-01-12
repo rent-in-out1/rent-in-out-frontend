@@ -1,6 +1,6 @@
 import axios from "axios"
+import { secret } from './../secrets';
 export const API_URL = 'https://rentinout.onrender.com'
-export const API_URL_CLIENT = 'http://localhost:3000'
 
 export const doGetApiMethod = async(_url ) => {
     let token;
@@ -10,7 +10,7 @@ export const doGetApiMethod = async(_url ) => {
     try {
         let resp = await axios({
             method: "GET",
-            url: API_URL + _url,
+            url: secret.SERVER_API_URL + _url,
             headers: {
                 'x-api-key' : token
             }
@@ -28,7 +28,7 @@ export const doApiMethod = async(_url, _method, _body = {}, _headers = {}) => {
     try {
         let resp = await axios({
             method: _method,
-            url: API_URL+_url,
+            url: secret.SERVER_API_URL +_url,
             headers: {
                 'x-api-key' : token
             },

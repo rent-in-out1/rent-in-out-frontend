@@ -9,7 +9,6 @@ import {
   onRegisterShow,
   onSearchToggle,
 } from "../../../redux/features/toggleSlice";
-import { API_URL_CLIENT } from "../../../services/axios-service/axios-service";
 import Search from "../../../assets/icons/search";
 import Dashboard from "../../../assets/icons/dashboard";
 import Profile from "../../../assets/icons/profile";
@@ -20,6 +19,7 @@ import SignIn from "../../../assets/icons/signIn";
 import SignOut from "../../../assets/icons/signOut";
 import WishList from "../../../assets/icons/wishlist";
 import { useEffect } from "react";
+import { secret } from './../../../services/secrets';
 
 const Header = () => {
   const nav = useNavigate();
@@ -174,7 +174,7 @@ const Header = () => {
             onClick={() => {
               if (isLogin) {
                 localStorage.removeItem("token");
-                window.open(API_URL_CLIENT, "_self");
+                window.open(secret.CLIENT_API_URL, "_self");
                 dispatch(onLogout());
                 closeNav();
               } else {

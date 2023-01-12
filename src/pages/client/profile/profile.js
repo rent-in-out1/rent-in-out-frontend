@@ -8,10 +8,13 @@ import Calendar from "../../../assets/icons/calendar";
 import OwnPosts from "../myProfile/ownPosts";
 import Pencil from "../../../assets/icons/pencil";
 import Mail from "./../../../assets/icons/mail";
+import { useUploadWidget } from "../../../shared/components/uploadWidget";
+import { secret } from './../../../services/secrets';
 
 const Profile = () => {
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
+
   return (
     <Wrapper>
       <nav>
@@ -54,7 +57,9 @@ const Profile = () => {
               {user.birthdate && (
                 <h5 className="flex items-center">
                   <Calendar />
-                  <p className="ml-2">{new Date(user?.birthdate).toLocaleDateString()}</p>
+                  <p className="ml-2">
+                    {new Date(user?.birthdate).toLocaleDateString()}
+                  </p>
                 </h5>
               )}
             </div>

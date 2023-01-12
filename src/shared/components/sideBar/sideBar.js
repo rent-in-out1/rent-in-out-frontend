@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { onInboxToggle, onLogout, onRegisterShow, onSearchToggle } from "../../../redux/features/toggleSlice";
-import { API_URL_CLIENT } from "../../../services/axios-service/axios-service";
+import { onLogout, onRegisterShow, onSearchToggle } from "../../../redux/features/toggleSlice";
 //style
 import { Wrapper } from "../../../assets/styles/wrappers/sideBar";
 // icons import
@@ -14,6 +13,7 @@ import SignOut from "../../../assets/icons/signOut";
 import Search from "../../../assets/icons/search";
 import Home from '../../../assets/icons/home';
 import WishList from "../../../assets/icons/wishlist";
+import { secret } from './../../../services/secrets';
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -88,7 +88,7 @@ const SideBar = () => {
             onClick={() => {
               if (isLogin) {
                 localStorage.removeItem("token");
-                window.open(API_URL_CLIENT, "_self");
+                window.open(secret.CLIENT_API_URL, "_self");
                 dispatch(onLogout());
               } else {
                 dispatch(onRegisterShow())
