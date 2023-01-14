@@ -68,7 +68,7 @@ const SinglePost = ({ post }) => {
               <hr />
               <div className="flex flex-wrap mt-2">
                 <div className="post-info md:w-1/2 border w-full">
-                  <PostInfo post={post} owner={post.creator_id} />
+                  <PostInfo post={post} owner={post.creator_id} user={user} />
                 </div>
                 <div className="post-likes md:w-1/2 border w-full">
                   <Likes likes={post?.likes} action={onPostToggle} />
