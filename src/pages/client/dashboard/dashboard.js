@@ -8,6 +8,7 @@ import {useScroll} from "../../../hooks/useScroll";
 import {clearPosts, getPosts} from "../../../redux/features/postsSlice";
 const Dashboard = () => {
     const dispatch = useDispatch();
+    const [isChange, setIsChange] = useState(false);
     const {posts, loading} = useSelector((state) => state.postsSlice);
     const nav = useNavigate();
     const {user} = useSelector((state) => state.userSlice);
@@ -19,6 +20,7 @@ const Dashboard = () => {
     }, [user])
 
     useEffect(() => {
+        setIsChange(false)
         setPage(1);
         dispatch(clearPosts());
         return () => {

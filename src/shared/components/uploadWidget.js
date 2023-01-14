@@ -63,7 +63,7 @@ export function useUploadWidget({
         }
         if (cloudName === secret.BANNER_CLOUDINARY_NAME && result.info) changeBanner(image);
         if (cloudName === secret.PROFILE_CLOUDINARY_NAME && result.info) changeProfile(image);
-        if (cloudName === secret.POST_CLOUDINARY_NAME && result.info) changeProfile(image);
+        // if (cloudName === secret.POST_CLOUDINARY_NAME && result.info) addPost(image);
       }
     }
   );
@@ -89,6 +89,14 @@ export function useUploadWidget({
     } catch (err) {
       return errorHandler(err.response.data.msg);
     }
+  };
+  const addPost = async (_img) => {
+    // try {
+    //   dispatch(uploadPostImages(_img));
+    //   successHandler(res);
+    // } catch (err) {
+    //   return errorHandler(err.response.data.msg);
+    // }
   };
   return [images, myWidget , loading];
 }

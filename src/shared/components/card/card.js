@@ -9,7 +9,7 @@ import {
   onRegisterShow,
 } from "../../../redux/features/toggleSlice";
 import Clock from "../../../assets/icons/clock";
-import { likePost } from "../../../redux/features/postsSlice";
+import { likePost, setIsChange } from "../../../redux/features/postsSlice";
 import { updateWishList } from "../../../redux/features/userSlice";
 import PostHeader from "../postHeader/postHeader";
 import ChatAndWhatsup from "../chat-whatsUp";
@@ -30,6 +30,7 @@ const Card = ({ post }) => {
             if (post.creator_id._id !== user._id) {
               dispatch(updateWishList(post));
             }
+            dispatch(setIsChange())
           }}
         >
           <div className="overflow-hidden w-full postImg">

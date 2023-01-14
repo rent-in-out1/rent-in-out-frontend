@@ -69,5 +69,14 @@ export const uploadBannerImg = async (file) => {
             errorHandler(err)
         }
     }
+    export const deletePostImage = async (img_id) => {
+        let url = "/users/cloudinary/postDel/?id=" + img_id
+        try {
+            const {data} = await doApiMethod(url , "POST")
+            return data.result
+        } catch (err) {
+            errorHandler(err)
+        }
+    }
 
 

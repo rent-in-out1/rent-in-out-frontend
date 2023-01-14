@@ -69,6 +69,7 @@ const initialState = {
   posts: [],
   loading: false,
   error: null,
+  isChange: false
 };
 
 const postsSlice = createSlice({
@@ -77,6 +78,9 @@ const postsSlice = createSlice({
   reducers: {
     clearPosts: (state) => {
       state.posts = []
+    },
+    setIsChange:(state) =>{
+      state.isChange = !state.isChange
     }
   },
   extraReducers(builder) {
@@ -140,5 +144,5 @@ const postsSlice = createSlice({
   },
 });
 
-export const { clearPosts } = postsSlice.actions;
+export const { clearPosts , setIsChange } = postsSlice.actions;
 export default postsSlice.reducer;
