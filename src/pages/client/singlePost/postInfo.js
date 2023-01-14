@@ -14,7 +14,7 @@ const PostInfo = ({ post, user, owner }) => {
         </li>
       </ul>
       <div className="w-full text-center flex justify-center mt-7">
-        <ChatAndWhatsup post={post} user={user} owner={owner} />
+        {user? <ChatAndWhatsup post={post} user={user} owner={owner} />: null}
       </div>
     </div>
   );
