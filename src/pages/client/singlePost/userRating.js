@@ -17,7 +17,7 @@ const UserRating = ({ rank, post, setIsChange, isChange }) => {
   const rankUser = async (rnk) => {
     if (!user) {
       setFill(-1);
-      dispatch(onRegisterShow());
+      return dispatch(onRegisterShow());
     } else {
       try {
         let url = `/users/rankUser/${post?.creator_id._id}`;
@@ -33,7 +33,7 @@ const UserRating = ({ rank, post, setIsChange, isChange }) => {
   return (
     <div className="flex justify-between items-center border rounded-xl p-2 mt-1 mx-5">
       <h2>User Rating: {rank.average ? rank.average.toFixed(1) : "0"}</h2>
-      <div className="flex flex-col text-center">
+      {user? <div className="flex flex-col text-center">
         <small>Rate user</small>
         <div className="flex">
           {[...Array(fill + 1)].map((star, i) => {
@@ -65,7 +65,7 @@ const UserRating = ({ rank, post, setIsChange, isChange }) => {
             );
           })}
         </div>
-      </div>
+      </div> : null}
     </div>
   );
 };
