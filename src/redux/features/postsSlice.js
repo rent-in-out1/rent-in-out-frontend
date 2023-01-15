@@ -45,8 +45,8 @@ export const deletePost = createAsyncThunk(
 export const uploadPost = createAsyncThunk(
   "uploadPost/upload",
   async (post) => {
-    try {
       console.log(post)
+    try {
       const url = "/posts";
       let { data } = await doApiMethod(url, "POST", post);
       return data;

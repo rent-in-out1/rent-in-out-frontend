@@ -13,6 +13,7 @@ export function useUploadWidget({
   cloudName,
   uploadPreset,
   single,
+  action
 }) {
   const dispatch = useDispatch()
   const nav = useNavigate()
@@ -20,7 +21,7 @@ export function useUploadWidget({
     (state) => state.userSlice?.user
   );
   const [loading  , setIsLoading] = useState(false)
-  const [images, setImages] = useState();
+  const [images, setImages] = useState([]);
   // const cloudName = "dva5ypcfd";
   // const uploadPreset = "postImages"
   // Remove the comments from the code below to add
@@ -38,7 +39,7 @@ export function useUploadWidget({
       cropping: single, //add a cropping step
       // showAdvancedOptions: true,  //add advanced options (public_id and tag)
       sources: ["local", "url", "google_drive"], // restrict the upload sources to URL and local files
-      showSkipCropButton: true, //
+      showSkipCropButton: single, //
       multiple: !single, //restrict upload to a single file
       folder: `${userID}/${postTitle}`, //upload files to the specified folder
       // tags: ["users", "profile"], //add the given tags to the uploaded files
@@ -59,11 +60,10 @@ export function useUploadWidget({
         };
         if (single) setImages(image);
         else if(!single) {
-          setImages((prev) => [...prev, image]);
+          setImages(images => [...images , image])
         }
         if (cloudName === secret.BANNER_CLOUDINARY_NAME && result.info) changeBanner(image);
         if (cloudName === secret.PROFILE_CLOUDINARY_NAME && result.info) changeProfile(image);
-        // if (cloudName === secret.POST_CLOUDINARY_NAME && result.info) addPost(image);
       }
     }
   );
@@ -78,6 +78,7 @@ export function useUploadWidget({
     } catch (err) {
       return errorHandler(err.response.data.msg);
     }
+
   };
   const changeProfile = async (_img) => {
     try {
@@ -90,13 +91,6 @@ export function useUploadWidget({
       return errorHandler(err.response.data.msg);
     }
   };
-  const addPost = async (_img) => {
-    // try {
-    //   dispatch(uploadPostImages(_img));
-    //   successHandler(res);
-    // } catch (err) {
-    //   return errorHandler(err.response.data.msg);
-    // }
-  };
   return [images, myWidget , loading];
+  
 }
