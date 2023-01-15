@@ -11,7 +11,7 @@ const CreatePost = ({ setOnAdd }) => {
   const [display, setDisplay] = useState(false);
   const [col, setCol] = useState(1);
   const [data, setData] = useState({
-      title: "",
+      title: data?.title || "",
       range: "short-term",
       img: images,
       info: "",
@@ -28,6 +28,7 @@ const CreatePost = ({ setOnAdd }) => {
     cloudName: secret.POST_CLOUDINARY_NAME,
     uploadPreset: secret.POST_CLOUDINARY_PRESET,
     single: false,
+    postTitle:data?.title
   });
   useEffect(() => {
     setData({ ...data ,img:images});
