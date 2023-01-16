@@ -10,17 +10,19 @@ import PopUPModel from "./../../../shared/UI/popup/popUpSinglePost";
 import { onPostToggle } from "../../../redux/features/toggleSlice";
 import BallTriangleLoader from "./../../../shared/components/loader/ballTriangle/ballTriangle";
 import MapBylocation from "./mapBylocation";
-import { OpenStreetMapProvider } from "leaflet-geosearch";
+
 import { useSelector } from "react-redux";
-const SinglePost = ({ post }) => {
+const SinglePost = ({ post , searchProvider }) => {
   const { user } = useSelector((state) => state.userSlice);
   const [isLoading, setIsLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
   const [rank, setRank] = useState({});
 
   useEffect(() => {
+    // let provider = new OpenStreetMapProvider();
+    // setSearchProvider(provider)
     getUserRating();
-    doSearchOnMap();
+    doSearchOnMap(post.collect_points);
   }, [isChange]);
   /** get rating from api */
   const getUserRating = async () => {
@@ -29,24 +31,27 @@ const SinglePost = ({ post }) => {
     setRank(data);
     setIsLoading(false);
   };
-  //dummy adresses
-  const locations = [
-    "תל אביב גלגלי הפלדה 5",
-    "תל אביב גלגלי הפלדה 8",
-    "תל אביב שדרות אבא אבן 7",
-  ];
-
   const [results, setResults] = useState([]);
   const [center, setCenter] = useState({ x: 0, y: 0 });
-  useEffect(() => {}, []);
-  const serachProvider = new OpenStreetMapProvider();
-  const doSearchOnMap = async () => {
+  useEffect(() => {
+    
+  }, []);
+  const doSearchOnMap = async (collects = post?.city) => {
     let results = [];
-    locations.map(async (loc, i) => {
-      let result = await serachProvider.search({ query: loc });
-      results.push(result[0]);
-      if (i === 0) setCenter(result[0]);
+    if (collects.length === 0) {
+      let result = await searchProvider.search({ query: post?.city });
       setResults((prev) => [...prev, result[0]]);
+      setCenter(result[0]);
+      return;
+    }
+    // if(post.collect_points) locations= post.collect_points
+    await collects.map(async (loc, i) => {
+      let locate = loc ? loc : post?.city;
+      console.log(locate);
+      let result = await searchProvider.search({ query: locate });
+      results.push(result[0]);
+      await setResults((prev) => [...prev, result[0]]);
+      if (i === 0) setCenter(result[0]);
     });
     // setResults(results);
   };

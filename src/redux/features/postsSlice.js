@@ -69,7 +69,7 @@ const initialState = {
   posts: [],
   loading: false,
   error: null,
-  isChange: false
+  isChange: false,
 };
 
 const postsSlice = createSlice({
