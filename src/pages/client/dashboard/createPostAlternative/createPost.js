@@ -11,36 +11,40 @@ const CreatePost = ({ setOnAdd }) => {
   const [display, setDisplay] = useState(false);
   const [col, setCol] = useState(1);
   const [data, setData] = useState({
-      title: data?.title || "",
-      range: "short-term",
-      img: images,
-      info: "",
-      available_from: Date.now(),
-      collect_points: ["Collection point number 1"],
-      price: 0,
-      category_url: "",
-      city: "",
-      country: "",
-    });
+    title: data?.title || "",
+    range: "short-term",
+    img: images,
+    info: "",
+    available_from: Date.now(),
+    collect_points: ["Collection point number 1"],
+    price: 0,
+    category_url: "",
+    city: "",
+    country: "",
+  });
   const { user } = useSelector((state) => state.userSlice);
+
   const [images, setImages, load] = useUploadWidget({
     userID: user._id,
     cloudName: secret.POST_CLOUDINARY_NAME,
     uploadPreset: secret.POST_CLOUDINARY_PRESET,
     single: false,
-    postTitle:data?.title
+    postTitle: data?.title
   });
+
   useEffect(() => {
-    setData({ ...data ,img:images});
+    setData({ ...data, img: images });
   }, [images]);
+
   const handleOnChange = (e) => {
     if (e) {
       setData({ ...data, [e.target.name]: e.target.value });
     } else {
-      setData({...data, img:images});
+      setData({ ...data, img: images });
     }
     console.log(data)
   };
+
   return (
     <Wrapper>
       <main className="mx-auto md:w-2/3 p-3 bg-white w-full rounded-xl drop-shadow-xl">
@@ -61,7 +65,6 @@ const CreatePost = ({ setOnAdd }) => {
             data={data}
             handleOnChange={handleOnChange}
             setDisplay={setDisplay}
-            setData={setData}
             setImages={setImages}
             images={images}
           />

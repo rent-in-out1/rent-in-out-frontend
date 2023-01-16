@@ -5,7 +5,6 @@ import ImageFill from "../../../../assets/icons/imageFill";
 const Form1 = ({
   data,
   setDisplay,
-  setData,
   setImages,
   images,
   handleOnChange,

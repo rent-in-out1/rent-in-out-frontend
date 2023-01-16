@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Minus from "../../../../assets/icons/minus";
 import { doGetApiMethod } from "../../../../services/axios-service/axios-service";
 import Plus from "./../../../../assets/icons/plus";
@@ -115,7 +115,7 @@ const Form2 = ({
                   placeholder={`Collection point number ${i + 1}`}
                 />
               </div>
-              {col == i + 1 ? (
+              {col === i + 1 ? (
                 <span
                   onClick={() => {
                     if (col >= 1) setCol(col + 1);
@@ -127,7 +127,7 @@ const Form2 = ({
               ) : (
                 <span
                   onClick={() => {
-                    if (col != 1) setCol(col - 1);
+                    if (col !== 1) setCol(col - 1);
                   }}
                   className="pl-2 cursor-pointer"
                 >
