@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { secret } from "./services/secrets";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
 import { doApiMethod } from "./services/axios-service/axios-service";
 import {
   getUserInbox,
@@ -52,6 +53,7 @@ const AppRoutes = () => {
   );
   let { likes } = useSelector((state) => state.toggleSlice);
   let { postShow } = useSelector((state) => state.toggleSlice);
+  let searchProvider = new OpenStreetMapProvider();
   useEffect(() => {
     let token;
     if (localStorage["token"]) {
@@ -110,7 +112,6 @@ const AppRoutes = () => {
             {/* Guest Routes */}
             <Route index element={<Dashboard />} />
             <Route path="/profile/:userId" element={<UserProfile />} />
-
             {user?.role === "user" && user?.active && (
               <React.Fragment>
                 <Route path="/chat/:roomID/:creatorID" element={<Chat />} />
@@ -139,7 +140,9 @@ const AppRoutes = () => {
           )}
         </Routes>
         <ToastContainer position="bottom-right" />
-        {postShow?.active ? <SinglePost post={postShow?.post} /> : null}
+        {postShow?.active ? (
+          <SinglePost post={postShow?.post} searchProvider={searchProvider} />
+        ) : null}
         {search ? <UserSearch /> : null}
         {register ? <Register /> : null}
         {likes?.active ? (

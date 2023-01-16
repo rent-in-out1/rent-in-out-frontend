@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import CreatePost from "./createPost";
+import CreatePost from "./createPostAlternative";
 import Card from "../../../shared/components/card";
 import {useScroll} from "../../../hooks/useScroll";
 import {clearPosts, getPosts} from "../../../redux/features/postsSlice";
@@ -52,18 +52,21 @@ const Dashboard = () => {
                                     </button>
                                 </div>
                             ) :
-                            <CreatePost/>}
+                            <CreatePost setOnAdd={setOnAdd}/>}
 
                         {onAdd ? (
                             /* hide create post */
                             <div className="flex justify-center mt-2 mb-8">
-                                <button
+                                {/* <button
                                     className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-1/2 md:w-1/6 inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
                                     type="button"
-                                    onClick={() => setOnAdd(false)}
+                                    onClick={() => {
+                                        setOnAdd(false)
+                                        
+                                    }}
                                 >
                                     Cancel
-                                </button>
+                                </button> */}
                             </div>
                         ) : null}
                     </div>)}

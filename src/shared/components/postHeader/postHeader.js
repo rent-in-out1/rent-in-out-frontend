@@ -38,7 +38,7 @@ const PostHeader = ({ post }) => {
         <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
           <img
             className="w-full h-full rounded-full object-cover"
-            src={post?.creator_id?.profile_img?.url}
+            src={post?.creator_id?.profile_img?.url || user?.profile_img?.url}
             alt="avatar"
           />
         </div>

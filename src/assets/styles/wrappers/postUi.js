@@ -33,31 +33,26 @@ margin-bottom: 12px;
             border: 1px solid var(--grey-200);
             border-radius: 8px ;
             padding: 8px ;
-            margin-bottom: 6px;
+            margin: 6px 0;
          }
-         button{
-            margin-top: 12px;
-               width: 100px;
-               padding: 10px 22px;
-               border-radius: 5px;
-               color: var(--white);
-               background: var(--skyblue-500);
-               display: flex;
-               align-items: center;
-               font-weight: bold;
-               margin-bottom: 20px;
-               cursor: pointer;
-               justify-content: center;
-               margin-right: 36px;
-               &:hover{
-                  background: var(--skyblue-800);
-               }  
-         }
+      }
+   }
+   button{
+      margin-top: 12px;
+         width: 100px;
+         padding: 10px 22px;
+         border-radius: 5px;
+         color: var(--white);
+         background: var(--skyblue-500);
+         display: flex;
+         align-items: center;
+         font-weight: bold;
+         /* margin-bottom: 20px; */
+         cursor: pointer;
+         justify-content: center;
+         &:hover{
+            background: var(--skyblue-800);
+         }  
    }
 }
-.secondform{
-
-}
-}
- 
 `

@@ -14,7 +14,7 @@ import SingleMessage from "./singleMessage";
 import { errorHandler } from "../../../services/extra-services/extra-services";
 import { secret } from "./../../../services/secrets";
 
-const Chat = ({ post }) => {
+const Chat = () => {
   const nav = useNavigate();
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
@@ -126,8 +126,8 @@ const Chat = ({ post }) => {
   };
   return (
     <Wrapper>
-      <h1>{post?.title}</h1>
       <div className="md:w-10/12 w-11/12 flex flex-col items-center justify-center text-center mx-auto shadow-xl p-3 bg-gray-300 rounded-xl">
+      <h1 className="text-center mx-auto w-1/2 shadow mb-2 bg-white rounded-xl py-1">You can now start chating with {owner?.name?.firstName + " " + owner?.name?.lastName}</h1>
         {chat.length > 0 && (
           <ul className="mb-5 w-full flex flex-col bg-gray-200 p-4 rounded">
             {chat.map((msg, i) => (
