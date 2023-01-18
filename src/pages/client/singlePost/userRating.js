@@ -33,7 +33,7 @@ const UserRating = ({ rank, post, setIsChange, isChange }) => {
   return (
     <div className="flex justify-between items-center border rounded-xl p-2 mt-1 mx-5">
       <h2>User Rating: {rank.average ? rank.average.toFixed(1) : "0"}</h2>
-      {user? <div className="flex flex-col text-center">
+      {user && user._id !== post.creator_id._id? <div className="flex flex-col text-center">
         <small>Rate user</small>
         <div className="flex">
           {[...Array(fill + 1)].map((star, i) => {
