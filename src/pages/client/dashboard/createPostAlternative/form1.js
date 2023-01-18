@@ -19,8 +19,8 @@ const handleNext = ( )=>{
 
   return (
     <React.Fragment>
-      <form className="h-80 capitalize overflow-y-scroll ">
-        <div className="flex flex-col w-full md:w-2/3">
+      <form className="h-80 capitalize overflow-y-scroll">
+        <div className="flex flex-col w-full">
           <input
             type="text"
             name="title"
@@ -46,8 +46,9 @@ const handleNext = ( )=>{
             <option value="long-term">long-term</option>
           </select>
         </div>
-        <div className="flex flex-col w-full md:w-1/3 px-3" onClick={() => setImages.open()}>
-          <div className="cursor-pointer flex items-center justify-center bg-white w-full rounded-xl p-3 h-full border border-gray-200">
+        <div className="flex flex-col w-full" onClick={() => setImages.open()}>
+          <div className="cursor-pointer flex flex-col items-center justify-center bg-white w-full rounded-xl p-3 h-full border border-gray-200">
+            <h2>Choose some photos</h2>
             {images && images.length > 0 ? (
               <h2 className="text-gray-900 top-4">Add More Photos</h2>
             ) : null}

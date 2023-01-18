@@ -16,7 +16,7 @@ const CreatePost = ({ setOnAdd }) => {
     img: images,
     info: "",
     available_from: Date.now(),
-    collect_points: ["Collection point number 1"],
+    collect_points: [],
     price: 0,
     category_url: "",
     city: "",

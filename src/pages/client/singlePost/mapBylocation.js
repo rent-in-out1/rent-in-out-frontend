@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 const MapBylocation = ({results ,center}) => {
-  console.log(results);
   return (
     <MapContainer center={[center?.y, center?.x]} zoom={15} scrollWheelZoom={false}>
       <TileLayer

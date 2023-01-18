@@ -13,16 +13,13 @@ import MapBylocation from "./mapBylocation";
 
 import { useSelector } from "react-redux";
 const SinglePost = ({ post , searchProvider }) => {
+  console.log(post)
   const { user } = useSelector((state) => state.userSlice);
   const [isLoading, setIsLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
   const [rank, setRank] = useState({});
-
   useEffect(() => {
-    // let provider = new OpenStreetMapProvider();
-    // setSearchProvider(provider)
     getUserRating();
-    doSearchOnMap(post.collect_points);
   }, [isChange]);
   /** get rating from api */
   const getUserRating = async () => {
@@ -30,30 +27,6 @@ const SinglePost = ({ post , searchProvider }) => {
     const { data } = await doGetApiMethod(url);
     setRank(data);
     setIsLoading(false);
-  };
-  const [results, setResults] = useState([]);
-  const [center, setCenter] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    
-  }, []);
-  const doSearchOnMap = async (collects = post?.city) => {
-    let results = [];
-    if (collects.length === 0) {
-      let result = await searchProvider.search({ query: post?.city });
-      setResults((prev) => [...prev, result[0]]);
-      setCenter(result[0]);
-      return;
-    }
-    // if(post.collect_points) locations= post.collect_points
-    await collects.map(async (loc, i) => {
-      let locate = loc ? loc : post?.city;
-      console.log(locate);
-      let result = await searchProvider.search({ query: locate });
-      results.push(result[0]);
-      await setResults((prev) => [...prev, result[0]]);
-      if (i === 0) setCenter(result[0]);
-    });
-    // setResults(results);
   };
   return (
     <PopUPModel action={onPostToggle}>
@@ -87,7 +60,7 @@ const SinglePost = ({ post , searchProvider }) => {
                 setIsChange={setIsChange}
               />
               <div className="p-2 overflow-hidden">
-                <MapBylocation results={results} center={center} />
+                <MapBylocation results={post?.collect_points} center={post?.collect_points[0]} />
               </div>
             </main>
           </section>
