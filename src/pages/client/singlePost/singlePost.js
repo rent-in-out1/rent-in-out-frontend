@@ -12,7 +12,7 @@ import BallTriangleLoader from "./../../../shared/components/loader/ballTriangle
 import MapBylocation from "./mapBylocation";
 
 import { useSelector } from "react-redux";
-const SinglePost = ({ post , searchProvider }) => {
+const SinglePost = ({ post }) => {
   console.log(post)
   const { user } = useSelector((state) => state.userSlice);
   const [isLoading, setIsLoading] = useState(true);

@@ -53,7 +53,6 @@ const AppRoutes = () => {
   );
   let { likes } = useSelector((state) => state.toggleSlice);
   let { postShow } = useSelector((state) => state.toggleSlice);
-  let searchProvider = new OpenStreetMapProvider();
   useEffect(() => {
     let token;
     if (localStorage["token"]) {
@@ -140,9 +139,7 @@ const AppRoutes = () => {
           )}
         </Routes>
         <ToastContainer position="bottom-right" />
-        {postShow?.active ? (
-          <SinglePost post={postShow?.post} searchProvider={searchProvider} />
-        ) : null}
+        {postShow?.active ? <SinglePost post={postShow?.post} /> : null}
         {search ? <UserSearch /> : null}
         {register ? <Register /> : null}
         {likes?.active ? (

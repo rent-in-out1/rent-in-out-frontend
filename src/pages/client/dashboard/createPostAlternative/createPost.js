@@ -23,7 +23,6 @@ const CreatePost = ({ setOnAdd }) => {
     country: "",
   });
   const { user } = useSelector((state) => state.userSlice);
-
   const [images, setImages, load] = useUploadWidget({
     userID: user._id,
     cloudName: secret.POST_CLOUDINARY_NAME,
