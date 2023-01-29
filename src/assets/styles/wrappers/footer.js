@@ -13,9 +13,6 @@ export const Wrapper = styled.div`
     justify-content: space-between;
     max-width: 1000px;
     margin: 0 auto;
-    div {
-      margin-top: 12px;
-    }
     p {
       margin-bottom: 12px;
     }
