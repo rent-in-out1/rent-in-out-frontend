@@ -1,1 +1,1 @@
-export { default } from "./chatAndWhatsup"
+export {default} from "./chatAndWhatsup"

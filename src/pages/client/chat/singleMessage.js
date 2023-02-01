@@ -1,63 +1,63 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getUserInbox } from "../../../redux/features/userSlice";
-import { doApiMethod } from "../../../services/axios-service/axios-service";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {getUserInbox} from "../../../redux/features/userSlice";
+import {doApiMethod} from "../../../services/axios-service/axios-service";
 import ExitFill from "../../../assets/icons/exitFill";
 import ExitNoFill from "../../../assets/icons/exitNoFill";
 
-const SingleMessage = ({ msg, user, roomID, deleteMsg ,location }) => {
-  const dispatch = useDispatch();
-  const [over, setOver] = useState(false);
-  const [showDel, setShowDel] = useState(false);
-  const deleteMessage = async () => {
-    let url = `/users/deleteMessage/${roomID}/${location-1}`;
-    await doApiMethod(url, "DELETE");
-    dispatch(getUserInbox());
-  };
-  return (
-    <li
-      onMouseOver={() => setShowDel(true)}
-      onMouseLeave={() => setShowDel(false)}
-      className={`shadow-xl mt-3 relative ${
-        msg?.sender === user._id ? "self-start" : "self-end"
-      } py-1 px-4 bg-white rounded`}
-    >
-      {showDel ? (
-        <span
-          className="mr-4 rounded-full absolute -right-3 rounded-full"
-          onMouseOver={() => setOver(true)}
-          onMouseLeave={() => setOver(false)}
-          onClick={() => {
-            deleteMessage();
-            deleteMsg(location);
-          }}
+const SingleMessage = ({msg, user, roomID, deleteMsg, location}) => {
+    const dispatch = useDispatch();
+    const [over, setOver] = useState(false);
+    const [showDel, setShowDel] = useState(false);
+    const deleteMessage = async () => {
+        let url = `/users/deleteMessage/${roomID}/${location - 1}`;
+        await doApiMethod(url, "DELETE");
+        dispatch(getUserInbox());
+    };
+    return (
+        <li
+            onMouseOver={() => setShowDel(true)}
+            onMouseLeave={() => setShowDel(false)}
+            className={`shadow-xl mt-3 relative ${
+                msg?.sender === user._id ? "self-start" : "self-end"
+            } py-1 px-4 bg-white rounded`}
         >
+            {showDel ? (
+                <span
+                    className="mr-4 rounded-full absolute -right-3 rounded-full"
+                    onMouseOver={() => setOver(true)}
+                    onMouseLeave={() => setOver(false)}
+                    onClick={() => {
+                        deleteMessage();
+                        deleteMsg(location);
+                    }}
+                >
           {over ? (
-            <ExitFill className="icon" width={8} height={8} />
+              <ExitFill className="icon" width={8} height={8}/>
           ) : (
-            <ExitNoFill className="icon" width={8} height={8} />
+              <ExitNoFill className="icon" width={8} height={8}/>
           )}
         </span>
-      ) : null}
-      <div className="flex flex-col">
-        <small
-          className={`p-0 capitalize ${
-            msg?.sender === user._id ? "self-start" : "self-end"
-          }`}
-        >
-          {msg?.userName}
-        </small>
-        <hr />
-        <p
-          className={`p-0 ${
-            !msg?.sender === user._id ? "self-start" : "self-end"
-          }`}
-        >
-          {msg?.message}
-        </p>
-      </div>
-    </li>
-  );
+            ) : null}
+            <div className="flex flex-col">
+                <small
+                    className={`p-0 capitalize ${
+                        msg?.sender === user._id ? "self-start" : "self-end"
+                    }`}
+                >
+                    {msg?.userName}
+                </small>
+                <hr/>
+                <p
+                    className={`p-0 ${
+                        !msg?.sender === user._id ? "self-start" : "self-end"
+                    }`}
+                >
+                    {msg?.message}
+                </p>
+            </div>
+        </li>
+    );
 };
 
 export default SingleMessage;

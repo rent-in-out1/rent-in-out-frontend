@@ -1,4 +1,5 @@
 import {toast} from "react-toastify"
+
 export const eyeShowHide = (setShow) => {
     let passType = document.querySelector("#passInput").type
     if (passType === "text") {
@@ -10,22 +11,24 @@ export const eyeShowHide = (setShow) => {
 }
 export const errorHandler = (err) => {
     console.log(err);
-    toast.info(err , {
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light"})
+    toast.info(err, {
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+    })
 }
 export const successHandler = (data) => {
-    toast.success(data , {
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light"})
+    toast.success(data, {
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+    })
 }

@@ -1,40 +1,37 @@
 import axios from "axios"
-import { secret } from './../secrets';
-export const API_URL = 'https://rentinout.onrender.com'
+import {secret} from '../secrets';
 
-export const doGetApiMethod = async(_url ) => {
+export const doGetApiMethod = async (_url) => {
     let token;
-    if(localStorage["token"]){
+    if (localStorage["token"]) {
         token = JSON.parse(localStorage["token"])
     }
     try {
-        let resp = await axios({
+        return await axios({
             method: "GET",
             url: secret.SERVER_API_URL + _url,
             headers: {
-                'x-api-key' : token
+                'x-api-key': token
             }
         })
-        return resp;
     } catch (err) {
         throw err;
     }
 }
-export const doApiMethod = async(_url, _method, _body = {}, _headers = {}) => {
+export const doApiMethod = async (_url, _method, _body = {}, _headers = {}) => {
     let token;
-    if(localStorage["token"]){
+    if (localStorage["token"]) {
         token = JSON.parse(localStorage["token"])
     }
     try {
-        let resp = await axios({
+        return await axios({
             method: _method,
-            url: secret.SERVER_API_URL +_url,
+            url: secret.SERVER_API_URL + _url,
             headers: {
-                'x-api-key' : token
+                'x-api-key': token
             },
             data: _body,
         })
-        return resp;
     } catch (err) {
         throw err;
     }

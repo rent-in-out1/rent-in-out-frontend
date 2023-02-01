@@ -1,17 +1,17 @@
 import React from "react";
 import SideBarChat from "./sideBarChat";
 import PopUPModel from "./../../UI/popup/popUpChatBar";
-import { onInboxToggle } from "../../../redux/features/toggleSlice";
-import { Wrapper } from './../../../assets/styles/wrappers/popUpSideBarChat';
+import {onInboxToggle} from "../../../redux/features/toggleSlice";
+import {Wrapper} from '../../../assets/styles/wrappers/popUpSideBarChat';
 
 const PopUpSideBarChat = () => {
-  return (
-    <PopUPModel action={onInboxToggle}>
-      <Wrapper>
-        <SideBarChat/>
-      </Wrapper>
-    </PopUPModel>
-  );
+    return (
+        <PopUPModel action={onInboxToggle}>
+            <Wrapper>
+                <SideBarChat/>
+            </Wrapper>
+        </PopUPModel>
+    );
 };
 
 export default PopUpSideBarChat;

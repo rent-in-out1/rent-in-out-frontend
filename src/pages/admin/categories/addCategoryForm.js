@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import {FaCheckCircle, FaBan} from "react-icons/fa";
 import {addCategory} from "../../../redux/features/categorieSlice";
 import {useDispatch} from "react-redux";
-import { errorHandler , successHandler } from './../../../services/extra-services/extra-services';
+import {errorHandler, successHandler} from '../../../services/extra-services/extra-services';
 
 const AddCategoryForm = (props) => {
     const dispatch = useDispatch()

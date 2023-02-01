@@ -1,64 +1,64 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { doGetApiMethod } from "../../../services/axios-service/axios-service";
+import React, {useState} from "react";
+import {useEffect} from "react";
+import {doGetApiMethod} from "../../../services/axios-service/axios-service";
 import ArrowLeftFill from "../../../assets/icons/arrowLeftFill";
 import ArrowRightFill from "../../../assets/icons/arrowRightFill";
 import ArrowRight from "../../../assets/icons/arrowRight";
 import ArrowLeft from "../../../assets/icons/arrowLeft";
 
 export default function PageNav({
-  urlPageApi,
-  perPage,
-  cssClass,
-  setPage,
-  page,
-  setIsChange,
-}) {
-  const [pages, setPages] = useState(0);
-  const [overR, setOverR] = useState(false);
-  const [overL, setOverL] = useState(false);
+                                    urlPageApi,
+                                    perPage,
+                                    cssClass,
+                                    setPage,
+                                    page,
+                                    setIsChange,
+                                }) {
+    const [pages, setPages] = useState(0);
+    const [overR, setOverR] = useState(false);
+    const [overL, setOverL] = useState(false);
 
-  useEffect(() => {
-    doApi();
-  }, []);
+    useEffect(() => {
+        doApi();
+    }, []);
 
-  const doApi = async () => {
-    let resp = await doGetApiMethod(urlPageApi);
-    let totalPages = Math.ceil(resp.data.count / perPage);
-    setPages(totalPages);
-  };
+    const doApi = async () => {
+        let resp = await doGetApiMethod(urlPageApi);
+        let totalPages = Math.ceil(resp.data.count / perPage);
+        setPages(totalPages);
+    };
 
-  return (
-    <div className={cssClass}>
+    return (
+        <div className={cssClass}>
       <span className="flex font-bold text-gray-500 dark:text-gray-400 cursor-pointer"
-        onMouseOver={() => setOverL(true)}
-        onMouseLeave={() => setOverL(false)}
-        onClick={() => {
-          page <= 1 ? setPage(pages) : setPage(page - 1);
-          setIsChange(true);
-        }}
+            onMouseOver={() => setOverL(true)}
+            onMouseLeave={() => setOverL(false)}
+            onClick={() => {
+                page <= 1 ? setPage(pages) : setPage(page - 1);
+                setIsChange(true);
+            }}
       >
         {overL ? (
-          <ArrowLeftFill color="gray" className="hover:shadow" width={32} height={32} />
+            <ArrowLeftFill color="gray" className="hover:shadow" width={32} height={32}/>
         ) : (
-          <ArrowLeft color="gray" className="hover:shadow" width={32} height={32} />
+            <ArrowLeft color="gray" className="hover:shadow" width={32} height={32}/>
         )}
-        Prev
+          Prev
       </span>
-      <span className="flex font-bold text-gray-500 dark:text-gray-400 cursor-pointer"
-        onMouseOver={() => setOverR(true)}
-        onMouseLeave={() => setOverR(false)}
-        onClick={() => {
-          page >= pages ? setPage(1) : setPage(page + 1);
-          setIsChange(true);
-        }}
-      >Next
-        {overR ? (
-          <ArrowRightFill color="gray" className="hover:shadow" width={32} height={32} />
-        ) : (
-          <ArrowRight color="gray" className="hover:shadow" width={32} height={32} />
-        )}
+            <span className="flex font-bold text-gray-500 dark:text-gray-400 cursor-pointer"
+                  onMouseOver={() => setOverR(true)}
+                  onMouseLeave={() => setOverR(false)}
+                  onClick={() => {
+                      page >= pages ? setPage(1) : setPage(page + 1);
+                      setIsChange(true);
+                  }}
+            >Next
+                {overR ? (
+                    <ArrowRightFill color="gray" className="hover:shadow" width={32} height={32}/>
+                ) : (
+                    <ArrowRight color="gray" className="hover:shadow" width={32} height={32}/>
+                )}
       </span>
-    </div>
-  );
+        </div>
+    );
 }

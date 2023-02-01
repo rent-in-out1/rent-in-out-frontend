@@ -1,7 +1,7 @@
 import React from 'react'
-import { BallTriangle } from 'react-loader-spinner'
+import {BallTriangle} from 'react-loader-spinner'
 
-const BallTriangleLoader = ({ load = true, height, width, color = "#97aef8" }) => {
+const BallTriangleLoader = ({load = true, height, width, color = "#97aef8"}) => {
     return (
         <BallTriangle
             height={height}
