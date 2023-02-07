@@ -4,7 +4,7 @@ import {FaBan, FaCheckCircle} from "react-icons/fa";
 import {useDispatch} from "react-redux";
 import {deleteCategory, editCategory} from "../../../redux/features/categorieSlice";
 
-const CategoryItem = ({item , setIsChange}) => {
+const CategoryItem = ({item, setIsChange}) => {
     const dispatch = useDispatch();
     const infoRef = useRef();
     const nameRef = useRef();

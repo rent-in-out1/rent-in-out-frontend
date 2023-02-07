@@ -5,8 +5,8 @@ import ProfileEdit from '../profile-edit'
 const Notification = () => {
     return (
         <div>
-            <ProfileEdit />
-            <OwnPosts />
+            <ProfileEdit/>
+            <OwnPosts/>
         </div>
     )
 }

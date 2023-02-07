@@ -1,22 +1,25 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    /* background: var(--skyblue-50); */
-    background: var(--white);
-    position:sticky;
-    top:0;
-    left:0;
-    z-index: 10;
-    section{
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 24px;
-        margin: 0 auto;
-        .left{
-        width: 50%;
-        display: flex;
-        align-items: center;
-        .search{
+  /* background: var(--skyblue-50); */
+  background: var(--white);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  section {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 24px;
+    margin: 0 auto;
+
+    .left {
+      width: 50%;
+      display: flex;
+      align-items: center;
+
+      .search {
         margin-left: 4px;
         display: flex;
         align-items: center;
@@ -26,100 +29,118 @@ export const Wrapper = styled.div`
         border-radius: 60px;
         padding: 0 8px;
         transition: 800ms;
-        .icon{
-            width: 15%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        input{
-            border-radius: 8px;
-            background: transparent;
-            border: 0;
-            height: 100%;
-            width: 85%;
-            outline: none;
-              &:focus, textarea:focus, select:focus{
-                  outline: red !important;
-                  .search{
-                    max-width: 25%;
-                  }
-             }
-        }
-    }
-     }
 
-    .right{
-        width: 50%;
-        display: flex;
-        justify-content: end;
-        align-items: center;
+        .icon {
+          width: 15%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+
+        input {
+          border-radius: 8px;
+          background: transparent;
+          border: 0;
+          height: 100%;
+          width: 85%;
+          outline: none;
+
+          &:focus, textarea:focus, select:focus {
+            outline: red !important;
+
+            .search {
+              max-width: 25%;
+            }
+          }
+        }
+      }
+    }
+
+    .right {
+      width: 50%;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      height: inherit;
+
+      .avatar {
+
+        cursor: pointer;
+        margin-left: 12px;
+        width: 40px;
+        height: 40px;
+
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      nav {
         height: inherit;
-        .avatar{
-            
-            cursor: pointer;
-            margin-left: 12px;
-            width: 40px;
-            height: 40px;
-            img{
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-            }
-        }
-        nav{
+
+        ul {
+          height: inherit;
+          display: flex;
+
+          li {
             height: inherit;
-            ul{
-                height: inherit;
-                display: flex;
-                li{
-                    height: inherit;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                    transition: 800ms ease-in-out ;
-                    font-size: 1.2em;
-                    button,a{
-                        font-size: 0.9em;
-                        border-radius: 8px;
-                    }
-                    &:hover{
-                        button ,a{
-                            background: var(--skyblue-300);
-                        }
-                    }
-                }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 800ms ease-in-out;
+            font-size: 1.2em;
+
+            button, a {
+              font-size: 0.9em;
+              border-radius: 8px;
             }
-        }
-    }
-    @media(max-width:768px){
-        padding: 8px 4px;
-        .left{
-            width: 15%;
-            p{
-                display: none;
+
+            &:hover {
+              button, a {
+                background: var(--skyblue-300);
+              }
             }
-            .search{
-                display: none;
-            }
+          }
         }
-        .right{
-            width: auto;
-            nav{
-            }
-        }
+      }
     }
-    }
-    .dropdown{
-        li{
-            transition: 1s ease;
+
+    @media (max-width: 768px) {
+      padding: 8px 4px;
+      .left {
+        width: 15%;
+
+        p {
+          display: none;
         }
-        li:hover{
-            background: var(--grey-300);
+
+        .search {
+          display: none;
         }
+      }
+
+      .right {
+        width: auto;
+
+        nav {
+        }
+      }
     }
+  }
+
+  .dropdown {
+    li {
+      transition: 1s ease;
+    }
+
+    li:hover {
+      background: var(--grey-300);
+    }
+  }
 
 `
 export const Logo = styled.div`

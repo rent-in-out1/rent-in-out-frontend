@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const BackDropS = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 20;
-    background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.75);
 
 `
 
@@ -30,7 +30,7 @@ export const Modal = styled.div`
 
   @media (max-width: 1024px) {
     .modal {
-    top: 10vh;
+      top: 10vh;
       width: 60%;
       left: 20%;
     }
@@ -42,13 +42,13 @@ export const Modal = styled.div`
       left: 5%;
       width: 90%;
     }
-  
+
     .modal .h2 {
       cursor: pointer;
       transition: 0.5s linear;
     }
   }
-  
+
   @keyframes slide-down {
     from {
       opacity: 0;

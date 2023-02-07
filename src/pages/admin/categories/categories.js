@@ -3,7 +3,7 @@ import {Wrapper} from "../../../assets/styles/wrappers/table";
 import CategoryItem from "./categoryItem";
 import Controllers from "../../../shared/components/controllers";
 import {useDispatch, useSelector} from "react-redux";
-import {getCatgories} from "./../../../redux/features/categorieSlice"
+import {getCatgories} from "../../../redux/features/categorieSlice"
 import PageNav from '../../../shared/UI/page-nav';
 import AddCategoryForm from "./addCategoryForm";
 
@@ -48,7 +48,7 @@ const Categories = () => {
                 <table>
                     <thead>
                     <tr>
-                        {categories_headers.map((header,i) => (
+                        {categories_headers.map((header, i) => (
                             <th key={i}>{header}</th>
                         ))}
                     </tr>

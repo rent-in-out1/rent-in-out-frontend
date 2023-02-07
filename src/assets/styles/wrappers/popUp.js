@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-.backdrop {
+  .backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
     z-index: 20;
     background-color: rgba(0, 0, 0, 0.75);
   }
+
   .model {
     overflow-y: hidden;
     padding: 12px;
@@ -25,12 +26,15 @@ export const Wrapper = styled.div`
     z-index: 30;
     animation: slide-down 600ms ease-in-out forwards;
   }
-  .model .data{
+
+  .model .data {
     overflow-y: scroll;
   }
-  .model .h2{
+
+  .model .h2 {
     display: none;
   }
+
   @media (max-width: 1024px) {
     .model {
       width: 60%;
@@ -46,7 +50,7 @@ export const Wrapper = styled.div`
       width: 100%;
       padding: 0;
     }
-  
+
     .model .h2 {
       padding: 0;
       margin: 0;
@@ -59,11 +63,12 @@ export const Wrapper = styled.div`
       cursor: pointer;
       transition: 0.5s linear;
     }
-    .model .exit:hover{
+
+    .model .exit:hover {
       color: var(--skyblue-900);
     }
   }
-  
+
   @keyframes slide-down {
     from {
       opacity: 0;
