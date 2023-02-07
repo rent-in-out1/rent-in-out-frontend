@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Dots from '../../../assets/icons/dots';
 import Send from '../../../assets/icons/send';
-import { deletePost } from '../../../redux/features/postsSlice';
+import { deletePost, setPostEdit } from '../../../redux/features/postsSlice';
+import { BsHammer } from 'react-icons/bs';
+import { BsTrash } from 'react-icons/bs';
 
 const PostHeader = ({ post }) => {
   const dispatch = useDispatch()
@@ -74,14 +76,20 @@ const PostHeader = ({ post }) => {
             <p>Share</p>
             <Send />
           </li>
-          {(user?._id === post?.creator_id || user?.role === "admin") && (
+          {(user?._id === post?.creator_id._id || user?.role === "admin") && (
             <React.Fragment>
               <li
-                onClick={() => closeNav()}
+                onClick={() => {
+                  closeNav()
+                  dispatch(setPostEdit(post, user))
+                  user?.role === "admin"
+                  ? nav(`/admin/editPost`)
+                  : nav(`/editPost`);
+                }}
                 className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200"
               >
                 <p>Edit</p>
-                <p>icon</p>
+                <BsHammer/>
               </li>
               <li
                 onClick={() => {
@@ -91,7 +99,7 @@ const PostHeader = ({ post }) => {
                 className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200"
               >
                 <p>Delete</p>
-                <p>icon</p>
+                <BsTrash/>
               </li>
             </React.Fragment>
           )}

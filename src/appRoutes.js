@@ -30,6 +30,7 @@ const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
+const PostEdit = React.lazy(() => import('./pages/client/post-edit/postEdit'));
 const ProfileEdit = React.lazy(() =>
   import("./pages/client/profile-edit/profileEdit")
 );
@@ -46,6 +47,8 @@ const UserSearch = React.lazy(() =>
 );
 const SinglePost = React.lazy(() => import("./pages/client/singlePost"));
 const AppRoutes = () => {
+
+
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
   let { search, register, showInbox } = useSelector(
@@ -113,6 +116,7 @@ const AppRoutes = () => {
             <Route path="/profile/:userId" element={<UserProfile />} />
             {user?.role === "user" && user?.active && (
               <React.Fragment>
+                <Route path="/editPost" element={<PostEdit />} />
                 <Route path="/chat/:roomID/:creatorID" element={<Chat />} />
                 <Route path="/profile" element={<MyProfile />} />
                 <Route path="/profileEdit" element={<ProfileEdit />} />
@@ -126,6 +130,7 @@ const AppRoutes = () => {
               {/* OutLet */}
               <Route index element={<Dashboard />} />
               <Route path="/admin/chat/:roomID/:creatorID" element={<Chat />} />
+              <Route path="/admin/editPost" element={<PostEdit />} />
               <Route path="/admin/users" element={<Users />} />
               <Route path="/admin/home" element={<HomeAdmin />} />
               <Route path="/admin/categories" element={<Categories />} />

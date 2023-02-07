@@ -70,6 +70,7 @@ const initialState = {
   loading: false,
   error: null,
   isChange: false,
+  editablePost:{}
 };
 
 const postsSlice = createSlice({
@@ -81,6 +82,9 @@ const postsSlice = createSlice({
     },
     setIsChange:(state) =>{
       state.isChange = !state.isChange
+    },
+    setPostEdit:(state , action) => {
+      state.editablePost = action.payload
     }
   },
   extraReducers(builder) {
@@ -144,5 +148,5 @@ const postsSlice = createSlice({
   },
 });
 
-export const { clearPosts , setIsChange } = postsSlice.actions;
+export const { clearPosts , setIsChange ,setPostEdit} = postsSlice.actions;
 export default postsSlice.reducer;
