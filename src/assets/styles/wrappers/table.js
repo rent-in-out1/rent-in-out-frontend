@@ -6,7 +6,7 @@ width: 100%;
     margin-bottom: 3em;
     display: flex;
     justify-content: center;
-    width: 98%;
+    width: 100%;
     overflow-y: scroll;
   }
 

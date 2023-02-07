@@ -10,7 +10,6 @@ const CategoryItem = ({item, setIsChange}) => {
     const nameRef = useRef();
     const urlRef = useRef();
     const category = item;
-    console.log(category)
     const [onEdit, setOnEdit] = useState(false);
     const [editData, setEditData] = useState({});
     return (

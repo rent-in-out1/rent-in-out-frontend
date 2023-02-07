@@ -10,22 +10,23 @@ const HomeAdmin = () => {
             <h3 className="text-2xl mt-2">List Of Tables : </h3>
             <div className="flex wrap p-3">
                 <Link to={"/admin/users"} className="box w-1/3 p-2">
-                    <div className="bg-red-300 h-48 cursor-pointer hover:bg-red-600 flex items-center justify-center">
+                    <div className="bg-red-300 h-32 rounded shadow-xl cursor-pointer hover:bg-red-600 flex items-center justify-center">
                         <h2 className="text-xl font-bold">Users</h2>
                     </div>
                 </Link>
                 <Link to={"/admin/posts"} className="box w-1/3 p-2">
-                    <div className="bg-blue-300 h-48 cursor-pointer hover:bg-blue-600 flex items-center justify-center">
+                    <div className="bg-blue-300 h-32 rounded shadow-xl cursor-pointer hover:bg-blue-600 flex items-center justify-center">
                         <h2 className="text-xl font-bold">Posts</h2>
                     </div>
                 </Link>
                 <Link to={"/admin/categories"} className="box w-1/3 p-2">
                     <div
-                        className="bg-green-300 h-48 cursor-pointer hover:bg-green-600 flex items-center justify-center">
+                        className="bg-green-300 h-32 rounded shadow-xl cursor-pointer hover:bg-green-600 flex items-center justify-center">
                         <h2 className="text-xl font-bold">Categories</h2>
                     </div>
                 </Link>
             </div>
+            
         </div>
     )
 }

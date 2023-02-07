@@ -58,7 +58,6 @@ export const editCategory = createAsyncThunk(
 export const addCategory = createAsyncThunk(
     "addCategory/add",
     async (addData) => {
-        console.log(addData)
         try {
             let url = "/categories";
             const {data} = await doApiMethod(url, "POST", addData);

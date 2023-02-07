@@ -128,7 +128,7 @@ const ProfileEdit = () => {
                         </div>
                         <div className="mt-3 flex px-2 justify-center">
                             <button className="mx-1">Update</button>
-                            <Link to={user.role === "admin" ? "/" : "/profile"}>Back</Link>
+                            <Link to={user.role === "admin" ? "/admin/profile" : "/profile"}>Back</Link>
                         </div>
                     </div>
                 </form>

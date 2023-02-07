@@ -139,17 +139,6 @@ const Header = () => {
                                 </div>
                             </li>
                             <li
-                                onClick={() => {
-                                    closeNav();
-                                    nav("/profile1");
-                                }}
-                                className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
-                            >
-                                <div className="flex justify-between items-center">
-                                    <p>Settings</p> <Settings/>
-                                </div>
-                            </li>
-                            <li
                                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                             >
                                 <Link
