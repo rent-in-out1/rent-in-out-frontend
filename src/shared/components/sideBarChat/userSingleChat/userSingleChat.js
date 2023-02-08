@@ -11,7 +11,6 @@ const UserSingleChat = ({msg}) => {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const {roomID} = useParams();
-    // console.log(roomID)
     const {user} = useSelector((state) => state.userSlice);
     const [over, setOver] = useState(false);
     const [showDel, setShowDel] = useState(false);

@@ -10,7 +10,6 @@ export const eyeShowHide = (setShow) => {
     setShow(true)
 }
 export const errorHandler = (err) => {
-    console.log(err);
     toast.info(err, {
         autoClose: 3000,
         hideProgressBar: false,

@@ -114,7 +114,6 @@ const AddCategoryForm = ({ setIsChange, setOnAdd }) => {
                   onClick={() => {
                     setOnAdd(false);
                     setAddData({});
-                    console.log(addData);
                   }}
                   className="absolute -left-4 -bottom-0 inset-0  opacity-50 rounded-full"
                 />

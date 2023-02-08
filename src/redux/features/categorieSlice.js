@@ -10,7 +10,7 @@ export const getCatgories = createAsyncThunk(
             const {data} = await doGetApiMethod(url);
             return data;
         } catch (error) {
-            console.log(error);
+            errorHandler(error);
         }
     }
 );
@@ -24,7 +24,7 @@ export const deleteCategory = createAsyncThunk(
                 return id;
             }
         } catch (error) {
-            console.log(error);
+            errorHandler(error);
         }
     }
 );
@@ -46,12 +46,11 @@ export const editCategory = createAsyncThunk(
             if (window.confirm(`Are you sure you want to edit ${editData.name}`)) {
                 setOnEdit(true);
                 const {data} = await doApiMethod(url, "PUT", editData);
-                // console.log(data)
                 setOnEdit(false);
                 return {data, id};
             }
         } catch (error) {
-            console.log(error);
+            errorHandler(error);
         }
     }
 );
@@ -63,7 +62,7 @@ export const addCategory = createAsyncThunk(
             const {data} = await doApiMethod(url, "POST", addData);
             return data
         } catch (error) {
-            console.log(error);
+            errorHandler(error);
         }
     }
 );

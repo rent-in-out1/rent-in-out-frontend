@@ -36,7 +36,6 @@ const ResetPass = () => {
         try {
             const url = "/users/resetPassword";
             const {data} = await doApiMethod(url, "POST", requestData);
-            console.log(data);
             if (data.status === "Success") {
                 successHandler(data.msg);
                 nav("/");

@@ -35,7 +35,6 @@ const Form2 = ({
     if (collection.val === "")
       return errorHandler("Please provide valid address");
     let result = await searchProvider.search({ query: collection.val });
-    console.log(result[0]);
     if (result.length === 0) return errorHandler("Couldn't find the adrress");
     else if (collections.some((el) => el.label === result[0].label))
       return errorHandler("Address is already exists or not valid");
@@ -44,14 +43,12 @@ const Form2 = ({
       setCollections([...collections, (collections[collection.i] = res)]);
       setData({ ...data, collect_points: [...collections] });
       if (col >= 1) setCol(col + 1);
-      console.log(collections);
     }
   };
   const handleRemoveCollectPoint = (index) => {
     collections = collections.filter((col, i) => i !== index);
     setCollections(collections);
     setData({ ...data, collect_points: [...collections] });
-    console.log(collections);
     if (col !== 1) setCol(col - 1);
   };
   const handleUpload = async () => {

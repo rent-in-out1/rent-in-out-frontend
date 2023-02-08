@@ -1,7 +1,7 @@
 import React from "react";
 import {doApiMethod} from "../../../services/axios-service/axios-service";
 import {useForm} from "react-hook-form";
-import {successHandler} from "../../../services/extra-services/extra-services";
+import {errorHandler, successHandler} from "../../../services/extra-services/extra-services";
 
 const ContactForm = () => {
     let {
@@ -12,7 +12,6 @@ const ContactForm = () => {
     } = useForm();
     const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const onSub = (_dataBody) => {
-        console.log(_dataBody);
         sendEmail(_dataBody);
         successHandler("your message sent successfully");
         reset();
@@ -21,9 +20,8 @@ const ContactForm = () => {
         try {
             const url = "/users/clientEmail";
             const {data} = await doApiMethod(url, "POST", _dataBody);
-            console.log(data);
         } catch (err) {
-            console.log(err);
+            errorHandler(err);
         }
     };
     return (

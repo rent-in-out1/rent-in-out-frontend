@@ -5,7 +5,6 @@ export const deleteProfileImage = async (img_id) => {
     let url = "/users/cloudinary/profileDel/?id=" + img_id
     try {
         const {data} = await doApiMethod(url, "POST")
-        console.log(data.result)
         return data.result
     } catch (err) {
         errorHandler(err)

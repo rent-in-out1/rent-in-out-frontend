@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {doApiMethod, doGetApiMethod} from "../../services/axios-service/axios-service";
+import { errorHandler } from "../../services/extra-services/extra-services";
 
 export const getPosts = createAsyncThunk(
     "posts/get",
@@ -24,7 +25,7 @@ export const getPosts = createAsyncThunk(
             }
             return data;
         } catch (error) {
-            console.log(error);
+            errorHandler(error);
         }
     }
 );
@@ -38,20 +39,20 @@ export const deletePost = createAsyncThunk(
                 return id;
             }
         } catch (error) {
-            console.log(error);
+            errorHandler(error);
         }
     }
 );
 export const uploadPost = createAsyncThunk(
     "uploadPost/upload",
     async (post) => {
-        console.log(post)
+    
         try {
             const url = "/posts";
             let {data} = await doApiMethod(url, "POST", post);
             return data;
         } catch (error) {
-            console.log(error);
+            errorHandler(error);
         }
     }
 );
@@ -59,10 +60,9 @@ export const likePost = createAsyncThunk("likePost/like", async ({id}) => {
     try {
         const url = "/posts/likePost/" + id;
         let {data} = await doApiMethod(url, "POST");
-        // console.log(data);
         return {data, id};
     } catch (error) {
-        console.log(error);
+        errorHandler(error);
     }
 });
 const initialState = {

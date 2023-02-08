@@ -32,11 +32,9 @@ const ProfileEdit = () => {
         onUpload(allupload);
     };
     const onUpload = async (_dataBody) => {
-        console.log(_dataBody);
         try {
             const url = "/users/" + user._id;
             const {data} = await doApiMethod(url, "PUT", _dataBody);
-            console.log(data.modifiedCount);
             if (data.modifiedCount) {
                 const url = "/users/info/" + user._id;
                 const {data} = await doGetApiMethod(url, "GET");

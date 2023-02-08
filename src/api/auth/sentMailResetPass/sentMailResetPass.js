@@ -30,7 +30,6 @@ const SentMailResetPass = (props) => {
         try {
             const url = "/users/requestPasswordReset";
             const {data} = await doApiMethod(url, "POST", requestData);
-            console.log(data)
             if (data.status === "Pending") {
                 successHandler("Reset request sent successfully please check your email")
                 dispatch(onLogout());

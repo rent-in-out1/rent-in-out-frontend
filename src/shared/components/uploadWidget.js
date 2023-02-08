@@ -48,7 +48,6 @@ export function useUploadWidget({
         async (error, result) => {
             // setIsLoading(true)
             if (!error && result && result.event === "success") {
-                console.log("Done! Here is the image info: ", result.info);
                 setIsLoading(false)
                 let image = {
                     url: result.info.url,
@@ -67,7 +66,6 @@ export function useUploadWidget({
         try {
             const urlR = "/users/uploadBanner";
             let res = await doApiMethod(urlR, "PATCH", _img);
-            console.log(res)
             await deleteBannerImage(cover_img?.img_id);
             dispatch(uploadBanner(_img));
             successHandler(res);

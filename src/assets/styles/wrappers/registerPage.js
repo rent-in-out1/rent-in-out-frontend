@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   width:100%;
   max-height: 90vh;
-  width: inherit;
   display: flex;
   justify-content: center;
   padding-top: 0;
@@ -12,6 +11,7 @@ export const Wrapper = styled.div`
   margin-bottom: 20px;
   user-select: none;
   .inside_box {
+    justify-content: center;
     min-height: inherit;
     background: var(--white);
     display: flex;
@@ -89,7 +89,7 @@ export const Wrapper = styled.div`
   }
 
 
-  .left {
+  /* .left {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -142,7 +142,7 @@ export const Wrapper = styled.div`
         width: 120px;
       }
     }
-  }
+  } */
 `;
 
 export const Button = styled.div`

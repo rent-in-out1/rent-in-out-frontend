@@ -40,7 +40,6 @@ const CreatePost = ({setOnAdd}) => {
         } else {
             setData({...data, img: images});
         }
-        console.log(data)
     };
 
     return (

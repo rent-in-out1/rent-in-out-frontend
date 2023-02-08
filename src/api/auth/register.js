@@ -27,7 +27,6 @@ const Register = () => {
         const url = "users/auth/google";
         try {
             const data = await doGetApiMethod(url);
-            console.log(data);
         } catch (err) {
             errorHandler(err.response.data.msg);
         }
@@ -44,7 +43,7 @@ const Register = () => {
             </h1>
             <Wrapper className="mb-3">
                 <div className="inside_box">
-                    <div className="left w-full md:w-1/3">
+                    {/* <div className="left w-full md:w-1/3">
                         <div className="loginButton google" onClick={loginGmailRequest}>
                             <img src={"./img/google.png"} alt="" className="icon"/>
                             Google
@@ -53,7 +52,7 @@ const Register = () => {
                             <img src={"./img/facebook.png"} alt="" className="icon"/>
                             Facebook
                         </div>
-                    </div>
+                    </div> */}
                     {layout}
                 </div>
             </Wrapper>
