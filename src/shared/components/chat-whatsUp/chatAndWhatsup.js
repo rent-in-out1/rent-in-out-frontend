@@ -1,12 +1,22 @@
 import React from 'react'
 import WebChat from '../../../assets/icons/webChat';
-import {onRegisterShow} from '../../../redux/features/toggleSlice';
+import {onPostToggle, onRegisterShow} from '../../../redux/features/toggleSlice';
 import Chat from '../../../assets/icons/chat';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 const ChatAndWhatsup = ({user, owner, post}) => {
     const dispatch = useDispatch();
+    const chatHandler = () =>{
+        if(!user) dispatch(onRegisterShow())
+        else {
+            user.role === "admin"
+            ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`)
+            : nav(`/chat/${owner._id}${user._id}/${owner._id}`)
+            dispatch(onPostToggle(post))
+        }
+
+    }
     const nav = useNavigate();
     return (
         <React.Fragment>
@@ -27,12 +37,7 @@ const ChatAndWhatsup = ({user, owner, post}) => {
                     <div
                         onClick={(e) => {
                             e.stopPropagation()
-
-                            !user
-                                ? dispatch(onRegisterShow())
-                                : user.role === "admin"
-                                    ? nav(`/admin/chat/${owner._id}${user._id}/${owner._id}`)
-                                    : nav(`/chat/${owner._id}${user._id}/${owner._id}`);
+                            chatHandler()
                         }}
                         className="h-full cursor-pointer text-white justify-center items-center flex bg-blue-400 hover:bg-blue-800 font-small rounded-lg text-xs px-2 py-2 md:px-2.5 md:py-1 lg:py-1.5"
                     >
