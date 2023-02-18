@@ -71,12 +71,10 @@ const Dashboard = () => {
                             </div>
                         ) : null}
                     </div>)}
-                <div id="posts" className="flex flex-wrap mx-auto mt-3 justify-between px-1">
+                <div id="posts" className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto mt-3 px-1">
                     {posts &&
                         posts?.map((post, i) => (
-                            <div key={post?._id} className="md:w-1/2 w-full flex">
                                 <Card post={post} key={i}/>
-                            </div>
                         ))}
                 </div>
             </main>

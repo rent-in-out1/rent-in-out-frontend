@@ -1,32 +1,31 @@
 import FillHeart from "../../../assets/icons/fillHeart";
 import Heart from "../../../assets/icons/heart";
-import {v4 as uuidv4} from "uuid";
-import {Wrapper} from "../../../assets/styles/wrappers/card";
-import {useDispatch, useSelector} from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { Wrapper } from "../../../assets/styles/wrappers/card";
+import { useDispatch, useSelector } from "react-redux";
 import {
     onLikesToggle,
     onPostToggle,
     onRegisterShow,
 } from "../../../redux/features/toggleSlice";
 import Clock from "../../../assets/icons/clock";
-import {likePost, setIsChange} from "../../../redux/features/postsSlice";
-import {updateWishList} from "../../../redux/features/userSlice";
+import { likePost, setIsChange } from "../../../redux/features/postsSlice";
+import { updateWishList } from "../../../redux/features/userSlice";
 import PostHeader from "../postHeader/postHeader";
 import ChatAndWhatsup from "../chat-whatsUp";
 
-const Card = ({post}) => {
+const Card = ({ post }) => {
     const dispatch = useDispatch();
-    const {user, wishList} = useSelector((state) => state.userSlice);
+    const { user, wishList } = useSelector((state) => state.userSlice);
     return (
         <Wrapper>
-            <div className="card">
-                <PostHeader post={post}/>
+                <PostHeader post={post} />
                 <div
                     className="relative cursor-pointer"
                     onDoubleClick={() => {
                         !user
                             ? dispatch(onRegisterShow())
-                            : dispatch(likePost({id: post._id}));
+                            : dispatch(likePost({ id: post._id }));
                         if (post.creator_id._id !== user._id) {
                             dispatch(updateWishList(post));
                         }
@@ -45,15 +44,15 @@ const Card = ({post}) => {
                         onClick={() => {
                             !user
                                 ? dispatch(onRegisterShow())
-                                : dispatch(likePost({id: post._id}));
+                                : dispatch(likePost({ id: post._id }));
                         }}
                     >
                         {post?.likes?.some((el) => el.user_id === user?._id) ||
-                        user?.wishList?.some((el) => el._id === post?._id) ||
-                        wishList?.some((el) => el._id === post?._id) ? (
-                            <FillHeart color="red" width="20px" height={"20px"}/>
+                            user?.wishList?.some((el) => el._id === post?._id) ||
+                            wishList?.some((el) => el._id === post?._id) ? (
+                            <FillHeart color="red" width="20px" height={"20px"} />
                         ) : (
-                            <Heart color="red" width="20px" height={"20px"}/>
+                            <Heart color="red" width="20px" height={"20px"} />
                         )}
                     </div>
                 </div>
@@ -73,9 +72,9 @@ const Card = ({post}) => {
                     </div>
                     <div className="flex justify-between items-center ">
                         <div className="flex items-center mt-2.5 mb-5 cursor-pointer ">
-              <span className="text-xs font-semibold mr-1 rounded">
-                {post?.likes.length || "Likes: 0"}
-              </span>
+                            <span className="text-xs font-semibold mr-1 rounded">
+                                {post?.likes.length || "Likes: 0"}
+                            </span>
                             <div
                                 onClick={(e) => {
                                     e.stopPropagation();
@@ -87,9 +86,8 @@ const Card = ({post}) => {
                                     return (
                                         <div
                                             key={uuidv4()}
-                                            className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${
-                                                i * 4
-                                            }`}
+                                            className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4
+                                                }`}
                                         >
                                             <img
                                                 title={like.fullName.firstName}
@@ -105,22 +103,21 @@ const Card = ({post}) => {
 
                         <span
                             className="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded lg:mr-2">
-              <Clock/>
-              3d
-            </span>
+                            <Clock />
+                            3d
+                        </span>
                     </div>
 
-                    <div className="md:flex items-center justify-around h-full">
+                    <div className="h-full">
                         <div className="flex items-center justify-center mb-2 md:mb-0">
-              <span className="text-xl md:text-2xl font-bold py-1 text-gray-900 mr-1">
-                {post?.price}$
-              </span>
+                            <span className="text-xl md:text-2xl font-bold py-1 text-gray-900 mr-1">
+                                {post?.price}$
+                            </span>
                             <span className="text-xs capitalize text-gray-400">per day</span>
                         </div>
-                        <ChatAndWhatsup post={post} user={user} owner={post.creator_id}/>
+                        <ChatAndWhatsup post={post} user={user} owner={post.creator_id} />
                     </div>
                 </div>
-            </div>
         </Wrapper>
     );
 };
