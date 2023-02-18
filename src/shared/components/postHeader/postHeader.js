@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Dots from '../../../assets/icons/dots';
 import Send from '../../../assets/icons/send';
 import { deletePost, setPostEdit } from '../../../redux/features/postsSlice';
@@ -9,45 +9,45 @@ import { BsHammer } from 'react-icons/bs';
 import { BsTrash } from 'react-icons/bs';
 
 
-const PostHeader = ({post}) => {
-    const dispatch = useDispatch()
-    const {user} = useSelector((state) => state.userSlice);
-    const [displayOptions, setDisplayOptions] = useState(false);
-    const nav = useNavigate();
-    let timeOut;
-    useEffect(() => {
-        window.addEventListener("scroll", () => closeNav());
-    }, []);
+const PostHeader = ({ post }) => {
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.userSlice);
+  const [displayOptions, setDisplayOptions] = useState(false);
+  const nav = useNavigate();
+  let timeOut;
+  useEffect(() => {
+    window.addEventListener("scroll", () => closeNav());
+  }, []);
 
-    const openNav = () => {
-        clearTimeout(timeOut);
-        setDisplayOptions(true);
-    };
-    const closeNav = () => {
-        timeOut = setTimeout(() => {
-            setDisplayOptions(false);
-        }, 100);
-    };
-    return (
-        <div className="flex justify-between items-center pr-2 p-1">
-            <div
-                onClick={() => {
-                    user?.role === "admin"
-                        ? nav(`/admin/profile/${post?.creator_id._id}`)
-                        : nav(`/profile/${post?.creator_id._id}`);
-                }}
-                className="flex items-center cursor-pointer capitalize"
-            >
-                <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
-                    <img
-                        className="w-full h-full rounded-full object-cover"
-                        src={post?.creator_id?.profile_img?.url || user?.profile_img?.url}
-                        alt="avatar"
-                    />
-                </div>
-                <span className="pl-1 flex">
+  const openNav = () => {
+    clearTimeout(timeOut);
+    setDisplayOptions(true);
+  };
+  const closeNav = () => {
+    timeOut = setTimeout(() => {
+      setDisplayOptions(false);
+    }, 100);
+  };
+  return (
+    <div className="dashboard-post-header-wrapper flex justify-between items-center pr-2 p-1">
+      <div
+        onClick={() => {
+          user?.role === "admin"
+            ? nav(`/admin/profile/${post?.creator_id._id}`)
+            : nav(`/profile/${post?.creator_id._id}`);
+        }}
+        className="flex items-center cursor-pointer capitalize"
+      >
+        <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
+          <img
+            className="w-full h-full rounded-full object-cover"
+            src={post?.creator_id?.profile_img?.url || user?.profile_img?.url}
+            alt="avatar"
+          />
+        </div>
+        <span className="pl-1 flex">
           {post?.creator_id.fullName?.firstName}
-                    <span className="ml-1 hidden md:flex">
+          <span className="ml-1 hidden md:flex">
             {post?.creator_id.fullName?.lastName}
           </span>
         </span>
@@ -84,22 +84,22 @@ const PostHeader = ({post}) => {
                   closeNav()
                   dispatch(setPostEdit(post, user))
                   user?.role === "admin"
-                  ? nav(`/admin/editPost`)
-                  : nav(`/editPost`);
+                    ? nav(`/admin/editPost`)
+                    : nav(`/editPost`);
                 }}
                 className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200"
               >
                 <p>Edit</p>
-                <BsHammer/>
+                <BsHammer />
               </li>
               <li
                 onClick={() => {
-                    displayOptions ? closeNav() : openNav();
+                  displayOptions ? closeNav() : openNav();
                 }}
                 className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200"
               >
                 <p>Delete</p>
-                <BsTrash/>
+                <BsTrash />
               </li>
             </React.Fragment>
           )}

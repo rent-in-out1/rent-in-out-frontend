@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   padding: 4px;
-  margin-bottom: 20px;
-  height: 100%;
+  margin-bottom: 10px;
   user-select: none;
     position: relative;
     background: var(--white);
