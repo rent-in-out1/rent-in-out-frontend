@@ -16,11 +16,14 @@ const Form1 = ({
             return errorHandler("You must provide at list one photo");
         setDisplay(true);
     }
+    console.log(images)
 
     return (
         <React.Fragment>
             <form className="h-80 capitalize overflow-y-scroll">
                 <div className="flex flex-col w-full">
+
+                    {/* post title */}
                     <input
                         type="text"
                         name="title"
@@ -28,6 +31,8 @@ const Form1 = ({
                         placeholder="Post title"
                         value={data?.title}
                     />
+
+                    {/* description */}
                     <textarea
                         className="p-2 w-full border border-gray-200 rounded-lg"
                         rows={3}
@@ -36,6 +41,8 @@ const Form1 = ({
                         name="info"
                         value={data?.info}
                     ></textarea>
+
+                    {/* term options */}
                     <select
                         onChange={handleOnChange}
                         value={data?.range}
@@ -46,7 +53,11 @@ const Form1 = ({
                         <option value="long-term">long-term</option>
                     </select>
                 </div>
-                <div className="flex flex-col w-full" onClick={() => setImages.open()}>
+
+                {/* upload post */}
+                {
+                    !images.length > 0 ? 
+                    <div className="flex flex-col w-full" onClick={() => setImages.open()}>
                     <div
                         className="cursor-pointer flex flex-col items-center justify-center bg-white w-full rounded-xl p-3 h-full border border-gray-200">
                         <h2>Choose some photos</h2>
@@ -56,7 +67,16 @@ const Form1 = ({
                         <ImageFill width={"60px"} height="60px"/>
                     </div>
                 </div>
+                :
+                
+                // images uploaded
+                <div className="overflow-hidden border">
+                    <img src={images[0]?.url} alt="post" />
+                </div>
+                }
             </form>
+
+            {/* next button */}
             <div className="flex justify-end w-full mt-2">
                 <button
                     onClick={() => {
