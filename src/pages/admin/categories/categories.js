@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {Wrapper} from "../../../assets/styles/wrappers/table";
-import CategoryItem from "./categoryItem";
-import Controllers from "../../../shared/components/controllers";
-import {useDispatch, useSelector} from "react-redux";
-import {getCatgories} from "../../../redux/features/categorieSlice"
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Wrapper } from "../../../assets/styles/wrappers/table";
+import { getCatgories } from "../../../redux/features/categorieSlice";
 import PageNav from '../../../shared/UI/page-nav';
+import Controllers from "../../../shared/components/controllers";
 import AddCategoryForm from "./addCategoryForm";
+import CategoryItem from "./categoryItem";
 
 const Categories = () => {
     const dispatch = useDispatch();

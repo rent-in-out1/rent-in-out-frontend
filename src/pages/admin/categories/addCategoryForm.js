@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import { FaCheckCircle, FaBan } from "react-icons/fa";
-import { addCategory } from "../../../redux/features/categorieSlice";
+import { FaBan, FaCheckCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { addCategory } from "../../../redux/features/categorieSlice";
 import {
   errorHandler,
   successHandler,
