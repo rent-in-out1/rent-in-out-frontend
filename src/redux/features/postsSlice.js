@@ -16,8 +16,8 @@ export const getPosts = createAsyncThunk(
 
         try {
             if (page === 1) clearPosts();
-            let url = `/posts/search?page=${page}&reverse=yes&sort=${option}`;
-            // let url = `/posts?page=${page}&sort=${option}&reverse=yes`;
+            // let url = `/posts/search?page=${page}&reverse=yes&sort=${option}`;
+            let url = `/posts?page=${page}&sort=${option}&reverse=yes`;
             let {data} = await doGetApiMethod(url);
             if (data.length > 0) {
                 endScreenEnd();
@@ -126,7 +126,7 @@ const postsSlice = createSlice({
             .addCase(likePost.fulfilled, (state, action) => {
                 state.loading = false;
                 state.posts.forEach((post, i) => {
-                    if (post._id === action.payload.id) state.posts[i].likes = action.payload.data.posts
+                    if (post?._id === action.payload.id) state.posts[i].likes = action.payload.data.posts
                 })
             })
             .addCase(likePost.rejected, (state, action) => {

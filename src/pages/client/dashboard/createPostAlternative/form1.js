@@ -1,6 +1,6 @@
 import React from "react";
-import {errorHandler} from "../../../../services/extra-services/extra-services";
 import ImageFill from "../../../../assets/icons/imageFill";
+import { errorHandler } from "../../../../services/extra-services/extra-services";
 
 const Form1 = ({
                    data,
@@ -16,7 +16,6 @@ const Form1 = ({
             return errorHandler("You must provide at list one photo");
         setDisplay(true);
     }
-    console.log(images)
 
     return (
         <React.Fragment>
