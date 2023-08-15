@@ -1,15 +1,13 @@
-import {useNavigate} from "react-router-dom";
-import {Button} from "../../../assets/styles/wrappers/registerPage";
-import {Wrapper} from "../../../assets/styles/wrappers/registerPage";
-import {useForm} from "react-hook-form";
-import {doApiMethod} from "../../../services/axios-service/axios-service";
-import {useParams} from "react-router-dom";
-import {useState} from "react";
-import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
-import {onRegisterShow} from "../../../redux/features/toggleSlice";
-import {useDispatch} from "react-redux";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Wrapper } from "../../../assets/styles/wrappers/registerPage";
+import { onRegisterShow } from "../../../redux/features/toggleSlice";
+import { doApiMethod } from "../../../services/axios-service/axios-service";
+import { errorHandler, successHandler } from "../../../services/extra-services/extra-services";
 import PopUPModel from "../../../shared/UI/popup/registerModel";
-import {errorHandler, successHandler} from "../../../services/extra-services/extra-services";
+import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
 
 const ResetPass = () => {
     const dispatch = useDispatch();

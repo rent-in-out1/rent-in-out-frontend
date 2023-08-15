@@ -1,22 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
+import Clock from "../../../assets/icons/clock";
 import FillHeart from "../../../assets/icons/fillHeart";
 import Heart from "../../../assets/icons/heart";
-import { v4 as uuidv4 } from "uuid";
 import { Wrapper } from "../../../assets/styles/wrappers/card";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    onLikesToggle,
-    onPostToggle,
-    onRegisterShow,
-} from "../../../redux/features/toggleSlice";
-import Clock from "../../../assets/icons/clock";
 import { likePost, setIsChange } from "../../../redux/features/postsSlice";
+import {
+    onPostToggle,
+    onRegisterShow
+} from "../../../redux/features/toggleSlice";
 import { updateWishList } from "../../../redux/features/userSlice";
-import PostHeader from "../postHeader/postHeader";
+import { utilFunctionUnitTimeToCreatedTime } from "../../../util/functions";
 import ChatAndWhatsup from "../chat-whatsUp";
+import PostHeader from "../postHeader/postHeader";
+import RecentLikes from "../recentLikes/recentLikes";
 
 const Card = ({ post }) => {
     const dispatch = useDispatch();
     const { user, wishList } = useSelector((state) => state.userSlice);
+
     return (
         <Wrapper>
             <PostHeader post={post} />
@@ -31,7 +32,7 @@ const Card = ({ post }) => {
                     if (post.creator_id._id !== user._id) {
                         dispatch(updateWishList(post));
                     }
-                    dispatch(setIsChange())
+                    dispatch(setIsChange());
                 }}
             >
                 <div className="overflow-hidden w-full postImg">
@@ -51,9 +52,7 @@ const Card = ({ post }) => {
                             : dispatch(likePost({ id: post._id }));
                     }}
                 >
-                    {post?.likes?.some((el) => el.user_id === user?._id) ||
-                        user?.wishList?.some((el) => el._id === post?._id) ||
-                        wishList?.some((el) => el._id === post?._id) ? (
+                    {post?.likes?.length > 0 ? (
                         <FillHeart color="red" width="20px" height={"20px"} />
                     ) : (
                         <Heart color="red" width="20px" height={"20px"} />
@@ -76,42 +75,14 @@ const Card = ({ post }) => {
 
                 <div className="flex justify-between items-center ">
 
-                    {/* likes */}
-                    <div className="flex items-center mt-2.5 mb-5 cursor-pointer ">
-                        <span className="text-xs font-semibold mr-1 rounded">
-                            {post?.likes.length || "Likes: 0"}
-                        </span>
-                        <div
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                dispatch(onLikesToggle(post?.likes));
-                            }}
-                            className="flex items-center justify-between relative "
-                        >
-                            {post?.likes.slice(0, 3).map((like, i) => {
-                                return (
-                                    <div
-                                        key={uuidv4()}
-                                        className={`w-6 h-6 bg-red-200 border rounded-full absolute -top-3 left-${i * 4
-                                            }`}
-                                    >
-                                        <img
-                                            title={like.fullName.firstName}
-                                            className="w-full h-full rounded-full object-cover"
-                                            src={like.profile_img}
-                                            alt="profile"
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                    {/* top 3 likes */}
+                    <RecentLikes key={post._id} likes={post.likes} />
 
                     {/* post uploaded time */}
                     <span
                         className="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded lg:mr-2">
                         <Clock />
-                        3d
+                        {utilFunctionUnitTimeToCreatedTime(post.createdAt)}
                     </span>
                 </div>
 

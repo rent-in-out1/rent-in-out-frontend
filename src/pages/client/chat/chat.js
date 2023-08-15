@@ -1,24 +1,26 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
     doApiMethod,
     doGetApiMethod,
 } from "../../../services/axios-service/axios-service";
-import {io} from "socket.io-client";
-import {Button} from "../../../assets/styles/wrappers/registerPage";
-import {Wrapper} from "../../../assets/styles/wrappers/chat";
+import { io } from "socket.io-client";
+import { Button } from "../../../assets/styles/wrappers/registerPage";
+import { Wrapper } from "../../../assets/styles/wrappers/chat";
 import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
-import {getUserInbox} from "../../../redux/features/userSlice";
+import { getUserInbox } from "../../../redux/features/userSlice";
 import SingleMessage from "./singleMessage";
-import {errorHandler} from "../../../services/extra-services/extra-services";
-import {secret} from "../../../services/secrets";
+import { errorHandler } from "../../../services/extra-services/extra-services";
+import { secret } from "../../../services/secrets";
+
+const apiUrl = secret.SERVER_API_URL;
 
 const Chat = () => {
     const nav = useNavigate();
-    const {user} = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
     const dispatch = useDispatch();
-    const {firstName, lastName} = useSelector(
+    const { firstName, lastName } = useSelector(
         (state) => state.userSlice.user.fullName
     );
     const [socket, setSocket] = useState(null);
@@ -27,11 +29,11 @@ const Chat = () => {
     const [typing, setTyping] = useState(false);
     const [owner, setOwner] = useState({});
     const [typingTimeOut, setTypingTimeOut] = useState(null);
-    const {roomID, creatorID} = useParams();
+    const { roomID, creatorID } = useParams();
     useEffect(() => {
-        setSocket(io(secret.SERVER_API_URL));
+        setSocket(io(apiUrl));
         const getChatHistory = async () => {
-            let {data} = await doGetApiMethod(`/users/getChat/${roomID}`);
+            let { data } = await doGetApiMethod(`/users/getChat/${roomID}`);
             if (data[0]?.messagesArr) setChat(data[0]?.messagesArr);
         };
         getChatHistory();
@@ -41,7 +43,7 @@ const Chat = () => {
         };
     }, [roomID]);
     const getPostCreatorInfo = async (id) => {
-        const {data} = await doGetApiMethod("/users/info/" + id);
+        const { data } = await doGetApiMethod("/users/info/" + id);
         setOwner({
             name: data.userInfo.fullName,
             img: data.userInfo.profile_img?.url,
@@ -81,11 +83,11 @@ const Chat = () => {
     };
     useEffect(() => {
         if (!socket) return;
-        socket.emit("join-room", {roomID});
+        socket.emit("join-room", { roomID });
         socket.on("messege-back", (data) => {
             setChat((prev) => [
                 ...prev,
-                {message: data.message, userName: data.userName, sender: data.sender},
+                { message: data.message, userName: data.userName, sender: data.sender },
             ]);
         });
         socket.on("recieve-typing", () => setTyping(true));
@@ -115,12 +117,12 @@ const Chat = () => {
     };
     const handleInput = (e) => {
         setMessage(e.target.value);
-        socket.emit("typing-start", {roomID});
+        socket.emit("typing-start", { roomID });
         if (typingTimeOut) clearTimeout(typingTimeOut);
 
         setTypingTimeOut(
             setTimeout(() => {
-                socket.emit("typing-end", {roomID});
+                socket.emit("typing-end", { roomID });
             }, 1000)
         );
     };
