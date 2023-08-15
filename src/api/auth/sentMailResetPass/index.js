@@ -1,1 +1,1 @@
-export {default} from "./sentMailResetPass"
+export { default } from "./sentMailResetPass";

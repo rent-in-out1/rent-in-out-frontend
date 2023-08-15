@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from "react";
-import {doGetApiMethod} from "../../services/axios-service/axios-service";
-import {Wrapper} from "../../assets/styles/wrappers/registerPage";
-import SignUp from "./signUp";
-import SignIn from "./signIn";
-import SentMailResetPass from "./sentMailResetPass";
-import {onRegisterShow} from "../../redux/features/toggleSlice";
+import React, { useEffect, useState } from "react";
+import { Wrapper } from "../../assets/styles/wrappers/registerPage";
+import { onRegisterShow } from "../../redux/features/toggleSlice";
+import { doGetApiMethod } from "../../services/axios-service/axios-service";
+import { errorHandler } from '../../services/extra-services/extra-services';
 import PopUPModel from '../../shared/UI/popup/registerModel';
-import {errorHandler} from '../../services/extra-services/extra-services';
+import SentMailResetPass from "./sentMailResetPass";
+import SignIn from "./signIn";
+import SignUp from "./signUp";
 
 const Register = () => {
     const [isState, setState] = useState("signIn");

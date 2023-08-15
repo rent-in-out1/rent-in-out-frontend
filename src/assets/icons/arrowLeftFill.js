@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const ArrowLeftFill = ({color = "black", width = "20px", height = "20px"}) => {
     return (

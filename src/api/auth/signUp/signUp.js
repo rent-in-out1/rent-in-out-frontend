@@ -1,13 +1,13 @@
-import React, {useState, useEffect, useRef} from "react";
-import {useForm} from "react-hook-form";
-import {Button} from "../../../assets/styles/wrappers/registerPage";
+import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Button } from "../../../assets/styles/wrappers/registerPage";
+import { doApiMethod } from "../../../services/axios-service/axios-service";
+import { errorHandler, successHandler } from "../../../services/extra-services/extra-services";
 import {
-    getCountries,
     getCities,
+    getCountries,
 } from "../../../services/get-locations-service/get-locations-service";
-import {doApiMethod} from "../../../services/axios-service/axios-service";
 import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
-import {successHandler, errorHandler} from "../../../services/extra-services/extra-services";
 
 const SignUp = (props) => {
     const [load, setLoad] = useState(false);

@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
-import {Button} from "../../../assets/styles/wrappers/registerPage";
-import {useForm} from "react-hook-form";
-import {doApiMethod} from '../../../services/axios-service/axios-service';
-import {onLogout} from "../../../redux/features/toggleSlice";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Button } from "../../../assets/styles/wrappers/registerPage";
+import { onLogout } from "../../../redux/features/toggleSlice";
+import { doApiMethod } from '../../../services/axios-service/axios-service';
+import { errorHandler, successHandler } from "../../../services/extra-services/extra-services";
+import { secret } from '../../../services/secrets';
 import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
-import {errorHandler, successHandler} from "../../../services/extra-services/extra-services";
-import {secret} from '../../../services/secrets';
 
 const SentMailResetPass = (props) => {
     const nav = useNavigate()

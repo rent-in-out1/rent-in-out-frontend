@@ -1,16 +1,15 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {useForm} from "react-hook-form";
-import {doApiMethod} from "../../../services/axios-service/axios-service";
-import {onLogin} from "../../../redux/features/userSlice";
-import {onLogout} from "../../../redux/features/toggleSlice";
-import {Button} from "../../../assets/styles/wrappers/registerPage";
-import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
-import OpenEye from "../../../assets/icons/openEye";
-import {eyeShowHide} from "../../../services/extra-services/extra-services";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import CloseEye from "../../../assets/icons/closeEye";
-import {errorHandler, successHandler} from "../../../services/extra-services/extra-services";
+import OpenEye from "../../../assets/icons/openEye";
+import { Button } from "../../../assets/styles/wrappers/registerPage";
+import { onLogout } from "../../../redux/features/toggleSlice";
+import { onLogin } from "../../../redux/features/userSlice";
+import { doApiMethod } from "../../../services/axios-service/axios-service";
+import { errorHandler, eyeShowHide, successHandler } from "../../../services/extra-services/extra-services";
+import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
 
 const SignIn = (props) => {
     const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
