@@ -43,12 +43,12 @@ const PostHeader = ({ post }) => {
             alt="avatar"
           />
         </div>
-        <span className="pl-1 flex">
+        <h5 className="pl-1 flex">
           {post?.creator_id.fullName?.firstName}
           <span className="ml-1 hidden md:flex">
             {post?.creator_id.fullName?.lastName}
           </span>
-        </span>
+        </h5>
       </div>
       <div
         className="z-10"
@@ -64,7 +64,7 @@ const PostHeader = ({ post }) => {
           onTouchCancel={() => closeNav()}
           onMouseOver={() => openNav()}
           onMouseLeave={() => closeNav()}
-          className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-10 md:top-12 z-10 right-0"
+          className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-11 md:top-10 xl:top-11 z-10 right-0"
         >
           <li
             onClick={() => closeNav()}

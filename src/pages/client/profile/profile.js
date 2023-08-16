@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Calendar from "../../../assets/icons/calendar";
@@ -12,6 +12,23 @@ import Mail from "./../../../assets/icons/mail";
 const Profile = () => {
     const nav = useNavigate();
     const { user } = useSelector((state) => state.userSlice);
+    // get user rank 
+    const userRank = useMemo(() => {
+        const { totalRank, totalUsers } = user.rank.reduce(
+            (total, rankItem) => {
+                const { rank } = rankItem;
+                total.totalRank += rank;
+                total.totalUsers++;
+
+                return total;
+            },
+            {
+                totalRank: 0,
+                totalUsers: 0
+            }
+        );
+        return totalRank / totalUsers;
+    }, [user]);
 
     return (
         <Wrapper>
@@ -21,7 +38,7 @@ const Profile = () => {
                         <li>Posts</li>
                         <li>Info</li>
                     </ul>
-                    <div>rank</div>
+                    <div>rank - {userRank}</div>
                 </div>
             </nav>
             <main>

@@ -34,46 +34,37 @@ const Dashboard = () => {
     return (
         <main className="min-h-screen md:p-3 text-center justify-center">
             {!loading && user &&
-
                 // add new post button
-                (<div><div
-                    className="bg-white p-3 space-x-1 md:w-10/12 w-full mx-auto rounded-xl drop-shadow-xlfixed top-2 left-2">
+                (<div
+                    className="p-3 space-x-1 w-full mx-auto rounded-xl drop-shadow-xlfixed top-2 left-2">
                     {!onAdd ? (
-
                         // unhide button 
                         <div className="flex justify-center mt-2 mb-8">
                             <button
-                                className="btn cursor-pointer bg-blue-400 opacity-50 rounded-full w-1/2  inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-600"
+                                className="btn cursor-pointer bg-blue-300 text-gray-900 rounded-full w-1/2  inline-block px-2 py-3 font-semibold leading-tight hover:text-white hover:bg-blue-500"
                                 type="button"
-                                onClick={() => setOnAdd(true)}
-                            >
+                                onClick={() => setOnAdd(true)}>
                                 Add New Post
                             </button>
                         </div>
                     ) :
                         <CreatePost setOnAdd={setOnAdd} />}
                 </div>
-                </div>
                 )}
 
             {/* all posts */}
-            <div id="posts" className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 mx-auto mt-3 px-1">
+            <div id="posts" className="grid grid-cols-2 gap-x-2 gap-y-4 md:gap-4 xl:grid-cols-3 mx-auto mt-3">
                 {posts &&
                     posts?.map((post) => (
                         <Card post={post} key={post._id} />
                     ))
                 }
-                {loading && Array.from(Array(6)).map(() => (
-                    <LoadingCard />
+
+                {/* loading card */}
+                {loading && Array.from(Array(8)).map(() => (
+                    <LoadingCard key={crypto.randomUUID()} />
                 ))}
             </div>
-            {
-                true &&
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 mx-auto mt-3 px-1">
-
-                </div>
-            }
-
         </main>
     );
 };

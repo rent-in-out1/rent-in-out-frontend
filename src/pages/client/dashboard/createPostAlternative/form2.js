@@ -5,6 +5,7 @@ import Minus from "../../../../assets/icons/minus";
 import Plus from "../../../../assets/icons/plus";
 import { uploadPost } from "../../../../redux/features/postsSlice";
 import { doGetApiMethod } from "../../../../services/axios-service/axios-service";
+import { deleteOnCancel } from "../../../../services/cloudinary-service/cloudinary-service";
 import { errorHandler } from "../../../../services/extra-services/extra-services";
 
 const Form2 = ({
@@ -15,6 +16,7 @@ const Form2 = ({
   setDisplay,
   handleOnChange,
   setOnAdd,
+  images
 }) => {
   let searchProvider = new OpenStreetMapProvider();
   const dispatch = useDispatch();
@@ -64,9 +66,15 @@ const Form2 = ({
     dispatch(uploadPost(data));
     setOnAdd(false);
   };
+
+  const closeUploadSection = () => {
+    setOnAdd(false);
+    if (images && images.length > 0) deleteOnCancel(images);
+  };
+
   return (
     <React.Fragment>
-      <form className="h-80 overflow-y-scroll capitalize">
+      <form className="min-h-min mb-4 overflow-y-scroll capitalize">
         <div className="flex-flex-col content-between w-full ">
           <div className="flex w-full">
             <input
@@ -176,17 +184,25 @@ const Form2 = ({
           </div>
         </div>
       </form>
-      <div className="flex justify-between w-full">
-        <button onClick={() => setDisplay(false)} type="submit">
+      <div className="flex justify-between px-2">
+        <button onClick={() => setDisplay(false)} className="flex-shrink-0 border-transparent py-2 border-4 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-blue-400 hover:text-blue-700 rounded-xl" type="button">
           Back
         </button>
-        <button
-          onClick={() => {
-            handleUpload();
-          }}
-        >
-          Upload
-        </button>
+        <div className="flex items-center">
+          <button className="flex-shrink-0 border-transparent py-2 border-4 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-blue-400 hover:text-blue-700 rounded-xl" type="button"
+            onClick={() => closeUploadSection()}>
+            Cancel
+          </button>
+          <button
+            onClick={() => {
+              handleUpload();
+            }}
+            className="flex-shrink-0 border-transparent hover:border-transparent active:border-transparent bg-blue-400 hover:bg-blue-700 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-white rounded-xl"
+            type="submit"
+          >
+            Upload
+          </button>
+        </div>
       </div>
     </React.Fragment>
   );

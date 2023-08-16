@@ -37,21 +37,5 @@ margin-bottom: 12px;
          }
       }
    }
-   button{
-      margin-top: 12px;
-         width: 100px;
-         padding: 10px 22px;
-         border-radius: 5px;
-         color: var(--white);
-         background: var(--skyblue-500);
-         display: flex;
-         align-items: center;
-         font-weight: bold;
-         cursor: pointer;
-         justify-content: center;
-         &:hover{
-            background: var(--skyblue-800);
-         }  
-   }
 }
 `;

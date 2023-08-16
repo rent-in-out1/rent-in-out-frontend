@@ -6,17 +6,15 @@ const RecentLikes = ({ likes }) => {
     const dispatch = useDispatch();
 
     return (
-        <div className="flex items-center mt-2.5 mb-5 cursor-pointer ">
+        <div onClick={(e) => {
+            e.stopPropagation();
+            dispatch(onLikesToggle(likes));
+        }}
+            className="flex items-center cursor-pointer">
             <span className="text-xs font-semibold mr-1 rounded">
                 {likes.length || "Likes: 0"}
             </span>
-            <div
-                onClick={(e) => {
-                    e.stopPropagation();
-                    dispatch(onLikesToggle(likes));
-                }}
-                className="flex items-center justify-between relative "
-            >
+            <div className="flex items-center justify-between relative">
                 {likes.slice(0, 3).map((like, i) => {
                     return (
                         <div

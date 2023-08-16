@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Calendar from '../../../assets/icons/calendar';
@@ -13,6 +13,23 @@ import OwnPosts from '../myProfile/ownPosts';
 const UserProfile = () => {
     const nav = useNavigate();
     const { user } = useSelector(state => state.userSlice);
+    // get user rank 
+    const userRank = useMemo(() => {
+        const { totalRank, totalUsers } = user.rank.reduce(
+            (total, rankItem) => {
+                const { rank } = rankItem;
+                total.totalRank += rank;
+                total.totalUsers++;
+
+                return total;
+            },
+            {
+                totalRank: 0,
+                totalUsers: 0
+            }
+        );
+        return totalRank / totalUsers;
+    }, [user]);
     const [userDetails, setUserDetails] = useState({});
     const { userId } = useParams();
     useEffect(() => {
@@ -54,11 +71,13 @@ const UserProfile = () => {
                         <li>Info</li>
                     </ul>
                     <div>
-                        rank
+                        rank - {userRank}
                     </div>
                 </div>
             </nav>
+
             <main>
+                {/* user details */}
                 <aside id='details' className='p-1 pb-0'>
                     <div className='flex items-center justify-center'>
                         <div className="userDetails bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
@@ -80,11 +99,15 @@ const UserProfile = () => {
                         </div>
                     </div>
                 </aside>
+
+                {/* own posts list */}
                 <section id='main' className='flex items-center justify-center p-1 mt-4 md:mt-0'>
                     <div className="userDetails bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
                         <OwnPosts id={userId} col={1} />
                     </div>
                 </section>
+
+                {/* aside ads */}
                 <aside id='ads' className='hidden justify-center p-2 xl:flex'>
                     <div id='ad' className='ads'>
                         <header

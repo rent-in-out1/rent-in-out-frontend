@@ -65,15 +65,14 @@ const Card = ({ post }) => {
                 onClick={() => {
                     dispatch(onPostToggle(post));
                 }}
-                className="px-3 pt-3"
-            >
+                className="px-3 pt-3">
 
                 {/* post title */}
-                <h5 className="text-sm capitalize lg:text-3xl font-semibold sm:tracking-tight text-gray-900 cursor-pointer">
+                <h4 className="mb-1 capitalize font-semibold text-gray-900 cursor-pointer">
                     {post?.title}
-                </h5>
+                </h4>
 
-                <div className="flex justify-between items-center ">
+                <div className="flex justify-between items-center py-1">
 
                     {/* top 3 likes */}
                     <RecentLikes key={post._id} likes={post.likes} />
@@ -87,7 +86,7 @@ const Card = ({ post }) => {
                 </div>
 
                 <div className="h-full">
-                    <div className="flex items-center justify-center mb-2 md:mb-0">
+                    <div className="flex items-center justify-center">
 
                         {/* post price */}
                         <span className="text-xl md:text-2xl font-bold py-1 text-gray-900 mr-1">
