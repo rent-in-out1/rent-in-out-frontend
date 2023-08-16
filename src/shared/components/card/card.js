@@ -16,7 +16,7 @@ import RecentLikes from "../recentLikes/recentLikes";
 
 const Card = ({ post }) => {
     const dispatch = useDispatch();
-    const { user, wishList } = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
 
     return (
         <Wrapper>
