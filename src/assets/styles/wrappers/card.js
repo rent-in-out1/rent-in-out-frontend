@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  padding: 4px;
   margin-bottom: 10px;
   user-select: none;
     position: relative;

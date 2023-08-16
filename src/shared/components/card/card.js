@@ -9,7 +9,7 @@ import {
     onRegisterShow
 } from "../../../redux/features/toggleSlice";
 import { updateWishList } from "../../../redux/features/userSlice";
-import { utilFunctionUnitTimeToCreatedTime } from "../../../util/functions";
+import { unitTimeToCreatedTimeHelper } from "../../../util/functions";
 import ChatAndWhatsup from "../chat-whatsUp";
 import PostHeader from "../postHeader/postHeader";
 import RecentLikes from "../recentLikes/recentLikes";
@@ -82,7 +82,7 @@ const Card = ({ post }) => {
                     <span
                         className="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded lg:mr-2">
                         <Clock />
-                        {utilFunctionUnitTimeToCreatedTime(post.createdAt)}
+                        {unitTimeToCreatedTimeHelper(post.createdAt)}
                     </span>
                 </div>
 
