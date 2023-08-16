@@ -1,1 +1,1 @@
-export {default} from "./spinnerButton"
+export { default } from "./spinnerButton";

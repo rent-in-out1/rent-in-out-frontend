@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { useDispatch } from "react-redux";
 import ExitFill from "../../../assets/icons/exitFill";
 import ExitNoFill from "../../../assets/icons/exitNoFill";
-import {useDispatch} from "react-redux";
-import {Wrapper} from "../../../assets/styles/wrappers/singlePostModel";
+import { Wrapper } from "../../../assets/styles/wrappers/singlePostModel";
 
-const Backdrop = ({action}) => {
+const Backdrop = ({ action }) => {
     const dispatch = useDispatch();
     return (
         <Wrapper>
@@ -19,7 +19,7 @@ const Backdrop = ({action}) => {
     );
 };
 
-const PopUpOverlay = ({action, children}) => {
+const PopUpOverlay = ({ action, children }) => {
     const [over, setOver] = useState(false);
     const dispatch = useDispatch();
     return (
@@ -35,9 +35,9 @@ const PopUpOverlay = ({action, children}) => {
                         }}
                     >
                         {over ? (
-                            <ExitFill className="icon" color="white" width={32} height={32}/>
+                            <ExitFill className="icon" color="white" width={32} height={32} />
                         ) : (
-                            <ExitNoFill className="icon" color="white" width={32} height={32}/>
+                            <ExitNoFill className="icon" color="white" width={32} height={32} />
                         )}
                     </h2>
                     <div>{children}</div>
@@ -47,10 +47,10 @@ const PopUpOverlay = ({action, children}) => {
     );
 };
 const portalElement = document.getElementById("overlays");
-const PopUPModel = ({action, children}) => {
+const PopUPModel = ({ action, children }) => {
     return (
         <React.Fragment>
-            {ReactDOM.createPortal(<Backdrop action={action}/>, portalElement)}
+            {ReactDOM.createPortal(<Backdrop action={action} />, portalElement)}
             {ReactDOM.createPortal(
                 <PopUpOverlay action={action}>{children}</PopUpOverlay>,
                 portalElement

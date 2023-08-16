@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  /* background: var(--skyblue-50); */
   background: var(--white);
   position: sticky;
   top: 0;
@@ -142,7 +141,7 @@ export const Wrapper = styled.div`
     }
   }
 
-`
+`;
 export const Logo = styled.div`
 display: flex;
 align-items: center;
@@ -173,4 +172,4 @@ cursor: pointer;
             margin: 0;
         }
     }
-`
+`;

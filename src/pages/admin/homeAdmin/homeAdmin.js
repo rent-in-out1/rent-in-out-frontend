@@ -1,8 +1,8 @@
-import {useSelector} from "react-redux"
-import {Link} from "react-router-dom"
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const HomeAdmin = () => {
-    const user = useSelector(state => state.userSlice.user)
+    const user = useSelector(state => state.userSlice.user);
     return (
         <div className="text-center mt-4">
             <h1 className="text-3xl font-sans capitalize">Welcome
@@ -26,8 +26,8 @@ const HomeAdmin = () => {
                     </div>
                 </Link>
             </div>
-            
+
         </div>
-    )
-}
-export default HomeAdmin
+    );
+};
+export default HomeAdmin;

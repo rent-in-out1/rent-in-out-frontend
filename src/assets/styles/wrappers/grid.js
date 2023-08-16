@@ -12,4 +12,4 @@ grid-row-gap: ${props => props.rowGap}px;
     grid-template-columns: repeat(1, 1fr);
 }
 
-`
+`;

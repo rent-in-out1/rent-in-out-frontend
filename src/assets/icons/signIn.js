@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignIn = ({color = "black", width = "20px", height = "20px"}) => {
+const SignIn = ({ color = "black", width = "20px", height = "20px" }) => {
     return (
         <svg
             aria-hidden="true"

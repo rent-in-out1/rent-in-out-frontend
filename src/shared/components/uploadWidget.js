@@ -1,23 +1,23 @@
-import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {deleteBannerImage, deleteProfileImage} from "../../services/cloudinary-service/cloudinary-service";
-import {secret} from "../../services/secrets";
-import {doApiMethod} from '../../services/axios-service/axios-service';
-import {errorHandler, successHandler} from "../../services/extra-services/extra-services";
-import {uploadBanner, uploadProfileImage} from "../../redux/features/userSlice";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { uploadBanner, uploadProfileImage } from "../../redux/features/userSlice";
+import { doApiMethod } from '../../services/axios-service/axios-service';
+import { deleteBannerImage, deleteProfileImage } from "../../services/cloudinary-service/cloudinary-service";
+import { errorHandler, successHandler } from "../../services/extra-services/extra-services";
+import { secret } from "../../services/secrets";
 
 export function useUploadWidget({
-                                    userID = "",
-                                    postTitle = "",
-                                    cloudName,
-                                    uploadPreset,
-                                    single
-                                }) {
-    const dispatch = useDispatch()
-    const {cover_img, profile_img} = useSelector(
+    userID = "",
+    postTitle = "",
+    cloudName,
+    uploadPreset,
+    single
+}) {
+    const dispatch = useDispatch();
+    const { cover_img, profile_img } = useSelector(
         (state) => state.userSlice?.user
     );
-    const [loading, setIsLoading] = useState(false)
+    const [loading, setIsLoading] = useState(false);
     const [images, setImages] = useState([]);
     // const cloudName = "dva5ypcfd";
     // const uploadPreset = "postImages"
@@ -46,16 +46,15 @@ export function useUploadWidget({
             // theme: "purple", //change to a purple theme
         },
         async (error, result) => {
-            // setIsLoading(true)
             if (!error && result && result.event === "success") {
-                setIsLoading(false)
+                setIsLoading(false);
                 let image = {
                     url: result.info.url,
                     img_id: result.info.public_id,
                 };
                 if (single) setImages(image);
                 else if (!single) {
-                    setImages(images => [...images, image])
+                    setImages(images => [...images, image]);
                 }
                 if (cloudName === secret.BANNER_CLOUDINARY_NAME && result.info) changeBanner(image);
                 if (cloudName === secret.PROFILE_CLOUDINARY_NAME && result.info) changeProfile(image);

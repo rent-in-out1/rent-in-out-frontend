@@ -1,5 +1,5 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import {doGetApiMethod} from "../../services/axios-service/axios-service";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { doGetApiMethod } from "../../services/axios-service/axios-service";
 import { errorHandler } from "../../services/extra-services/extra-services";
 
 const initialState = {
@@ -12,7 +12,7 @@ const initialState = {
 export const getUserInbox = createAsyncThunk("getUserInbox/get", async () => {
     try {
         const url = "/users/getAllChat";
-        let {data} = await doGetApiMethod(url);
+        let { data } = await doGetApiMethod(url);
         return data;
     } catch (error) {
         errorHandler(error);
@@ -21,7 +21,7 @@ export const getUserInbox = createAsyncThunk("getUserInbox/get", async () => {
 export const getUserWishList = createAsyncThunk("getUserWishList/get", async () => {
     try {
         const url = "/users/getWishList";
-        let {data} = await doGetApiMethod(url);
+        let { data } = await doGetApiMethod(url);
         return data;
     } catch (error) {
         errorHandler(error);

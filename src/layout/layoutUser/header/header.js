@@ -1,31 +1,28 @@
-import React from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {Logo, Wrapper} from "../../../assets/styles/wrappers/navbarUser";
-import {useSelector, useDispatch} from "react-redux";
-import {useState} from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Bell from "../../../assets/icons/bell";
+import Dashboard from "../../../assets/icons/dashboard";
+import Inbox from "../../../assets/icons/inbox";
+import Profile from "../../../assets/icons/profile";
+import Search from "../../../assets/icons/search";
+import SignIn from "../../../assets/icons/signIn";
+import SignOut from "../../../assets/icons/signOut";
+import WishList from "../../../assets/icons/wishlist";
+import { Logo, Wrapper } from "../../../assets/styles/wrappers/navbarUser";
 import {
     onInboxToggle,
     onLogout,
     onRegisterShow,
     onSearchToggle,
 } from "../../../redux/features/toggleSlice";
-import Search from "../../../assets/icons/search";
-import Dashboard from "../../../assets/icons/dashboard";
-import Profile from "../../../assets/icons/profile";
-import Bell from "../../../assets/icons/bell";
-import Settings from "../../../assets/icons/settings";
-import Inbox from "../../../assets/icons/inbox";
-import SignIn from "../../../assets/icons/signIn";
-import SignOut from "../../../assets/icons/signOut";
-import WishList from "../../../assets/icons/wishlist";
-import {useEffect} from "react";
-import {secret} from '../../../services/secrets';
+import { secret } from '../../../services/secrets';
 
 const Header = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const isLogin = useSelector((state) => state.userSlice?.user !== null);
-    const {user} = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
     const [isOpen, setIsOpen] = useState(false);
     useEffect(() => {
         window.addEventListener("scroll", () => closeNav());
@@ -46,7 +43,7 @@ const Header = () => {
                 <div className="left flex flex-wrap">
                     <Link to={"/"}>
                         <Logo>
-                            <img src="/img/LOGO.png" alt="logo"/>
+                            <img src="/img/LOGO.png" alt="logo" />
                             <p>rentInOut</p>
                         </Logo>
                     </Link>
@@ -60,7 +57,7 @@ const Header = () => {
                                         type="button"
                                         className="inline-flex relative items-center p-3 text-sm  text-center"
                                     >
-                                        <Inbox color="black" width="20" height="20"/>
+                                        <Inbox color="black" width="20" height="20" />
                                         <span className="sr-only">Notifications</span>
                                         <div
                                             className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
@@ -73,7 +70,7 @@ const Header = () => {
                                         type="button"
                                         className="inline-flex relative items-center p-3 text-sm  text-center"
                                     >
-                                        <Bell/>
+                                        <Bell />
                                         <span className="sr-only">Notifications</span>
                                         <div
                                             className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
@@ -101,9 +98,8 @@ const Header = () => {
                             alt=""
                         />
                         <span
-                            className={`${
-                                isLogin ? "bg-green-400" : "bg-red-400"
-                            } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
+                            className={`${isLogin ? "bg-green-400" : "bg-red-400"
+                                } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
                         ></span>
                     </div>
                 </div>
@@ -124,7 +120,7 @@ const Header = () => {
                                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
                             >
                                 <div className="flex justify-between items-center">
-                                    <p>Home</p> <Dashboard color="black"/>
+                                    <p>Home</p> <Dashboard color="black" />
                                 </div>
                             </li>
                             <li
@@ -135,7 +131,7 @@ const Header = () => {
                                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
                             >
                                 <div className="flex justify-between items-center">
-                                    <p>Profile</p> <Profile color="black"/>
+                                    <p>Profile</p> <Profile color="black" />
                                 </div>
                             </li>
                             <li
@@ -146,7 +142,7 @@ const Header = () => {
                                     to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
                                 >
                                     <span>Wish List</span>
-                                    <WishList/>
+                                    <WishList />
                                 </Link>
                             </li>
                         </React.Fragment>
@@ -156,10 +152,10 @@ const Header = () => {
                         onClick={() => dispatch(onSearchToggle())}
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
-                        <a className="flex justify-between items-center cursor-pointer">
+                        <div className="flex justify-between items-center cursor-pointer">
                             <span>Search</span>
-                            <Search/>
-                        </a>
+                            <Search />
+                        </div>
                     </li>
                     <li
                         onClick={() => {
@@ -178,11 +174,11 @@ const Header = () => {
                         {isLogin ? (
                             <div className="flex justify-between items-center">
                                 {" "}
-                                <p>Signout</p> <SignOut color="black"/>
+                                <p>Signout</p> <SignOut color="black" />
                             </div>
                         ) : (
                             <div className="flex justify-between items-center">
-                                <p>Signin</p> <SignIn/>
+                                <p>Signin</p> <SignIn />
                             </div>
                         )}
                     </li>

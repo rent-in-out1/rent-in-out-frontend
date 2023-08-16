@@ -3,19 +3,19 @@ import ImageFill from "../../../../assets/icons/imageFill";
 import { errorHandler } from "../../../../services/extra-services/extra-services";
 
 const Form1 = ({
-                   data,
-                   setDisplay,
-                   setImages,
-                   images,
-                   handleOnChange,
-               }) => {
+    data,
+    setDisplay,
+    setImages,
+    images,
+    handleOnChange,
+}) => {
     const handleNext = () => {
         if (data.title === "") return errorHandler("You must provide a title");
         if (data.info === "") return errorHandler("You must provide a post info");
         if (data.img.length === 0)
             return errorHandler("You must provide at list one photo");
         setDisplay(true);
-    }
+    };
 
     return (
         <React.Fragment>
@@ -55,23 +55,23 @@ const Form1 = ({
 
                 {/* upload post */}
                 {
-                    !images.length > 0 ? 
-                    <div className="flex flex-col w-full" onClick={() => setImages.open()}>
-                    <div
-                        className="cursor-pointer flex flex-col items-center justify-center bg-white w-full rounded-xl p-3 h-full border border-gray-200">
-                        <h2>Choose some photos</h2>
-                        {images && images.length > 0 ? (
-                            <h2 className="text-gray-900 top-4">Add More Photos</h2>
-                        ) : null}
-                        <ImageFill width={"60px"} height="60px"/>
-                    </div>
-                </div>
-                :
-                
-                // images uploaded
-                <div className="overflow-hidden border">
-                    <img src={images[0]?.url} alt="post" />
-                </div>
+                    !images.length > 0 ?
+                        <div className="flex flex-col w-full" onClick={() => setImages.open()}>
+                            <div
+                                className="cursor-pointer flex flex-col items-center justify-center bg-white w-full rounded-xl p-3 h-full border border-gray-200">
+                                <h2>Choose some photos</h2>
+                                {images && images.length > 0 ? (
+                                    <h2 className="text-gray-900 top-4">Add More Photos</h2>
+                                ) : null}
+                                <ImageFill width={"60px"} height="60px" />
+                            </div>
+                        </div>
+                        :
+
+                        // images uploaded
+                        <div className="overflow-hidden border">
+                            <img src={images[0]?.url} alt="post" />
+                        </div>
                 }
             </form>
 
@@ -79,7 +79,7 @@ const Form1 = ({
             <div className="flex justify-end w-full mt-2">
                 <button
                     onClick={() => {
-                        handleNext()
+                        handleNext();
                     }}
                 >
                     Next

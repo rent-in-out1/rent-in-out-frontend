@@ -5,12 +5,10 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
   .chats {
     width: 95%;
     margin: -70px auto;
     display: flex;
-    /* align-items: center; */
     justify-content: space-between;
     height: 100%;
     background: var(--white);
@@ -33,10 +31,8 @@ export const Wrapper = styled.div`
       overflow-y: scroll;
       max-height: inherit;
     }
-    /*  */
   }
   @media (max-width: 768px) {
-    /* margin-top: 40px; */
     height: 100vh;
     max-height: 100vh;
     .chats {

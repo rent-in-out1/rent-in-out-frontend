@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { io } from "socket.io-client";
+import { Wrapper } from "../../../assets/styles/wrappers/chat";
+import { Button } from "../../../assets/styles/wrappers/registerPage";
+import { getUserInbox } from "../../../redux/features/userSlice";
 import {
     doApiMethod,
     doGetApiMethod,
 } from "../../../services/axios-service/axios-service";
-import { io } from "socket.io-client";
-import { Button } from "../../../assets/styles/wrappers/registerPage";
-import { Wrapper } from "../../../assets/styles/wrappers/chat";
-import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
-import { getUserInbox } from "../../../redux/features/userSlice";
-import SingleMessage from "./singleMessage";
 import { errorHandler } from "../../../services/extra-services/extra-services";
 import { secret } from "../../../services/secrets";
+import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
+import SingleMessage from "./singleMessage";
 
 const apiUrl = secret.SERVER_API_URL;
 

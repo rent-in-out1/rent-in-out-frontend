@@ -79,4 +79,4 @@ export const Wrapper = styled.div`
       transform: translateY(0);
     }
   }
-`
+`;

@@ -1,14 +1,14 @@
-import React from 'react'
-import OwnPosts from '../myProfile/ownPosts'
-import ProfileEdit from '../profile-edit'
+import React from 'react';
+import OwnPosts from '../myProfile/ownPosts';
+import ProfileEdit from '../profile-edit';
 
 const Notification = () => {
     return (
         <div>
-            <ProfileEdit/>
-            <OwnPosts/>
+            <ProfileEdit />
+            <OwnPosts />
         </div>
-    )
-}
+    );
+};
 
-export default Notification
+export default Notification;

@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const errorsSlice = createSlice({
     name: "errors",
@@ -7,7 +7,7 @@ const errorsSlice = createSlice({
         messege: ""
     },
     reducers: {}
-})
+});
 
-export const {isError} = errorsSlice.actions
-export default errorsSlice.reducer
+export const { isError } = errorsSlice.actions;
+export default errorsSlice.reducer;

@@ -1,5 +1,5 @@
-import React from 'react'
-import {MapContainer, TileLayer, Marker, Popup, Tooltip} from 'react-leaflet';
+import React from 'react';
+import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
 
 const mapComponent = () => {
     return (
@@ -17,7 +17,7 @@ const mapComponent = () => {
                 <Tooltip>hello</Tooltip>
             </Marker>
         </MapContainer>
-    )
-}
+    );
+};
 
-export default mapComponent
+export default mapComponent;

@@ -30,9 +30,6 @@ export const Wrapper = styled.div`
     overflow-y: scroll;
   }
 
-  /* .model >h3{
-    display: none;
-  } */
   @media (max-width: 1024px) {
     .model {
       width: 95%;
@@ -79,4 +76,4 @@ export const Wrapper = styled.div`
       transform: translateY(0);
     }
   }
-`
+`;

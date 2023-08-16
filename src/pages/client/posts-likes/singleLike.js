@@ -1,16 +1,16 @@
-import React from 'react'
-import {useDispatch, useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const SingleLike = ({item, action}) => {
+const SingleLike = ({ item, action }) => {
 
     const dispatch = useDispatch();
     const nav = useNavigate();
-    const {user} = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
     return (
         <li
             onClick={() => {
-                dispatch(action())
+                dispatch(action());
                 user?.role === "admin"
                     ? nav(`/admin/profile/${item.user_id}`)
                     : nav(`/profile/${item.user_id}`);
@@ -42,7 +42,7 @@ const SingleLike = ({item, action}) => {
                 {item.country}
             </p>
         </li>
-    )
-}
+    );
+};
 
-export default SingleLike
+export default SingleLike;

@@ -1,1 +1,1 @@
-export {default} from "./myProfile"
+export { default } from "./myProfile";

@@ -9,7 +9,7 @@ import CategoryItem from "./categoryItem";
 
 const Categories = () => {
     const dispatch = useDispatch();
-    const {categories} = useSelector((state) => state.categoriesSlice);
+    const { categories } = useSelector((state) => state.categoriesSlice);
     const [isChange, setIsChange] = useState(false);
     const [onAdd, setOnAdd] = useState(false);
     const [search, setSearch] = useState("");
@@ -17,16 +17,16 @@ const Categories = () => {
     const [page, setPage] = useState(1);
 
     const options = [
-        {name: "Title", value: "name"},
-        {name: "Date created", value: "createdAt"},
-        {name: "Date updated", value: "updatedAt"},
+        { name: "Title", value: "name" },
+        { name: "Date created", value: "createdAt" },
+        { name: "Date updated", value: "updatedAt" },
     ];
     const categories_headers = [
         "Title", "url name", "Created by", "info", "created at", "updated at", "edit", "last edit by", "delete"
-    ]
+    ];
 
     useEffect(() => {
-        dispatch(getCatgories({search, option, page}));
+        dispatch(getCatgories({ search, option, page }));
     }, [page, option, search]);
     return (
         <Wrapper className="mb-2">
@@ -47,24 +47,24 @@ const Categories = () => {
             <div className="wrapper">
                 <table>
                     <thead>
-                    <tr>
-                        {categories_headers.map((header, i) => (
-                            <th key={i}>{header}</th>
-                        ))}
-                    </tr>
+                        <tr>
+                            {categories_headers.map((header, i) => (
+                                <th key={i}>{header}</th>
+                            ))}
+                        </tr>
                     </thead>
                     <tbody>
-                    {categories?.map((category) => (
-                        <CategoryItem
-                            key={category?._id}
-                            item={category}
-                            setIsChange={setIsChange}
-                            isChange={isChange}
-                        />
-                    ))}
-                    {onAdd && (
-                        <AddCategoryForm setOnAdd={setOnAdd} setIsChange={setIsChange}/>
-                    )}
+                        {categories?.map((category) => (
+                            <CategoryItem
+                                key={category?._id}
+                                item={category}
+                                setIsChange={setIsChange}
+                                isChange={isChange}
+                            />
+                        ))}
+                        {onAdd && (
+                            <AddCategoryForm setOnAdd={setOnAdd} setIsChange={setIsChange} />
+                        )}
                     </tbody>
                 </table>
             </div>

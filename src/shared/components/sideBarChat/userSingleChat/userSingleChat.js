@@ -1,29 +1,28 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-// import { updateInbox } from "../../redux/features/userSlice";
-import {doApiMethod} from "../../../../services/axios-service/axios-service";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from 'react-router-dom';
 import ExitFill from "../../../../assets/icons/exitFill";
 import ExitNoFill from "../../../../assets/icons/exitNoFill";
-import {useNavigate, useParams} from 'react-router-dom';
-import {getUserInbox} from "../../../../redux/features/userSlice";
+import { getUserInbox } from "../../../../redux/features/userSlice";
+import { doApiMethod } from "../../../../services/axios-service/axios-service";
 
-const UserSingleChat = ({msg}) => {
+const UserSingleChat = ({ msg }) => {
     const nav = useNavigate();
     const dispatch = useDispatch();
-    const {roomID} = useParams();
-    const {user} = useSelector((state) => state.userSlice);
+    const { roomID } = useParams();
+    const { user } = useSelector((state) => state.userSlice);
     const [over, setOver] = useState(false);
     const [showDel, setShowDel] = useState(false);
     const deleteChat = async () => {
-        let url = `/users/deleteChat/${msg._id}`
-        await doApiMethod(url, "DELETE")
+        let url = `/users/deleteChat/${msg._id}`;
+        await doApiMethod(url, "DELETE");
         dispatch(getUserInbox());
         if (roomID === msg.roomID) {
             user.role === "admin"
                 ? nav(`/admin`)
                 : nav(`/`);
         }
-    }
+    };
     return (
         <div
             onMouseOver={() => setShowDel(true)}
@@ -40,7 +39,6 @@ const UserSingleChat = ({msg}) => {
                         />
                     </div>
                     <div className="firstName text-sm capitalize rounded">
-                        {/* {user.fullName.firstName} */}
                         {user._id === msg.creatorID ? msg.userName : msg.ownerName}
                     </div>
                 </div>
@@ -49,16 +47,16 @@ const UserSingleChat = ({msg}) => {
                     onMouseOver={() => setOver(true)}
                     onMouseLeave={() => setOver(false)}
                     onClick={(e) => {
-                        e.stopPropagation()
-                        deleteChat()
+                        e.stopPropagation();
+                        deleteChat();
                     }}
                 >
-          {over ? (
-              <ExitFill className="icon" width={16} height={16}/>
-          ) : (
-              <ExitNoFill className="icon" width={16} height={16}/>
-          )}
-        </span>) : null}
+                    {over ? (
+                        <ExitFill className="icon" width={16} height={16} />
+                    ) : (
+                        <ExitNoFill className="icon" width={16} height={16} />
+                    )}
+                </span>) : null}
             </div>
             <div className="chatOverView bg-gray-50 text-xs mt-2 p-1">
                 {msg?.messagesArr[msg?.messagesArr?.length - 1]?.message}

@@ -1,13 +1,13 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {doApiMethod, doGetApiMethod} from "../../services/axios-service/axios-service";
-import {errorHandler} from "../../services/extra-services/extra-services";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { doApiMethod, doGetApiMethod } from "../../services/axios-service/axios-service";
+import { errorHandler } from "../../services/extra-services/extra-services";
 
 export const getCatgories = createAsyncThunk(
     "categories/get",
-    async ({search, option, page}) => {
+    async ({ search, option, page }) => {
         try {
             let url = `/categories/search/?s=${search}&sort=${option}&page=${page}`;
-            const {data} = await doGetApiMethod(url);
+            const { data } = await doGetApiMethod(url);
             return data;
         } catch (error) {
             errorHandler(error);
@@ -16,7 +16,7 @@ export const getCatgories = createAsyncThunk(
 );
 export const deleteCategory = createAsyncThunk(
     "deleteCategory/delete",
-    async ({id, name}) => {
+    async ({ id, name }) => {
         try {
             if (window.confirm(`Are you sure you want to delete${name}`)) {
                 const url = "/categories/" + id;
@@ -31,7 +31,7 @@ export const deleteCategory = createAsyncThunk(
 
 export const editCategory = createAsyncThunk(
     "editCategory/edit",
-    async ({id, editData, setOnEdit}) => {
+    async ({ id, editData, setOnEdit }) => {
         const url = "/categories/" + id;
         if (
             !editData ||
@@ -45,9 +45,9 @@ export const editCategory = createAsyncThunk(
         try {
             if (window.confirm(`Are you sure you want to edit ${editData.name}`)) {
                 setOnEdit(true);
-                const {data} = await doApiMethod(url, "PUT", editData);
+                const { data } = await doApiMethod(url, "PUT", editData);
                 setOnEdit(false);
-                return {data, id};
+                return { data, id };
             }
         } catch (error) {
             errorHandler(error);
@@ -59,8 +59,8 @@ export const addCategory = createAsyncThunk(
     async (addData) => {
         try {
             let url = "/categories";
-            const {data} = await doApiMethod(url, "POST", addData);
-            return data
+            const { data } = await doApiMethod(url, "POST", addData);
+            return data;
         } catch (error) {
             errorHandler(error);
         }
@@ -110,7 +110,7 @@ const categoriesSlice = createSlice({
                 state.categories = state.categories.filter(
                     (category) => category._id !== action.payload.id
                 );
-                state.categories = [...state.categories, action.payload.data.category]
+                state.categories = [...state.categories, action.payload.data.category];
             })
             .addCase(editCategory.rejected, (state, action) => {
                 state.loading = false;
@@ -121,12 +121,12 @@ const categoriesSlice = createSlice({
             })
             .addCase(addCategory.fulfilled, (state, action) => {
                 state.loading = false;
-                state.categories = [...state.categories, action.payload]
+                state.categories = [...state.categories, action.payload];
             })
             .addCase(addCategory.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            })
+            });
     },
 });
 export default categoriesSlice.reducer;

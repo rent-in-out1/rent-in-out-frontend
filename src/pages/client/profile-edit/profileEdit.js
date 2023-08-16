@@ -1,23 +1,23 @@
-import {useForm} from "react-hook-form";
-import {useSelector, useDispatch} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
-import {upload} from "../../../redux/features/userSlice";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Wrapper } from "../../../assets/styles/wrappers/editUser";
+import { upload } from "../../../redux/features/userSlice";
 import {
     doApiMethod,
     doGetApiMethod,
 } from "../../../services/axios-service/axios-service";
-import {toast} from "react-toastify";
-import {Wrapper} from "../../../assets/styles/wrappers/editUser";
-import {errorHandler} from "../../../services/extra-services/extra-services";
+import { errorHandler } from "../../../services/extra-services/extra-services";
 
 const ProfileEdit = () => {
     const nav = useNavigate();
-    const {user} = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
     const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
-        formState: {errors},
+        formState: { errors },
     } = useForm();
     const onSubForm = (_dataBody) => {
         let allupload = {
@@ -34,10 +34,10 @@ const ProfileEdit = () => {
     const onUpload = async (_dataBody) => {
         try {
             const url = "/users/" + user._id;
-            const {data} = await doApiMethod(url, "PUT", _dataBody);
+            const { data } = await doApiMethod(url, "PUT", _dataBody);
             if (data.modifiedCount) {
                 const url = "/users/info/" + user._id;
-                const {data} = await doGetApiMethod(url, "GET");
+                const { data } = await doGetApiMethod(url, "GET");
                 dispatch(upload(data.userInfo));
                 toast.success("the deatails change");
                 user.role === "admin" ? nav("admin/profile") : nav("/profile");

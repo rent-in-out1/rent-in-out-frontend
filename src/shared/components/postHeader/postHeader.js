@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { BsHammer, BsTrash } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Dots from '../../../assets/icons/dots';
 import Send from '../../../assets/icons/send';
-import { deletePost, setPostEdit } from '../../../redux/features/postsSlice';
-import { BsHammer } from 'react-icons/bs';
-import { BsTrash } from 'react-icons/bs';
+import { setPostEdit } from '../../../redux/features/postsSlice';
 
 
 const PostHeader = ({ post }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
   const [displayOptions, setDisplayOptions] = useState(false);
   const nav = useNavigate();
@@ -81,8 +79,8 @@ const PostHeader = ({ post }) => {
             <React.Fragment>
               <li
                 onClick={() => {
-                  closeNav()
-                  dispatch(setPostEdit(post, user))
+                  closeNav();
+                  dispatch(setPostEdit(post, user));
                   user?.role === "admin"
                     ? nav(`/admin/editPost`)
                     : nav(`/editPost`);
@@ -106,8 +104,8 @@ const PostHeader = ({ post }) => {
         </ul>
       )}
     </div>
-  )
+  );
 
-}
+};
 
-export default PostHeader
+export default PostHeader;

@@ -1,14 +1,14 @@
 import React from "react";
 // should send title options and set search set option
 // controllers of all the tables 
-const Controllers = ({title, placeHolder = "", options, setSearch, setOption}) => {
+const Controllers = ({ title, placeHolder = "", options, setSearch, setOption }) => {
     return (
         <div className="flex flex-wrap controllers">
             <div className="title w-full text-center">
                 <h1 className="capitalize px-2">{title}</h1>
             </div>
             <div
-                className=" flex justify-center flex-wrap p-3 items-center justify-center w-full md:w-8/12 sm:w-full md:mx-auto mx-6">
+                className=" flex flex-wrap p-3 items-center justify-center w-full md:w-8/12 sm:w-full md:mx-auto mx-6">
                 <div className="search w-full md:w-8/12 relative mr-2">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg

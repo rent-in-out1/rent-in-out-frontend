@@ -1,1 +1,1 @@
-export {default} from "./ownPosts"
+export { default } from "./ownPosts";

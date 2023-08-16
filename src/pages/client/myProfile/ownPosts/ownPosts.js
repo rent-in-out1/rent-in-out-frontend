@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from "react";
-import {doGetApiMethod} from "../../../../services/axios-service/axios-service";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Wrapper } from "../../../../assets/styles/wrappers/grid";
+import { doGetApiMethod } from "../../../../services/axios-service/axios-service";
 import Card from "../../../../shared/components/card/card";
-import {Wrapper} from "../../../../assets/styles/wrappers/grid";
-import {useSelector} from "react-redux";
 
-const OwnPosts = ({id, col = 2}) => {
+const OwnPosts = ({ id, col = 2 }) => {
     const [posts, setPosts] = useState([]);
-    const {isChange} = useSelector(state => state.postsSlice)
+    const { isChange } = useSelector(state => state.postsSlice);
     useEffect(() => {
         getUserPosts();
     }, [isChange, id]);
 
     const getUserPosts = async () => {
         let url = "/posts/userPosts/" + id;
-        const {data} = await doGetApiMethod(url);
+        const { data } = await doGetApiMethod(url);
         setPosts(data);
     };
     return (
@@ -22,7 +22,7 @@ const OwnPosts = ({id, col = 2}) => {
                 {posts.map((post) => {
                     return (
                         <div key={post._id} className=" flex justify-center items-center">
-                            <Card post={post}/>
+                            <Card post={post} />
                         </div>
                     );
                 })}

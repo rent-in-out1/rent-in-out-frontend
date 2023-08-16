@@ -1,15 +1,14 @@
-import React from 'react'
-import BannerProfile from '../profile/bannerProfile'
-import Profile from '../profile'
+import React from 'react';
+import Profile from '../profile';
+import BannerProfile from '../profile/bannerProfile';
 
 const MyProfile = () => {
     return (
         <div>
-            <BannerProfile/>
-            <Profile/>
-            {/* <Footer /> */}
+            <BannerProfile />
+            <Profile />
         </div>
-    )
-}
+    );
+};
 
-export default MyProfile
+export default MyProfile;

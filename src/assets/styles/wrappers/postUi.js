@@ -47,7 +47,6 @@ margin-bottom: 12px;
          display: flex;
          align-items: center;
          font-weight: bold;
-         /* margin-bottom: 20px; */
          cursor: pointer;
          justify-content: center;
          &:hover{
@@ -55,4 +54,4 @@ margin-bottom: 12px;
          }  
    }
 }
-`
+`;

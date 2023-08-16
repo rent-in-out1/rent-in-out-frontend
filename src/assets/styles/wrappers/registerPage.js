@@ -20,7 +20,6 @@ export const Wrapper = styled.div`
     padding: 8px;
     max-width: inherit;
     width: 100%;
-    /* box-sizing: border-box; */
     border-radius: 8px;
     @media (max-width: 768px) {
       border-radius: 0;
@@ -64,7 +63,6 @@ export const Wrapper = styled.div`
     #password{
       background: var(--grey-100);
       display: flex;
-      /* padding: 8px; */
       align-items: center;
       border: 1px solid var(--grey-200);
       border-radius: 8px;
@@ -86,64 +84,7 @@ export const Wrapper = styled.div`
     @media (max-width: 768px) {
       padding: 24px;
     }
-  }
-
-
-  /* .left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 35px;
-    @media (max-width: 768px) {
-      margin: 8px;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-    .loginButton {
-      margin-top:0;
-      width: 150px;
-      padding: 10px 25px;
-      border-radius: 5px;
-      color: white;
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-    .google {
-      background-color: #df4930;
-    }
-    .facebook {
-      background-color: #507cc0;
-    }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
-    }
-    .google {
-      background-color: #df4930;
-    }
-    .facebook {
-      background-color: #507cc0;
-    }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
-    }
-    @media (max-width: 768px) {
-      .loginButton{
-        padding: 10px 10px;
-        width: 120px;
-      }
-    }
-  } */
-`;
+  }`;
 
 export const Button = styled.div`
   display: flex;

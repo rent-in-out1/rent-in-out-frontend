@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const FilterPosts = () => {
     return (
         <div>
-            <input type="text"/>
+            <input type="text" />
         </div>
-    )
-}
+    );
+};
 
-export default FilterPosts
+export default FilterPosts;

@@ -47,6 +47,7 @@ const SentMailResetPass = (props) => {
         <div className="right w-full md:w-2/3">
             <form onSubmit={handleSubmit(onSub)}>
                 <div className="flex flex-wrap -mx-3 mb-2">
+                    {/* email */}
                     <div className="w-full px-3">
                         <label>Email</label>
                         <input
@@ -63,6 +64,7 @@ const SentMailResetPass = (props) => {
                     </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-2">
+                    {/* confirm email */}
                     <div className="w-full px-3">
                         <label>Confirm Email</label>
                         <input
@@ -78,10 +80,12 @@ const SentMailResetPass = (props) => {
                         {errors.email2 && <small>Email not match.</small>}
                     </div>
                 </div>
+                {/* send password button submit */}
                 <Button>
                     <LoadingButton isLoading={load}>Send Password Reset Request</LoadingButton>
                 </Button>
             </form>
+            {/* navigate to sign in */}
             <span className="flex items-center justify-center">
         Already a member ?
         <button
