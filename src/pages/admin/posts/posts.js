@@ -22,7 +22,7 @@ const Posts = () => {
     const getAllposts = async () => {
         let url = `/posts/search/?s=${search}&sort=${option}&page=${page}`;
         const { data } = await doGetApiMethod(url);
-        setPosts(data);
+        setPosts(data.posts);
         setIsChange(false);
     };
     useEffect(() => {

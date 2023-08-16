@@ -1,10 +1,10 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Header from './header';
-import Sidebar from '../../shared/components/sideBar';
 import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../../shared/components/sideBar';
 import SideBarChat from '../../shared/components/sideBarChat/sideBarChat';
 import Footer from './footer/footer';
+import Header from './header';
 
 
 const Layout = () => {
@@ -13,7 +13,7 @@ const Layout = () => {
         <React.Fragment>
             <Header />
             <div className='bg-gray-100 flex'>
-                <div className="lg:w-2/12 hidden lg:flex">
+                <div className="xl:w-2/12 hidden xl:flex">
                     <Sidebar />
                 </div>
                 <div className="bg-gray-100 lg:w-8/12 w-full lg:ml-12 lg:-mr-4  lg:pl-6 lg:pr-3">

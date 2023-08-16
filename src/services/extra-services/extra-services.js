@@ -54,8 +54,6 @@ export const unitTimeToCreatedTimeHelper = (unix) => {
 export const checkIfPostAvailableHelper = (date) => {
     const currentTime = Math.floor(Date.now() / 1000);
     const unixTime = new Date(date).getTime() / 1000;
-    console.log(unixTime);
-    console.log(Math.floor(Date.now() / 1000));
 
     if (unixTime < currentTime) {
         return true;

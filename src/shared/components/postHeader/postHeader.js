@@ -45,9 +45,9 @@ const PostHeader = ({ post }) => {
         </div>
         <h5 className="pl-1 flex">
           {post?.creator_id.fullName?.firstName}
-          <span className="ml-1 hidden md:flex">
+          <label className="ml-1">
             {post?.creator_id.fullName?.lastName}
-          </span>
+          </label>
         </h5>
       </div>
       <div

@@ -15,13 +15,14 @@ export const Wrapper = styled.div`
     overflow-y: hidden;
     padding: 12px;
     position: fixed;
+    min-height: 40vh;
     max-height: 80vh;
     margin-bottom: 20px;
-    top: 10vh;
+    top: 20vh;
     left: 25%;
     width: 50%;
     background-color: white;
-    border-radius: 14px;
+    border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     z-index: 30;
     animation: slide-down 600ms ease-in-out forwards;

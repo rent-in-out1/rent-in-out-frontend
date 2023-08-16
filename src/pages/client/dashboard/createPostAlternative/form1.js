@@ -81,11 +81,11 @@ const Form1 = ({
                 }
             </form>
             <div className="flex justify-end mt-2 mr-4">
-                <button className="flex-shrink-0 border-transparent py-2 border-4 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-blue-400 hover:text-blue-700 rounded-xl" type="button"
+                <button className="flex-shrink-0 border-transparent focus:outline-none py-2 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-blue-400 hover:text-blue-700 rounded-xl" type="button"
                     onClick={() => closeUploadSection()}>
                     Cancel
                 </button>
-                <button className="flex-shrink-0 border-transparent hover:border-transparent active:border-transparent bg-blue-400 hover:bg-blue-700 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-white rounded-xl"
+                <button className="flex-shrink-0 border-transparent focus:outline-none hover:border-transparent active:border-transparent bg-blue-400 hover:bg-blue-700 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-white rounded-xl"
                     onClick={() => {
                         handleNext();
                     }}>
