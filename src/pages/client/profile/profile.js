@@ -1,17 +1,17 @@
 import React from "react";
-import {Wrapper} from "../../../assets/styles/wrappers/userProfile";
-import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import Location from "../../../assets/icons/location";
-import Telephone from "../../../assets/icons/telephone";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Calendar from "../../../assets/icons/calendar";
-import OwnPosts from "../myProfile/ownPosts";
+import Location from "../../../assets/icons/location";
 import Pencil from "../../../assets/icons/pencil";
+import Telephone from "../../../assets/icons/telephone";
+import { Wrapper } from "../../../assets/styles/wrappers/userProfile";
+import OwnPosts from "../myProfile/ownPosts";
 import Mail from "./../../../assets/icons/mail";
 
 const Profile = () => {
     const nav = useNavigate();
-    const {user} = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
 
     return (
         <Wrapper>
@@ -37,25 +37,25 @@ const Profile = () => {
                         <div
                             className="userDetails capitalize bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
                             <h3 className="flex items-center justify-between mb-1 capitalize">
-                <span>
-                  {user.fullName?.firstName} {user.fullName?.lastName}
-                </span>{" "}
-                                <Pencil/>
+                                <span>
+                                    {user.fullName?.firstName} {user.fullName?.lastName}
+                                </span>{" "}
+                                <Pencil />
                             </h3>
                             <h5 className="flex items-center mb-1 capitalize">
-                                <Location/> {user?.country} {user?.city}
+                                <Location /> {user?.country} {user?.city}
                             </h5>
                             <h5 className="flex items-center mb-1 capitalize">
-                                <Telephone/> {user?.phone}
+                                <Telephone /> {user?.phone}
                             </h5>
                             <h5 className="flex items-center mb-1 ">
-                                <Mail/>
+                                <Mail />
                                 <p className="lowercase">{user?.email}</p>{" "}
                             </h5>
 
                             {user.birthdate && (
                                 <h5 className="flex items-center">
-                                    <Calendar/>
+                                    <Calendar />
                                     <p className="ml-2">
                                         {new Date(user?.birthdate).toLocaleDateString()}
                                     </p>
@@ -65,9 +65,9 @@ const Profile = () => {
                     </div>
                     <div className="activity flex justify-center mt-4 ">
                         <div className="bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
-              <span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
-                Activities
-              </span>
+                            <span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                                Activities
+                            </span>
                             <h2>{user.fullName?.firstName} Liked shimon post</h2>
                             <h2>Rent skateboard from Ido</h2>
                         </div>
@@ -78,7 +78,7 @@ const Profile = () => {
                     className="flex items-center justify-center p-1 mt-4 md:mt-0"
                 >
                     <div className="userDetails bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
-                        <OwnPosts id={user._id} col={1}/>
+                        <OwnPosts id={user._id} col={1} />
                     </div>
                 </section>
                 <aside id="ads" className="hidden justify-center p-2 xl:flex">

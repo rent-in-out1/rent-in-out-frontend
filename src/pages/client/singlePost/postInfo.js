@@ -1,6 +1,6 @@
 import React from "react";
+import { availableTimeStampHelper, checkIfPostAvailableHelper, unitTimeToCreatedTimeHelper } from "../../../services/extra-services/extra-services";
 import ChatAndWhatsup from "../../../shared/components/chat-whatsUp";
-import { availableTimeStampHelper, checkIfPostAvailableHelper, unitTimeToCreatedTimeHelper } from "../../../util/functions";
 
 const PostInfo = ({ post, user, owner }) => {
     return (

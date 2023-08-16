@@ -37,9 +37,7 @@ const ResetPass = () => {
             if (data.status === "Success") {
                 successHandler(data.msg);
                 nav("/");
-            } else {
-                errorHandler(data.msg);
-            }
+            } else errorHandler(data.msg);
             dispatch(onRegisterShow());
             setLoad(false);
         } catch (err) {
@@ -56,6 +54,7 @@ const ResetPass = () => {
                         <div className="flex flex-wrap -mx-3 mb-2">
                             <div className="w-full px-3">
                                 <label>Password</label>
+                                {/* password input */}
                                 <input
                                     {...register("password", {
                                         required: true,
@@ -75,6 +74,7 @@ const ResetPass = () => {
                             </div>
                             <div className="w-full px-3">
                                 <label>Confirm Password</label>
+                                {/* password recheck input */}
                                 <input
                                     {...register("password2", {
                                         required: true,

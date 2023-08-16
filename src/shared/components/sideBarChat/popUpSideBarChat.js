@@ -1,14 +1,14 @@
 import React from "react";
-import SideBarChat from "./sideBarChat";
+import { Wrapper } from '../../../assets/styles/wrappers/popUpSideBarChat';
+import { onInboxToggle } from "../../../redux/features/toggleSlice";
 import PopUPModel from "./../../UI/popup/popUpChatBar";
-import {onInboxToggle} from "../../../redux/features/toggleSlice";
-import {Wrapper} from '../../../assets/styles/wrappers/popUpSideBarChat';
+import SideBarChat from "./sideBarChat";
 
 const PopUpSideBarChat = () => {
     return (
         <PopUPModel action={onInboxToggle}>
             <Wrapper>
-                <SideBarChat/>
+                <SideBarChat />
             </Wrapper>
         </PopUPModel>
     );

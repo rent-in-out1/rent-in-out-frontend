@@ -9,14 +9,14 @@ import {
     onRegisterShow
 } from "../../../redux/features/toggleSlice";
 import { updateWishList } from "../../../redux/features/userSlice";
-import { unitTimeToCreatedTimeHelper } from "../../../util/functions";
+import { unitTimeToCreatedTimeHelper } from "../../../services/extra-services/extra-services";
 import ChatAndWhatsup from "../chat-whatsUp";
 import PostHeader from "../postHeader/postHeader";
 import RecentLikes from "../recentLikes/recentLikes";
 
 const Card = ({ post }) => {
     const dispatch = useDispatch();
-    const { user, wishList } = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
 
     return (
         <Wrapper>
@@ -69,7 +69,7 @@ const Card = ({ post }) => {
             >
 
                 {/* post title */}
-                <h5 className="text-sm capitalize text-lg lg:text-3xl font-semibold sm:tracking-tight text-gray-900 cursor-pointer">
+                <h5 className="text-sm capitalize lg:text-3xl font-semibold sm:tracking-tight text-gray-900 cursor-pointer">
                     {post?.title}
                 </h5>
 

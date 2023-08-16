@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from "react";
-import {useSelector} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Wrapper } from "../../../../assets/styles/wrappers/postUi";
+import { deleteOnCancel } from "../../../../services/cloudinary-service/cloudinary-service";
+import { secret } from "../../../../services/secrets";
+import { useUploadWidget } from "../../../../shared/components/uploadWidget";
 import Form1 from "./form1";
 import Form2 from "./form2";
-import {Wrapper} from "../../../../assets/styles/wrappers/postUi";
-import {secret} from "../../../../services/secrets";
-import {useUploadWidget} from "../../../../shared/components/uploadWidget";
-import {deleteOnCancel} from "../../../../services/cloudinary-service/cloudinary-service";
 
 const CreatePost = ({setOnAdd}) => {
     const [display, setDisplay] = useState(false);
@@ -85,7 +85,6 @@ const CreatePost = ({setOnAdd}) => {
                 type="button"
                 onClick={() => {
                     setOnAdd(false);
-                    // setData(initialState);
                     if (images && images.length > 0) deleteOnCancel(images);
                 }}
             >

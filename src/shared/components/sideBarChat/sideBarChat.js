@@ -1,14 +1,13 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { onInboxClose } from "../../../redux/features/toggleSlice";
+import { getUserInbox } from "../../../redux/features/userSlice";
 import UserSingleChat from "./userSingleChat/userSingleChat";
-import {getUserInbox} from "../../../redux/features/userSlice";
-import {onInboxClose} from "../../../redux/features/toggleSlice";
-// import Chat from "./../../../assets/icons/chat";
 const SideBarChat = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
-    const {user, inbox} = useSelector((state) => state.userSlice);
+    const { user, inbox } = useSelector((state) => state.userSlice);
     useEffect(() => {
         dispatch(getUserInbox());
     }, []);
@@ -34,7 +33,7 @@ const SideBarChat = () => {
                                     dispatch(onInboxClose());
                                 }}
                             >
-                                <UserSingleChat msg={msg}/>
+                                <UserSingleChat msg={msg} />
                             </div>
                         ))}
                     </div>

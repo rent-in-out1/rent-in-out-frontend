@@ -1,1 +1,1 @@
-export {default} from "./bannerProfile"
+export { default } from "./bannerProfile";

@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import UserRating from "./userRating";
+import React, { useState } from "react";
 import Telephone from './../../../assets/icons/telephone';
+import UserRating from "./userRating";
 
-const UserInfo = ({owner, rank, post, isChange, setIsChange}) => {
+const UserInfo = ({ owner, rank, post, isChange, setIsChange }) => {
     const [show, setIsShow] = useState(true);
     return (
         <div className="user-header capitalize mb-2 border p-2 relative">
@@ -19,10 +19,10 @@ const UserInfo = ({owner, rank, post, isChange, setIsChange}) => {
                     <li>
                         email:{" "}
                         <span className="lowercase">
-              <a className="hover:underline" href="#">
-                {owner?.email}
-              </a>
-            </span>
+                            <a className="hover:underline" href="#">
+                                {owner?.email}
+                            </a>
+                        </span>
                     </li>
                 </ul>
                 <button
@@ -31,16 +31,16 @@ const UserInfo = ({owner, rank, post, isChange, setIsChange}) => {
                 >
                     {show ? (
                         <span className="flex flex-col items-center justify-center">
-              <Telephone color="gray" width="30px" height="30px" className="text-center"/>
-              <small className="text-red-400">Show</small>
-            </span>
+                            <Telephone color="gray" width="30px" height="30px" className="text-center" />
+                            <small className="text-red-400">Show</small>
+                        </span>
                     ) : (
                         <span className="flex flex-col items-center justify-center">
-              <a href="#" className="hover:underline">
-                {owner.phone}
-              </a>
-              <small className="text-green-400">Hide</small>
-            </span>
+                            <a href="#" className="hover:underline">
+                                {owner.phone}
+                            </a>
+                            <small className="text-green-400">Hide</small>
+                        </span>
                     )}
                 </button>
             </div>

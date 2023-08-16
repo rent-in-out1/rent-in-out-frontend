@@ -1,9 +1,9 @@
-import {configureStore} from '@reduxjs/toolkit';
-import userSlice from './features/userSlice';
-import errorsSlice from './features/errorSlice'
-import toggleSlice from './features/toggleSlice'
+import { configureStore } from '@reduxjs/toolkit';
 import categoriesSlice from './features/categorieSlice';
+import errorsSlice from './features/errorSlice';
 import postsSlice from './features/postsSlice';
+import toggleSlice from './features/toggleSlice';
+import userSlice from './features/userSlice';
 
 
 const store = configureStore({
@@ -14,6 +14,6 @@ const store = configureStore({
         categoriesSlice,
         postsSlice
     }
-})
+});
 
-export default store
+export default store;

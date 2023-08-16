@@ -1,28 +1,28 @@
-import React, {useEffect, Suspense} from "react";
 import jwt_decode from "jwt-decode";
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import {ToastContainer} from "react-toastify";
+import React, { Suspense, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useSelector, useDispatch} from "react-redux";
-import {secret} from "./services/secrets";
-import {doApiMethod} from "./services/axios-service/axios-service";
-import {
-    getUserInbox,
-    getUserWishList,
-    onLogin,
-} from "./redux/features/userSlice";
-import Loader from "./shared/components/loader/loader";
-import WishList from "./pages/client/wishList";
-import ConfirmHandler from "./shared/UI/confirm/confirm";
 import Chat from "./pages/client/chat/chat";
 import MyProfile from "./pages/client/myProfile";
+import WishList from "./pages/client/wishList";
+import { onLikesToggle } from "./redux/features/toggleSlice";
+import {
+  getUserInbox,
+  getUserWishList,
+  onLogin,
+} from "./redux/features/userSlice";
+import { doApiMethod } from "./services/axios-service/axios-service";
+import { errorHandler } from "./services/extra-services/extra-services";
+import { secret } from "./services/secrets";
+import ConfirmHandler from "./shared/UI/confirm/confirm";
+import Loader from "./shared/components/loader/loader";
 import PopUpSideBarChat from "./shared/components/sideBarChat/popUpSideBarChat";
-import {onLikesToggle} from "./redux/features/toggleSlice";
-import {errorHandler} from "./services/extra-services/extra-services";
 
 // Lazy loading of routes
 const LayoutAdmin = React.lazy(() =>
-    import("./layout/layoutAdmin/layoutAdmin")
+  import("./layout/layoutAdmin/layoutAdmin")
 );
 const Users = React.lazy(() => import("./pages/admin/users"));
 const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
@@ -31,7 +31,7 @@ const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
 const PostEdit = React.lazy(() => import('./pages/client/post-edit/postEdit'));
 const ProfileEdit = React.lazy(() =>
-    import("./pages/client/profile-edit/profileEdit")
+  import("./pages/client/profile-edit/profileEdit")
 );
 const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
 const Register = React.lazy(() => import("./api/auth/register"));
@@ -39,10 +39,10 @@ const Posts = React.lazy(() => import("./pages/admin/posts"));
 const Page404 = React.lazy(() => import("./pages/page-not-found"));
 const ResetPass = React.lazy(() => import("./api/auth/resetPass"));
 const PopUpLikes = React.lazy(() =>
-    import("./pages/client/posts-likes/popUpLikes")
+  import("./pages/client/posts-likes/popUpLikes")
 );
 const UserSearch = React.lazy(() =>
-    import("./pages/client/userSearch/userSearch")
+  import("./pages/client/userSearch/userSearch")
 );
 const SinglePost = React.lazy(() => import("./pages/client/singlePost"));
 const AppRoutes = () => {
@@ -53,35 +53,47 @@ const AppRoutes = () => {
   );
   let { likes } = useSelector((state) => state.toggleSlice);
   let { postShow } = useSelector((state) => state.toggleSlice);
+
   useEffect(() => {
-    let token;
-    if (localStorage["token"]) {
-      token = localStorage["token"];
-      const decoded = jwt_decode(token);
-      if (decoded.exp < Date.now()) {
-        getUserInfo(decoded._id, token);
-      } else errorHandler("Your authorization is expired please login again");
-    }
-    const getInbox = user
-      ? setInterval(() => dispatch(getUserInbox()), 3000)
-      : null;
+    checkTokenFromLocalStorage();
+    const getInbox = user ? setInterval(() => dispatch(getUserInbox()), 3000) : null;
+
+    // clear interval
     return () => {
       clearInterval(getInbox);
     };
   }, []);
 
+  const checkTokenFromLocalStorage = () => {
+    let token;
+    // check in local storage for token
+    if (localStorage["token"]) {
+      token = localStorage["token"];
+      // decoded token 
+      const decoded = jwt_decode(token);
+      // check if token expired 
+      if (decoded.exp < Date.now()) {
+        getUserInfo(decoded._id, token);
+      } else errorHandler("Your authorization is expired please login again");
+    }
+  };
+
   const getUserInfo = async (_id, token) => {
-    let url = "/users/infoToken/" + _id;
+    let url = `/users/infoToken/${_id}`;
     const { data } = await doApiMethod(url, "GET", token);
+    // if token expired return to login page 
     if (!data.userInfo) {
-      errorHandler("invalid user");
+      errorHandler("Invalid User");
       window.open(secret.CLIENT_API_URL, "_self");
       return;
     }
+    // set token with new token 
     localStorage.setItem("token", JSON.stringify(data.newAccessToken));
+    // login with user info 
     dispatch(onLogin(data.userInfo));
     dispatch(getUserWishList());
   };
+
   return (
     <Suspense
       fallback={

@@ -1,19 +1,19 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Star from "../../../assets/icons/star";
 import StarFill from "../../../assets/icons/starFill";
-import {onRegisterShow} from "../../../redux/features/toggleSlice";
+import { onRegisterShow } from "../../../redux/features/toggleSlice";
+import { doApiMethod } from "../../../services/axios-service/axios-service";
 import {
     errorHandler,
     successHandler,
 } from "../../../services/extra-services/extra-services";
-import {doApiMethod} from "../../../services/axios-service/axios-service";
 
-const UserRating = ({rank, post, setIsChange, isChange}) => {
+const UserRating = ({ rank, post, setIsChange, isChange }) => {
     const dispatch = useDispatch();
-    let userRanks = rank?.userRank ? rank.userRank : 0
+    let userRanks = rank?.userRank ? rank.userRank : 0;
     const [fill, setFill] = useState(userRanks - 1);
-    const {user} = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
     const rankUser = async (rnk) => {
         if (!user) {
             setFill(-1);
@@ -21,7 +21,7 @@ const UserRating = ({rank, post, setIsChange, isChange}) => {
         } else {
             try {
                 let url = `/users/rankUser/${post?.creator_id._id}`;
-                await doApiMethod(url, "PATCH", {rnk});
+                await doApiMethod(url, "PATCH", { rnk });
                 setIsChange(!isChange);
                 successHandler("Rating updated");
             } catch (err) {
@@ -46,8 +46,8 @@ const UserRating = ({rank, post, setIsChange, isChange}) => {
                                     rankUser(i + 1);
                                 }}
                             >
-                <StarFill/>
-              </span>
+                                <StarFill />
+                            </span>
                         );
                     })}
                     {[...Array(4 - fill)].map((star, i) => {
@@ -60,8 +60,8 @@ const UserRating = ({rank, post, setIsChange, isChange}) => {
                                     rankUser(fill + i + 2);
                                 }}
                             >
-                <Star/>
-              </span>
+                                <Star />
+                            </span>
                         );
                     })}
                 </div>

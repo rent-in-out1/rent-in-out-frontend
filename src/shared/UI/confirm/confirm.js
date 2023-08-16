@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import {BackDropS, Modal} from "./confirmWrapper";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ExitFill from "../../../assets/icons/exitFill";
 import ExitNoFill from "../../../assets/icons/exitNoFill";
+import { Button } from "../../../assets/styles/wrappers/registerPage";
+import { onMessegeToggle } from "../../../redux/features/toggleSlice";
 import LoadingButton from "../../components/spinner-button/spinnerButton";
-import {Button} from "../../../assets/styles/wrappers/registerPage";
-import {onMessegeToggle} from "../../../redux/features/toggleSlice";
+import { BackDropS, Modal } from "./confirmWrapper";
 
-const Backdrop = ({action}) => {
+const Backdrop = ({ action }) => {
     const dispatch = useDispatch();
     return (
         <BackDropS
@@ -20,8 +20,8 @@ const Backdrop = ({action}) => {
     );
 };
 
-const Confirm = ({action}) => {
-    const {message} = useSelector(state => state.toggleSlice)
+const Confirm = ({ action }) => {
+    const { message } = useSelector(state => state.toggleSlice);
     const [over, setOver] = useState(false);
     const dispatch = useDispatch();
     return (
@@ -40,9 +40,9 @@ const Confirm = ({action}) => {
                     }}
                 >
                     {over ? (
-                        <ExitFill className="icon" width={24} height={24}/>
+                        <ExitFill className="icon" width={24} height={24} />
                     ) : (
-                        <ExitNoFill className="icon" width={24} height={24}/>
+                        <ExitNoFill className="icon" width={24} height={24} />
                     )}
                 </h2>
                 <div className="text-center">
@@ -50,7 +50,7 @@ const Confirm = ({action}) => {
                     <div className="flex justify-around">
                         <Button
                             onClick={() => {
-                                dispatch(action())
+                                dispatch(action());
                             }}
                             className="w-2/5"
                         >
@@ -76,10 +76,10 @@ const Confirm = ({action}) => {
 };
 
 const portalElement = document.getElementById("overlays");
-const ConfirmHandler = ({children}) => {
+const ConfirmHandler = ({ children }) => {
     return (
         <React.Fragment>
-            {ReactDOM.createPortal(<Backdrop/>, portalElement)}
+            {ReactDOM.createPortal(<Backdrop />, portalElement)}
             {ReactDOM.createPortal(
                 <Confirm>
                     {children}

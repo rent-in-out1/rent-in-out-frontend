@@ -1,8 +1,8 @@
-import React, {useCallback, useEffect, useState, useRef} from "react";
 import PropTypes from "prop-types";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./multiRangeSlider.css";
 
-const MultiRangeSlider = ({min, max, onChange}) => {
+const MultiRangeSlider = ({ min, max, onChange }) => {
     const [minVal, setMinVal] = useState(min);
     const [maxVal, setMaxVal] = useState(max);
     const minValRef = useRef(min);
@@ -38,7 +38,7 @@ const MultiRangeSlider = ({min, max, onChange}) => {
 
     // Get min and max values when their state changes
     useEffect(() => {
-        onChange({min: minVal, max: maxVal});
+        onChange({ min: minVal, max: maxVal });
     }, [minVal, maxVal, onChange]);
 
     return (
@@ -56,7 +56,7 @@ const MultiRangeSlider = ({min, max, onChange}) => {
                         minValRef.current = value;
                     }}
                     className="thumb thumb--left"
-                    style={{zIndex: minVal > max - 100 && "5"}}
+                    style={{ zIndex: minVal > max - 100 && "5" }}
                 />
                 <input
                     type="range"
@@ -72,8 +72,8 @@ const MultiRangeSlider = ({min, max, onChange}) => {
                 />
 
                 <div className="slider">
-                    <div className="slider__track"/>
-                    <div ref={range} className="slider__range"/>
+                    <div className="slider__track" />
+                    <div ref={range} className="slider__range" />
                     <div className="slider__left-value">{minVal}</div>
                     <div className="slider__right-value">{maxVal}</div>
                 </div>

@@ -1,1 +1,1 @@
-export {default} from "./sideBarChat"
+export { default } from "./sideBarChat";

@@ -1,24 +1,23 @@
-import React, {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Bell from "../../../assets/icons/bell";
+import Categories from "../../../assets/icons/categories";
+import Home from "../../../assets/icons/home";
+import Posts from "../../../assets/icons/posts";
+import Profile from "../../../assets/icons/profile";
+import Search from "../../../assets/icons/search";
+import SignIn from "../../../assets/icons/signIn";
+import SignOut from "../../../assets/icons/signOut";
+import Users from "../../../assets/icons/users";
+import WishList from "../../../assets/icons/wishlist";
+import { Logo, Wrapper } from "../../../assets/styles/wrappers/navbarAdmin";
 import {
     onInboxToggle,
     onRegisterToggle,
     onSearchToggle,
 } from "../../../redux/features/toggleSlice";
-import {Logo, Wrapper} from "../../../assets/styles/wrappers/navbarAdmin";
-import {useSelector, useDispatch} from "react-redux";
-import {onLogout} from "../../../redux/features/userSlice";
-import Profile from "../../../assets/icons/profile";
-import Users from "../../../assets/icons/users";
-import Posts from "../../../assets/icons/posts";
-import Categories from "../../../assets/icons/categories";
-import Home from "../../../assets/icons/home";
-import SignIn from "../../../assets/icons/signIn";
-import SignOut from "../../../assets/icons/signOut";
-import Bell from "../../../assets/icons/bell";
-import Search from "../../../assets/icons/search";
-import WishList from "../../../assets/icons/wishlist";
-import {useEffect} from "react";
+import { onLogout } from "../../../redux/features/userSlice";
 import Inbox from "./../../../assets/icons/inbox";
 
 const Header = () => {
@@ -47,7 +46,7 @@ const Header = () => {
                 <div className="left flex flex-wrap">
                     <Link to={"/admin"}>
                         <Logo>
-                            <img src="/img/LOGO.png" alt="logo"/>
+                            <img src="/img/LOGO.png" alt="logo" />
                             <p>rentInOut</p>
                         </Logo>
                     </Link>
@@ -60,7 +59,7 @@ const Header = () => {
                                     type="button"
                                     className="inline-flex relative items-center p-3 text-sm  text-center"
                                 >
-                                    <Inbox color="black" width="20" height="20"/>
+                                    <Inbox color="black" width="20" height="20" />
                                     <span className="sr-only">Notifications</span>
                                     <div
                                         className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
@@ -73,7 +72,7 @@ const Header = () => {
                                     type="button"
                                     className="inline-flex relative items-center p-3 text-sm  text-center"
                                 >
-                                    <Bell/>
+                                    <Bell />
                                     <span className="sr-only">Notifications</span>
                                     <div
                                         className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
@@ -100,9 +99,8 @@ const Header = () => {
                             alt=""
                         />
                         <span
-                            className={`${
-                                isLogin ? "bg-green-400" : "bg-red-400"
-                            } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
+                            className={`${isLogin ? "bg-green-400" : "bg-red-400"
+                                } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
                         ></span>
                     </div>
                 </div>
@@ -122,7 +120,7 @@ const Header = () => {
                     >
                         <div className="flex justify-between items-center">
                             {" "}
-                            <p>Home</p> <Home/>
+                            <p>Home</p> <Home />
                         </div>
                     </li>
                     <li
@@ -134,7 +132,7 @@ const Header = () => {
                     >
                         <div className="flex justify-between items-center">
                             {" "}
-                            <p>Users</p> <Profile color="black"/>
+                            <p>Users</p> <Profile color="black" />
                         </div>
                     </li>
                     <li
@@ -146,7 +144,7 @@ const Header = () => {
                     >
                         <div className="flex justify-between items-center">
                             {" "}
-                            <p>Posts</p> <Posts color="black"/>
+                            <p>Posts</p> <Posts color="black" />
                         </div>
                     </li>
                     <li
@@ -158,7 +156,7 @@ const Header = () => {
                     >
                         <div className="flex justify-between items-center">
                             {" "}
-                            <p>Categories</p> <Categories/>
+                            <p>Categories</p> <Categories />
                         </div>
                     </li>
                     <li
@@ -169,7 +167,7 @@ const Header = () => {
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
                         <div className="flex justify-between items-center">
-                            <p>Profile</p> <Users/>
+                            <p>Profile</p> <Users />
                         </div>
                     </li>
                     <li
@@ -180,7 +178,7 @@ const Header = () => {
                             to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
                         >
                             <span>Wish List</span>
-                            <WishList/>
+                            <WishList />
                         </Link>
                     </li>
                     <li
@@ -189,7 +187,7 @@ const Header = () => {
                     >
                         <a className="flex justify-between items-center cursor-pointer">
                             <span>Search</span>
-                            <Search/>
+                            <Search />
                         </a>
                     </li>
                     <li
@@ -208,11 +206,11 @@ const Header = () => {
                         {isLogin ? (
                             <div className="flex justify-between items-center cursor-pointer">
                                 {" "}
-                                <p>Signout</p> <SignOut color="black"/>
+                                <p>Signout</p> <SignOut color="black" />
                             </div>
                         ) : (
                             <div className="flex justify-between items-center">
-                                <p>Signin</p> <SignIn color="black"/>
+                                <p>Signin</p> <SignIn color="black" />
                             </div>
                         )}
                     </li>

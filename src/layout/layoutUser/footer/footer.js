@@ -1,7 +1,7 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {Wrapper} from "../../../assets/styles/wrappers/footer";
-import {Logo} from '../../../assets/styles/wrappers/navbarUser';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Wrapper } from "../../../assets/styles/wrappers/footer";
+import { Logo } from '../../../assets/styles/wrappers/navbarUser';
 import ContactForm from '../../../shared/components/contactform';
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
                     <div>
                         <Link to={"/"}>
                             <Logo>
-                                <img src="/img/LOGO.png" alt="logo"/>
+                                <img src="/img/LOGO.png" alt="logo" />
                                 <p>rentInOut</p>
                             </Logo>
                         </Link>
@@ -34,11 +34,11 @@ const Footer = () => {
                     </div>
                     <div className='hidden md:block'>
                         <h2> Get in Touch</h2>
-                        <ContactForm/>
+                        <ContactForm />
                     </div>
                 </main>
             </footer>
         </Wrapper>
-    )
-}
-export default Footer
+    );
+};
+export default Footer;

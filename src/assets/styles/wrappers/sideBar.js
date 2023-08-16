@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Wrapper = styled.aside`
     a{
-        /* flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 */
         display: flex;
        align-items :center;
        padding: 8px;
@@ -15,7 +14,6 @@ export const Wrapper = styled.aside`
         background: var(--grey-100);
        }
        aside{
-        /* inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full */
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -30,4 +28,4 @@ export const Wrapper = styled.aside`
         border-radius: 50%;
        }
     }
-`
+`;

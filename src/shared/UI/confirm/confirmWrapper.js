@@ -9,7 +9,7 @@ export const BackDropS = styled.div`
   z-index: 20;
   background-color: rgba(0, 0, 0, 0.75);
 
-`
+`;
 
 export const Modal = styled.div`
   .modal {
@@ -59,4 +59,4 @@ export const Modal = styled.div`
       transform: translateY(0);
     }
   }
-`
+`;

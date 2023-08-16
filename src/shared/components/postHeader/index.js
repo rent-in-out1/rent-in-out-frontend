@@ -1,1 +1,1 @@
-export {default} from "./postHeader"
+export { default } from "./postHeader";

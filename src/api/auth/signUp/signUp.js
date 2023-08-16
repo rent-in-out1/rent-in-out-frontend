@@ -43,7 +43,7 @@ const SignUp = (props) => {
         register,
         getValues,
         handleSubmit,
-        formState: {errors},
+        formState: { errors },
     } = useForm();
 
     const onSub = (_dataBody) => {
@@ -81,6 +81,7 @@ const SignUp = (props) => {
         <div className="right w-full md:w-2/3">
             <form onSubmit={handleSubmit(onSub)}>
                 <div className="flex flex-wrap -mx-3 mb-2">
+                    {/* first name */}
                     <div className="w-full md:w-1/2 px-3 mb-2 md:mb-0">
                         <label>First Name</label>
                         <input
@@ -109,6 +110,7 @@ const SignUp = (props) => {
                     </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-2">
+                    {/* email */}
                     <div className="w-full px-3">
                         <label>Email</label>
                         <input
@@ -125,6 +127,7 @@ const SignUp = (props) => {
                     </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-2">
+                    {/* confirm email */}
                     <div className="w-full px-3">
                         <label>Confirm Email</label>
                         <input
@@ -141,6 +144,7 @@ const SignUp = (props) => {
                     </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-2">
+                    {/* password */}
                     <div className="w-full md:w-1/2 px-3">
                         <label>Password</label>
                         <input
@@ -176,11 +180,12 @@ const SignUp = (props) => {
                     </div>
                 </div>
                 <div className="flex flex-wrap mb-2 -mx-3">
+                    {/* birthdate */}
                     <div className=" w-1/2 px-2">
                         <label>Birthdate</label>
                         <div className="flex relative bottom-3 items-center pl-3 pointer-events-none"></div>
                         <input
-                            {...register("birthdate", {required: true})}
+                            {...register("birthdate", { required: true })}
                             defaultValue="01/01/2000"
                             type="date"
                             className="datepicker-input"
@@ -203,6 +208,7 @@ const SignUp = (props) => {
                     </div>
                 </div>
                 <div className="filters w-full flex mr-2">
+                    {/* country */}
                     <div className="w-4/5 mr-1">
                         <label>Country</label>
                         <select
@@ -239,22 +245,24 @@ const SignUp = (props) => {
                         </select>
                     </div>
                 </div>
+                {/* sign up button */}
                 <Button>
                     <LoadingButton isLoading={load}>Sign Up</LoadingButton>
                 </Button>
             </form>
+            {/* navigate to sign in */}
             <span className="flex items-center justify-center">
-        Already a member ?
-        <button
-            type="button"
-            onClick={() => {
-                props.setState("signIn");
-            }}
-            className="ml-2 text-blue-400 hover:text-blue-700"
-        >
-          Login now
-        </button>
-      </span>
+                Already a member ?
+                <button
+                    type="button"
+                    onClick={() => {
+                        props.setState("signIn");
+                    }}
+                    className="ml-2 text-blue-400 hover:text-blue-700"
+                >
+                    Login now
+                </button>
+            </span>
         </div>
     );
 };

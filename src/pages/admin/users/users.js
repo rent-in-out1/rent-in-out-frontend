@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
-import {doGetApiMethod} from "../../../services/axios-service/axios-service";
-import {Wrapper} from "../../../assets/styles/wrappers/table";
-import SingleUser from "./singleUser";
-import Controllers from "../../../shared/components/controllers/controllers";
+import React, { useEffect, useState } from "react";
+import { Wrapper } from "../../../assets/styles/wrappers/table";
+import { doGetApiMethod } from "../../../services/axios-service/axios-service";
 import PageNav from "../../../shared/UI/page-nav/page-nav";
+import Controllers from "../../../shared/components/controllers/controllers";
+import SingleUser from "./singleUser";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -12,11 +12,11 @@ const Users = () => {
     const [page, setPage] = useState(1);
     const [isChange, setIsChange] = useState(false);
     const options = [
-        {name: "Role", value: "role"},
-        {name: "Name", value: "fullName.firstName"},
-        {name: "Status", value: "active"},
-        {name: "Country", value: "country"},
-        {name: "City", value: "city"},
+        { name: "Role", value: "role" },
+        { name: "Name", value: "fullName.firstName" },
+        { name: "Status", value: "active" },
+        { name: "Country", value: "country" },
+        { name: "City", value: "city" },
     ];
     useEffect(() => {
         getAllUsers();
@@ -24,11 +24,11 @@ const Users = () => {
 
     const getAllUsers = async () => {
         let url = `/users/userSearch/?s=${search}&sort=${option}&page=${page}`;
-        let {data} = await doGetApiMethod(url);
+        let { data } = await doGetApiMethod(url);
         setUsers(data);
         setIsChange(false);
     };
-    const users_hedaers = ["Name", "email", "country", "city", "age", "phone", "Created at", "active", "Role", "delete"]
+    const users_hedaers = ["Name", "email", "country", "city", "age", "phone", "Created at", "active", "Role", "delete"];
 
     return (
         <Wrapper className="mb-2">
@@ -50,23 +50,23 @@ const Users = () => {
             <div className="wrapper">
                 <table>
                     <thead>
-                    <tr>
-                        {users_hedaers.map((header, i) => (
-                            <th key={i}>{header}</th>
-                        ))}
-                    </tr>
+                        <tr>
+                            {users_hedaers.map((header, i) => (
+                                <th key={i}>{header}</th>
+                            ))}
+                        </tr>
                     </thead>
                     <tbody id="tbody">
-                    {users.length > 0 &&
-                        users?.map((user) => {
-                            return (
-                                <SingleUser
-                                    key={user._id}
-                                    item={user}
-                                    setIsChange={setIsChange}
-                                />
-                            );
-                        })}
+                        {users.length > 0 &&
+                            users?.map((user) => {
+                                return (
+                                    <SingleUser
+                                        key={user._id}
+                                        item={user}
+                                        setIsChange={setIsChange}
+                                    />
+                                );
+                            })}
                     </tbody>
                 </table>
             </div>

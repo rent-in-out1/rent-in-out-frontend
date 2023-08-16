@@ -1,24 +1,24 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {doApiMethod, doGetApiMethod} from "../../services/axios-service/axios-service";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { doApiMethod, doGetApiMethod } from "../../services/axios-service/axios-service";
 import { errorHandler } from "../../services/extra-services/extra-services";
 
 export const getPosts = createAsyncThunk(
     "posts/get",
     async ({
-               search = "",
-               option = "createdAt",
-               page = 1,
-               min = 0,
-               max = 1000,
-               endScreenEnd,
-               setPage,
-           }) => {
+        search = "",
+        option = "createdAt",
+        page = 1,
+        min = 0,
+        max = 1000,
+        endScreenEnd,
+        setPage,
+    }) => {
 
         try {
             if (page === 1) clearPosts();
             // let url = `/posts/search?page=${page}&reverse=yes&sort=${option}`;
             let url = `/posts?page=${page}&sort=${option}&reverse=yes`;
-            let {data} = await doGetApiMethod(url);
+            let { data } = await doGetApiMethod(url);
             if (data.length > 0) {
                 endScreenEnd();
                 setPage(page + 1);
@@ -31,7 +31,7 @@ export const getPosts = createAsyncThunk(
 );
 export const deletePost = createAsyncThunk(
     "deletePost/delete",
-    async ({id, name}) => {
+    async ({ id, name }) => {
         try {
             if (window.confirm(`Are you sure you want to delete${name}`)) {
                 const url = "/posts/" + id;
@@ -46,47 +46,47 @@ export const deletePost = createAsyncThunk(
 export const uploadPost = createAsyncThunk(
     "uploadPost/upload",
     async (post) => {
-    
+
         try {
             const url = "/posts";
-            let {data} = await doApiMethod(url, "POST", post);
+            let { data } = await doApiMethod(url, "POST", post);
             return data;
         } catch (error) {
             errorHandler(error);
         }
     }
 );
-export const likePost = createAsyncThunk("likePost/like", async ({id}) => {
+export const likePost = createAsyncThunk("likePost/like", async ({ id }) => {
     try {
         const url = "/posts/likePost/" + id;
-        let {data} = await doApiMethod(url, "POST");
-        return {data, id};
+        let { data } = await doApiMethod(url, "POST");
+        return { data, id };
     } catch (error) {
         errorHandler(error);
     }
 });
 const initialState = {
-  posts: [],
-  loading: false,
-  error: null,
-  isChange: false,
-  editablePost:{}
+    posts: [],
+    loading: false,
+    error: null,
+    isChange: false,
+    editablePost: {}
 };
 
 const postsSlice = createSlice({
-  name: "posts",
-  initialState: initialState,
-  reducers: {
-    clearPosts: (state) => {
-      state.posts = []
+    name: "posts",
+    initialState: initialState,
+    reducers: {
+        clearPosts: (state) => {
+            state.posts = [];
+        },
+        setIsChange: (state) => {
+            state.isChange = !state.isChange;
+        },
+        setPostEdit: (state, action) => {
+            state.editablePost = action.payload;
+        }
     },
-    setIsChange:(state) =>{
-      state.isChange = !state.isChange
-    },
-    setPostEdit:(state , action) => {
-      state.editablePost = action.payload
-    }
-  },
     extraReducers(builder) {
         builder
             .addCase(getPosts.pending, (state) => {
@@ -126,8 +126,8 @@ const postsSlice = createSlice({
             .addCase(likePost.fulfilled, (state, action) => {
                 state.loading = false;
                 state.posts.forEach((post, i) => {
-                    if (post?._id === action.payload.id) state.posts[i].likes = action.payload.data.posts
-                })
+                    if (post?._id === action.payload.id) state.posts[i].likes = action.payload.data.posts;
+                });
             })
             .addCase(likePost.rejected, (state, action) => {
                 state.loading = false;
@@ -143,9 +143,9 @@ const postsSlice = createSlice({
             .addCase(uploadPost.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            })
+            });
     },
 });
 
-export const { clearPosts , setIsChange ,setPostEdit} = postsSlice.actions;
+export const { clearPosts, setIsChange, setPostEdit } = postsSlice.actions;
 export default postsSlice.reducer;

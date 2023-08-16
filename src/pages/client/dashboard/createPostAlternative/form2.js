@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import Minus from "../../../../assets/icons/minus";
-import { doGetApiMethod } from "../../../../services/axios-service/axios-service";
 import Plus from "../../../../assets/icons/plus";
 import { uploadPost } from "../../../../redux/features/postsSlice";
-import { useDispatch } from "react-redux";
+import { doGetApiMethod } from "../../../../services/axios-service/axios-service";
 import { errorHandler } from "../../../../services/extra-services/extra-services";
-import { OpenStreetMapProvider } from "leaflet-geosearch";
 
 const Form2 = ({
   col,
@@ -79,7 +79,7 @@ const Form2 = ({
               min={0}
             />
             <select
-              value={data?.category_url? data.category_url : "Choose Category"}
+              value={data?.category_url ? data.category_url : "Choose Category"}
               name="category_url"
               className="mt-2"
               onChange={handleOnChange}

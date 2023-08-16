@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignOut = ({color = "#6B7280", width = "24px", height = "24px"}) => {
+const SignOut = ({ color = "#6B7280", width = "24px", height = "24px" }) => {
     return (
         <svg
             aria-hidden="true"

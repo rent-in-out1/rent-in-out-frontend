@@ -1,14 +1,14 @@
 import React from "react";
-import {doApiMethod} from "../../../services/axios-service/axios-service";
-import {useForm} from "react-hook-form";
-import {errorHandler, successHandler} from "../../../services/extra-services/extra-services";
+import { useForm } from "react-hook-form";
+import { doApiMethod } from "../../../services/axios-service/axios-service";
+import { errorHandler, successHandler } from "../../../services/extra-services/extra-services";
 
 const ContactForm = () => {
     let {
         register,
         reset,
         handleSubmit,
-        formState: {errors},
+        formState: { errors },
     } = useForm();
     const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const onSub = (_dataBody) => {
@@ -19,7 +19,7 @@ const ContactForm = () => {
     const sendEmail = async (_dataBody) => {
         try {
             const url = "/users/clientEmail";
-            const {data} = await doApiMethod(url, "POST", _dataBody);
+            const { data } = await doApiMethod(url, "POST", _dataBody);
         } catch (err) {
             errorHandler(err);
         }
@@ -79,15 +79,15 @@ const ContactForm = () => {
                     </div>
                 </div>
                 <div>
-          <textarea
-              rows={4}
-              {...register("textarea", {
-                  required: true,
-                  minLength: 6,
-                  maxLength: 50,
-              })}
-              placeholder="Enter your request"
-          ></textarea>
+                    <textarea
+                        rows={4}
+                        {...register("textarea", {
+                            required: true,
+                            minLength: 6,
+                            maxLength: 50,
+                        })}
+                        placeholder="Enter your request"
+                    ></textarea>
                     {errors.textarea && <small>Enter valid request.</small>}
                     <button>submit</button>
                 </div>
