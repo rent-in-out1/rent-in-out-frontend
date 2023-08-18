@@ -10,7 +10,7 @@ const CreatePost = ({setOnAdd}) => {
     const [display, setDisplay] = useState(false);
     const [col, setCol] = useState(1);
     const [data, setData] = useState({
-        title: data?.title || "",
+        title: "",
         range: "short-term",
         info: "",
         available_from: Date.now(),
@@ -31,6 +31,7 @@ const CreatePost = ({setOnAdd}) => {
 
     useEffect(() => {
         setData({...data, img: images});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [images]);
 
     const handleOnChange = (e) => {

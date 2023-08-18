@@ -19,6 +19,7 @@ export default function PageNav({
 
     useEffect(() => {
         doApi();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const doApi = async () => {

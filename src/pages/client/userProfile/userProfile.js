@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Calendar from '../../../assets/icons/calendar';
@@ -13,37 +13,44 @@ import OwnPosts from '../myProfile/ownPosts';
 const UserProfile = () => {
     const nav = useNavigate();
     const { user } = useSelector(state => state.userSlice);
-    // get user rank 
-    const userRank = useMemo(() => {
-        const { totalRank, totalUsers } = user.rank.reduce(
-            (total, rankItem) => {
-                const { rank } = rankItem;
-                total.totalRank += rank;
-                total.totalUsers++;
-
-                return total;
-            },
-            {
-                totalRank: 0,
-                totalUsers: 0
-            }
-        );
-        return totalRank / totalUsers;
-    }, [user]);
     const [userDetails, setUserDetails] = useState({});
     const { userId } = useParams();
-    useEffect(() => {
-        getUser();
-    }, [userId]);
-    const getUser = async () => {
-        // if user id same as search user send him to his profile
-        if (user?._id === userId) {
-            user?.role === "admin" ? nav("/admin/profile") : nav("/profile");
+    
+    // get user rank 
+    const userRank = useMemo(() => {
+        if(user.rank){
+            const { totalRank, totalUsers } = user.rank.reduce(
+                (total, rankItem) => {
+                    const { rank } = rankItem;
+                    total.totalRank += rank;
+                    total.totalUsers++;
+    
+                    return total;
+                },
+                {
+                    totalRank: 0,
+                    totalUsers: 0
+                }
+            );
+            return totalRank / totalUsers;
         }
-        const url = "/users/info/" + userId;
-        const { data } = await doGetApiMethod(url);
-        setUserDetails(data.userInfo);
-    };
+        return "N/A"
+    }, [user]);
+
+    useMemo(() => {
+        async function getUser() {
+            // if user id same as search user send him to his profile
+            if (user?._id === userId) {
+                user?.role === "admin" ? nav("/admin/profile") : nav("/profile");
+            }
+            const url = "/users/info/" + userId;
+            const { data } = await doGetApiMethod(url);
+            setUserDetails(data.userInfo);
+        }
+        getUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userId]);
+    
     return (
         <Wrapper>
             {userDetails.cover_img ?

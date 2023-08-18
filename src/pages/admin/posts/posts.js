@@ -27,6 +27,7 @@ const Posts = () => {
     };
     useEffect(() => {
         getAllposts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isChange, search, option]);
 
     return (

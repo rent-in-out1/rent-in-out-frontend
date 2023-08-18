@@ -10,6 +10,7 @@ const SideBarChat = () => {
     const { user, inbox } = useSelector((state) => state.userSlice);
     useEffect(() => {
         dispatch(getUserInbox());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <div className="chats lg:w-1/6 p-1 top-16 -right-1 fixed hidden lg:inline-block">

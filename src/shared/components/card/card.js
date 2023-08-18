@@ -50,6 +50,10 @@ const Card = ({ post }) => {
                         !user
                             ? dispatch(onRegisterShow())
                             : dispatch(likePost({ id: post._id }));
+                        if (post.creator_id._id !== user._id) {
+                            dispatch(updateWishList(post));
+                        }
+                        dispatch(setIsChange());
                     }}
                 >
                     {post?.likes?.length > 0 ? (

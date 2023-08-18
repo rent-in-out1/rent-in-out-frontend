@@ -20,6 +20,7 @@ const Users = () => {
     ];
     useEffect(() => {
         getAllUsers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isChange, option, search]);
 
     const getAllUsers = async () => {

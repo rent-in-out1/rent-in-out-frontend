@@ -10,6 +10,7 @@ const BannerProfile = () => {
     const { cover_img, profile_img } = useSelector(
         (state) => state.userSlice?.user
     );
+    // eslint-disable-next-line no-unused-vars
     const [banner, setBanner, loadBanner] = useUploadWidget({
         userID: user._id,
         postTitle: "",
@@ -17,6 +18,7 @@ const BannerProfile = () => {
         uploadPreset: secret.BANNER_CLOUDINARY_PRESET,
         single: true,
     });
+    // eslint-disable-next-line no-unused-vars
     const [profile, setProfile, loadImg] = useUploadWidget({
         userID: user._id,
         postTitle: "",

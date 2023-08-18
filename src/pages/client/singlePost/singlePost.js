@@ -20,6 +20,7 @@ const SinglePost = ({ post }) => {
     const [rank, setRank] = useState({});
     useEffect(() => {
         getUserRating();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isChange]);
     /** get rating from api */
     const getUserRating = async () => {

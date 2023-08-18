@@ -29,6 +29,7 @@ const Header = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", () => closeNav());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     let timeOut;
     const openNav = () => {
@@ -185,10 +186,10 @@ const Header = () => {
                         onClick={() => dispatch(onSearchToggle())}
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
-                        <a className="flex justify-between items-center cursor-pointer">
+                        <Link to={'/'} className="flex justify-between items-center cursor-pointer">
                             <span>Search</span>
                             <Search />
-                        </a>
+                        </Link>
                     </li>
                     <li
                         onClick={() => {

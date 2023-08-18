@@ -17,6 +17,7 @@ const Dashboard = () => {
     const [endScreen, endScreenEnd] = useScroll(900);
     useMemo(() => {
         if (user?.role === "admin") nav("/admin");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useMemo(() => {
@@ -25,10 +26,12 @@ const Dashboard = () => {
         return () => {
             dispatch(clearPosts());
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useMemo(() => {
         dispatch(getPosts({ page, endScreenEnd, setPage }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [endScreen]);
 
     return (

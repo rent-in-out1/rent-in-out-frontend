@@ -42,10 +42,10 @@ const SideBar = () => {
                         </li>
                     ) : null}
                     <li onClick={() => dispatch(onSearchToggle())}>
-                        <a>
+                        <Link to={'/'}>
                             <Search color={"#6B7280"} />
                             <span className="ml-3">Search</span>
-                        </a>
+                        </Link>
                     </li>
                     {isLogin && (
                         <React.Fragment>

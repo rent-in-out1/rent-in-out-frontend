@@ -23,12 +23,12 @@ const LoadingCard = () => {
                 </svg>
             </div>
             {/* context */}
-            <div className="mx-auto h-2.5 bg-gray-200 rounded-full w-48 mb-4"></div>
-            <div className="flex items-center justify-between w-full space-x-24 mb-4">
-                <div className="h-2.5 bg-gray-200 rounded-full w-32"></div>
-                <div className="h-2.5 bg-gray-300 rounded-full w-44"></div>
+            <div className="mx-auto h-2.5 bg-gray-200 rounded-full w-5/6 mb-4"></div>
+            <div className="flex items-center justify-between w-full  mb-4">
+                <div className="h-2.5 bg-gray-200 rounded-full w-2/6"></div>
+                <div className="h-2.5 bg-gray-300 rounded-full w-3/6"></div>
             </div>
-            <div className="mx-auto h-2.5 bg-gray-200 rounded-full w-48 mb-4"></div>
+            <div className="mx-auto h-2.5 bg-gray-200 rounded-full w-4/6 mb-4"></div>
             <span className="sr-only">Loading...</span>
         </div>
     );

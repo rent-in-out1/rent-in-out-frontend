@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Telephone from './../../../assets/icons/telephone';
 import UserRating from "./userRating";
 
@@ -19,7 +20,7 @@ const UserInfo = ({ owner, rank, post, isChange, setIsChange }) => {
                     <li>
                         email:{" "}
                         <span className="lowercase">
-                            <a className="hover:underline" href="#">
+                            <a className="hover:underline" href="/">
                                 {owner?.email}
                             </a>
                         </span>
@@ -36,9 +37,9 @@ const UserInfo = ({ owner, rank, post, isChange, setIsChange }) => {
                         </span>
                     ) : (
                         <span className="flex flex-col items-center justify-center">
-                            <a href="#" className="hover:underline">
+                            <Link to={"/"} className="hover:underline">
                                 {owner.phone}
-                            </a>
+                            </Link>
                             <small className="text-green-400">Hide</small>
                         </span>
                     )}

@@ -41,6 +41,7 @@ const Chat = () => {
         return () => {
             dispatch(getUserInbox());
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [roomID]);
     const getPostCreatorInfo = async (id) => {
         const { data } = await doGetApiMethod("/users/info/" + id);
@@ -92,6 +93,7 @@ const Chat = () => {
         });
         socket.on("recieve-typing", () => setTyping(true));
         socket.on("notRecieve-typing", () => setTyping(false));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [socket]);
 
     const handleSubmit = (e) => {

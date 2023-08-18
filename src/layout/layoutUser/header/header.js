@@ -26,6 +26,7 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     useEffect(() => {
         window.addEventListener("scroll", () => closeNav());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     let timeOut;
     const openNav = () => {

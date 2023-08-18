@@ -9,6 +9,7 @@ const OwnPosts = ({ id, col = 2 }) => {
     const { isChange } = useSelector(state => state.postsSlice);
     useEffect(() => {
         getUserPosts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isChange, id]);
 
     const getUserPosts = async () => {

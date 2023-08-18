@@ -27,6 +27,7 @@ const Categories = () => {
 
     useEffect(() => {
         dispatch(getCatgories({ search, option, page }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, option, search]);
     return (
         <Wrapper className="mb-2">

@@ -19,7 +19,7 @@ const ContactForm = () => {
     const sendEmail = async (_dataBody) => {
         try {
             const url = "/users/clientEmail";
-            const { data } = await doApiMethod(url, "POST", _dataBody);
+            await doApiMethod(url, "POST", _dataBody);
         } catch (err) {
             errorHandler(err);
         }
