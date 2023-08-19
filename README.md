@@ -32,6 +32,10 @@ To get started with RentApp, follow these steps:
 
 This project is licensed under the [MIT License](LICENSE).
 
+## Linked Projects 
+
+Navigate to [RentInOut Backend](https://github.com/shimislm/RentInOut_backEnd)
+
 ---
 
 Experience the future of rentals with RentApp. Whether you're a traveler seeking convenience or a local looking to optimize space, join us in shaping a world where access is valued over ownership.
