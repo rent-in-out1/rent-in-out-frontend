@@ -30,7 +30,7 @@ export default function PageNav({
 
     return (
         <div className={cssClass}>
-            <span className="flex font-bold text-gray-500 dark:text-gray-400 cursor-pointer"
+            <span className="flex font-bold text-gray-500 cursor-pointer"
                 onMouseOver={() => setOverL(true)}
                 onMouseLeave={() => setOverL(false)}
                 onClick={() => {
@@ -45,7 +45,7 @@ export default function PageNav({
                 )}
                 Prev
             </span>
-            <span className="flex font-bold text-gray-500 dark:text-gray-400 cursor-pointer"
+            <span className="flex font-bold text-gray-500 cursor-pointer"
                 onMouseOver={() => setOverR(true)}
                 onMouseLeave={() => setOverR(false)}
                 onClick={() => {

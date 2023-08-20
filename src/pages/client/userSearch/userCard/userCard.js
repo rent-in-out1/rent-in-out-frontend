@@ -8,9 +8,24 @@ const UserCard = ({ item }) => {
     const nav = useNavigate();
     const { user } = useSelector((state) => state.userSlice);
     const userProfile = async () => {
-        user.role === "admin"
-            ? nav(`admin/profile/${item._id}`)
-            : nav(`/profile/${item._id}`);
+        // allowed scrolling once modal closed 
+        document.body.style.overflow = 'unset';
+        if (user) {
+            switch (user?.role) {
+                case 'admin':
+                    nav(`admin/profile/${item._id}`);
+                    break;
+                case 'user':
+                    nav(`/profile/${item._id}`);
+                    break;
+                default:
+                    nav(`/profile/${item._id}`);
+            }
+        }
+        else {
+            nav(`/profile/${item._id}`);
+        }
+
     };
     return (
         <li
@@ -29,19 +44,19 @@ const UserCard = ({ item }) => {
                                 ? item.profile_img.url
                                 : "https://freesvg.org/img/Male-Avatar.png"
                         }
-                        alt=""
+                        alt="user profile"
                     />
                 </div>
                 <div>
-                    <p className='"text-sm font-medium text-gray-900 truncate dark:text-white"'>
+                    <p className="text-sm font-medium text-gray-900 truncate">
                         {item.fullName.firstName} {item.fullName.lastName}{" "}
                     </p>
-                    <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                    <p className="text-sm text-gray-500 truncate">
                         {item.email}
                     </p>
                 </div>
             </div>
-            <p className="text-base font-semibold text-gray-900 dark:text-white md:p-2 -mx-2 md:overflow-hidden">
+            <p className="text-base font-semibold text-gray-900 md:p-2 -mx-2 md:overflow-hidden">
                 {item.country}
             </p>
         </li>

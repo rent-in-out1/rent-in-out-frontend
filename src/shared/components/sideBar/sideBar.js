@@ -22,7 +22,7 @@ const SideBar = () => {
     const { user, wishList } = useSelector((state) => state.userSlice);
     return (
         <Wrapper
-            className="lg:w-1/6 z-10 p-1 top-16 -left-1 fixed hidden lg:inline-block"
+            className="lg:w-2/12 z-10 p-1 top-16 -left-1 lg:fixed"
             aria-label="Sidebar"
         >
             <div className="overflow-y-auto py-4 mt-4 px-3 w-full bg-white shadow-xl rounded">

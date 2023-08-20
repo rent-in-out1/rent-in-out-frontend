@@ -100,7 +100,7 @@ const Header = () => {
                         />
                         <span
                             className={`${isLogin ? "bg-green-400" : "bg-red-400"
-                                } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full`}
+                                } bottom-0 left-7 absolute  w-3.5 h-3.5 border-2 border-white rounded-full`}
                         ></span>
                     </div>
                 </div>

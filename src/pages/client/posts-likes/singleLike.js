@@ -7,14 +7,33 @@ const SingleLike = ({ item, action }) => {
     const dispatch = useDispatch();
     const nav = useNavigate();
     const { user } = useSelector((state) => state.userSlice);
+
+    const navigateToUserProfile = () => {
+        // allowed scrolling once modal closed 
+        document.body.style.overflow = 'unset';
+        console.log(item);
+        dispatch(action());
+        if (user) {
+            switch (user.role) {
+                case 'admin':
+                    nav(`/admin/profile/${item._id}`);
+                    break;
+                case 'user':
+                    nav(`/profile/${item._id}`);
+                    break;
+                default:
+                    nav(`/profile/${item._id}`);
+            }
+        }
+        else {
+            nav(`/profile/${item._id}`);
+        }
+
+    };
+
     return (
         <li
-            onClick={() => {
-                dispatch(action());
-                user?.role === "admin"
-                    ? nav(`/admin/profile/${item.user_id}`)
-                    : nav(`/profile/${item.user_id}`);
-            }}
+            onClick={() => navigateToUserProfile()}
             className={`p-3 mx-auto w-full flex items-center justify-between mt-3 cursor-pointer bg-white transition ease-in-out delay-150 hover:bg-gray-300 rounded-lg shadow-md`}
         >
             <div className="flex items-center space-x-1">
@@ -30,15 +49,15 @@ const SingleLike = ({ item, action }) => {
                     />
                 </div>
                 <div>
-                    <p className='"text-sm font-medium text-gray-900 truncate dark:text-white"'>
+                    <p className='"text-sm font-medium text-gray-900 truncate"'>
                         {item.fullName.firstName} {item.fullName.lastName}{" "}
                     </p>
-                    <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                    <p className="text-sm text-gray-500 truncate">
                         {item.email}
                     </p>
                 </div>
             </div>
-            <p className="text-base font-semibold text-gray-900 dark:text-white md:p-2 -mx-2 md:overflow-hidden">
+            <p className="text-base font-semibold text-gray-900 md:p-2 -mx-2 md:overflow-hidden">
                 {item.country}
             </p>
         </li>

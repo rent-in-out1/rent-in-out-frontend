@@ -40,6 +40,9 @@ const PostHeader = ({ post }) => {
       if (user.role === "admin") return nav(`${adminUrl}${post?.creator_id._id}`);
       return nav(`${userUrl}${post?.creator_id._id}`);
     }
+    else{
+      return nav(`${userUrl}${post?.creator_id._id}`);
+    }
   };
 
   const navigateToUserProfileEdit = () => {

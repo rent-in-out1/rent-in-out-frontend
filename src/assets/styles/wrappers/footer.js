@@ -1,17 +1,10 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  margin-top: 20px;
-  padding: 12px;
-  background-color: var(--skyblue-50);
-  @media (max-width: 768px) {
-    margin-top: 50px;
-
-  }
   main {
     display: flex;
     justify-content: space-between;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     p {
       margin-bottom: 12px;
@@ -36,10 +29,9 @@ export const Wrapper = styled.div`
     form {
       display: flex;
       flex-direction: column;
-    }
-
-    input,
-    textarea {
+      
+      input,
+      textarea {
       display: block;
       width: 100%;
       background: var(--white);
@@ -66,6 +58,7 @@ export const Wrapper = styled.div`
       font-weight: bold;
       margin-bottom: 20px;
       cursor: pointer;
+    }
     }
   }
 `;

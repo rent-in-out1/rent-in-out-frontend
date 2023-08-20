@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
 import ExitFill from "../../../assets/icons/exitFill";
@@ -7,10 +7,15 @@ import { Wrapper } from "../../../assets/styles/wrappers/singlePostModel";
 
 const Backdrop = ({ action }) => {
     const dispatch = useDispatch();
+    // allowed scrolling once modal closed 
+    const closeModal = () => {
+        document.body.style.overflow = 'unset';
+    };
     return (
         <Wrapper>
             <div
                 onClick={() => {
+                    closeModal();
                     dispatch(action());
                 }}
                 className="backdrop"
@@ -22,6 +27,17 @@ const Backdrop = ({ action }) => {
 const PopUpOverlay = ({ action, children }) => {
     const [over, setOver] = useState(false);
     const dispatch = useDispatch();
+
+    // disable scroll on modal load 
+    useMemo(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
+
+    // allowed scrolling once modal closed 
+    const closeModal = () => {
+        document.body.style.overflow = 'unset';
+    };
+
     return (
         <Wrapper>
             <div>
@@ -31,6 +47,7 @@ const PopUpOverlay = ({ action, children }) => {
                         onMouseOver={() => setOver(true)}
                         onMouseLeave={() => setOver(false)}
                         onClick={() => {
+                            closeModal();
                             dispatch(action());
                         }}
                     >

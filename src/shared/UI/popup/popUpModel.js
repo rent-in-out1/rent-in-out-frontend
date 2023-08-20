@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
 import ExitFill from "../../../assets/icons/exitFill";
@@ -7,10 +7,17 @@ import { Wrapper } from "../../../assets/styles/wrappers/popUp";
 
 const Backdrop = ({ action }) => {
     const dispatch = useDispatch();
+
+    // allowed scrolling once modal closed 
+    const closeModal = () => {
+        document.body.style.overflow = 'unset';
+    };
+
     return (
         <Wrapper>
             <div
                 onClick={() => {
+                    closeModal();
                     dispatch(action());
                 }}
                 className="backdrop"
@@ -22,24 +29,37 @@ const Backdrop = ({ action }) => {
 const PopUpOverlay = ({ action, children }) => {
     const [over, setOver] = useState(false);
     const dispatch = useDispatch();
+
+    // disable scroll on modal load 
+    useMemo(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
+
+    // allowed scrolling once modal closed 
+    const closeModal = () => {
+        document.body.style.overflow = 'unset';
+    };
+
     return (
         <Wrapper>
             <div className="data">
                 <div className="model">
-                    <h2
-                        className=" exit w-full md:hidden flex justify-end "
-                        onMouseOver={() => setOver(true)}
-                        onMouseLeave={() => setOver(false)}
-                        onClick={() => {
-                            dispatch(action());
-                        }}
-                    >
-                        {over ? (
-                            <ExitFill className="icon" width={32} height={32} />
-                        ) : (
-                            <ExitNoFill className="icon" width={32} height={32} />
-                        )}
-                    </h2>
+                    <div className="w-100 flex justify-end mb-3">
+                        <h2
+                            className="exit w-8 h-8 md:hidden cursor-pointer"
+                            onMouseOver={() => setOver(true)}
+                            onMouseLeave={() => setOver(false)}
+                            onClick={() => {
+                                closeModal();
+                                dispatch(action());
+                            }}>
+                            {over ? (
+                                <ExitFill className="icon" width={32} height={32} />
+                            ) : (
+                                <ExitNoFill className="icon cursor-pointer" width={32} height={32} />
+                            )}
+                        </h2>
+                    </div>
                     <div>{children}</div>
                 </div>
             </div>

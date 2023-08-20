@@ -24,12 +24,12 @@ export const Wrapper = styled.div`
     background-color: white;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    z-index: 30;
+    z-index: 999;
     animation: slide-down 600ms ease-in-out forwards;
   }
 
   .model .data {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .model .h2 {
@@ -37,36 +37,18 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: 1024px) {
-    .model {
-      width: 60%;
-      left: 20%;
-    }
-  }
-  @media (max-width: 768px) {
-    .model {
+  .model {
       border-radius: 0;
-      max-height: 100vh;
-      top: 0;
+      top: 30;
       left: 0;
       width: 100%;
+      max-height: 50vh;
       padding: 0;
-    }
+  }
 
-    .model .h2 {
-      padding: 0;
-      margin: 0;
-      top: 0;
+    .model h2 {
       z-index: 30;
-      right: 20px;
-      width: 20px;
-      color: var(--skyblue-600);
-      font-size: 2em;
-      cursor: pointer;
       transition: 0.5s linear;
-    }
-
-    .model .exit:hover {
-      color: var(--skyblue-900);
     }
   }
 

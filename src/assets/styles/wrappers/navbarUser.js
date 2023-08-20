@@ -141,7 +141,6 @@ export const Wrapper = styled.div`
 export const Logo = styled.div`
 display: flex;
 align-items: center;
-max-width: 40%;
 margin: 0;
 cursor: pointer;
     p{

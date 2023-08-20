@@ -1,6 +1,6 @@
 import React from "react";
 
-const ExitFill = ({ width = 16, height = 16, color = "black" }) => {
+const ExitFill = ({ width = 16, height = 16, color = "red" }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"

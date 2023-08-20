@@ -18,8 +18,8 @@ const UserProfile = () => {
     
     // get user rank 
     const userRank = useMemo(() => {
-        if(user.rank){
-            const { totalRank, totalUsers } = user.rank.reduce(
+        if(userDetails?.rank){
+            const { totalRank, totalUsers } = userDetails.rank.reduce(
                 (total, rankItem) => {
                     const { rank } = rankItem;
                     total.totalRank += rank;
@@ -32,10 +32,10 @@ const UserProfile = () => {
                     totalUsers: 0
                 }
             );
-            return totalRank / totalUsers;
+            return (totalRank / totalUsers).toFixed(2);
         }
-        return "N/A"
-    }, [user]);
+        return 0
+    }, [userDetails]);
 
     useMemo(() => {
         async function getUser() {
@@ -55,7 +55,7 @@ const UserProfile = () => {
         <Wrapper>
             {userDetails.cover_img ?
                 <React.Fragment>
-                    <div className='w-full h-72 relative' style={{
+                    <div className='h-72 relative' style={{
                         backgroundImage: `url(${userDetails.cover_img.url})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center"
@@ -97,20 +97,20 @@ const UserProfile = () => {
                                 : {userDetails?.birthdate?.split("T")[0]}</h5>}
                         </div>
                     </div>
-                    <div className='activity flex justify-center mt-4'>
+                    <div className='activity mt-4'>
                         <div className='bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl'>
                             <span
                                 className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Activation</span>
-                            <h2>{userDetails.fullName?.firstName} Liked shimon post</h2>
-                            <h2>Rent skateboard from Ido</h2>
+                            <h5>{userDetails.fullName?.firstName} Liked shimon post</h5>
+                            <h5>Rent skateboard from Ido</h5>
                         </div>
                     </div>
                 </aside>
 
                 {/* own posts list */}
-                <section id='main' className='flex items-center justify-center p-1 mt-4 md:mt-0'>
+                <section id='main' className='p-1 mt-4 md:mt-0'>
                     <div className="userDetails bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
-                        <OwnPosts id={userId} col={1} />
+                        <OwnPosts id={userId} />
                     </div>
                 </section>
 

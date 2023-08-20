@@ -95,7 +95,7 @@ const Profile = () => {
                     className="flex items-center justify-center p-1 mt-4 md:mt-0"
                 >
                     <div className="userDetails bg-white w-full overflow-hidden min-h-20 rounded-xl p-3 shadow-xl">
-                        <OwnPosts id={user._id} col={1} />
+                        <OwnPosts id={user._id} />
                     </div>
                 </section>
                 <aside id="ads" className="hidden justify-center p-2 xl:flex">

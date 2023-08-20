@@ -10,12 +10,14 @@ const ContactForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+
     const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const onSub = (_dataBody) => {
         sendEmail(_dataBody);
         successHandler("your message sent successfully");
         reset();
     };
+
     const sendEmail = async (_dataBody) => {
         try {
             const url = "/users/clientEmail";
@@ -24,11 +26,13 @@ const ContactForm = () => {
             errorHandler(err);
         }
     };
+
     return (
         <form onSubmit={handleSubmit(onSub)}>
-            <div className="flex items-center ">
+            <div className="flex items-center">
                 <div className="mr-3">
                     <div>
+                        {/* first name */}
                         <input
                             {...register("firstName", {
                                 required: true,
@@ -41,6 +45,7 @@ const ContactForm = () => {
                         {errors.firstName && <small>Enter valid name .</small>}
                     </div>
                     <div>
+                        {/* last name */}
                         <input
                             {...register("lastName", {
                                 required: true,
@@ -48,11 +53,12 @@ const ContactForm = () => {
                                 maxLength: 25,
                             })}
                             type="text"
-                            placeholder=" Enter Last name"
+                            placeholder="Enter Last name"
                         />
                         {errors.lastName && <small>Enter valid last name.</small>}
                     </div>
                     <div>
+                        {/* email */}
                         <input
                             {...register("email", {
                                 required: true,
@@ -66,6 +72,7 @@ const ContactForm = () => {
                         {errors.email && <small>Please fill valid email.</small>}
                     </div>
                     <div>
+                        {/* phone */}
                         <input
                             {...register("phone", {
                                 required: true,
@@ -79,6 +86,7 @@ const ContactForm = () => {
                     </div>
                 </div>
                 <div>
+                    {/* request text area */}
                     <textarea
                         rows={4}
                         {...register("textarea", {

@@ -46,6 +46,8 @@ const SignIn = (props) => {
                 dispatch(onLogout());
                 nav("/");
             }
+            // allowed scrolling once modal closed 
+            document.body.style.overflow = 'unset';
             setLoad(false);
             successHandler("Log In successfully!!!");
         } catch (err) {

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LetterEmail from '../../../assets/icons/letterEmail';
+import Location from '../../../assets/icons/location';
+import Telephone from '../../../assets/icons/telephone';
 import { Wrapper } from "../../../assets/styles/wrappers/footer";
 import { Logo } from '../../../assets/styles/wrappers/navbarUser';
 import ContactForm from '../../../shared/components/contactform';
@@ -7,8 +10,8 @@ import ContactForm from '../../../shared/components/contactform';
 const Footer = () => {
     return (
         <Wrapper>
-            <footer>
-                <main>
+            <footer className='bg-blue-100 w-full p-12'>
+                <main className='px-8'>
                     <div>
                         <Link to={"/"}>
                             <Logo>
@@ -16,9 +19,9 @@ const Footer = () => {
                                 <p>rentInOut</p>
                             </Logo>
                         </Link>
-                        <p><i className="fa fa-phone" aria-hidden="true"></i> +9725641124</p>
-                        <p><i className="fa fa-envelope-o" aria-hidden="true"></i> rentMe@gmail.com</p>
-                        <p><i className="fa fa-map-marker" aria-hidden="true"></i> KING GEORGE STREET, TEL AVIV</p>
+                        <p className='flex items-center'><Telephone/><span className='pl-1'>+9725641124</span></p>
+                        <p className='flex items-center'><LetterEmail/><span className='pl-1'>rentInOut@gmail.com</span></p>
+                        <p className='flex items-center'><Location/><span className='pl-1'>King George Street, Tel Aviv</span></p>
                         <ul className='social'>
                             <li><i className="fa fa-linkedin-square" aria-hidden="true"></i></li>
                             <li><i className="fa fa-twitter" aria-hidden="true"></i></li>
@@ -33,7 +36,7 @@ const Footer = () => {
 
                     </div>
                     <div className='hidden md:block'>
-                        <h2> Get in Touch</h2>
+                        <h2>Get in Touch</h2>
                         <ContactForm />
                     </div>
                 </main>

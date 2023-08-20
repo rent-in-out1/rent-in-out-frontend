@@ -44,27 +44,15 @@ export const Wrapper = styled.div`
     .model {
       border-radius: 0;
       max-height: 100vh;
-      top: 0;
+      top: 20;
       left: 0;
       width: 100%;
       padding: 0;
     }
 
-    .model .h2 {
-      padding: 0;
-      margin: 0;
-      top: 0;
-      z-index: 30;
-      right: 20px;
-      width: 20px;
-      color: var(--skyblue-600);
-      font-size: 2em;
+    .model h2 {
       cursor: pointer;
       transition: 0.5s linear;
-    }
-
-    .model .exit:hover {
-      color: var(--skyblue-900);
     }
   }
 
