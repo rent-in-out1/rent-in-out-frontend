@@ -33,10 +33,10 @@ const ProfileEdit = () => {
     };
     const onUpload = async (_dataBody) => {
         try {
-            const url = "/users/" + user._id;
+            const url = `/users/${user._id}`;
             const { data } = await doApiMethod(url, "PUT", _dataBody);
             if (data.modifiedCount) {
-                const url = "/users/info/" + user._id;
+                const url = `/users/info/${user._id}`;
                 const { data } = await doGetApiMethod(url, "GET");
                 dispatch(upload(data.userInfo));
                 toast.success("the deatails change");

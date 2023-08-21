@@ -5,18 +5,18 @@ import { doApiMethod } from '../../../services/axios-service/axios-service';
 const SingleUser = (props) => {
     const user = props.item;
     const changeRole = async (_id) => {
-        const url = "/users/changeRole/" + _id;
+        const url = `/users/changeRole/${_id}`;
         await doApiMethod(url, "PATCH");
 
     };
     const changeActive = async (_id) => {
-        const url = "/users/changeActive/" + _id;
+        const url = `/users/changeActive/${_id}`;
         await doApiMethod(url, "PATCH");
 
     };
     const deleteUser = async (_id, name) => {
         if (window.confirm(`Are you sure you want to delete ${name}`)) {
-            const url = "/users/" + _id;
+            const url = `/users/${_id}`;
             await doApiMethod(url, "DELETE");
         }
     };

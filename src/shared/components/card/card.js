@@ -18,6 +18,7 @@ const Card = ({ post }) => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.userSlice);
 
+
     return (
         <Wrapper>
             <PostHeader post={post} />
@@ -38,7 +39,7 @@ const Card = ({ post }) => {
                 <div className="overflow-hidden w-full postImg">
                     <img
                         className="w-full h-full object-cover"
-                        src={post.img[0]?.url}
+                        src={post?.img[0]?.url}
                         alt="post"
                     />
                 </div>
@@ -47,16 +48,17 @@ const Card = ({ post }) => {
                 <div
                     className="absolute top-0 right-2 p-2"
                     onClick={() => {
-                        !user
-                            ? dispatch(onRegisterShow())
-                            : dispatch(likePost({ id: post._id }));
+                        if(!user) dispatch(onRegisterShow())
+                         else{
+                            dispatch(likePost({ id: post._id }))
+                        }  
                         if (post.creator_id._id !== user._id) {
                             dispatch(updateWishList(post));
                         }
                         dispatch(setIsChange());
                     }}
                 >
-                    {post?.likes?.length > 0 ? (
+                    {post?.likes?.length > 0 && post?.likes?.some(like=> like._id===user._id) > 0 ? (
                         <FillHeart color="red" width="20px" height={"20px"} />
                     ) : (
                         <Heart color="red" width="20px" height={"20px"} />

@@ -5,12 +5,12 @@ import { doApiMethod } from "../../../services/axios-service/axios-service";
 const SinglePost = ({ post, setIsChange }) => {
     const nav = useNavigate();
     const changeActive = async (_id) => {
-        const url = "/posts/changeActive/" + _id;
+        const url = `/posts/changeActive/${_id}`;
         await doApiMethod(url, "PATCH");
     };
     const deletePost = async (_id, postName) => {
         if (window.confirm(`Are you sure you want to delete ${postName}`)) {
-            const url = "/posts/" + _id;
+            const url = `/posts/${_id}`;
             await doApiMethod(url, "DELETE");
         }
     };

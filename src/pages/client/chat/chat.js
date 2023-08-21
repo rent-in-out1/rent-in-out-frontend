@@ -44,7 +44,7 @@ const Chat = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [roomID]);
     const getPostCreatorInfo = async (id) => {
-        const { data } = await doGetApiMethod("/users/info/" + id);
+        const { data } = await doGetApiMethod(`/users/info/${id}`);
         setOwner({
             name: data.userInfo.fullName,
             img: data.userInfo.profile_img?.url,
@@ -59,9 +59,9 @@ const Chat = () => {
     const messageSave = async () => {
         let url = "/users/chatUpdate";
         let messageObj = {
-            ownerName: owner?.name?.firstName + " " + owner?.name?.lastName,
+            ownerName: `${owner?.name?.firstName} ${owner?.name?.lastName}`,
             ownerImg: owner?.img,
-            userName: firstName + " " + lastName,
+            userName: `${firstName} ${lastName}`,
             userImg: user?.profile_img.url,
             roomID,
             creatorID,
@@ -70,7 +70,7 @@ const Chat = () => {
                 ...chat,
                 {
                     message: message,
-                    userName: firstName + " " + lastName,
+                    userName: `${firstName} ${lastName}`,
                     sender: user._id,
                 },
             ],
@@ -103,14 +103,14 @@ const Chat = () => {
         socket.emit("send-messege", {
             message,
             roomID,
-            userName: firstName + " " + lastName,
+            userName: `${firstName} ${lastName}`,
             sender: user._id,
         });
         setChat((prev) => [
             ...prev,
             {
                 message: message,
-                userName: firstName + " " + lastName,
+                userName: `${firstName} ${lastName}`,
                 sender: user._id,
             },
         ]);
@@ -132,8 +132,8 @@ const Chat = () => {
         <Wrapper>
             <div
                 className="md:w-10/12 w-11/12 flex flex-col items-center justify-center text-center mx-auto shadow-xl p-3 bg-gray-300 rounded-xl">
-                <h1 className="text-center mx-auto w-1/2 shadow mb-2 bg-white rounded-xl py-1">You can now start chating
-                    with {owner?.name?.firstName + " " + owner?.name?.lastName}</h1>
+                <h4 className="text-center mx-auto w-1/2 shadow mb-2 bg-white rounded-xl py-1">You can now start chating
+                    with {`${owner?.name?.firstName} ${owner?.name?.lastName}`}</h4>
                 {chat.length > 0 && (
                     <ul className="mb-5 w-full flex flex-col bg-gray-200 p-4 rounded">
                         {chat.map((msg, i) => (

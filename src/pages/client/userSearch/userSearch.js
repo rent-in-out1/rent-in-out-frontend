@@ -19,7 +19,7 @@ const UserSearch = () => {
             setSearchUsersAr([]);
             return;
         }
-        const url = "/users/userSearch?s=" + searchQ;
+        const url = `/users/userSearch?s=${searchQ}`;
         try {
             const { data } = await doGetApiMethod(url);
             setSearchUsersAr(data);

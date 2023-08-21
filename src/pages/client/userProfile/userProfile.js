@@ -43,7 +43,7 @@ const UserProfile = () => {
             if (user?._id === userId) {
                 user?.role === "admin" ? nav("/admin/profile") : nav("/profile");
             }
-            const url = "/users/info/" + userId;
+            const url = `/users/info/${userId}`;
             const { data } = await doGetApiMethod(url);
             setUserDetails(data.userInfo);
         }

@@ -34,7 +34,7 @@ export const deletePost = createAsyncThunk(
     async ({ id, name }) => {
         try {
             if (window.confirm(`Are you sure you want to delete${name}`)) {
-                const url = "/posts/" + id;
+                const url = `/posts/${id}`;
                 await doApiMethod(url, "DELETE");
                 return id;
             }
@@ -58,7 +58,7 @@ export const uploadPost = createAsyncThunk(
 );
 export const likePost = createAsyncThunk("likePost/like", async ({ id }) => {
     try {
-        const url = "/posts/likePost/" + id;
+        const url = `/posts/likePost/${id}`;
         let { data } = await doApiMethod(url, "POST");
         return { data, id };
     } catch (error) {
@@ -85,7 +85,8 @@ const postsSlice = createSlice({
         },
         setPostEdit: (state, action) => {
             state.editablePost = action.payload;
-        }
+        },
+        
     },
     extraReducers(builder) {
         builder
@@ -124,6 +125,7 @@ const postsSlice = createSlice({
                 state.loading = false;
             })
             .addCase(likePost.fulfilled, (state, action) => {
+                console.log(action.payload)
                 state.loading = false;
                 state.posts.forEach((post, i) => {
                     if (post?._id === action.payload.id) state.posts[i].likes = action.payload.data.posts;

@@ -2,7 +2,7 @@ import { doApiMethod } from '../axios-service/axios-service';
 import { errorHandler } from '../extra-services/extra-services';
 
 export const deleteProfileImage = async (img_id) => {
-    let url = "/users/cloudinary/profileDel/?id=" + img_id;
+    let url = `/users/cloudinary/profileDel/?id=${img_id}`;
     try {
         const { data } = await doApiMethod(url, "POST");
         return data.result;
@@ -11,7 +11,7 @@ export const deleteProfileImage = async (img_id) => {
     }
 };
 export const deleteBannerImage = async (img_id) => {
-    let url = "/users/cloudinary/bannerDel/?id=" + img_id;
+    let url = `/users/cloudinary/bannerDel/?id=${img_id}`;
     try {
         const { data } = await doApiMethod(url, "POST");
         return data.result;
@@ -20,7 +20,7 @@ export const deleteBannerImage = async (img_id) => {
     }
 };
 export const deletePostImages = async (post_id) => {
-    let url = "/posts/postDel/?id=" + post_id;
+    let url = `/posts/postDel/?id=${post_id}`;
     try {
         const { data } = await doApiMethod(url, "POST");
         return data.result;

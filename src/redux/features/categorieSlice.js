@@ -19,7 +19,7 @@ export const deleteCategory = createAsyncThunk(
     async ({ id, name }) => {
         try {
             if (window.confirm(`Are you sure you want to delete${name}`)) {
-                const url = "/categories/" + id;
+                const url = `/categories/${id}`;
                 await doApiMethod(url, "DELETE");
                 return id;
             }
@@ -32,7 +32,7 @@ export const deleteCategory = createAsyncThunk(
 export const editCategory = createAsyncThunk(
     "editCategory/edit",
     async ({ id, editData, setOnEdit }) => {
-        const url = "/categories/" + id;
+        const url = `/categories/${id}`;
         if (
             !editData ||
             editData.name === "" ||
