@@ -1,152 +1,153 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { doApiMethod, doGetApiMethod } from "../../services/axios-service/axios-service";
+import {
+  doApiMethod,
+  doGetApiMethod,
+} from "../../services/axios-service/axios-service";
 import { errorHandler } from "../../services/extra-services/extra-services";
 
 export const getPosts = createAsyncThunk(
-    "posts/get",
-    async ({
-        search = "",
-        option = "createdAt",
-        page = 1,
-        min = 0,
-        max = 1000,
-        endScreenEnd,
-        setPage,
-    }) => {
-
-        try {
-            if (page === 1) clearPosts();
-            // let url = `/posts/search?page=${page}&reverse=yes&sort=${option}`;
-            let url = `/posts?page=${page}&sort=${option}&reverse=yes`;
-            let { data } = await doGetApiMethod(url);
-            if (data.length > 0) {
-                endScreenEnd();
-                setPage(page + 1);
-            }
-            return data;
-        } catch (error) {
-            errorHandler(error);
-        }
+  "posts/get",
+  async ({
+    search = "",
+    option = "createdAt",
+    page = 1,
+    min = 0,
+    max = 1000,
+    endScreenEnd,
+    setPage,
+  }) => {
+    try {
+      if (page === 1) clearPosts();
+      // let url = `/posts/search?page=${page}&reverse=yes&sort=${option}`;
+      let url = `/posts?page=${page}&sort=${option}&reverse=yes`;
+      let { data } = await doGetApiMethod(url);
+      if (data.length > 0) {
+        endScreenEnd();
+        setPage(page + 1);
+      }
+      return data;
+    } catch (error) {
+      errorHandler(error);
     }
+  }
 );
 export const deletePost = createAsyncThunk(
-    "deletePost/delete",
-    async ({ id, name }) => {
-        try {
-            if (window.confirm(`Are you sure you want to delete${name}`)) {
-                const url = `/posts/${id}`;
-                await doApiMethod(url, "DELETE");
-                return id;
-            }
-        } catch (error) {
-            errorHandler(error);
-        }
+  "deletePost/delete",
+  async ({ id, name }) => {
+    try {
+      if (window.confirm(`Are you sure you want to delete${name}`)) {
+        const url = `/posts/${id}`;
+        await doApiMethod(url, "DELETE");
+        return id;
+      }
+    } catch (error) {
+      errorHandler(error);
     }
+  }
 );
 export const uploadPost = createAsyncThunk(
-    "uploadPost/upload",
-    async (post) => {
-
-        try {
-            const url = "/posts";
-            let { data } = await doApiMethod(url, "POST", post);
-            return data;
-        } catch (error) {
-            errorHandler(error);
-        }
+  "uploadPost/upload",
+  async (post) => {
+    try {
+      const url = "/posts";
+      let { data } = await doApiMethod(url, "POST", post);
+      return data;
+    } catch (error) {
+      errorHandler(error);
     }
+  }
 );
 export const likePost = createAsyncThunk("likePost/like", async ({ id }) => {
-    try {
-        const url = `/posts/likePost/${id}`;
-        let { data } = await doApiMethod(url, "POST");
-        return { data, id };
-    } catch (error) {
-        errorHandler(error);
-    }
+  try {
+    const url = `/posts/likePost/${id}`;
+    let { data } = await doApiMethod(url, "POST");
+    return { data, id };
+  } catch (error) {
+    errorHandler(error);
+  }
 });
 const initialState = {
-    posts: [],
-    loading: false,
-    error: null,
-    isChange: false,
-    editablePost: {}
+  posts: [],
+  loading: false,
+  error: null,
+  isChange: false,
+  editablePost: {},
 };
 
 const postsSlice = createSlice({
-    name: "posts",
-    initialState: initialState,
-    reducers: {
-        clearPosts: (state) => {
-            state.posts = [];
-        },
-        setIsChange: (state) => {
-            state.isChange = !state.isChange;
-        },
-        setPostEdit: (state, action) => {
-            state.editablePost = action.payload;
-        },
-        
+  name: "posts",
+  initialState: initialState,
+  reducers: {
+    clearPosts: (state) => {
+      state.posts = [];
     },
-    extraReducers(builder) {
-        builder
-            .addCase(getPosts.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(getPosts.fulfilled, (state, action) => {
-                state.loading = false;
-                state.posts = [...state.posts, ...action.payload];
-                state.posts = state.posts.filter(element => {
-                    const isDuplicate = state.posts.includes(element._id);
-                    if (!isDuplicate) {
-                        state.posts.push(element._id);
-                        return true;
-                    }
-                    return false;
-                });
-            })
-            .addCase(getPosts.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-            // delete post
-            .addCase(deletePost.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(deletePost.fulfilled, (state, action) => {
-                state.loading = false;
-                state.posts = state.posts.filter((post) => post._id !== action.payload);
-            })
-            .addCase(deletePost.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-            .addCase(likePost.pending, (state) => {
-                state.loading = false;
-            })
-            .addCase(likePost.fulfilled, (state, action) => {
-                console.log(action.payload)
-                state.loading = false;
-                state.posts.forEach((post, i) => {
-                    if (post?._id === action.payload.id) state.posts[i].likes = action.payload.data.posts;
-                });
-            })
-            .addCase(likePost.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-            .addCase(uploadPost.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(uploadPost.fulfilled, (state, action) => {
-                state.loading = false;
-                state.posts.unshift(action.payload);
-            })
-            .addCase(uploadPost.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            });
+    setIsChange: (state) => {
+      state.isChange = !state.isChange;
     },
+    setPostEdit: (state, action) => {
+      state.editablePost = action.payload;
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getPosts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getPosts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = [...state.posts, ...action?.payload];
+        state.posts = state.posts.filter((element) => {
+          const isDuplicate = state.posts.includes(element._id);
+          if (!isDuplicate) {
+            state.posts.push(element._id);
+            return true;
+          }
+          return false;
+        });
+      })
+      .addCase(getPosts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // delete post
+      .addCase(deletePost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = state.posts.filter((post) => post._id !== action.payload);
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(likePost.pending, (state) => {
+        state.loading = false;
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.loading = false;
+        state.posts.forEach((post, i) => {
+          if (post?._id === action.payload.id)
+            state.posts[i].likes = action.payload.data.posts;
+        });
+      })
+      .addCase(likePost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(uploadPost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(uploadPost.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts.unshift(action.payload);
+      })
+      .addCase(uploadPost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
 });
 
 export const { clearPosts, setIsChange, setPostEdit } = postsSlice.actions;

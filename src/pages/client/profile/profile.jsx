@@ -7,7 +7,7 @@ import Pencil from "../../../assets/icons/pencil";
 import Telephone from "../../../assets/icons/telephone";
 import { Wrapper } from "../../../assets/styles/wrappers/userProfile";
 import OwnPosts from "../myProfile/ownPosts";
-import Mail from "./../../../assets/icons/mail";
+import Mail from "../../../assets/icons/mail";
 
 const Profile = () => {
     const nav = useNavigate();

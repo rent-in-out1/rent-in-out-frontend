@@ -1,7 +1,7 @@
 import React from "react";
 import { Wrapper } from '../../../assets/styles/wrappers/popUpSideBarChat';
 import { onInboxToggle } from "../../../redux/features/toggleSlice";
-import PopUPModel from "./../../UI/popup/popUpChatBar";
+import PopUPModel from "../../UI/popup/popUpChatBar";
 import SideBarChat from "./sideBarChat";
 
 const PopUpSideBarChat = () => {

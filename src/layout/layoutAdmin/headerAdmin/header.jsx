@@ -18,7 +18,7 @@ import {
     onSearchToggle,
 } from "../../../redux/features/toggleSlice";
 import { onLogout } from "../../../redux/features/userSlice";
-import Inbox from "./../../../assets/icons/inbox";
+import Inbox from "../../../assets/icons/inbox";
 
 const Header = () => {
     const nav = useNavigate();

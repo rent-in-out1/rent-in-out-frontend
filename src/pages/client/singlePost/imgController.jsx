@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ArrowLeft from './../../../assets/icons/arrowLeft';
-import ArrowRight from './../../../assets/icons/arrowRight';
+import ArrowLeft from '../../../assets/icons/arrowLeft';
+import ArrowRight from '../../../assets/icons/arrowRight';
 
 const ImgController = ({ post }) => {
     const [image, setImage] = useState(0);

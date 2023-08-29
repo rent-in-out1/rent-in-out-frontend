@@ -29,7 +29,7 @@ const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
 const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
 const Categories = React.lazy(() => import("./pages/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
-const PostEdit = React.lazy(() => import('./pages/client/post-edit/postEdit'));
+const PostEdit = React.lazy(() => import("./pages/client/post-edit/postEdit"));
 const ProfileEdit = React.lazy(() =>
   import("./pages/client/profile-edit/profileEdit")
 );
@@ -45,6 +45,8 @@ const UserSearch = React.lazy(() =>
   import("./pages/client/userSearch/userSearch")
 );
 const SinglePost = React.lazy(() => import("./pages/client/singlePost"));
+// Lazy loading of routes - close
+
 const AppRoutes = () => {
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
@@ -56,7 +58,9 @@ const AppRoutes = () => {
 
   useEffect(() => {
     checkTokenFromLocalStorage();
-    const getInbox = user ? setInterval(() => dispatch(getUserInbox()), 3000) : null;
+    const getInbox = user
+      ? setInterval(() => dispatch(getUserInbox()), 3000)
+      : null;
 
     // clear interval
     return () => {
@@ -70,9 +74,9 @@ const AppRoutes = () => {
     // check in local storage for token
     if (localStorage["token"]) {
       token = localStorage["token"];
-      // decoded token 
+      // decoded token
       const decoded = jwt_decode(token);
-      // check if token expired 
+      // check if token expired
       if (decoded.exp < Date.now()) {
         getUserInfo(decoded._id, token);
       } else errorHandler("Your authorization is expired please login again");
@@ -82,15 +86,15 @@ const AppRoutes = () => {
   const getUserInfo = async (_id, token) => {
     let url = `/users/infoToken/${_id}`;
     const { data } = await doApiMethod(url, "GET", token);
-    // if token expired return to login page 
+    // if token expired return to login page
     if (!data.userInfo) {
       errorHandler("Invalid User");
       window.open(secret.CLIENT_API_URL, "_self");
       return;
     }
-    // set token with new token 
+    // set token with new token
     localStorage.setItem("token", JSON.stringify(data.newAccessToken));
-    // login with user info 
+    // login with user info
     dispatch(onLogin(data.userInfo));
     dispatch(getUserWishList());
   };
@@ -164,7 +168,6 @@ const AppRoutes = () => {
       </Router>
     </Suspense>
   );
-
 };
 
 export default AppRoutes;

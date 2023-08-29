@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Telephone from './../../../assets/icons/telephone';
+import Telephone from '../../../assets/icons/telephone';
 import UserRating from "./userRating";
 
 const UserInfo = ({ owner, rank, post, isChange, setIsChange }) => {
