@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-src/services/secrets.js
 
 # testing
 /coverage
@@ -13,6 +12,7 @@ src/services/secrets.js
 /build
 
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local
