@@ -78,88 +78,89 @@ const PostHeader = ({ post }) => {
       copyText = `${apiUrl}${userUrl}`;;
     }
 
-  // Asynchronously call copyTextToClipboard
-  copyTextToClipboard(copyText)
-    .then(() => {
-      // If successful, notification success
-      successHandler('User URL has been successfully copied to the clipboard.');
-      closeNav();
-    })
-    .catch((err) => {
-      errorHandler('Unfortunately, we were unable to copy the URL to your clipboard');
-      closeNav();
-    });
-};
+    // Asynchronously call copyTextToClipboard
+    copyTextToClipboard(copyText)
+      .then(() => {
+        // If successful, notification success
+        successHandler('User URL has been successfully copied to the clipboard.');
+        closeNav();
+      })
+      .catch((err) => {
+        errorHandler('Unfortunately, we were unable to copy the URL to your clipboard');
+        closeNav();
+      });
+  };
 
-return (
-  <div className="dashboard-post-header-wrapper flex justify-between items-center pr-2 p-1">
-    <div
-      onClick={() => navigateToUserProfile()}
-      className="flex items-center cursor-pointer capitalize"
-    >
-      <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
-        <img
-          className="w-full h-full rounded-full object-cover"
-          src={post?.creator_id?.profile_img?.url || user?.profile_img?.url}
-          alt="avatar"
-        />
-      </div>
-      <h5 className="pl-1 flex">
-        {post?.creator_id.fullName?.firstName}
-        <label className="ml-1">
-          {post?.creator_id.fullName?.lastName}
-        </label>
-      </h5>
-    </div>
-    <div
-      className="z-10"
-      onMouseLeave={() => closeNav()}
-      onClick={() => {
-        displayOptions ? closeNav() : openNav();
-      }}
-    >
-      <Dots />
-    </div>
-    {displayOptions && (
-      <ul
-        onTouchCancel={() => closeNav()}
-        onMouseOver={() => openNav()}
-        onMouseLeave={() => closeNav()}
-        className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-11 md:top-10 xl:top-11 z-10 right-0"
+  return (
+    <div className="dashboard-post-header-wrapper flex justify-between items-center pr-2 p-1">
+      <div
+        onClick={() => navigateToUserProfile()}
+        className="flex items-center cursor-pointer capitalize"
       >
-        <li
-          onClick={() => handleCopyClick()}
-          className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${user?._id !== post?.creator_id &&
-            "rounded-b-xl hover:rounded-b-xl"
-            }`}
+        <div className="profile overflow-hidden w-8 h-8 lg:w-10 lg:h-10">
+          <img
+            className="w-full h-full rounded-full object-cover"
+            src={post?.creator_id?.profile_img?.url || user?.profile_img?.url}
+            alt="avatar"
+          />
+        </div>
+        <h5 className="pl-1 flex">
+          {post?.creator_id.fullName?.firstName}
+          <label className="ml-1">
+            {post?.creator_id.fullName?.lastName}
+          </label>
+        </h5>
+      </div>
+      <div
+        className="z-10"
+        onMouseLeave={() => closeNav()}
+        onClick={() => {
+          displayOptions ? closeNav() : openNav();
+        }}
+      >
+        <Dots />
+      </div>
+      {displayOptions && (
+        <ul
+          onTouchCancel={() => closeNav()}
+          onMouseOver={() => openNav()}
+          onMouseLeave={() => closeNav()}
+          className="w-2/3 md:w-1/3 absolute bg-white shadow-xl rounded-b-xl hover:rounded-b-xl top-11 md:top-10 xl:top-11 z-10 right-0"
         >
-          <p>Share</p>
-          <Send />
-        </li>
-        {(user?._id === post?.creator_id._id || user?.role === "admin") && (
-          <React.Fragment>
-            <li
-              onClick={() => navigateToUserProfileEdit()}
-              className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200"
-            >
-              <p>Edit</p>
-              <BsHammer />
-            </li>
-            <li
-              onClick={() => {
-                displayOptions ? closeNav() : openNav();
-              }}
-              className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200"
-            >
-              <p>Delete</p>
-              <BsTrash />
-            </li>
-          </React.Fragment>
-        )}
-      </ul>
-    )}
-  </div>
-);
+          <li
+            onClick={() => handleCopyClick()}
+            className={`transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between items-center hover:bg-gray-200 ${user?._id !== post?.creator_id &&
+              "rounded-b-xl hover:rounded-b-xl"
+              }`}
+          >
+            <p>Share</p>
+            <Send />
+          </li>
+          {(user?._id === post?.creator_id._id || user?.role === "admin") && (
+            <React.Fragment>
+              <li
+                onClick={() => navigateToUserProfileEdit()}
+                className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between hover:bg-gray-200"
+              >
+                <p>Edit</p>
+                <BsHammer />
+              </li>
+              <li
+                onClick={() => {
+                  dispatch(deletePost({ _id, postName }));
+                  displayOptions ? closeNav() : openNav();
+                }}
+                className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200"
+              >
+                <p>Delete</p>
+                <BsTrash />
+              </li>
+            </React.Fragment>
+          )}
+        </ul>
+      )}
+    </div>
+  );
 
 };
 

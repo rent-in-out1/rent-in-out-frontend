@@ -32,7 +32,7 @@ export const getPosts = createAsyncThunk(
   }
 );
 export const deletePost = createAsyncThunk(
-  "deletePost/delete",
+  "posts/delete",
   async ({ id, name }) => {
     try {
       if (window.confirm(`Are you sure you want to delete${name}`)) {
