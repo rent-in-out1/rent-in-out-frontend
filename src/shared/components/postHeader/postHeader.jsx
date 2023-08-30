@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Dots from '../../../assets/icons/dots';
 import Send from '../../../assets/icons/send';
-import { setPostEdit } from '../../../redux/features/postsSlice';
+import { deletePost, setPostEdit } from '../../../redux/features/postsSlice';
 import { copyTextToClipboard, errorHandler, successHandler } from '../../../services/extra-services/extra-services';
 import { secret } from '../../../services/secrets';
 
