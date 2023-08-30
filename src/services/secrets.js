@@ -1,8 +1,8 @@
 export const secret = {
-  SERVER_API_URL: import.meta.env.VITE_SERVER_URL_PRO,
-  // SERVER_API_URL: import.meta.env.VITE_SERVER_URL_DEV,
-  // CLIENT_API_URL: import.meta.env.VITE_CLIENT_URL_DEV,
-  CLIENT_API_URL: import.meta.env.VITE_CLIENT_URL_PRO,
+  // SERVER_API_URL: import.meta.env.VITE_SERVER_URL_PRO,
+  SERVER_API_URL: import.meta.env.VITE_SERVER_URL_DEV,
+  CLIENT_API_URL: import.meta.env.VITE_CLIENT_URL_DEV,
+  // CLIENT_API_URL: import.meta.env.VITE_CLIENT_URL_PRO,
   //cloudinary profile upload settings
   PROFILE_CLOUDINARY_PRESET: import.meta.env.VITE_PROFILE_CLOUDINARY_PRESET,
   PROFILE_CLOUDINARY_NAME: import.meta.env.VITE_PROFILE_CLOUDINARY_NAME,
