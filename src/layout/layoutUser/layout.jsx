@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../shared/components/sideBar";
 import SideBarChat from "../../shared/components/sideBarChat/sideBarChat";
-import Footer from "./footer/footer";
-import Header from "./header";
+import Footer from "./components/footer/footer";
+import Header from "./components/header";
 import LoadingSideBar from "../../shared/components/loadingComponents/loadingSideBar/loadingSideBar";
 
 const Layout = () => {

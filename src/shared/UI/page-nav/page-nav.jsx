@@ -3,7 +3,7 @@ import ArrowLeft from "../../../assets/icons/arrowLeft";
 import ArrowLeftFill from "../../../assets/icons/arrowLeftFill";
 import ArrowRight from "../../../assets/icons/arrowRight";
 import ArrowRightFill from "../../../assets/icons/arrowRightFill";
-import { doGetApiMethod } from "../../../services/axios-service/axios-service";
+import { doGetApiMethod } from "../../../api/services/axios-service/axios-service";
 
 export default function PageNav({
     urlPageApi,

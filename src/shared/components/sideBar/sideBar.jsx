@@ -14,7 +14,7 @@ import Profile from "../../../assets/icons/profile";
 import Search from "../../../assets/icons/search";
 import SignOut from "../../../assets/icons/signOut";
 import WishList from "../../../assets/icons/wishlist";
-import { secret } from '../../../services/secrets';
+import { secret } from '../../../util/secrets';
 
 const SideBar = () => {
     const dispatch = useDispatch();

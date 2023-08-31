@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   doApiMethod,
   doGetApiMethod,
-} from "../../services/axios-service/axios-service";
-import { errorHandler } from "../../services/extra-services/extra-services";
+} from "../../api/services/axios-service/axios-service";
+import { errorHandler } from "../../util/functions";
 
 export const getPosts = createAsyncThunk(
   "posts/get",

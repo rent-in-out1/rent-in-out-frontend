@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../shared/components/sideBar";
 import SideBarChat from "../../shared/components/sideBarChat/sideBarChat";
-import Header from "./headerAdmin";
+import Header from "./components/headerAdmin";
 import LoadingSideBar from "../../shared/components/loadingComponents/loadingSideBar/loadingSideBar";
 
 const LayoutAdmin = () => {

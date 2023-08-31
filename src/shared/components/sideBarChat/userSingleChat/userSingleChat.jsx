@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ExitFill from "../../../../assets/icons/exitFill";
 import ExitNoFill from "../../../../assets/icons/exitNoFill";
 import { getUserInbox } from "../../../../redux/features/userSlice";
-import { doApiMethod } from "../../../../services/axios-service/axios-service";
-import { contains_heb } from "../../../../services/extra-services/extra-services";
+import { doApiMethod } from "../../../../api/services/axios-service/axios-service";
+import { contains_heb } from "../../../../util/functions";
 
 const UserSingleChat = ({ msg }) => {
     const nav = useNavigate();

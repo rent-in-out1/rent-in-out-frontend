@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { doApiMethod } from "../../../services/axios-service/axios-service";
-import { errorHandler, successHandler } from "../../../services/extra-services/extra-services";
+import { doApiMethod } from "../../../api/services/axios-service/axios-service";
+import { errorHandler, successHandler } from "../../../util/functions";
 
 const ContactForm = () => {
     let {

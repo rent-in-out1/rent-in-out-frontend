@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Dots from '../../../assets/icons/dots';
 import Send from '../../../assets/icons/send';
 import { deletePost, setPostEdit } from '../../../redux/features/postsSlice';
-import { copyTextToClipboard, errorHandler, successHandler } from '../../../services/extra-services/extra-services';
-import { secret } from '../../../services/secrets';
+import { copyTextToClipboard, errorHandler, successHandler } from '../../../util/functions';
+import { secret } from '../../../util/secrets';
 
 
 const PostHeader = ({ post }) => {

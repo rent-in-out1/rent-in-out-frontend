@@ -4,18 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Chat from "./pages/client/chat/chat";
-import MyProfile from "./pages/client/myProfile";
-import WishList from "./pages/client/wishList";
+import Chat from "./views/client/chat/chat";
+import MyProfile from "./views/client/myProfile";
+import WishList from "./views/client/wishList";
 import { onLikesToggle } from "./redux/features/toggleSlice";
 import {
   getUserInbox,
   getUserWishList,
   onLogin,
 } from "./redux/features/userSlice";
-import { doApiMethod } from "./services/axios-service/axios-service";
-import { errorHandler } from "./services/extra-services/extra-services";
-import { secret } from "./services/secrets";
+import { doApiMethod } from "./api/services/axios-service/axios-service";
+import { errorHandler } from "./util/functions";
+import { secret } from "./util/secrets";
 import ConfirmHandler from "./shared/UI/confirm/confirm";
 import Loader from "./shared/components/loader/loader";
 import PopUpSideBarChat from "./shared/components/sideBarChat/popUpSideBarChat";
@@ -24,27 +24,27 @@ import PopUpSideBarChat from "./shared/components/sideBarChat/popUpSideBarChat";
 const LayoutAdmin = React.lazy(() =>
   import("./layout/layoutAdmin/layoutAdmin")
 );
-const Users = React.lazy(() => import("./pages/admin/users"));
-const UserProfile = React.lazy(() => import("./pages/client/userProfile"));
-const HomeAdmin = React.lazy(() => import("./pages/admin/homeAdmin"));
-const Categories = React.lazy(() => import("./pages/admin/categories"));
+const Users = React.lazy(() => import("./views/admin/users"));
+const UserProfile = React.lazy(() => import("./views/client/userProfile"));
+const HomeAdmin = React.lazy(() => import("./views/admin/homeAdmin"));
+const Categories = React.lazy(() => import("./views/admin/categories"));
 const Layout = React.lazy(() => import("./layout/layoutUser/layout"));
-const PostEdit = React.lazy(() => import("./pages/client/post-edit/postEdit"));
+const PostEdit = React.lazy(() => import("./views/client/postEdit/postEdit"));
 const ProfileEdit = React.lazy(() =>
-  import("./pages/client/profile-edit/profileEdit")
+  import("./views/client/profile-edit/profileEdit")
 );
-const Dashboard = React.lazy(() => import("./pages/client/dashboard"));
-const Register = React.lazy(() => import("./api/auth/register"));
-const Posts = React.lazy(() => import("./pages/admin/posts"));
-const Page404 = React.lazy(() => import("./pages/page-not-found"));
-const ResetPass = React.lazy(() => import("./api/auth/resetPass"));
+const Dashboard = React.lazy(() => import("./views/client/dashboard"));
+const Register = React.lazy(() => import("./views/auth/register"));
+const Posts = React.lazy(() => import("./views/admin/posts"));
+const Page404 = React.lazy(() => import("./views/page-not-found"));
+const ResetPass = React.lazy(() => import("./views/auth/resetPass"));
 const PopUpLikes = React.lazy(() =>
-  import("./pages/client/posts-likes/popUpLikes")
+  import("./views/client/postsLikes/popUpLikes/popUpLikes")
 );
 const UserSearch = React.lazy(() =>
-  import("./pages/client/userSearch/userSearch")
+  import("./views/client/userSearch/userSearch")
 );
-const SinglePost = React.lazy(() => import("./pages/client/singlePost"));
+const SinglePost = React.lazy(() => import("./views/client/singlePost"));
 // Lazy loading of routes - close
 
 const AppRoutes = () => {

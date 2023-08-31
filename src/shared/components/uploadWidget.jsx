@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadBanner, uploadProfileImage } from "../../redux/features/userSlice";
-import { doApiMethod } from '../../services/axios-service/axios-service';
-import { deleteBannerImage, deleteProfileImage } from "../../services/cloudinary-service/cloudinary-service";
-import { errorHandler, successHandler } from "../../services/extra-services/extra-services";
-import { secret } from "../../services/secrets";
+import { doApiMethod } from '../../api/services/axios-service/axios-service';
+import { deleteBannerImage, deleteProfileImage } from "../../api/services/cloudinary-service/cloudinary-service";
+import { errorHandler, successHandler } from "../../util/functions";
+import { secret } from "../../util/secrets";
 
 export function useUploadWidget({
     userID = "",

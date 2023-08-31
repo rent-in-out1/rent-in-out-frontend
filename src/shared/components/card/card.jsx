@@ -9,7 +9,7 @@ import {
   onRegisterShow,
 } from "../../../redux/features/toggleSlice";
 import { updateWishList } from "../../../redux/features/userSlice";
-import { unitTimeToCreatedTimeHelper } from "../../../services/extra-services/extra-services";
+import { unitTimeToCreatedTimeHelper } from "../../../util/functions";
 import ChatAndWhatsup from "../chat-whatsUp";
 import PostHeader from "../postHeader";
 import RecentLikes from "../recentLikes";
