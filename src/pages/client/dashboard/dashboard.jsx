@@ -59,7 +59,7 @@ const Dashboard = () => {
       {/* all posts */}
       <div
         id="posts"
-        className="grid grid-cols-2 gap-x-2 gap-y-4 md:gap-4 xl:grid-cols-3 mx-auto mt-3"
+        className="grid grid-cols-2 gap-x-2 gap-y-4 md:gap-4 md:grid-cols-3 2xl:grid-cols-4 mx-auto mt-3"
       >
         {posts && posts?.map((post) => <Card post={post} key={post._id} />)}
 

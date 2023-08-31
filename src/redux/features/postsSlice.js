@@ -35,7 +35,7 @@ export const deletePost = createAsyncThunk(
   "posts/delete",
   async ({ id, name }) => {
     try {
-      if (window.confirm(`Are you sure you want to delete${name}`)) {
+      if (window.confirm(`Are you sure you want to delete "${name}"`)) {
         const url = `/posts/${id}`;
         await doApiMethod(url, "DELETE");
         return id;

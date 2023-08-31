@@ -11,13 +11,13 @@ import {
 import { updateWishList } from "../../../redux/features/userSlice";
 import { unitTimeToCreatedTimeHelper } from "../../../services/extra-services/extra-services";
 import ChatAndWhatsup from "../chat-whatsUp";
-import PostHeader from "../postHeader/postHeader";
-import RecentLikes from "../recentLikes/recentLikes";
+import PostHeader from "../postHeader";
+import RecentLikes from "../recentLikes";
 
 const Card = ({ post }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
-  
+
   return (
     <Wrapper>
       <PostHeader post={post} />
@@ -58,7 +58,7 @@ const Card = ({ post }) => {
           }}
         >
           {post?.likes?.length > 0 &&
-          post?.likes?.some((like) => like._id === user?._id) > 0 ? (
+            post?.likes?.some((like) => like._id === user?._id) > 0 ? (
             <FillHeart color="red" width="20px" height={"20px"} />
           ) : (
             <Heart color="red" width="20px" height={"20px"} />

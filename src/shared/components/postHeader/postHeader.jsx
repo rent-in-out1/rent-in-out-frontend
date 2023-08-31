@@ -91,6 +91,11 @@ const PostHeader = ({ post }) => {
       });
   };
 
+  const removePost = (id, name) => {
+    dispatch(deletePost({ id, name }));
+    displayOptions ? closeNav() : openNav();
+  };
+
   return (
     <div className="dashboard-post-header-wrapper flex justify-between items-center pr-2 p-1">
       <div
@@ -146,10 +151,7 @@ const PostHeader = ({ post }) => {
                 <BsHammer />
               </li>
               <li
-                onClick={() => {
-                  dispatch(deletePost({ _id, postName }));
-                  displayOptions ? closeNav() : openNav();
-                }}
+                onClick={() => removePost(post.id, post.title)}
                 className="transition duration-100 ease-in-out cursor-pointer px-4 py-2 flex justify-between rounded-b-xl hover:rounded-b-xl hover:bg-gray-200"
               >
                 <p>Delete</p>
