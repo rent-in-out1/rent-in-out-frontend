@@ -12,7 +12,7 @@ const PostInfo = ({ post, user, owner }) => {
                 <li>Last update {unitTimeToCreatedTimeHelper(post?.updatedAt)}</li>
                 <li className="text-center">
                     {checkIfPostAvailableHelper(post?.available_from) ?
-                        <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Available</span> :
+                        <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Available</span> :
                         <div>Will be available in {availableTimeStampHelper(post.available_from)}</div>}
                 </li>
             </ul>

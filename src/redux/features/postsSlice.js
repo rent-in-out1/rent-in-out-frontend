@@ -125,7 +125,6 @@ const postsSlice = createSlice({
         state.loading = false;
       })
       .addCase(likePost.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.loading = false;
         state.posts.forEach((post, i) => {
           if (post?._id === action.payload.id)

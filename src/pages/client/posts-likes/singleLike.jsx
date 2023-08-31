@@ -11,7 +11,6 @@ const SingleLike = ({ item, action }) => {
     const navigateToUserProfile = () => {
         // allowed scrolling once modal closed 
         document.body.style.overflow = 'unset';
-        console.log(item);
         dispatch(action());
         if (user) {
             switch (user.role) {

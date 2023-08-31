@@ -17,7 +17,7 @@ import RecentLikes from "../recentLikes";
 const Card = ({ post }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
-
+  
   return (
     <Wrapper>
       <PostHeader post={post} />
