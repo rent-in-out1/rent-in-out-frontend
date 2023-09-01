@@ -6,7 +6,7 @@ import { useUploadWidget } from "../../../../../shared/components/uploadWidget";
 import CreatePostAlternativeFirstForm from "../createPostAlternativeFirstForm/createPostAlternativeFirstForm";
 import CreatePostAlternativeSecondForm from "../createPostAlternativeSecondForm/createPostAlternativeSecondForm";
 
-const CreatePostAlternative = ({setOnAdd}) => {
+const CreatePostAlternative = ({ setOnAdd }) => {
     const [display, setDisplay] = useState(false);
     const [col, setCol] = useState(1);
     const [data, setData] = useState({
@@ -20,7 +20,7 @@ const CreatePostAlternative = ({setOnAdd}) => {
         city: "",
         country: "",
     });
-    const {user} = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
     const [images, setImages] = useUploadWidget({
         userID: user._id,
         cloudName: secret.POST_CLOUDINARY_NAME,
@@ -30,15 +30,15 @@ const CreatePostAlternative = ({setOnAdd}) => {
     });
 
     useEffect(() => {
-        setData({...data, img: images});
+        setData({ ...data, img: images });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [images]);
 
     const handleOnChange = (e) => {
         if (e) {
-            setData({...data, [e.target.name]: e.target.value});
+            setData({ ...data, [e.target.name]: e.target.value });
         } else {
-            setData({...data, img: images});
+            setData({ ...data, img: images });
         }
     };
 

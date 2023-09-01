@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import ImageFill from "../../../../../assets/icons/imageFill";
 import { deleteOnCancel } from "../../../../../api/services/cloudinary-service/cloudinary-service";
 import { errorHandler } from "../../../../../util/functions";
@@ -11,6 +11,12 @@ const CreatePostAlternativeFirstForm = ({
     handleOnChange,
     setOnAdd
 }) => {
+    const [isDisable, setIsDisable] = useState(true);
+
+    useMemo(() => {
+        setIsDisable(!(data.title.length > 0 && data.info.length > 0 && data.img.length > 0));
+    }, [data]);
+
     const handleNext = () => {
         if (data.title === "") return errorHandler("You must provide a title");
         if (data.info === "") return errorHandler("You must provide a post info");
@@ -22,7 +28,7 @@ const CreatePostAlternativeFirstForm = ({
         setOnAdd(false);
         if (images && images.length > 0) deleteOnCancel(images);
     };
-    
+
     return (
         <React.Fragment>
             <form className="h-80 capitalize overflow-y-scroll">
@@ -85,7 +91,7 @@ const CreatePostAlternativeFirstForm = ({
                     onClick={() => closeUploadSection()}>
                     Cancel
                 </button>
-                <button className="flex-shrink-0 border-transparent focus:outline-none hover:border-transparent active:border-transparent bg-blue-400 hover:bg-blue-700 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-white rounded-xl"
+                <button disabled={isDisable} className="flex-shrink-0 border-transparent focus:outline-none hover:border-transparent active:border-transparent bg-blue-400 hover:bg-blue-700 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:text disabled:hover:bg-blue-400" type="submit"
                     onClick={() => {
                         handleNext();
                     }}>

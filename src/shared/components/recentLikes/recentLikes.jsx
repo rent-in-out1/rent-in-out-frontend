@@ -12,7 +12,7 @@ const RecentLikes = ({ likes }) => {
             }}
                 className="flex items-center cursor-pointer">
                 <span className="text-xs font-semibold mr-1 rounded">
-                    {likes.length || "PostsLikes: 0"}
+                    {likes.length < 1 || null}
                 </span>
                 {likes.length > 0 && <div className="flex items-center justify-between relative">
                     {likes?.slice(0, 3)?.map((like, i) => {

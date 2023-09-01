@@ -1,5 +1,5 @@
 import { OpenStreetMapProvider } from "leaflet-geosearch";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Minus from "../../../../../assets/icons/minus";
 import Plus from "../../../../../assets/icons/plus";
@@ -18,21 +18,29 @@ const CreatePostAlternativeSecondForm = ({
   setOnAdd,
   images
 }) => {
+
   let searchProvider = new OpenStreetMapProvider();
   const dispatch = useDispatch();
   const colRef = useRef();
+  const [isDisable, setIsDisable] = useState(true);
   const [category, setCategory] = useState();
   let [collections, setCollections] = useState([]);
   const [collection, setCollection] = useState({ val: "", i: 0 });
-  useEffect(() => {
-    allCategories();
-  }, []);
 
-  const allCategories = async () => {
+  useMemo(() => {
+    setIsDisable(!(data.country.length > 0 &&
+      data.city.length > 0 &&
+      data.collect_points.length > 0 &&
+      data.category_url.length > 0 &&
+      data.price > 0));
+  }, [data]);
+
+  useState(async () => {
     const url = "/categories";
     const { data } = await doGetApiMethod(url);
     setCategory(data);
-  };
+  }, []);
+
   const handleCollectionPoints = async () => {
     if (collection.val === "")
       return errorHandler("Please provide valid address");
@@ -197,7 +205,8 @@ const CreatePostAlternativeSecondForm = ({
             onClick={() => {
               handleUpload();
             }}
-            className="flex-shrink-0 border-transparent hover:border-transparent active:border-transparent bg-blue-400 hover:bg-blue-700 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-white rounded-xl"
+            disabled={isDisable}
+            className="flex-shrink-0 border-transparent hover:border-transparent active:border-transparent bg-blue-400 hover:bg-blue-700 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-white rounded-xl disabled:cursor-not-allowed disabled:text disabled:hover:bg-blue-400"
             type="submit"
           >
             Upload
