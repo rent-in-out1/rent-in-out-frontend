@@ -13,8 +13,9 @@ import { Logo, Wrapper } from "../../../../assets/styles/wrappers/navbarUser";
 import {
     onInboxToggle,
     onLogout,
+    onPostSearchToggle,
     onRegisterShow,
-    onSearchToggle,
+    onSearchToggle
 } from "../../../../redux/features/toggleSlice";
 import { secret } from '../../../../util/secrets';
 import FilterPosts from "../../../../views/client/filterPosts/filterPosts";
@@ -181,7 +182,7 @@ const Header = () => {
                     </li>
                     {/* search users */}
                     <li
-                        onClick={(e) => openFilterPostsModal(e)}
+                        onClick={() => dispatch(onSearchToggle())}
                         className="block w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200"
                     >
                         <div className="flex justify-between items-center cursor-pointer">

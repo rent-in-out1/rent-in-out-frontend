@@ -28,7 +28,6 @@ export const Wrapper = styled.div`
     }
 
     &-body {
-      min-height: 50vh;
       max-height: 70vh;
       background-color: white;
       border-radius: 4px;

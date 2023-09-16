@@ -52,7 +52,7 @@ const PopUpOverlay = ({ action, children, className }) => {
                             <ExitNoFill className="icon cursor-pointer" width={30} height={30} inLineFill="#E5E5E5" outLineFill="transparent" />
                         </h2>
                     </div>
-                    <div className={`model-body ${className}`}>{children}</div>
+                    <div className={`model-body ${className ?? ''}`}>{children}</div>
                 </div>
             </div>
         </Wrapper>
