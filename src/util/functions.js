@@ -1,4 +1,6 @@
+import clsx from "clsx";
 import { toast } from "react-toastify";
+import { twMerge } from "tailwind-merge";
 
 /** change input from password to text */
 export const eyeShowHide = (setShow) => {
@@ -10,6 +12,10 @@ export const eyeShowHide = (setShow) => {
   document.querySelector("#passInput").type = "text";
   setShow(true);
 };
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
 
 /** appear error handler */
 export const errorHandler = (err) => {

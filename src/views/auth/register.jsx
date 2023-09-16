@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Wrapper } from "../../assets/styles/wrappers/registerPage";
 import { onRegisterShow } from "../../redux/features/toggleSlice";
-import PopUPModel from '../../shared/UI/popup/registerModel';
+import PopUpModel from '../../shared/UI/popup/popUpModel';
 import SentMailResetPass from "./sentMailResetPass";
 import SignIn from "./signIn";
 import SignUp from "./signUp";
@@ -22,7 +22,7 @@ const Register = () => {
     }, [isState]);
 
     return (
-        <PopUPModel action={onRegisterShow}>
+        <PopUpModel action={onRegisterShow}>
             <h1 className="text-center text-5xl my-6 m-0">
                 {isState === "signIn"
                     ? "Sign In"
@@ -35,7 +35,7 @@ const Register = () => {
                     {layout}
                 </div>
             </Wrapper>
-        </PopUPModel>
+        </PopUpModel>
     );
 };
 export default Register;

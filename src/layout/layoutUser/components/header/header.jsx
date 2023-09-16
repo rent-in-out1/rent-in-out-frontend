@@ -17,6 +17,7 @@ import {
     onSearchToggle,
 } from "../../../../redux/features/toggleSlice";
 import { secret } from '../../../../util/secrets';
+import FilterPosts from "../../../../views/client/filterPosts/filterPosts";
 
 const Header = () => {
     const nav = useNavigate();
@@ -38,6 +39,12 @@ const Header = () => {
             setIsOpen(false);
         }, 100);
     };
+
+    const openFilterPostsModal = (e) => {
+        e.stopPropagation();
+        dispatch(onPostSearchToggle());
+    };
+
     return (
         <Wrapper className="drop-shadow-xl">
             <section>
@@ -50,6 +57,9 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="right">
+                    <div className="hidden md:block">
+                        <FilterPosts />
+                    </div>
                     <nav className="md:hidden block">
                         {isLogin && (
                             <ul>
@@ -60,8 +70,7 @@ const Header = () => {
                                     >
                                         <Inbox color="black" width="20" height="20" />
                                         <span className="sr-only">Notifications</span>
-                                        <div
-                                            className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
+                                        <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
                                             1
                                         </div>
                                     </button>
@@ -73,8 +82,7 @@ const Header = () => {
                                     >
                                         <Bell />
                                         <span className="sr-only">Notifications</span>
-                                        <div
-                                            className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
+                                        <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
                                             2
                                         </div>
                                     </button>
@@ -96,7 +104,7 @@ const Header = () => {
                                     ? user.profile_img?.url || user?.profile_img
                                     : "https://freesvg.org/img/Male-Avatar.png"
                             }
-                            alt=""
+                            alt="profile"
                         />
                         <span
                             className={`${isLogin ? "bg-green-400" : "bg-red-400"
@@ -113,6 +121,7 @@ const Header = () => {
                 >
                     {isLogin && (
                         <React.Fragment>
+                            {/* dashborad */}
                             <li
                                 onClick={() => {
                                     closeNav();
@@ -121,9 +130,13 @@ const Header = () => {
                                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
                             >
                                 <div className="flex justify-between items-center">
-                                    <p>Home</p> <Dashboard color="black" />
+                                    <span>Home</span>
+                                    <span className="pr-1">
+                                        <Dashboard color="black" />
+                                    </span>
                                 </div>
                             </li>
+                            {/* profile */}
                             <li
                                 onClick={() => {
                                     closeNav();
@@ -132,9 +145,13 @@ const Header = () => {
                                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer`}
                             >
                                 <div className="flex justify-between items-center">
-                                    <p>Profile</p> <Profile color="black" />
+                                    <span>Profile</span>
+                                    <span className="pr-1">
+                                        <Profile color="black" />
+                                    </span>
                                 </div>
                             </li>
+                            {/* wish list */}
                             <li
                                 className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                             >
@@ -143,19 +160,35 @@ const Header = () => {
                                     to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
                                 >
                                     <span>Wish List</span>
-                                    <WishList />
+                                    <span className="pr-1">
+                                        <WishList />
+                                    </span>
                                 </Link>
                             </li>
                         </React.Fragment>
                     )}
-
+                    {/* filter posts */}
                     <li
-                        onClick={() => dispatch(onSearchToggle())}
-                        className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
+                        onClick={(e) => openFilterPostsModal(e)}
+                        className="block md:hidden w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200"
                     >
                         <div className="flex justify-between items-center cursor-pointer">
-                            <span>Search</span>
-                            <Search />
+                            <span>Filter Posts</span>
+                            <span className="pr-1">
+                                <Search />
+                            </span>
+                        </div>
+                    </li>
+                    {/* search users */}
+                    <li
+                        onClick={(e) => openFilterPostsModal(e)}
+                        className="block w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200"
+                    >
+                        <div className="flex justify-between items-center cursor-pointer">
+                            <span>Search User</span>
+                            <span className="pr-1">
+                                <Profile color="black" />
+                            </span>
                         </div>
                     </li>
                     <li
@@ -174,12 +207,17 @@ const Header = () => {
                     >
                         {isLogin ? (
                             <div className="flex justify-between items-center">
-                                {" "}
-                                <p>Signout</p> <SignOut color="black" />
+                                <span>Signout</span>
+                                <span className="pr-1">
+                                    <SignOut color="black" />
+                                </span>
                             </div>
                         ) : (
                             <div className="flex justify-between items-center">
-                                <p>Signin</p> <SignIn />
+                                <span>Signin</span>
+                                <span className="pr-1">
+                                    <SignIn />
+                                </span>
                             </div>
                         )}
                     </li>

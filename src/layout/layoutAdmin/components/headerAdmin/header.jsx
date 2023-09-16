@@ -19,6 +19,7 @@ import {
 } from "../../../../redux/features/toggleSlice";
 import { onLogout } from "../../../../redux/features/userSlice";
 import Inbox from "../../../../assets/icons/inbox";
+import FilterPosts from "../../../../views/client/filterPosts/filterPosts";
 
 const Header = () => {
     const nav = useNavigate();
@@ -41,11 +42,17 @@ const Header = () => {
             setIsOpen(false);
         }, 100);
     };
+
+    const openFilterPostsModal = (e) => {
+        e.stopPropagation();
+        dispatch(onPostSearchToggle());
+    };
+
     return (
         <Wrapper className="drop-shadow-xl">
             <section>
                 <div className="left flex flex-wrap">
-                    <Link to={"/admin"}>
+                    <Link to={"/"}>
                         <Logo>
                             <img src="/img/LOGO.png" alt="logo" />
                             <p>rentInOut</p>
@@ -53,6 +60,9 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="right">
+                    <div className="hidden md:block">
+                        <FilterPosts />
+                    </div>
                     <nav className="md:hidden block">
                         <ul>
                             <li onClick={() => dispatch(onInboxToggle())}>
@@ -62,8 +72,7 @@ const Header = () => {
                                 >
                                     <Inbox color="black" width="20" height="20" />
                                     <span className="sr-only">Notifications</span>
-                                    <div
-                                        className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
+                                    <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
                                         1
                                     </div>
                                 </button>
@@ -75,8 +84,7 @@ const Header = () => {
                                 >
                                     <Bell />
                                     <span className="sr-only">Notifications</span>
-                                    <div
-                                        className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
+                                    <div className="z-10 inline-flex absolute -top-1 -right-2 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
                                         2
                                     </div>
                                 </button>
@@ -120,8 +128,10 @@ const Header = () => {
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
                         <div className="flex justify-between items-center">
-                            {" "}
-                            <p>Home</p> <Home />
+                            <span>Home</span>
+                            <span className="pr-1">
+                                <Home />
+                            </span>
                         </div>
                     </li>
                     <li
@@ -132,8 +142,10 @@ const Header = () => {
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
                         <div className="flex justify-between items-center">
-                            {" "}
-                            <p>Users</p> <Profile color="black" />
+                            <span>Users</span>
+                            <span className="pr-1">
+                                <Users />
+                            </span>
                         </div>
                     </li>
                     <li
@@ -144,8 +156,10 @@ const Header = () => {
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
                         <div className="flex justify-between items-center">
-                            {" "}
-                            <p>Posts</p> <Posts color="black" />
+                            <span>Posts</span>
+                            <span className="pr-1">
+                                <Posts color="black" />
+                            </span>
                         </div>
                     </li>
                     <li
@@ -156,8 +170,10 @@ const Header = () => {
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
                         <div className="flex justify-between items-center">
-                            {" "}
-                            <p>Categories</p> <Categories />
+                            <span>Categories</span>
+                            <span className="pr-1">
+                                <Categories />
+                            </span>
                         </div>
                     </li>
                     <li
@@ -168,7 +184,10 @@ const Header = () => {
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
                         <div className="flex justify-between items-center">
-                            <p>Profile</p> <Users />
+                            <span>Profile</span>
+                            <span className="pr-1">
+                                <Profile color="black" />
+                            </span>
                         </div>
                     </li>
                     <li
@@ -179,16 +198,36 @@ const Header = () => {
                             to={user?.role === "admin" ? "/admin/wishlist" : "/wishlist"}
                         >
                             <span>Wish List</span>
-                            <WishList />
+                            <span className="pr-1">
+                                <WishList />
+                            </span>
                         </Link>
                     </li>
+                    {/* filter posts */}
+                    <li
+                        onClick={(e) => openFilterPostsModal(e)}
+                        className="md:hidden w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200"
+                    >
+                        <div className="flex justify-between items-center cursor-pointer">
+                            <span>Filter Posts</span>
+                            <span className="pr-1">
+                                <Search />
+                            </span>
+                        </div>
+                    </li>
+                    {/* user search */}
                     <li
                         onClick={() => dispatch(onSearchToggle())}
                         className={`w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200`}
                     >
-                        <Link to={'/'} className="flex justify-between items-center cursor-pointer">
-                            <span>Search</span>
-                            <Search />
+                        <Link
+                            to={"/"}
+                            className="flex justify-between items-center cursor-pointer"
+                        >
+                            <span>Search User</span>
+                            <span className="pr-1">
+                                <Profile color="black" />
+                            </span>
                         </Link>
                     </li>
                     <li
@@ -206,12 +245,13 @@ const Header = () => {
                     >
                         {isLogin ? (
                             <div className="flex justify-between items-center cursor-pointer">
-                                {" "}
-                                <p>Signout</p> <SignOut color="black" />
+                                <span>Signout</span>
+                                <SignOut color="black" />
                             </div>
                         ) : (
                             <div className="flex justify-between items-center">
-                                <p>Signin</p> <SignIn color="black" />
+                                <span>Signin</span>
+                                <SignIn color="black" />
                             </div>
                         )}
                     </li>

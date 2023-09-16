@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
-import ExitFill from "../../../assets/icons/exitFill";
 import ExitNoFill from "../../../assets/icons/exitNoFill";
 import { Wrapper } from "../../../assets/styles/wrappers/popUp";
 
@@ -26,8 +25,7 @@ const Backdrop = ({ action }) => {
     );
 };
 
-const PopUpOverlay = ({ action, children }) => {
-    const [over, setOver] = useState(false);
+const PopUpOverlay = ({ action, children, className }) => {
     const dispatch = useDispatch();
 
     // disable scroll on modal load 
@@ -44,39 +42,33 @@ const PopUpOverlay = ({ action, children }) => {
         <Wrapper>
             <div className="data">
                 <div className="model">
-                    <div className="w-100 flex justify-end mb-3">
+                    <div className="model-header-exit">
                         <h2
-                            className="exit w-8 h-8 md:hidden cursor-pointer"
-                            onMouseOver={() => setOver(true)}
-                            onMouseLeave={() => setOver(false)}
+                            className="exit cursor-pointer"
                             onClick={() => {
                                 closeModal();
                                 dispatch(action());
                             }}>
-                            {over ? (
-                                <ExitFill className="icon" width={32} height={32} />
-                            ) : (
-                                <ExitNoFill className="icon cursor-pointer" width={32} height={32} />
-                            )}
+                            <ExitNoFill className="icon cursor-pointer" width={30} height={30} inLineFill="#E5E5E5" outLineFill="transparent" />
                         </h2>
                     </div>
-                    <div>{children}</div>
+                    <div className={`model-body ${className}`}>{children}</div>
                 </div>
             </div>
         </Wrapper>
     );
 };
 const portalElement = document.getElementById("overlays");
-const PopUPModel = ({ action, children }) => {
+const PopUpModel = ({ action, children, className }) => {
     return (
         <React.Fragment>
             {ReactDOM.createPortal(<Backdrop action={action} />, portalElement)}
             {ReactDOM.createPortal(
-                <PopUpOverlay action={action}>{children}</PopUpOverlay>,
+                <PopUpOverlay action={action} className={className}>{children}</PopUpOverlay>,
                 portalElement
             )}
         </React.Fragment>
     );
 };
 
-export default PopUPModel;
+export default PopUpModel;

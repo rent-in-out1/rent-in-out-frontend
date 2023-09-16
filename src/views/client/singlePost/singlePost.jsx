@@ -3,7 +3,7 @@ import { Wrapper } from "../../../assets/styles/wrappers/singlePost";
 import { onPostToggle } from "../../../redux/features/toggleSlice";
 import { doGetApiMethod } from "../../../api/services/axios-service/axios-service";
 import PostHeader from "../../../shared/components/postHeader/postHeader";
-import PopUPModel from "../../../shared/UI/popup/popUpSinglePost";
+import PopUPModel from "../../../shared/UI/popup/popUpModel";
 import BallTriangleLoader from "../../../shared/components/loader/ballTriangle/ballTriangle";
 import PostsLikes from "../postsLikes/postsLikes";
 import SinglePostImgController from "./components/singlePostImgController/singlePostImgController";

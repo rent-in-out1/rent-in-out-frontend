@@ -12,43 +12,43 @@ export const Wrapper = styled.div`
   }
 
   .model {
-    overflow-y: hidden;
-    padding: 12px;
     position: fixed;
-    min-height: 40vh;
-    max-height: 80vh;
-    margin-bottom: 20px;
-    top: 20vh;
+    top: 10vh;
     left: 25%;
-    width: 50%;
-    background-color: white;
-    border-radius: 4px;
+    width: 60%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    z-index: 999;
+    z-index: 40;
     animation: slide-down 600ms ease-in-out forwards;
+
+    &-header-exit {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      padding: 4px 0;
+    }
+
+    &-body {
+      min-height: 50vh;
+      max-height: 70vh;
+      background-color: white;
+      border-radius: 4px;
+      overflow-y: auto;
+    }
   }
 
-  .model .data {
-    overflow-y: auto;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .model {
+      width: 80%;
+      left: 10%;
+    }
   }
 
-  .model .h2 {
-    display: none;
-  }
-
-  @media (max-width: 1024px) {
-  .model {
+  @media (max-width: 767px) {
+    .model {
+      width: 96%;
       border-radius: 0;
-      top: 30;
-      left: 0;
-      width: 100%;
-      max-height: 50vh;
-      padding: 0;
-  }
-
-    .model h2 {
-      z-index: 30;
-      transition: 0.5s linear;
+      left: 2%;
+      top: 10vh;
     }
   }
 

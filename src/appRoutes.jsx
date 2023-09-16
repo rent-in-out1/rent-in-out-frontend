@@ -19,6 +19,7 @@ import { secret } from "./util/secrets";
 import ConfirmHandler from "./shared/UI/confirm/confirm";
 import Loader from "./shared/components/loader/loader";
 import PopUpSideBarChat from "./shared/components/sideBarChat/popUpSideBarChat";
+import PopUpFilterSearch from "./views/client/filterPosts/components/popUpFilterSearch/popUpFilterSearch";
 
 // Lazy loading of routes
 const LayoutAdmin = React.lazy(() =>
@@ -50,7 +51,7 @@ const SinglePost = React.lazy(() => import("./views/client/singlePost"));
 const AppRoutes = () => {
   const dispatch = useDispatch();
   let { user } = useSelector((state) => state.userSlice);
-  let { search, register, showInbox } = useSelector(
+  let { search, register, showInbox, postSearch } = useSelector(
     (state) => state.toggleSlice
   );
   let { likes } = useSelector((state) => state.toggleSlice);
@@ -160,6 +161,7 @@ const AppRoutes = () => {
         <ToastContainer position="bottom-right" />
         {postShow?.active ? <SinglePost post={postShow?.post} /> : null}
         {search ? <UserSearch /> : null}
+        {postSearch ? <PopUpFilterSearch /> : null}
         {register ? <Register /> : null}
         {likes?.active ? (
           <PopUpLikes likesArr={likes?.likesArr} action={onLikesToggle} />
