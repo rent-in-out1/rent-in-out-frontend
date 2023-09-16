@@ -6,13 +6,13 @@ import { Button, Wrapper } from "../../../assets/styles/wrappers/registerPage";
 import { onRegisterShow } from "../../../redux/features/toggleSlice";
 import { doApiMethod } from "../../../api/services/axios-service/axios-service";
 import { errorHandler, successHandler } from "../../../util/functions";
-import PopUPModel from "../../../shared/UI/popup/registerModel";
+import PopUPModel from "../../../shared/UI/popup/popUpModel";
 import LoadingButton from "../../../shared/components/spinner-button/spinnerButton";
 
 const ResetPass = () => {
     const dispatch = useDispatch();
     const [load, setLoad] = useState(false);
-    const {id, resetString} = useParams();
+    const { id, resetString } = useParams();
     const nav = useNavigate();
     const regPassword =
         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,50}$/;
@@ -20,7 +20,7 @@ const ResetPass = () => {
         register,
         getValues,
         handleSubmit,
-        formState: {errors},
+        formState: { errors },
     } = useForm();
 
     const onSub = async (_dataBody) => {
@@ -33,7 +33,7 @@ const ResetPass = () => {
         };
         try {
             const url = "/users/resetPassword";
-            const {data} = await doApiMethod(url, "POST", requestData);
+            const { data } = await doApiMethod(url, "POST", requestData);
             if (data.status === "Success") {
                 successHandler(data.msg);
                 nav("/");
