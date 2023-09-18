@@ -42,15 +42,13 @@ const PopUpOverlay = ({ action, children, className }) => {
         <Wrapper>
             <div className="data">
                 <div className="model">
-                    <div className="model-header-exit">
-                        <h2
-                            className="exit cursor-pointer"
-                            onClick={() => {
-                                closeModal();
-                                dispatch(action());
-                            }}>
-                            <ExitNoFill className="icon cursor-pointer" width={30} height={30} inLineFill="#E5E5E5" outLineFill="transparent" />
-                        </h2>
+                    <div onClick={() => {
+                        closeModal();
+                        dispatch(action());
+                    }} className="model-header-exit">
+                        <span className="cursor-pointer">
+                            <ExitNoFill className="icon" width={30} height={30} inLineFill="#E5E5E5" outLineFill="transparent" />
+                        </span>
                     </div>
                     <div className={`model-body ${className ?? ''}`}>{children}</div>
                 </div>

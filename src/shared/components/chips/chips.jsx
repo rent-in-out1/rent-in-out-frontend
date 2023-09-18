@@ -26,39 +26,61 @@ const chipVariants = cva(
   }
 );
 
-const Chips = ({ chipsProp, setChipsProp, className, variant, size, ...props }) => {
+const Chips = ({ chipsProp, setChipsProp, setForm, showChipsCount = 7, className, variant, size, ...props }) => {
   const [arrSlice1, setArrSlice1] = useState([]);
   const [arrSlice2, setArrSlice2] = useState([]);
   const [isOpenMoreOptions, setIsOpenMoreOptions] = useState(false);
 
   useEffect(() => {
-    setArrSlice1(chipsProp.slice(0, 5));
-    setArrSlice2(chipsProp.slice(5));
+    setArrSlice1(chipsProp.slice(0, showChipsCount));
+    setArrSlice2(chipsProp.slice(showChipsCount));
   }, [chipsProp]);
 
   const handleChecked = (id) => {
     const tempChips = arrSlice1.map((chip) => {
-      if (chip._id === id)
-        return { ...chip, check: !chip.check };
+      if (chip._id === id) {
+        chip['check'] = !chip.check;
+        updateForm(chip);
+        return chip;
+      }
       return chip;
     });
-
+    // update first slice of chips
     setArrSlice1(tempChips);
   };
-
+  /** slices the array to two slices */
   const moveToFirstGroup = (id) => {
-    handleChecked(id);
-    let ChoosenChip = {};
-    const filterChips = arrSlice2.filter(chip => {
+    const tempChips = arrSlice2.map((chip) => {
       if (chip._id === id) {
-        ChoosenChip = chip;
-        chip.check = true;
-        return false;
+        chip['check'] = !chip.check;
+        updateForm(chip);
+        return chip;
       }
-      return true;
+      return chip;
     });
-    setArrSlice2(filterChips);
-    setArrSlice1(prev => [...prev, ChoosenChip]);
+    // update first slice of chips
+    setArrSlice2(tempChips);
+  };
+
+  const updateForm = (choosenChip) => {
+    // check if there is form
+    if (setForm && choosenChip) {
+      // update filter form categories
+      if (choosenChip.check) {
+        setForm(prev => ({
+          ...prev,
+          categories: [...prev.categories, choosenChip]
+        }));
+      }
+      else {
+        // if check is true remove from form
+        setForm(prev => ({
+          ...prev,
+          categories: [...prev.categories.filter(category => category._id !== choosenChip._id)]
+        }));
+      }
+
+    }
   };
 
   return (
@@ -104,6 +126,7 @@ const Chips = ({ chipsProp, setChipsProp, className, variant, size, ...props }) 
                     {
                       chip.name && (
                         <div onClick={() => moveToFirstGroup(chip._id)} className={`${cn(chipVariants({ size, variant, className }))} border-black`} {...props}>
+                          {chip.check && <span className='mr-1'><CheckMark color='green' /></span>}
                           {chip.name}
                         </div>
                       )

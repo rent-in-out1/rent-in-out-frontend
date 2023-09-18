@@ -17,9 +17,6 @@ const PostsLikesSingle = ({ item, action }) => {
                 case 'admin':
                     nav(`/admin/profile/${item._id}`);
                     break;
-                case 'user':
-                    nav(`/profile/${item._id}`);
-                    break;
                 default:
                     nav(`/profile/${item._id}`);
             }

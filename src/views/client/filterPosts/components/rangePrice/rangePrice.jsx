@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 
-const RangePrice = () => {
-  const [values, setValues] = useState({
-    min: 0,
-    max: 1000
-  });
+const RangePrice = ({ setFilterForm, filterForm }) => {
+  const minPriceInputRef = useRef();
+  const maxPriceInputRef = useRef();
+
+  const handleChangeMinPrice = () => {
+    setFilterForm(prev => ({
+      ...prev,
+      minPrice: minPriceInputRef.current.value
+    }));
+  };
+
+  const handleChangeMaxPrice = () => {
+    setFilterForm(prev => ({
+      ...prev,
+      maxPrice: maxPriceInputRef.current.value
+    }));
+  };
   return (
     <div className='mb-3'>
       {/* header */}
@@ -17,7 +29,7 @@ const RangePrice = () => {
       <div className='md:px-0'>
         <div className='flex items-center'>
           <div>
-            <input defaultValue={values.min} type="number" id="visitors" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-none block w-full p-2.5" placeholder="Min" required />
+            <input onChange={handleChangeMinPrice} ref={minPriceInputRef} defaultValue={filterForm?.minPrice} type="number" id="visitors" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-none block w-full p-2.5" placeholder="Min" required />
           </div>
 
           <div className='p-3 text-2xl'>
@@ -25,7 +37,7 @@ const RangePrice = () => {
           </div>
 
           <div>
-            <input defaultValue={values.max} type="number" id="visitors" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-none block w-full p-2.5" placeholder="Max" required />
+            <input onChange={e => handleChangeMaxPrice(e)} ref={maxPriceInputRef} defaultValue={filterForm?.maxPrice} type="number" id="visitors" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-none block w-full p-2.5" placeholder="Max" required />
           </div>
 
         </div>

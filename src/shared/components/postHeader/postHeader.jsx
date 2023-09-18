@@ -67,9 +67,6 @@ const PostHeader = ({ post }) => {
         case 'admin':
           copyText = `${apiUrl}${adminUrl}`;
           break;
-        case 'user':
-          copyText = `${apiUrl}${userUrl}`;
-          break;
         default:
           copyText = `${apiUrl}${userUrl}`;;
       }
