@@ -7,7 +7,7 @@ import FilterByCategory from '../filterByCategory/filterByCategory';
 import FreeSearch from '../freeSearch';
 import RangePrice from '../rangePrice';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const PopUpFilterSearch = () => {
   const dispatch = useDispatch();
@@ -20,35 +20,40 @@ const PopUpFilterSearch = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useMemo(() => {
-    let localFilterForm;
-    // if there is saved filterForm in local storage update fields 
-    if (localStorage["filterForm"])
-      localFilterForm = JSON.parse(localStorage["filterForm"]);
-    if (localFilterForm)
-      setFilterForm(prev => ({
-        categories: localFilterForm?.categories || prev.categories,
-        minPrice: localFilterForm?.minPrice || prev.minPrice,
-        maxPrice: localFilterForm?.maxPrice || prev.maxPrice,
-        search: localFilterForm?.search || prev.search
-      }));
+    // check if there is any values in url
+    setFilterForm(prev => ({
+      categories: searchParams.get('categories') && searchParams.get('categories')?.split(",") || prev.categories,
+      minPrice: searchParams.get('price_min') || prev.minPrice,
+      maxPrice: searchParams.get('price_max') || prev.maxPrice,
+      search: searchParams.get('s') || prev.search
+    }));
   }, []);
 
   const filterPostsHandler = async () => {
-    if (checkErrors())
-      localStorage.setItem("filterForm", JSON.stringify(filterForm));
-    setIsLoading(true);
-    setTimeout(() => {
-      // stop loading 
-      setIsLoading(false);
-      // close modal
-      dispatch(onPostSearchToggle());
-      // allowed scrolling once modal closed 
-      document.body.style.overflow = 'unset';
-      // reload the page to use redux request server again(to posts)
-      nav('/');
-    }, 1000);
+    if (checkErrors()) {
+      setIsLoading(true);
+      setTimeout(() => {
+        // stop loading 
+        setIsLoading(false);
+        // close modal
+        dispatch(onPostSearchToggle());
+        // allowed scrolling once modal closed 
+        document.body.style.overflow = 'unset';
+        // reload the page to use redux request server again(to posts)
+        nav({
+          pathname: '/',
+          search: `?${createSearchParams()}`
+        });
+      }, 1000);
+    }
+  };
+
+  const createSearchParams = () => {
+    const categoriesArr = filterForm?.categories.length > 0 ? filterForm?.categories.map((category) => category.url_name)?.join(",") : '';
+    return `s=${filterForm.search}&price_max=${filterForm.maxPrice}&price_min=${filterForm.minPrice}&categories=${categoriesArr}`;
   };
 
   const checkErrors = () => {
@@ -62,10 +67,6 @@ const PopUpFilterSearch = () => {
     }
     else if (filterForm.minPrice < 0) {
       setErrorMsg("Min price must be greater than 0.");
-      return false;
-    }
-    else if (filterForm.maxPrice < filterForm.minPrice) {
-      setErrorMsg("Max price must be greater than the minimum price.");
       return false;
     }
     setErrorMsg(null);

@@ -7,18 +7,23 @@ import { errorHandler } from "../../util/functions";
 
 export const getPosts = createAsyncThunk(
   "posts/get",
-  async ({ option = "createdAt", page = 1, endScreenEnd, setPage }) => {
+  async ({
+    option = "createdAt",
+    page = 1,
+    endScreenEnd,
+    setPage,
+    searchParams,
+  }) => {
+    console.log(searchParams.get("s"));
     try {
-      let filterForm;
-      // get filters from local storage
-      if (localStorage["filterForm"]) {
-        filterForm = JSON.parse(localStorage["filterForm"]);
-      }
       if (page === 1) clearPosts();
-      const categoriesArr = filterForm?.categories
-        .map((category) => category.url_name)
-        ?.join(",");
-      let url = `/posts/search?s=${filterForm?.search}&page=${page}&reverse=yes&sort=${option}&max=${filterForm?.maxPrice}&min=${filterForm?.minPrice}&categories=${categoriesArr}`;
+      let url = `/posts/search?searchQ=${searchParams.get(
+        "s"
+      )}&page=${page}&reverse=yes&sort=${option}&max=${searchParams.get(
+        "price_max"
+      )}&min=${searchParams.get("price_min")}&categories=${searchParams.get(
+        "categories"
+      )}`;
       let { data } = await doGetApiMethod(url);
       if (data.count > 0) {
         endScreenEnd();
@@ -96,7 +101,7 @@ const postsSlice = createSlice({
       })
       .addCase(getPosts.fulfilled, (state, action) => {
         state.loading = false;
-        if (action.payload.count > 0) {
+        if (action?.payload?.count > 0) {
           state.posts = [...state.posts, ...action.payload.posts];
           state.posts = state.posts?.filter((element) => {
             const isDuplicate = state.posts.includes(element._id);

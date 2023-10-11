@@ -74,10 +74,13 @@ const Chips = ({ chipsProp, setChipsProp, setForm, showChipsCount = 7, className
       }
       else {
         // if check is true remove from form
-        setForm(prev => ({
-          ...prev,
-          categories: [...prev.categories.filter(category => category._id !== choosenChip._id)]
-        }));
+        setForm(prev => {
+          return ({
+            ...prev,
+            categories: [...prev.categories.filter(category => category.url_name !== choosenChip.url_name)]
+          });
+        }
+        );
       }
 
     }

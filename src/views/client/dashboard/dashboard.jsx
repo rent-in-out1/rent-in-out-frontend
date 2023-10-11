@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useScroll } from "../../../hooks/useScroll";
 import { clearPosts, getPosts } from "../../../redux/features/postsSlice";
 import Card from "../../../shared/components/card";
@@ -15,23 +15,25 @@ const Dashboard = () => {
   const [onAdd, setOnAdd] = useState(false);
   const [page, setPage] = useState(1);
   const [endScreen, endScreenEnd] = useScroll(900);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (user?.role === "admin") nav("/admin");
   }, [user]);
 
-  useEffect(() => {
+  useMemo(() => {
     setPage(1);
     dispatch(clearPosts());
     return () => {
       dispatch(clearPosts());
     };
-  }, [dispatch]);
+  }, [dispatch, searchParams]);
 
   useEffect(() => {
-    dispatch(getPosts({ page, endScreenEnd, setPage }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [endScreen]);
+    setTimeout(() => {
+      dispatch(getPosts({ page, endScreenEnd, setPage, searchParams }));
+    }, 100);
+  }, [endScreen, searchParams]);
 
   return (
     <main className="min-h-screen md:p-3 text-center justify-center">

@@ -8,9 +8,30 @@ const FilterByCategory = ({ setFilterForm, filterForm }) => {
   useMemo(async () => {
     const url = "/categories";
     const { data } = await doGetApiMethod(url);
+    setCategoriesWithFullProps(data);
     const mappedChips = mapDataToChip(data);
     setChips(mappedChips);
   }, []);
+
+  const setCategoriesWithFullProps = (data) => {
+    const categories = filterForm?.categories;
+    if (categories && data) {
+      const categoriseWithFullProps = [...categories.map(category => {
+        return data.filter(fetchCategory => fetchCategory.url_name === category)[0];
+      })];
+
+      setFilterForm(prev => ({
+        ...prev,
+        categories: categoriseWithFullProps
+      }));
+    }
+    else {
+      setFilterForm(prev => ({
+        ...prev,
+        categories: []
+      }));
+    }
+  };
 
   const mapDataToChip = (chips) => {
     return chips?.map(chip => {
@@ -25,10 +46,13 @@ const FilterByCategory = ({ setFilterForm, filterForm }) => {
   };
 
   const checkChips = (chip) => {
-    if (filterForm) {
+    if (filterForm && filterForm.categories?.length) {
       return filterForm?.categories?.some(filterChip => {
-        return filterChip._id === chip._id;
+        return filterChip.toLowerCase() === chip.url_name.toLowerCase();
       });
+    }
+    else {
+      return false;
     }
   };
 
