@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Bell from "../../../../assets/icons/bell";
 import Dashboard from "../../../../assets/icons/dashboard";
 import Inbox from "../../../../assets/icons/inbox";
@@ -17,6 +17,7 @@ import {
     onRegisterShow,
     onSearchToggle
 } from "../../../../redux/features/toggleSlice";
+import CircleBadge from "../../../../shared/components/circleBadge";
 import { secret } from '../../../../util/secrets';
 import FilterPosts from "../../../../views/client/filterPosts/filterPosts";
 
@@ -26,10 +27,13 @@ const Header = () => {
     const isLogin = useSelector((state) => state.userSlice?.user !== null);
     const { user } = useSelector((state) => state.userSlice);
     const [isOpen, setIsOpen] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
+
     useEffect(() => {
         window.addEventListener("scroll", () => closeNav());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
     let timeOut;
     const openNav = () => {
         clearTimeout(timeOut);
@@ -44,6 +48,14 @@ const Header = () => {
     const openFilterPostsModal = (e) => {
         e.stopPropagation();
         dispatch(onPostSearchToggle());
+    };
+
+    const countSearchParams = () => {
+        let count = 0;
+        count += searchParams.get("s") ? 1 : 0;
+        count += searchParams.get("price_max") || searchParams.get("price_min") ? 1 : 0;
+        count += searchParams.get("categories") ? 1 : 0;
+        return count;
     };
 
     return (
@@ -174,7 +186,10 @@ const Header = () => {
                         className="block md:hidden w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200"
                     >
                         <div className="flex justify-between items-center cursor-pointer">
-                            <span>Filter Posts</span>
+                            <span>
+                                Filter Posts
+                                {countSearchParams() > 0 && <span className="ml-2"><CircleBadge count={countSearchParams()} /></span>}
+                            </span>
                             <span className="pr-1">
                                 <Search />
                             </span>

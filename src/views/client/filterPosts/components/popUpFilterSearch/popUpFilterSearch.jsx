@@ -43,10 +43,7 @@ const PopUpFilterSearch = () => {
         // allowed scrolling once modal closed 
         document.body.style.overflow = 'unset';
         // reload the page to use redux request server again(to posts)
-        nav({
-          pathname: '/',
-          search: `?${createSearchParams()}`
-        });
+        setSearchParams(createSearchParams());
       }, 1000);
     }
   };

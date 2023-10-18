@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Bell from "../../../../assets/icons/bell";
 import Categories from "../../../../assets/icons/categories";
 import Home from "../../../../assets/icons/home";
@@ -21,6 +21,7 @@ import {
 } from "../../../../redux/features/toggleSlice";
 import { onLogout } from "../../../../redux/features/userSlice";
 import FilterPosts from "../../../../views/client/filterPosts/filterPosts";
+import CircleBadge from "../../../../shared/components/circleBadge";
 
 const Header = () => {
     const nav = useNavigate();
@@ -28,6 +29,7 @@ const Header = () => {
     const isLogin = useSelector((state) => state.userSlice?.user !== null);
     const user = useSelector((state) => state.userSlice.user);
     const [isOpen, setIsOpen] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         window.addEventListener("scroll", () => closeNav());
@@ -47,6 +49,14 @@ const Header = () => {
     const openFilterPostsModal = (e) => {
         e.stopPropagation();
         dispatch(onPostSearchToggle());
+    };
+
+    const countSearchParams = () => {
+        let count = 0;
+        count += searchParams.get("s") ? 1 : 0;
+        count += searchParams.get("price_max") || searchParams.get("price_min") ? 1 : 0;
+        count += searchParams.get("categories") ? 1 : 0;
+        return count;
     };
 
     return (
@@ -210,7 +220,10 @@ const Header = () => {
                         className="md:hidden w-full p-2 rounded transition ease-in-out delay-150 cursor-pointer hover:bg-blue-200"
                     >
                         <div className="flex justify-between items-center cursor-pointer">
-                            <span>Filter Posts</span>
+                            <span>
+                                Filter Posts
+                                {countSearchParams() > 0 && <span className="ml-2"><CircleBadge count={countSearchParams()} /></span>}
+                            </span>
                             <span className="pr-1">
                                 <Search />
                             </span>

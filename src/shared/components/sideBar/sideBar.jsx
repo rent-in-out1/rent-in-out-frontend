@@ -15,6 +15,7 @@ import Search from "../../../assets/icons/search";
 import SignOut from "../../../assets/icons/signOut";
 import WishList from "../../../assets/icons/wishlist";
 import { secret } from '../../../util/secrets';
+import CircleBadge from "../circleBadge";
 
 const SideBar = () => {
     const dispatch = useDispatch();
@@ -63,21 +64,14 @@ const SideBar = () => {
                                 >
                                     <WishList color={"#6B7280"} />
                                     <span className="flex-1 ml-3">Wish List</span>
-                                    <aside>{wishList?.length}</aside>
+                                    <CircleBadge count={wishList?.length} />
                                 </Link>
                             </li>
-                            {/* <li onClick={()=> dispatch(onInboxToggle())}>
-                <a>
-                  <Inbox />
-                  <span className="flex-1 ml-3">Inbox</span>
-                  <aside>1</aside>
-                </a>
-              </li> */}
                             <li>
                                 <Link to={user?.role === "admin" ? "/admin" : "/"}>
                                     <Notifications />
                                     <span className="flex-1 ml-3">Notifications</span>
-                                    <aside>2</aside>
+                                    <CircleBadge count={2} />
                                 </Link>
                             </li>
                         </React.Fragment>

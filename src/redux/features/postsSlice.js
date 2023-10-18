@@ -14,7 +14,6 @@ export const getPosts = createAsyncThunk(
     setPage,
     searchParams,
   }) => {
-    console.log(searchParams.get("s"));
     try {
       if (page === 1) clearPosts();
       let url = `/posts/search?searchQ=${searchParams.get(

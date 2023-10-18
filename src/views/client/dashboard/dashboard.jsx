@@ -37,8 +37,8 @@ const Dashboard = () => {
 
   return (
     <main className="min-h-screen md:p-3 text-center justify-center">
+      {/* add new post button */}
       {!loading && user && (
-        // add new post button
         <div className="p-3 space-x-1 w-full mx-auto rounded-xl drop-shadow-xlfixed top-2 left-2">
           {!onAdd ? (
             // unhide button
