@@ -10,6 +10,8 @@ import { onLogin } from "../../../redux/features/userSlice";
 import { doApiMethod } from "../../../api/services/axios-service/axios-service";
 import { errorHandler, eyeShowHide, successHandler } from "../../../util/functions";
 import LoadingButton from '../../../shared/components/spinner-button/spinnerButton';
+import GoogleColored from "../../../assets/icons/googleColored";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const SignIn = (props) => {
     const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -31,6 +33,15 @@ const SignIn = (props) => {
         };
         loginRequest(login);
     };
+
+    const loginWithGoogle = useGoogleLogin({
+        onSuccess: (codeResponse) => {
+            console.log(codeResponse);
+            loginRequest({ token: codeResponse.access_token });
+        },
+        onError: (error) => console.log("Login Failed:", error),
+    });
+
     const loginRequest = async (_dataBody) => {
         try {
             const url = "/users/login";
@@ -116,8 +127,22 @@ const SignIn = (props) => {
                     <LoadingButton isLoading={load}>Sign In</LoadingButton>
                 </Button>
             </form>
+
+            {/* contine with line */}
+            <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
+                <hr className="border-gray-400" />
+                <p className="text-center text-sm">or continue with</p>
+                <hr className="border-gray-400" />
+            </div>
+
+            {/* google button */}
+            <button onClick={() => loginWithGoogle()} className="bg-white border py-2 w-full rounded-xl my-5 flex justify-center items-center text-sm text-[#002D74]">
+                <GoogleColored />
+                Login with Google
+            </button>
+
             {/* navigate sign up */}
-            <span className="flex items-center justify-center">
+            <span className="flex items-center">
                 Not a member ?
                 <button
                     type="button"
@@ -129,7 +154,7 @@ const SignIn = (props) => {
                     Signup now
                 </button>
             </span>
-            <br />
+
         </div>
     );
 };
