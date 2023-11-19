@@ -35,10 +35,7 @@ const SignIn = (props) => {
     };
 
     const loginWithGoogle = useGoogleLogin({
-        onSuccess: (codeResponse) => {
-            console.log(codeResponse);
-            loginRequest({ token: codeResponse.access_token });
-        },
+        onSuccess: (codeResponse) => loginRequest({ token: codeResponse.access_token }),
         onError: (error) => console.log("Login Failed:", error),
     });
 
