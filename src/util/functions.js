@@ -102,14 +102,25 @@ const switchTimeStampToFeatureResult = (unix) => {
 };
 
 /** copy text to clipboard */
-export async function copyTextToClipboard(text) {
+export const copyTextToClipboard = async (text) => {
   if ("clipboard" in navigator) {
     return await navigator.clipboard.writeText(text);
   } else {
     return document.execCommand("copy", true, text);
   }
-}
+};
 /** check if text is on hebrew */
-export function contains_heb(str) {
+export const contains_heb = (str) => {
   return /[\u0590-\u05FF]/.test(str);
-}
+};
+
+/** random hex color */
+export const randomColor = () => `#${Math.random().toString(16).slice(2, 8).padEnd(6, '0')}`;
+
+/** return array of hex colors */
+export const randomSetOfColors = (num) => Array.from({ length: num }, () => randomColor());
+
+/** Check if number is not defined. */
+export const isNumberEmpty = (number) => number === undefined || number === null || number < 1;
+
+export const isArrayEmpty = (arr) => arr === undefined || arr === null || arr.length === 0;

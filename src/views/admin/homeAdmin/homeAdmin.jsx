@@ -1,33 +1,131 @@
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import RentBarChart from "../../../shared/components/rentBarChart";
+import RentCard from "../../../shared/components/rentCard";
+import RentLineChart from "../../../shared/components/rentLineChart";
+import UsersWizard from "./components/usersWizard";
+import CategoriesWizard from "./components/categoriesWizard/categoriesWizard";
+import PostsWizard from "./components/postsWizard/postsWizard";
+import { doGetApiMethod } from "../../../api/services/axios-service/axios-service";
 
 const HomeAdmin = () => {
-    const user = useSelector(state => state.userSlice.user);
-    return (
-        <div className="text-center mt-4">
-            <h1 className="text-3xl font-sans capitalize">Welcome
-                back {user?.fullName.firstName} {user?.fullName.lastName} !</h1>
-            <h3 className="text-2xl mt-2">List Of Tables : </h3>
-            <div className="flex wrap p-3">
-                <Link to={"/admin/users"} className="box w-1/3 p-2">
-                    <div className="bg-red-300 h-32 rounded shadow-xl cursor-pointer hover:bg-red-600 flex items-center justify-center">
-                        <h2 className="text-xl font-bold">Users</h2>
-                    </div>
-                </Link>
-                <Link to={"/admin/posts"} className="box w-1/3 p-2">
-                    <div className="bg-blue-300 h-32 rounded shadow-xl cursor-pointer hover:bg-blue-600 flex items-center justify-center">
-                        <h2 className="text-xl font-bold">Posts</h2>
-                    </div>
-                </Link>
-                <Link to={"/admin/categories"} className="box w-1/3 p-2">
-                    <div
-                        className="bg-green-300 h-32 rounded shadow-xl cursor-pointer hover:bg-green-600 flex items-center justify-center">
-                        <h2 className="text-xl font-bold">Categories</h2>
-                    </div>
-                </Link>
-            </div>
+  const user = useSelector((state) => state.userSlice.user);
+  const [usersCount, setUsersCount] = useState(0);
+  const [categoriesCount, setCategoriesCount] = useState(0);
+  const [postCount, setPostsCount] = useState(0);
+  const [postsByCategory, setPostsByCategory] = useState([]);
+  const [usersByDate, setUsersByDate] = useState([]);
 
+  useEffect(() => {
+    getUsersCount();
+    getCategoriesCount();
+    getPostsCount();
+    getPostsByCategory();
+    getUsersByDate();
+  }, []);
+
+  const getUsersCount = async () => {
+    const { data } = await doGetApiMethod("/users/count");
+    setUsersCount(data.count);
+  };
+
+  const getCategoriesCount = async () => {
+    const { data } = await doGetApiMethod("/categories/count");
+    setCategoriesCount(data.count);
+  };
+
+  const getPostsCount = async () => {
+    const { data } = await doGetApiMethod("/posts/count");
+    setPostsCount(data.count);
+  };
+
+  const getPostsByCategory = async () => {
+    const { data } = await doGetApiMethod("/posts/count-by-category");
+    const mappedCategories = mapPostsByCategory(data);
+    setPostsByCategory(mappedCategories);
+  };
+
+  const mapPostsByCategory = (categories) => {
+    return categories.map((category) => {
+      return {
+        name: category.name,
+        Category: category.count,
+      };
+    });
+  };
+
+  const getUsersByDate = async () => {
+    const { data } = await doGetApiMethod("/users/users-by-date");
+    const mappedUsersByDate = mapUsersByDate(data);
+    setUsersByDate(mappedUsersByDate);
+  };
+
+  const mapUsersByDate = (users) => {
+    return users.map((userByDate) => {
+      return {
+        name: userByDate.date,
+        users: userByDate.count,
+      };
+    });
+  };
+
+  // config
+  const data = [
+    {
+      name: 1687368739,
+      users: 30,
+    },
+    {
+      name: 1689960739,
+      users: 40,
+    },
+    {
+      name: 1692639139,
+      users: 200,
+    },
+    {
+      name: 1695317539,
+      users: 180,
+    },
+    {
+      name: 1697909539,
+      users: 300,
+    },
+  ];
+
+  return (
+    <React.Fragment>
+      <div className="flex flex-wrap mt-5">
+        {/* users count */}
+        <div className="px-2 w-full md:w-1/3 mb-4">
+          <UsersWizard count={usersCount} />
         </div>
-    );
+
+        {/* categories count */}
+        <div className="px-2 w-full md:w-1/3 mb-4">
+          <CategoriesWizard count={categoriesCount} />
+        </div>
+
+        {/* posts count */}
+        <div className="px-2 w-full md:w-1/3 mb-4">
+          <PostsWizard count={postCount} />
+        </div>
+      </div>
+
+      {/* posts by category */}
+      <RentCard styleClass={"mb-4 shadow-lg"}>
+        <h4 className="ps-3 mb-4 font-semibold text-center">All Categories:</h4>
+        <RentBarChart config={postsByCategory} activeLegend={false} />
+      </RentCard>
+
+      {/* users by date */}
+      <RentCard styleClass={"shadow-lg mb-4"}>
+        <h4 className="ps-3 mb-4 font-semibold text-center">
+          Users Count By Date:
+        </h4>
+        <RentLineChart config={usersByDate} />
+      </RentCard>
+    </React.Fragment>
+  );
 };
 export default HomeAdmin;
