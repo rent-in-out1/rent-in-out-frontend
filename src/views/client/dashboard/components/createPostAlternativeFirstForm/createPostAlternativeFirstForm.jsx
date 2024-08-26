@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import ImageFill from "../../../../../assets/icons/imageFill";
-import { deleteOnCancel } from "../../../../../api/services/cloudinary-service/cloudinary-service";
+import { deleteOnCancel, deleteSingleImage } from "../../../../../api/services/cloudinary-service/cloudinary-service";
 import { errorHandler } from "../../../../../util/functions";
 
 const CreatePostAlternativeFirstForm = ({
@@ -79,10 +79,10 @@ const CreatePostAlternativeFirstForm = ({
                             </div>
                         </div>
                         :
-
                         // images uploaded
                         <div className="overflow-hidden border">
-                            <img src={images[0]?.url} alt="post" />
+                            {/* TODO - dekel example of how to use the service */}
+                            <img onClick={() => deleteSingleImage(images[0]?.img_id)} src={images[0]?.url} alt="post" />
                         </div>
                 }
             </form>

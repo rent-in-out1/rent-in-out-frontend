@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Wrapper } from "../../../../../assets/styles/wrappers/postUi";
-import { secret } from "../../../../../util/secrets";
 import { useUploadWidget } from "../../../../../shared/components/uploadWidget";
 import CreatePostAlternativeFirstForm from "../createPostAlternativeFirstForm/createPostAlternativeFirstForm";
 import CreatePostAlternativeSecondForm from "../createPostAlternativeSecondForm/createPostAlternativeSecondForm";
@@ -23,10 +22,8 @@ const CreatePostAlternative = ({ setOnAdd }) => {
     const { user } = useSelector((state) => state.userSlice);
     const [images, setImages] = useUploadWidget({
         userID: user._id,
-        cloudName: secret.POST_CLOUDINARY_NAME,
-        uploadPreset: secret.POST_CLOUDINARY_PRESET,
+        folder: 'posts',
         single: false,
-        postTitle: data?.title
     });
 
     useEffect(() => {

@@ -1,7 +1,6 @@
 import React from "react";
 import { FaCamera } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { secret } from "../../../../../util/secrets";
 import Loader from "../../../../../shared/components/loader/loader";
 import { useUploadWidget } from "../../../../../shared/components/uploadWidget";
 
@@ -10,20 +9,22 @@ const BannerProfile = () => {
     const { cover_img, profile_img } = useSelector(
         (state) => state.userSlice?.user
     );
+
     // eslint-disable-next-line no-unused-vars
     const [banner, setBanner, loadBanner] = useUploadWidget({
         userID: user._id,
-        postTitle: "",
-        cloudName: secret.BANNER_CLOUDINARY_NAME,
-        uploadPreset: secret.BANNER_CLOUDINARY_PRESET,
+        folder: 'banner',
+        cropping: true,
+        showSkipCropButton: true,
         single: true,
     });
+
     // eslint-disable-next-line no-unused-vars
     const [profile, setProfile, loadImg] = useUploadWidget({
         userID: user._id,
-        postTitle: "",
-        cloudName: secret.PROFILE_CLOUDINARY_NAME,
-        uploadPreset: secret.PROFILE_CLOUDINARY_PRESET,
+        folder: 'profile',
+        cropping: true,
+        showSkipCropButton: true,
         single: true,
     });
     return (
