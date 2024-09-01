@@ -2,9 +2,7 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-/dist
+package-lock.json
 pnpm-lock.yaml
 
 # testing
@@ -12,16 +10,18 @@ pnpm-lock.yaml
 
 # production
 /build
+/certs
 
 # misc
-.env
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+**/*/public
+**/*/dist
+**/.DS_Store
+*/.env.
+**/.git
+**/*/*.css
+**/*/*.json
+**/*/*.html
 
-npm-debug.log*
 
-vite-env.d.js
-vite.config.js
+.gitignore
+.idea/

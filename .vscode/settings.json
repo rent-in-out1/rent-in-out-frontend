@@ -1,17 +1,15 @@
 {
   "git.closeDiffOnOperation": true,
   "javascript.preferences.importModuleSpecifier": "shortest", // default value is shortest
-  // "js/ts.implicitProjectConfig.checkJs": true,
-  // "eslint.options": { "overrideConfigFile": "./.eslint.config.mjs" },
+  "js/ts.implicitProjectConfig.checkJs": true,
+  // "eslint.options": { "overrideConfigFile": "./.eslintrc.yaml" },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always",
+    "source.fixAll.eslint": "explicit",
     "source.addMissingImports": "never"
   },
-  // "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "editor.tabSize": 2,
-  "editor.detectIndentation": false,
   "window.zoomLevel": 0,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": false,
   "editor.mouseWheelZoom": false,
   "editor.multiCursorModifier": "alt",
   "css.lint.unknownProperties": "ignore",
