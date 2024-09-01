@@ -1,67 +1,99 @@
+/* eslint-disable no-undef */
+import L from "leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import "leaflet/dist/leaflet.css"; // Import Leaflet's CSS
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import Minus from "../../../../../assets/icons/minus";
-import Plus from "../../../../../assets/icons/plus";
-import { uploadPost } from "../../../../../redux/features/postsSlice";
 import { doGetApiMethod } from "../../../../../api/services/axios-service/axios-service";
 import { deleteOnCancel } from "../../../../../api/services/cloudinary-service/cloudinary-service";
-import { errorHandler } from "../../../../../util/functions";
+import Minus from "../../../../../assets/icons/minus";
+import { uploadPost } from "../../../../../redux/features/postsSlice";
+import { dateToString, errorHandler } from "../../../../../util/functions";
+import { getButtonsProps } from "./createPostAlternativeSecondFormProps";
 
 const CreatePostAlternativeSecondForm = ({
-  col,
-  setCol,
   data,
   setData,
   setDisplay,
   handleOnChange,
   setOnAdd,
-  images
+  images,
 }) => {
-
-  let searchProvider = new OpenStreetMapProvider();
   const dispatch = useDispatch();
-  const colRef = useRef();
   const [isDisable, setIsDisable] = useState(true);
   const [category, setCategory] = useState();
-  let [collections, setCollections] = useState([]);
-  const [collection, setCollection] = useState({ val: "", i: 0 });
+  const [provider] = useState(new OpenStreetMapProvider());
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedAddresses, setSelectedAddresses] = useState([]);
+  const [marker, setMarker] = useState(null);
+  const [map, setMap] = useState(null);
 
-  useMemo(() => {
-    setIsDisable(!(data.country.length > 0 &&
-      data.city.length > 0 &&
-      data.collect_points.length > 0 &&
-      data.category_url.length > 0 &&
-      data.price > 0));
-  }, [data]);
+  useEffect(() => {
+    getCategories();
+    const mapInstance = L.map("map").setView([32.0853, 34.7818], 13); // Coordinates for the center of the map
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors",
+    }).addTo(mapInstance);
+    setMap(mapInstance);
 
-  useState(async () => {
-    const url = "/categories";
-    const { data } = await doGetApiMethod(url);
-    setCategory(data);
+    return () => mapInstance.remove();
   }, []);
 
-  const handleCollectionPoints = async () => {
-    if (collection.val === "")
-      return errorHandler("Please provide valid address");
-    let result = await searchProvider.search({ query: collection.val });
-    if (result.length === 0) return errorHandler("Couldn't find the adrress");
-    else if (collections.some((el) => el.label === result[0].label))
-      return errorHandler("Address is already exists or not valid");
-    else {
-      let res = { x: result[0].x, y: result[0].y, label: result[0].label };
-      setCollections([...collections, (collections[collection.i] = res)]);
-      setData({ ...data, collect_points: [...collections] });
-      if (col >= 1) setCol(col + 1);
+  useEffect(() => {
+    setIsDisable(
+      !(
+        data.country.length > 0 &&
+        data.city.length > 0 &&
+        data.collect_points.length > 0 &&
+        data.category_url.length > 0 &&
+        data.price > 0
+      )
+    );
+  }, [data]);
+
+  const getCategories = () => {
+    const url = "/categories";
+    doGetApiMethod(url).then((response) => {
+      setCategory(response.data);
+    });
+  };
+
+  const handleInputChange = async (e) => {
+    const inputValue = e.target.value;
+    setQuery(inputValue);
+
+    if (inputValue.length > 2) {
+      const results = await provider.search({ query: inputValue });
+      setSuggestions(results);
+    } else {
+      setSuggestions([]);
     }
   };
-  const handleRemoveCollectPoint = (index) => {
-    collections = collections.filter((col, i) => i !== index);
-    setCollections(collections);
-    setData({ ...data, collect_points: [...collections] });
-    if (col !== 1) setCol(col - 1);
+
+  const handleSelectSuggestion = (suggestion) => {
+    const { x, y, label } = suggestion;
+    setSuggestions([]);
+
+    setSelectedAddresses((prevAddresses) => [...prevAddresses, suggestion]);
+    setData((prevData) => ({
+      ...prevData,
+      collect_points: [...prevData.collect_points, suggestion],
+    }));
+
+    if (map) {
+      if (marker) marker.remove();
+      map.setView([y, x], 13);
+      const newMarker = L.marker([y, x])
+        .addTo(map)
+        .bindPopup(label)
+        .openPopup();
+      setMarker(newMarker);
+    }
+    setQuery("");
   };
-  const handleUpload = async () => {
+
+  const handleUpload = () => {
     if (data.collect_points.length === 0)
       return errorHandler("You must provide at list one collection point");
     if (data.price === "") return errorHandler("You must provide a price");
@@ -80,138 +112,153 @@ const CreatePostAlternativeSecondForm = ({
     if (images && images.length > 0) deleteOnCancel(images);
   };
 
+  const handleDeleteAddress = (selectedAddress) => {
+    const updatedSelectedAddresses = selectedAddresses.filter(
+      (address) => address.label !== selectedAddress.label
+    );
+    setSelectedAddresses(updatedSelectedAddresses);
+    setData((prevData) => ({
+      ...prevData,
+      collect_points: updatedSelectedAddresses,
+    }));
+  };
+
   return (
     <React.Fragment>
-      <form className="min-h-min mb-4 overflow-y-scroll capitalize">
-        <div className="flex-flex-col content-between w-full ">
-          <div className="flex w-full">
-            <input
-              value={data?.price}
-              className="mt-2 mr-1"
-              name="price"
-              type="number"
-              placeholder="Price"
-              onChange={handleOnChange}
-              min={0}
-            />
-            <select
-              value={data?.category_url ? data.category_url : "Choose Category"}
-              name="category_url"
-              className="mt-2"
-              onChange={handleOnChange}
-            >
-              <option value="Choose Category" className="capitalize">
-                Choose Category
+      <form className="min-h-min mb-4 capitalize flex flex-col gap-3">
+        <div className="flex gap-2 w-full">
+          <input
+            value={data?.price || ""}
+            name="price"
+            type="number"
+            placeholder="Price"
+            onChange={handleOnChange}
+            min={0}
+          />
+          <select
+            value={data?.category_url ?? "Choose Category"}
+            name="category_url"
+            onChange={handleOnChange}
+          >
+            <option value="Choose Category" className="capitalize">
+              Choose Category
+            </option>
+            {category?.map((category) => (
+              <option
+                value={category?.url_name}
+                key={category.name}
+                className="capitalize"
+              >
+                {category.name}
               </option>
-              {category?.map((category, i) => (
-                <option
-                  value={category?.url_name}
-                  key={i}
-                  className="capitalize"
-                >
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="filters w-full flex ">
-            <div className="w-1/2 mr-1">
-              <input
-                value={data?.country}
-                type="text"
-                name="country"
-                placeholder="Country"
-                onChange={handleOnChange}
-              />
-            </div>
-            <div className="w-full md:w-1/2 px-1 mt-2  md:mb-0 ">
-              <input
-                value={data?.city}
-                type="text"
-                name="city"
-                placeholder="City"
-                onChange={handleOnChange}
-              />
-            </div>
-          </div>
-          <div className="w-full text-start px-1 mt-2  md:mb-0 ">
-            <small className="ml-1">available from</small>
-            <input
-              value={data?.available_from}
-              type="date"
-              name="available_from"
-              onChange={handleOnChange}
-            />
-          </div>
-          <div className="border rounded bg-gray-200 p-2 flex w-full">
-            <div className="w-full">
-              <h2>Collection Points</h2>
-              {[...Array(col)].map((collect, i) => (
-                <div key={i} className="flex items-center justify-between">
-                  <div className="w-full md:mb-0">
-                    <input
-                      onChange={() =>
-                        setCollection({ val: colRef.current.value, i })
-                      }
-                      ref={colRef}
-                      name="collect_points"
-                      type="text"
-                      placeholder={`Collection point number ${i + 1}`}
-                    />
-                  </div>
-                  {col === i + 1 ? (
-                    <div className="flex items-center justufy-center">
-                      <span
-                        onClick={() => {
-                          handleCollectionPoints();
-                        }}
-                        className="pl-2 cursor-pointer"
-                      >
-                        <Plus color="green" />
-                      </span>
-                      <small
-                        onClick={() => handleCollectionPoints()}
-                        className="rounded-xl bg-green-200 p-1 text-xs cursor-pointer"
-                      >
-                        Check
-                      </small>
-                    </div>
-                  ) : (
+            ))}
+          </select>
+        </div>
+        <div className="filters w-full flex gap-2">
+          <input
+            value={data?.country}
+            type="text"
+            name="country"
+            placeholder="Country"
+            onChange={handleOnChange}
+          />
+          <input
+            value={data?.city}
+            type="text"
+            name="city"
+            placeholder="City"
+            onChange={handleOnChange}
+          />
+        </div>
+        <div className="w-full text-start">
+          <small className="ml-1">available from</small>
+          <input
+            value={dateToString(data?.available_from)}
+            type="date"
+            name="available_from"
+            onChange={handleOnChange}
+          />
+        </div>
+        <div>
+          {selectedAddresses.length > 0 && (
+            <>
+              <small className="block text-left ml-1">
+                Selected Collection Points
+              </small>
+              <ul className="mb-2 flex flex-col gap-1">
+                {selectedAddresses.map((address) => (
+                  <div
+                    className="flex justify-between border rounded p-2"
+                    key={address.label}
+                  >
+                    <li>{address.label}</li>
                     <span
-                      onClick={() => {
-                        handleRemoveCollectPoint(i);
-                      }}
-                      className="pl-2 cursor-pointer"
+                      className="cursor-pointer"
+                      onClick={() => handleDeleteAddress(address)}
                     >
                       <Minus color="red" />
                     </span>
-                  )}
-                </div>
-              ))}
-            </div>
+                  </div>
+                ))}
+              </ul>
+            </>
+          )}
+          <div className="relative">
+            <input
+              type="text"
+              value={query}
+              onChange={handleInputChange}
+              placeholder="Type an Address"
+              style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+            />
+            {suggestions.length > 0 && (
+              <ul
+                className="absolute z-[10000] w-full"
+                style={{ listStyleType: "none", padding: "0", margin: "0" }}
+              >
+                {suggestions.map((suggestion) => (
+                  <li
+                    key={suggestion.label}
+                    onClick={() => handleSelectSuggestion(suggestion)}
+                    style={{
+                      padding: "10px",
+                      backgroundColor: "#fff",
+                      border: "1px solid #ddd",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {suggestion.label}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+          <div id="map" style={{ height: "500px", width: "100%" }}></div>
         </div>
       </form>
       <div className="flex justify-between px-2">
-        <button onClick={() => setDisplay(false)} className="flex-shrink-0 border-transparent py-2 border-4 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-blue-400 hover:text-blue-700 rounded-xl" type="button">
-          Back
-        </button>
-        <div className="flex items-center">
-          <button className="flex-shrink-0 border-transparent py-2 border-4 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-blue-400 hover:text-blue-700 rounded-xl" type="button"
-            onClick={() => closeUploadSection()}>
-            Cancel
-          </button>
-          <button
-            onClick={() => {
-              handleUpload();
-            }}
-            disabled={isDisable}
-            className="flex-shrink-0 border-transparent hover:border-transparent active:border-transparent bg-blue-400 hover:bg-blue-700 px-6 md:px-8 md:py-2 text-sm md:text-base cursor-pointer text-white rounded-xl disabled:cursor-not-allowed disabled:text disabled:hover:bg-blue-400"
-            type="submit"
-          >
-            Upload
-          </button>
-        </div>
+        {getButtonsProps(
+          setDisplay,
+          closeUploadSection,
+          handleUpload,
+          isDisable
+        ).map((buttonsGroup, i) => (
+          <div key={i}>
+            {buttonsGroup.map(
+              ({ handleClick, disabled, className, type, text }) => (
+                <button
+                  key={text}
+                  onClick={handleClick}
+                  disabled={disabled}
+                  className={className}
+                  type={type}
+                >
+                  {text}
+                </button>
+              )
+            )}
+          </div>
+        ))}
       </div>
     </React.Fragment>
   );

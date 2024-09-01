@@ -62,7 +62,7 @@ const Dashboard = () => {
         id="posts"
         className="grid grid-cols-2 gap-x-2 gap-y-4 md:gap-4 md:grid-cols-3 2xl:grid-cols-4 mx-auto mt-3"
       >
-        {posts && posts?.map((post) => <Card post={post} key={post._id} />)}
+        {posts && posts?.map((post) => <Card post={post} key={post?._id} />)}
 
         {/* loading card */}
         {loading && <LoadingCard cards={8} />}

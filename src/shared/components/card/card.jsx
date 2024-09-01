@@ -17,7 +17,7 @@ import RecentLikes from "../recentLikes";
 const Card = ({ post }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
-  
+
   return (
     <Wrapper>
       <PostHeader post={post} />
@@ -58,7 +58,7 @@ const Card = ({ post }) => {
           }}
         >
           {post?.likes?.length > 0 &&
-            post?.likes?.some((like) => like._id === user?._id) > 0 ? (
+          post?.likes?.some((like) => like._id === user?._id) > 0 ? (
             <FillHeart color="red" width="20px" height={"20px"} />
           ) : (
             <Heart color="red" width="20px" height={"20px"} />
@@ -80,12 +80,12 @@ const Card = ({ post }) => {
 
         <div className="flex justify-between items-center py-1">
           {/* top 3 likes */}
-          <RecentLikes key={post._id} likes={post.likes} />
+          <RecentLikes key={post?._id} likes={post?.likes} />
 
           {/* post uploaded time */}
           <span className="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded lg:mr-2">
             <Clock />
-            {unitTimeToCreatedTimeHelper(post.createdAt)}
+            {unitTimeToCreatedTimeHelper(post?.createdAt)}
           </span>
         </div>
 
@@ -99,7 +99,7 @@ const Card = ({ post }) => {
             {/* price for day/week/month */}
             <span className="text-xs capitalize text-gray-400">per day</span>
           </div>
-          <ChatAndWhatsup post={post} user={user} owner={post.creator_id} />
+          <ChatAndWhatsup post={post} user={user} owner={post?.creator_id} />
         </div>
       </div>
     </Wrapper>

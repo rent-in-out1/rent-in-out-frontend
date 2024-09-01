@@ -124,3 +124,15 @@ export const randomSetOfColors = (num) => Array.from({ length: num }, () => rand
 export const isNumberEmpty = (number) => number === undefined || number === null || number < 1;
 
 export const isArrayEmpty = (arr) => arr === undefined || arr === null || arr.length === 0;
+
+export function dateToString(date) {
+  date = new Date(date)
+  if (!date) {
+    return '';
+  } else {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+}
