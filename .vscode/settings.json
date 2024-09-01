@@ -3,10 +3,8 @@
   "javascript.preferences.importModuleSpecifier": "shortest", // default value is shortest
   "js/ts.implicitProjectConfig.checkJs": true,
   // "eslint.options": { "overrideConfigFile": "./.eslintrc.yaml" },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.addMissingImports": "never"
-  },
+  "editor.codeActionsOnSave": { "source.fixAll": "always" },
+  "editor.formatOnSave": false,
   "window.zoomLevel": 0,
   "editor.tabSize": 2,
   "editor.insertSpaces": false,
