@@ -1,1 +1,1 @@
-export { default } from "./singlePostImgController";
+export { default } from './singlePostImgController';

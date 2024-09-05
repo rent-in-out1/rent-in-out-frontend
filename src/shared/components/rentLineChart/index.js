@@ -1,1 +1,1 @@
-export { default } from "./rentLineChart";
+export { default } from './rentLineChart';

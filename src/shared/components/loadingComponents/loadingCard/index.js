@@ -1,1 +1,1 @@
-export { default } from "./loadingCard";
+export { default } from './loadingCard';

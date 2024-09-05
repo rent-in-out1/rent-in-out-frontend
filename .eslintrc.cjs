@@ -59,6 +59,7 @@ module.exports = {
     // #########################
     'no-debugger': 'warn', // default value is error. Disallow the use of the debugger keyword.
     'no-unused-vars': 'off', // Solved unused variables raising an error. Using @typescript-eslint/no-unused-vars instead.
+    'no-useless-catch': 'off',
     // '--max-warnings': -1, // default for build ignore warnings like 'setUserData' is assigned a value but never used
     'prefer-template': 'warn', // turns this: name + value, to `${name}${value}`
     // 'arrow-body-style': 'error', // Makes a return with one line a one-liner without a return. if you had used plugin:prettier/recommended this would have been enabled by default.
@@ -80,7 +81,8 @@ module.exports = {
     // ############################
     // Rule Set 3: typescript rules
     // ############################
-    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': 'off', // TODO - check if need that 
+    '@typescript-eslint/no-unused-expressions': 'off', // TODO - remove later
 
     // ########################
     // Rule Set 4: import rules
@@ -90,7 +92,7 @@ module.exports = {
     'import/newline-after-import': 'warn', // must use a newline between all imports and next line of code.
     'import/first': 'warn', // I want the imports to be the first thing to appear in every file.
     'import/exports-last': 'warn', // Ensure all exports appear after other statements.
-    'import/extensions': ['warn', 'never', { js: 'always' }],
+    'import/extensions': ['warn', 'never'],
     // - about import/extensions = Ensures consistent use of file extension on import path. it also had "'always', { ignorePackages: true }", which made internal packages fail at runtime if I enable this (api-gateway is an example case).
     // 'import/prefer-default-export': 'error', // Uncomment this if you only want to see export default and to disallow export { someVariable }.
     // 'import/newline-after-import': 'error', // Always make sure there's a new line after the last import statement.

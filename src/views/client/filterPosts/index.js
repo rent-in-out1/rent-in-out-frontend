@@ -1,1 +1,1 @@
-export { default } from "./filterPosts";
+export { default } from './filterPosts';

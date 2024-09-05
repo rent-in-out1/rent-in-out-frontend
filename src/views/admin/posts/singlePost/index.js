@@ -1,1 +1,1 @@
-export {default} from "./singlePost";
+export { default } from './singlePost';

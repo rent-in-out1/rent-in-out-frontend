@@ -1,1 +1,1 @@
-export { default } from "./singlePostInfo";
+export { default } from './singlePostInfo';

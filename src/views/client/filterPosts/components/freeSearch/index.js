@@ -1,1 +1,1 @@
-export { default } from "./freeSearch";
+export { default } from './freeSearch';

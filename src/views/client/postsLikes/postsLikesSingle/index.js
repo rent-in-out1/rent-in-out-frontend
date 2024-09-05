@@ -1,1 +1,1 @@
-export { default } from "./postsLikesSingle";
+export { default } from './postsLikesSingle';

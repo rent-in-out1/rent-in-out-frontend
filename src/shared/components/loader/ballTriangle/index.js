@@ -1,1 +1,1 @@
-export { default } from "./ballTriangle";
+export { default } from './ballTriangle';

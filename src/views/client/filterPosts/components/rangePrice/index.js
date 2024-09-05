@@ -1,1 +1,1 @@
-export { default } from "./rangePrice";
+export { default } from './rangePrice';

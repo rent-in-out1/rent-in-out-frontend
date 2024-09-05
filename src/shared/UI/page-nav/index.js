@@ -1,1 +1,1 @@
-export { default } from "./page-nav";
+export { default } from './page-nav';

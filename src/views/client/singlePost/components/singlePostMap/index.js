@@ -1,1 +1,1 @@
-export { default } from "./singlePostMap";
+export { default } from './singlePostMap';

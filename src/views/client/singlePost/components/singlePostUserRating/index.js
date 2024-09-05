@@ -1,1 +1,1 @@
-export {default} from "./singlePostUserRating";
+export { default } from './singlePostUserRating';

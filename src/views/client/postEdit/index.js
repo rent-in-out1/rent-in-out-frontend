@@ -1,1 +1,1 @@
-export { default } from "./postEdit";
+export { default } from './postEdit';

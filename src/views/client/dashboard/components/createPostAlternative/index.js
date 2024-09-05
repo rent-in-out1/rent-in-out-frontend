@@ -1,1 +1,1 @@
-export { default } from "./createPostAlternative";
+export { default } from './createPostAlternative';

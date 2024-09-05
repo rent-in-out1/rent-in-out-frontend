@@ -1,1 +1,1 @@
-export { default } from "./rentCard";
+export { default } from './rentCard';

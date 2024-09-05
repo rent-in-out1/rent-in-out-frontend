@@ -5,15 +5,14 @@ import postsSlice from './features/postsSlice';
 import toggleSlice from './features/toggleSlice';
 import userSlice from './features/userSlice';
 
-
 const store = configureStore({
-    reducer: {
-        userSlice,
-        errorsSlice,
-        toggleSlice,
-        categoriesSlice,
-        postsSlice
-    }
+	reducer: {
+		userSlice,
+		errorsSlice,
+		toggleSlice,
+		categoriesSlice,
+		postsSlice,
+	},
 });
 
 export default store;

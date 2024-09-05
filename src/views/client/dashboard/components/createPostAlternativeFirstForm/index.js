@@ -1,1 +1,1 @@
-export { default } from "./createPostAlternativeFirstForm";
+export { default } from './createPostAlternativeFirstForm';

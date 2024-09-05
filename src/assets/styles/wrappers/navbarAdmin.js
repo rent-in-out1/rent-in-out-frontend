@@ -1,5 +1,36 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
+export const Logo = styled.div`
+display: flex;
+align-items: center;
+max-width: 40%;
+margin: 0;
+cursor: pointer;
+    p{
+        margin: 0 4px;
+        /* display: none; */
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    img{
+        width: 40px;
+        height: 40px;
+    }
+    @media(max-width:768px){
+        display: block;
+        max-width: 100%;
+        img{
+            width: 30px;
+            height: 30px;
+        }
+        a{
+            margin: 0;
+        }
+        p{
+            /* display: none; */
+            margin: 0;
+        }
+    }
+`;
 export const Wrapper = styled.div`
   background: var(--white);
   position: sticky;
@@ -141,35 +172,4 @@ export const Wrapper = styled.div`
     }
   }
 
-`;
-export const Logo = styled.div`
-display: flex;
-align-items: center;
-max-width: 40%;
-margin: 0;
-cursor: pointer;
-    p{
-        margin: 0 4px;
-        /* display: none; */
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
-    img{
-        width: 40px;
-        height: 40px;
-    }
-    @media(max-width:768px){
-        display: block;
-        max-width: 100%;
-        img{
-            width: 30px;
-            height: 30px;
-        }
-        a{
-            margin: 0;
-        }
-        p{
-            /* display: none; */
-            margin: 0;
-        }
-    }
 `;

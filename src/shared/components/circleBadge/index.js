@@ -1,1 +1,1 @@
-export { default } from "./circleBadge";
+export { default } from './circleBadge';
