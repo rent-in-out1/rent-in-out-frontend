@@ -1,79 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { onLogout, onRegisterShow, onSearchToggle } from '../../../redux/features/toggleSlice';
+import { getLinks } from './sideBarProps';
 
 //style
-// eslint-disable-next-line import/extensions
 import { Wrapper } from '../../../assets/styles/wrappers/sideBar';
 
 // icons import
-import Dashboard from '../../../assets/icons/dashboard';
-import Home from '../../../assets/icons/home';
-import Notifications from '../../../assets/icons/notifications';
-import Profile from '../../../assets/icons/profile';
-import Search from '../../../assets/icons/search';
 import SignOut from '../../../assets/icons/signOut';
-import WishList from '../../../assets/icons/wishlist';
 import { secret } from '../../../util/secrets';
-import CircleBadge from '../circleBadge';
 
 const SideBar = () => {
 	const dispatch = useDispatch();
-	const isLogin = useSelector((state) => state.userSlice?.user !== null);
 	const { user, wishList } = useSelector((state) => state.userSlice);
+	const isLogin = useSelector((state) => state.userSlice?.user !== null);
+	const [selectedRoute, setSelectedRoute] = useState('');
+	const [links, setLinkes] = useState();
+
+	useEffect(() => {
+		setLinkes(getLinks(user, isLogin, wishList));
+	}, [user, isLogin, wishList]);
+
 	return (
 		<Wrapper className='lg:w-2/12 z-10 p-1 top-16 -left-1 lg:fixed' aria-label='Sidebar'>
 			<div className='overflow-y-auto py-4 mt-4 px-3 w-full bg-white shadow-xl rounded'>
 				<ul className='space-y-2'>
-					<li>
-						<Link to={user?.role === 'admin' ? '/admin' : '/'}>
-							<Dashboard />
-							<span className='ml-3'>Dashboard</span>
-						</Link>
-					</li>
-					{user?.role === 'admin' ? (
-						<li>
-							<Link to='/admin/home'>
-								<Home color={'#6B7280'} />
-								<span className='ml-3'>Home Admin</span>
+					{links?.map(({ to, component, text, secondComponent, spanClassName }) => {
+						return (
+							<Link
+								className={`${selectedRoute === text && 'bg-gray-100'}`}
+								key={text}
+								onClick={text === 'Search' ? () => dispatch(onSearchToggle()) : () => setSelectedRoute(text)}
+								to={to}
+							>
+								{component}
+								<sapn className={spanClassName}>{text}</sapn>
+								{secondComponent}
 							</Link>
-						</li>
-					) : null}
-					<li onClick={() => dispatch(onSearchToggle())}>
-						<Link to={'/'}>
-							<Search color={'#6B7280'} />
-							<span className='ml-3'>Search</span>
-						</Link>
-					</li>
-					{isLogin && (
-						<React.Fragment>
-							<li>
-								<Link to={user?.role === 'admin' ? '/admin/profile' : '/profile'}>
-									<Profile />
-									<span className='flex-1 ml-3'>Profile</span>
-								</Link>
-							</li>
-							<li>
-								<Link to={user?.role === 'admin' ? '/admin/wishlist' : '/wishlist'}>
-									<WishList color={'#6B7280'} />
-									<span className='flex-1 ml-3'>Wish List</span>
-									<CircleBadge count={wishList?.length} />
-								</Link>
-							</li>
-							<li>
-								<Link to={user?.role === 'admin' ? '/admin' : '/'}>
-									<Notifications />
-									<span className='flex-1 ml-3'>Notifications</span>
-									<CircleBadge count={2} />
-								</Link>
-							</li>
-						</React.Fragment>
-					)}
+						);
+					})}
 				</ul>
 				<ul className='pt-4 mt-4 space-y-2 border-t border-gray-200'>
 					<li
-						className={`w-full p-2 rounded cursor-pointer`}
+						className='w-full p-2 rounded cursor-pointer'
 						onClick={() => {
 							if (isLogin) {
 								localStorage.removeItem('token');
