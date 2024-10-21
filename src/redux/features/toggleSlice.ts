@@ -1,12 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IToggleModel } from '../models/toggle.model';
+import { IPostDataModel } from '../models/post.model';
 
-const initialState = {
+const initialState: IToggleModel = {
 	register: false,
-	message: {
-		isShow: false,
-		info: '',
-		action: null,
-	},
+	message: false,
 	search: false,
 	postSearch: false,
 	likes: {
@@ -15,7 +13,7 @@ const initialState = {
 	},
 	postShow: {
 		active: false,
-		post: {},
+		post: {} as IPostDataModel,
 	},
 	showInbox: false,
 };
@@ -43,10 +41,8 @@ const toggleSlice = createSlice({
 			state.likes.active = !state.likes.active;
 			state.likes.likesArr = action.payload;
 		},
-		onMessegeToggle: async (state, action) => {
-			state.message.isShow = !state.message.isShow;
-			state.message.info = action.payload.info;
-			state.message.action = action.payload.action;
+		onMessegeToggle: (state) => {
+			state.message = !state.message;
 		},
 		onInboxToggle: (state) => {
 			state.showInbox = !state.showInbox;
@@ -62,7 +58,6 @@ const toggleSlice = createSlice({
 });
 
 export const {
-	onToggle,
 	onRegisterToggle,
 	onSearchToggle,
 	onPostSearchToggle,

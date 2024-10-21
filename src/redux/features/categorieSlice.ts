@@ -1,25 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doApiMethod, doGetApiMethod } from '../../api/services/axios-service/axios-service';
 import { errorHandler } from '../../util/functions';
-
-interface ICategoryModel {
-	categories: ICategoryDataModel[];
-	error: object | unknown;
-	loading: boolean;
-}
-
-interface ICategoryDataModel {
-	_id: string;
-	name: string;
-	utl_name: string;
-	info: string;
-	craetedAt: number;
-	updatedAt: number | Date;
-}
-
-interface AddCategoryPayload {
-	name: string;
-}
+import { AddCategoryPayload, ICategoryDataModel, ICategoryModel } from '../models/category.model';
 
 const initialState: ICategoryModel = {
 	categories: [],
