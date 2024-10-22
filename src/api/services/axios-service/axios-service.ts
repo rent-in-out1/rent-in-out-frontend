@@ -22,15 +22,15 @@ export const doApiMethod = async <T>(url: string, method: 'GET' | 'PUT' | 'POST'
 	}
 };
 
-export const doGetApiMethod = async (_url) => {
+export const doGetApiMethod = async <T>(url: string) => {
 	let token;
 	if (localStorage['token']) {
 		token = JSON.parse(localStorage['token']);
 	}
 	try {
-		return await axios({
+		return await axios<T>({
 			method: 'GET',
-			url: `${apiUrl}${_url}`,
+			url: `${apiUrl}${url}`,
 			headers: {
 				'x-api-key': token,
 			},
