@@ -35,7 +35,7 @@ const SideBar = () => {
 								to={to}
 							>
 								{component}
-								<sapn className={spanClassName}>{text}</sapn>
+								<span className={spanClassName}>{text}</span>
 								{secondComponent}
 							</Link>
 						);
