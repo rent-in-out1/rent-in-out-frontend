@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { BsHammer, BsTrash } from 'react-icons/bs';
 import { FaBan, FaCheckCircle } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { deleteCategory, editCategory } from '../../../../../redux/features/categorieSlice';
+import { deleteCategory, editCategory } from '../../../../../redux/features/categorieSlice.js';
 
 const CategoryItem = ({ item, setIsChange }) => {
 	const dispatch = useDispatch();

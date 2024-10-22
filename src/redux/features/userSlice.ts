@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doGetApiMethod } from '../../api/services/axios-service/axios-service';
 import { errorHandler } from '../../util/functions';
+import { IUserModel } from '../models/user.model';
 
-const initialState = {
+const initialState: IUserModel = {
 	user: null,
 	inbox: [],
 	wishList: [],
@@ -25,18 +26,18 @@ const userSlice = createSlice({
 		},
 
 		uploadBanner: (state, action) => {
-			state.user.cover_img = action.payload;
+			if (state.user) state.user.cover_img = action.payload;
 		},
 
 		uploadProfileImage: (state, action) => {
-			state.user.profile_img = action.payload;
+			if (state.user) state.user.profile_img = action.payload;
 		},
 
 		upload: (state, action) => {
 			state.user = action.payload;
 		},
 		updateWishList: (state, action) => {
-			let like = state.wishList.some((post) => post._id === action.payload._id);
+			const like = state.wishList.some((post) => post._id === action.payload._id);
 			if (like) state.wishList = state.wishList.filter((post) => post._id !== action.payload._id);
 			else state.wishList.push(action.payload);
 		},
@@ -52,7 +53,7 @@ const userSlice = createSlice({
 			})
 			.addCase(getUserInbox.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.payload;
+				state.error = action.payload as string;
 			})
 			.addCase(getUserWishList.pending, (state) => {
 				state.loading = true;
@@ -63,7 +64,7 @@ const userSlice = createSlice({
 			})
 			.addCase(getUserWishList.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.payload;
+				state.error = action.payload as string;
 			});
 	},
 });
@@ -71,7 +72,7 @@ const userSlice = createSlice({
 export const getUserInbox = createAsyncThunk('getUserInbox/get', async () => {
 	try {
 		const url = '/users/getAllChat';
-		let { data } = await doGetApiMethod(url);
+		const { data } = await doGetApiMethod(url);
 		return data;
 	} catch (error) {
 		errorHandler(error);
@@ -80,22 +81,13 @@ export const getUserInbox = createAsyncThunk('getUserInbox/get', async () => {
 export const getUserWishList = createAsyncThunk('getUserWishList/get', async () => {
 	try {
 		const url = '/users/getWishList';
-		let { data } = await doGetApiMethod(url);
+		const { data } = await doGetApiMethod(url);
 		return data;
 	} catch (error) {
 		errorHandler(error);
 	}
 });
 
-export const {
-	onRegister,
-	onLogin,
-	changeRole,
-	onLogout,
-	uploadBanner,
-	uploadProfileImage,
-	upload,
-	updateWishList,
-	updateInbox,
-} = userSlice.actions;
+export const { onRegister, onLogin, onLogout, uploadBanner, uploadProfileImage, upload, updateWishList } =
+	userSlice.actions;
 export default userSlice.reducer;

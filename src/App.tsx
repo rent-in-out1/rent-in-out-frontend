@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import AppRoutes from './appRoutes';
 import './index.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import store from './redux/store';
+import store from './redux/store.ts';
 
 function App() {
 	return (

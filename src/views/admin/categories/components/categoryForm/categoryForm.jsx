@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { FaBan, FaCheckCircle } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { addCategory } from '../../../../../redux/features/categorieSlice';
+import { addCategory } from '../../../../../redux/features/categorieSlice.js';
 import { errorHandler, successHandler } from '../../../../../util/functions';
 
 const CategoryForm = ({ setIsChange, setOnAdd }) => {

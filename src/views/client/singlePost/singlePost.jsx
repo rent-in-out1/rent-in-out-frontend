@@ -28,6 +28,7 @@ const SinglePost = ({ post }) => {
 		setRank(data);
 		setIsLoading(false);
 	};
+
 	return (
 		<PopUPModel action={onPostToggle}>
 			<Wrapper>

@@ -32,13 +32,7 @@ const Confirm = ({ action }) => {
 					onMouseOver={() => setOver(true)}
 					onMouseLeave={() => setOver(false)}
 					onClick={() => {
-						dispatch(
-							onMessegeToggle({
-								isShow: false,
-								info: '',
-								action: null,
-							})
-						);
+						dispatch(onMessegeToggle());
 					}}
 				>
 					{over ? (
@@ -60,13 +54,7 @@ const Confirm = ({ action }) => {
 						</Button>
 						<Button
 							onClick={() => {
-								dispatch(
-									onMessegeToggle({
-										isShow: false,
-										info: '',
-										action: null,
-									})
-								);
+								dispatch(onMessegeToggle());
 							}}
 							className='w-2/5'
 						>
