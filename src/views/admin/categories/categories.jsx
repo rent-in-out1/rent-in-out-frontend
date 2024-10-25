@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Wrapper } from '../../../assets/styles/wrappers/table';
-import { getCatgories } from '../../../redux/features/categorieSlice';
+import { getCategories } from '../../../redux/features/categorieSlice.js';
 import PageNav from '../../../shared/UI/page-nav';
 import Controllers from '../../../shared/components/controllers';
 import CategoryForm from './components/categoryForm/categoryForm';
@@ -34,7 +34,7 @@ const Categories = () => {
 	];
 
 	useEffect(() => {
-		dispatch(getCatgories({ search, option, page }));
+		dispatch(getCategories({ search, option, page }));
 	}, [page, option, search]);
 
 	const handleSearchChange = (e) => {

@@ -21,6 +21,7 @@ export const doApiMethod = async <T>(url: string, method: 'GET' | 'PUT' | 'POST'
 		throw err;
 	}
 };
+
 export const doGetApiMethod = async <T>(url: string) => {
 	let token;
 	if (localStorage['token']) {

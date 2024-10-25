@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../rent-in-out-backend/rent-in-out-backend-main" vcs="Git" />
   </component>
 </project>
