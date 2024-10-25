@@ -2,15 +2,15 @@ import axios from 'axios';
 import { secret } from '../../../util/secrets';
 
 const apiUrl = secret.SERVER_API_URL;
-export const doApiMethod = async (_url, _method, _body = {}) => {
+export const doApiMethod = async <T>(url: string, method: 'GET' | 'PUT' | 'POST' | 'DELETE', _body = {}) => {
 	let token;
 	if (localStorage['token']) {
 		token = JSON.parse(localStorage['token']);
 	}
 	try {
-		return await axios({
-			method: _method,
-			url: `${apiUrl}${_url}`,
+		return await axios<T>({
+			method: method,
+			url: `${apiUrl}${url}`,
 			headers: {
 				'x-api-key': token,
 			},
@@ -21,15 +21,15 @@ export const doApiMethod = async (_url, _method, _body = {}) => {
 		throw err;
 	}
 };
-export const doGetApiMethod = async (_url) => {
+export const doGetApiMethod = async <T>(url: string) => {
 	let token;
 	if (localStorage['token']) {
 		token = JSON.parse(localStorage['token']);
 	}
 	try {
-		return await axios({
+		return await axios<T>({
 			method: 'GET',
-			url: `${apiUrl}${_url}`,
+			url: `${apiUrl}${url}`,
 			headers: {
 				'x-api-key': token,
 			},
