@@ -31,5 +31,5 @@ Introducing RentApp, the ultimate solution for all your rental needs, whether it
 This project is licensed under the [MIT License](LICENSE).
 
 ## Linked Projects
-Navigate to [RentInOut Backend](https://github.com/shimislm/RentInOut_backEnd) <br/>
+Navigate to [RentInOut Backend](https://github.com/rent-in-out1/rent-in-out-backend) <br/>
 Navigate to [Jira agile scrum](https://rentinout.atlassian.net/jira/software/projects/REN/boards/1)
